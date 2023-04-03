@@ -9,7 +9,7 @@ jobs:
           path: ~/sunbird-admin-ui
 
       - run: npm install
-      - run: ng lint
+      - run: rpm run lint
         #      - run: grunt build-jsdoc
 
           #
@@ -23,7 +23,7 @@ jobs:
       
       - run:
           name: linting
-          command: ng lint     
+          command: npm run lint  
 workflows:
   version: 2.1
   build_and_test:
