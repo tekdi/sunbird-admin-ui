@@ -16,9 +16,6 @@ jobs:
       - checkout:
           path: ~/sunbird-admin-ui
       - run:
-          name: Node version
-          command: 'node --version'
-      - run:
           name: Installing Angular cli
           command: 'npm install -g @angular/cli@14.2.10 --no-progress'
       - restore_cache:
