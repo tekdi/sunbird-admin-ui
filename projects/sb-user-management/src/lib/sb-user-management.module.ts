@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { TabViewModule } from 'primeng/tabview';
@@ -16,6 +17,7 @@ import { UserListComponent } from './user-list/user-list.component';
   imports: [
     BrowserModule,
     CommonModule,
+    HttpClientModule,
     ButtonModule,
     TabViewModule,
     TableModule,
