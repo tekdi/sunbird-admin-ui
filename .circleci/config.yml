@@ -13,9 +13,22 @@ jobs:
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
-      - run: 
-            name: ng lint
-            command: npm run lint
+      - checkout:
+          path: ~/sunbird-admin-ui
+      - run:
+          name: Node version
+          command: 'node --version'
+      - run:
+          name: Installing Angular cli
+          command: 'npm install -g @angular/cli@14.2.10 --no-progress'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Installing NPM deps
+          command: 'npm install --no-progress'
+      - run:
+          name: Linting
+          command: npm run lint
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
