@@ -20,7 +20,7 @@ jobs:
           command: sudo npm install
       - run:
           name: Linting
-          command: ng lint
+          command: npm run lint
       - run:
           name: Testing
           command: npm run test
