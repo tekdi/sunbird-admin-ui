@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  build:
+  build1:
     working_directory: ~/sunbird-admin-ui
     docker:
      - image: circleci/node:14.18.2-browsers
@@ -31,4 +31,4 @@ workflows:
   version: 2.1
   build_and_test:
     jobs:
-      - build
+      - build1
