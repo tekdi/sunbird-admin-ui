@@ -3,27 +3,33 @@ jobs:
   build:
     working_directory: ~/sunbird-admin-ui
     docker:
-      - image: circleci/node:14.0.0
+     - image: circleci/node:14.18.2-browsers
     steps:
       - checkout:
-          path: cd sunbird-admin-ui
-
-      - run: npm install
-      - run: npm run lint
-        #      - run: grunt build-jsdoc
-
-          #
-      # - run:
-      #     name: running test cases
-      #     command: npm run test-player
-
+          path: ~/sunbird-admin-ui
       - run:
-          name: Install NVM
-          command: 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh|bash'
-      
+          name: Show current branch
+          command: echo ${CIRCLE_BRANCH}
       - run:
-          name: linting
-          command: npm run lint  
+          environment:
+            NG_CLI_ANALYTICS: "ci"
+          command: npm install
+      - run: cd projects/sb-user-mgmt && sudo npm install
+      - run:
+          name: Node install
+          command: sudo npm install
+      - run:
+          name: Linting
+          command: npm run lint
+      - run:
+          name: Testing
+          command: npm run test
+      - run:
+          name: Install sonar scanner
+          command: 'sudo npm install -i -g sonarqube-scanner'
+      - run:
+          name: Sonar scanner
+          command: cd ~/sunbird-admin-ui && sonar-scanner
 workflows:
   version: 2.1
   build_and_test:
