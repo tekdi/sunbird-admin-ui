@@ -5,7 +5,7 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  test-cases:
+  say-hello:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
@@ -13,24 +13,14 @@ jobs:
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
-      - checkout:
-          path: ~/sunbird-admin-ui
+      - checkout
       - run:
-          name: Installing Angular cli
-          command: 'npm install -g @angular/cli@14.2.10 --no-progress'
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: Installing NPM deps
-          command: 'npm install --no-progress'
-      - run:
-          name: Linting
-          command: ng lint
+          name: "Say hello"
+          command: "echo Hello, World!"
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  version: 2
-  build_and_test:
+  say-hello-workflow:
     jobs:
-      - test-cases
+      - say-hello
