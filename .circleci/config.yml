@@ -15,7 +15,7 @@ jobs:
     steps:
       - run: 
             name: ng lint
-            command: 'ng lint'
+            command: npm run lint
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
