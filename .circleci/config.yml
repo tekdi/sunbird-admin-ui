@@ -6,7 +6,7 @@ jobs:
       - image: circleci/node:14.0.0
     steps:
       - checkout:
-          path: ~/sunbird-admin-ui
+          path: cd sunbird-admin-ui
 
       - run: npm install
       - run: npm run lint
