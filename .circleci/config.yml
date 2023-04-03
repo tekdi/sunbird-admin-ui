@@ -15,7 +15,7 @@ jobs:
     steps:
       - checkout
       - run: |
-          # ng lint
+          ng lint
 
 workflows:
   my-custom-workflow:
