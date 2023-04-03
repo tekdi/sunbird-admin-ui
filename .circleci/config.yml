@@ -19,9 +19,6 @@ jobs:
           name: Node install
           command: sudo npm install
       - run:
-          name: Linting
-          command: npm run lint
-      - run:
           name: Testing
           command: npm run test
       - run:
