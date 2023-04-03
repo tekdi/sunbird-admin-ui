@@ -9,7 +9,7 @@ jobs:
           path: ~/sunbird-admin-ui
 
       - run: npm install
-      - run: rpm run lint
+      - run: npm run lint
         #      - run: grunt build-jsdoc
 
           #
