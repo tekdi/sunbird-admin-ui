@@ -9,7 +9,7 @@ executors:
           username: $DOCKER_HUB_USER
           password: $DOCKER_HUB_PASSWORD
 jobs:
-  sunbird-admin-ui:
+  sb-admin-ui:
 
     executor: my-custom-executor
     steps:
@@ -20,4 +20,4 @@ jobs:
 workflows:
   my-custom-workflow:
     jobs:
-      - sunbird-admin-ui
+      - sb-admin-ui
