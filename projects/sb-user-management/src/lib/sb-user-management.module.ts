@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
+import { TabViewModule } from 'primeng/tabview';
+import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
 import { SbUserManagementComponent } from './sb-user-management.component';
 import { UserListComponent } from './user-list/user-list.component';
-import { TabViewModule } from 'primeng/tabview';
-
-
 
 @NgModule({
   declarations: [
@@ -11,7 +14,12 @@ import { TabViewModule } from 'primeng/tabview';
     UserListComponent
   ],
   imports: [
-    TabViewModule
+    BrowserModule,
+    CommonModule,
+    ButtonModule,
+    TabViewModule,
+    TableModule,
+    InputTextModule
   ],
   exports: [
     SbUserManagementComponent
