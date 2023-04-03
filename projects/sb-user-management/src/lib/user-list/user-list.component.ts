@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { CountService } from "../services/count.service";
 import { UserService } from "../services/user-service/user.service";
 @Component({
   selector: "lib-user-list",
@@ -11,10 +10,7 @@ export class UserListComponent implements OnInit {
   tableColumns: any[] = [];
   users: any;
   count: any;
-  constructor(
-    private uservice: CountService,
-    private userService: UserService
-  ) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
     this.tableColumns = [
