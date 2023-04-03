@@ -5,18 +5,16 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  build:
-    working_directory: ~/sunbird-admin-ui
+  test-cases:
+    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/configuration-reference/#executor-job
+    docker:
+      - image: cimg/base:stable
+    # Add steps to the job
+    # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout:
           path: ~/sunbird-admin-ui
-      - run:
-          name: Install  Node.js v14.20.0 with build in nvm tool
-          command: |
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-            nvm install v14 && nvm use v14 && nvm alias default v14
-            node -v
       - run:
           name: Node version
           command: 'node --version'
@@ -38,4 +36,4 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
+      - test-cases
