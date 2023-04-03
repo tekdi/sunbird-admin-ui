@@ -28,7 +28,7 @@ jobs:
           command: 'npm install --no-progress'
       - run:
           name: Linting
-          command: npm run lint
+          command: ng lint
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
