@@ -1,0 +1,17 @@
+h1{
+    color: green;text-align: center !important;
+}
+img{
+    height: 100px !important;
+    width: 100px !important;
+}
+h3{
+   color: rgb(42, 165, 128) !important;
+}
+.font-semibold{
+    color: rgb(202, 45, 45) !important;
+}
+.pi-users{
+    font-size: 2rem;
+    color: cadetblue;
+}

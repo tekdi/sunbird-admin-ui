@@ -1,0 +1,44 @@
+[
+    {
+       "tenantName": "Dhwani",
+       "tenantLogo": "dhwani.png",
+       "userCount":   0,
+       "channelId": "01358974742001254423"
+    },
+    {
+       "tenantName": "KEF",
+       "tenantLogo": "KEF_Logo.png",
+       "userCount":   0,
+       "channelId": "01373263149320601644"
+    },
+    {
+       "tenantName": "Pratham",
+       "tenantLogo": "pradigi.png",
+       "userCount":   0,
+       "channelId": "01369885294383923244"
+    },
+    {
+       "tenantName": "Educate Girls",
+       "tenantLogo": "Pragati.png",
+       "userCount":   0,
+       "channelId": "0135656861912678406"
+    },
+    {
+       "tenantName": "ALT (Transform School)",
+       "tenantLogo": "ALT.png",
+       "userCount":   0,
+       "channelId": "0136351260261662723"
+    },
+    {
+       "tenantName": "BJS",
+       "tenantLogo": "bjs.jpg",
+       "userCount":   0,
+       "channelId": "01373476834370355257"
+    },
+    {
+       "tenantName": "Tan90",
+       "tenantLogo": "tan90.png",
+       "userCount":   0,
+       "channelId": "01375950338370764827"
+    }
+ ]
