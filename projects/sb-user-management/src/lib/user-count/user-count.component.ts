@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserCountService } from './user-count.service';
-import tenantList from  './tenantDetails.json';
+import tenantList from  './tenant.json';
 
 interface TenantDetails {  
   tenantName: string;  

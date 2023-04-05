@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from "./data";
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class UserCountService {
   getUserCountOfaTenant(channelId :string): Observable<Object> {
     let header = new HttpHeaders({  
       "Content-Type": 'application/json',
-      "Authorization": '',
-      "x-authenticated-user-token": '',
+      "Authorization": environment.authKey,
+      "x-authenticated-user-token": environment.userToken,
     })
 
     let body = {
