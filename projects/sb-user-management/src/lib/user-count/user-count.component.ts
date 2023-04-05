@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserCountService } from '../user-count.service';
-import tenanats from  './tenantDetails.json';
+import { UserCountService } from './user-count.service';
+import tenantList from  './tenantDetails.json';
 
 interface TenantDetails {  
   tenantName: string;  
@@ -18,7 +18,7 @@ export class UserCountComponent implements OnInit {
 
   constructor(private userCountService: UserCountService) { }
 
-  tenantDetail: TenantDetails[]=tenanats;
+  tenantDetail: TenantDetails[]=tenantList;
 
   ngOnInit(): void {
     this.getTenantUserCount();
