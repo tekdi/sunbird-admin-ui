@@ -1,15 +1,26 @@
-h1{
-    color: green;text-align: center !important;
+.heading{
+    color: rgb(124, 104, 95);text-align: center;
 }
-img{
-    height: 100px !important;
-    width: 100px !important;
+#templateView{
+    border:1px solid black;
 }
-h3{
-   color: rgb(42, 165, 128) !important;
-}
+@media only screen and (min-width: 768px) {
+    .containImg{
+        height: 100px;
+        width: 100px;
+    }
+
+ }
+ @media only screen and (max-width: 767px) {
+    .containImg{
+        height: 100px;
+        width: 100%;
+        
+    }
+ }
+
 .font-semibold{
-    color: rgb(202, 45, 45) !important;
+    color: rgb(202, 45, 45);
 }
 .pi-users{
     font-size: 2rem;
