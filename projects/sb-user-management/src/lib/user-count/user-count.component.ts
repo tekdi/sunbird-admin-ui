@@ -25,12 +25,14 @@ export class UserCountComponent implements OnInit {
   }
   getTenantUserCount() {
     this.tenantDetail.map((tenant) => {
-      this.userCountService.getUserCountOfaTenant(tenant.channelId).subscribe((counttenant)=> {
-        const data : any= counttenant;
-         tenant.userCount = data?.result?.response?.count; 
+      this.userCountService.getUserCountOfaTenant(tenant.channelId).subscribe((counttenant:any)=> {
+        //console.log(counttenant)
+        //console.log(JSON.stringify(counttenant));
+        tenant.userCount = counttenant?.result?.response?.count; 
       })
     })
     }
+
 }
 
 
