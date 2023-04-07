@@ -26,14 +26,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.userService.getUsers().then(data => this.users = data);
 
+        //TODO:- Need to replace this with actual org data and map it
         this.items = [
-            { label: 'Educate Girls', icon: 'bg-blue-100' },
-            { label: 'Dhwani', icon: 'bg-green-100' },
-            { label: 'ALT', icon: 'bg-cyan-100' },
-            { label: 'Pratham', icon: 'bg-purple-100' },
-            { label: 'KEF', icon: 'bg-blue-100' },
-            { label: 'BJS', icon: 'bg-green-100' },
-            { label: 'Tan90', icon: 'bg-cyan-100' }
+            { label: 'ORG_1', icon: 'bg-blue-100' },
+            { label: 'ORG_2', icon: 'bg-green-100' },
+            { label: 'ORG_3', icon: 'bg-cyan-100' },
+            { label: 'ORG_4', icon: 'bg-purple-100' },
+            { label: 'ORG_5', icon: 'bg-blue-100' },
+            { label: 'ORG_6', icon: 'bg-green-100' },
+            { label: 'ORG_7', icon: 'bg-cyan-100' }
         ];
     }
 
