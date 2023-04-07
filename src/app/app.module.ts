@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+<<<<<<< HEAD
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,5 +24,25 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [],
   bootstrap: [AppComponent]
+=======
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppLayoutModule } from './layout/app.layout.module';
+import { NotfoundComponent } from './sb-admin/components/notfound/notfound.component';
+import { UserService } from './sb-admin/service/user.service';
+
+@NgModule({
+    declarations: [
+        AppComponent, NotfoundComponent
+    ],
+    imports: [
+        AppRoutingModule,
+        AppLayoutModule
+    ],
+    providers: [
+        UserService
+    ],
+    bootstrap: [AppComponent]
+>>>>>>> upstream/main
 })
 export class AppModule { }
