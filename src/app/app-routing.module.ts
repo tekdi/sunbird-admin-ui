@@ -1,18 +1,7 @@
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-<<<<<<< HEAD
-import { RouterModule, Routes } from '@angular/router';
-import { UserCountComponent } from 'projects/sb-user-management/src/lib/user-count/user-count.component';
-import { SbUserManagementComponent } from 'projects/sb-user-management/src/public-api';
-
-const routes: Routes = [
-  {path:'',component:SbUserManagementComponent},
-  {path:'user-count-dashboard',component:UserCountComponent}
-];
-=======
 import { NotfoundComponent } from './sb-admin/components/notfound/notfound.component';
 import { AppLayoutComponent } from "./layout/app.layout.component";
->>>>>>> upstream/main
 
 @NgModule({
     imports: [

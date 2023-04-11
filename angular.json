@@ -75,19 +75,10 @@
           
           "configurations": {
             "production": {
-<<<<<<< HEAD
-              "browserTarget": "angular-tour:build:production"
-              
-            },
-            "development": {
-              "browserTarget": "angular-tour:build:development"
-              
-=======
               "browserTarget": "sb-admin-ng:build:production"
             },
             "development": {
               "browserTarget": "sb-admin-ng:build:development"
->>>>>>> upstream/main
             }
           },
           "defaultConfiguration": "development"
