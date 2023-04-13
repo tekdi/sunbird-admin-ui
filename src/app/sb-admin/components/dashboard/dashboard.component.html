@@ -1,8 +1,17 @@
 <div class="grid">
     <div class="col-12 xl:col-12">
         <div class="card">
-            <h5>Users</h5>
-            <p-table [value]="tenantDetail" [paginator]="true" [rows]="10" responsiveLayout="scroll">
+            <h5>Dashboard</h5>
+            <p-table #myTab [value]="tenantDetail" [loading]="loading" [paginator]="true" [rows]="10"
+                responsiveLayout="scroll" [globalFilterFields]="['orgName']">
+                <ng-template pTemplate="caption">
+
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"> </i>
+                        <input type="text" pInputText placeholder="Organization Name"
+                            (input)="myTab.filterGlobal($any($event.target).value,'contains')" />
+                    </span>
+                </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
                         <th pSortableColumn="orgName">Organization Name<p-sortIcon field="orgName"></p-sortIcon></th>
