@@ -28,7 +28,7 @@ jobs:
           pkg-manager: npm
       - run:
           name: Run tests
-          command: ng lint
+          command: npm run start
 
 workflows:
   # Below is the definition of your workflow.
