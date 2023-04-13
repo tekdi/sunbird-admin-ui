@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             }
         });
 
-        this.userService.getUsers().then(data => this.users = data);
+        //this.userService.getUsers().then(data => this.users = data);
     }
 
     //Get all tenant data
@@ -60,6 +60,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         return this.userCountService.getTenant().pipe(
             map((data: any) => {
                 this.tenantDetail = data.result.response.content;
+                console.log(this.tenantDetail);
                 return this.tenantDetail;
             })
         );

@@ -39,8 +39,8 @@ export class UserCountService {
     return this.http.post('api/org/v1/search', body, { headers: header })
   }
 
-  getUserCountOfaTenant(channelId :string): Observable<Object> {
-    let header = new HttpHeaders({  
+  getUserCountOfaTenant(channelId: string): Observable<Object> {
+    let header = new HttpHeaders({
       "Content-Type": 'application/json',
       "Authorization": environment.authKey,
       "x-authenticated-user-token": environment.userToken,
@@ -48,25 +48,25 @@ export class UserCountService {
 
     let body = {
       "request": {
-          "filters": {
-              "rootOrgId": channelId
-          },
-          "fields": [
-              "firstName",
-              "lastName",
-              "userName",
-              "id",
-              "email",
-              "phone",
-              "createdDate",
-              "roles",
-              "managedBy"
-          ],
-          "limit": 10
+        "filters": {
+          "rootOrgId": channelId
+        },
+        "fields": [
+          "firstName",
+          "lastName",
+          "userName",
+          "id",
+          "email",
+          "phone",
+          "createdDate",
+          "roles",
+          "managedBy"
+        ],
+        "limit": 10
       }
-  }
-    return this.http.post('api/user/v1/search',body,{headers : header}) 
+    }
+    return this.http.post('api/user/v1/search', body, { headers: header })
   }
 
- 
+
 }
