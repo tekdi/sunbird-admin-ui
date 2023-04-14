@@ -72,7 +72,7 @@
           "options": {
             "proxyConfig": "proxy.conf.js"
           },
-          
+           
           "configurations": {
             "production": {
               "browserTarget": "sb-admin-ng:build:production"

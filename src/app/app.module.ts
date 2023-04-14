@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { NotfoundComponent } from './sb-admin/components/notfound/notfound.component';
 import { UserService } from './sb-admin/service/user.service';
+import { UserCountService } from './sb-admin/service/user-count.service';
 
 @NgModule({
     declarations: [
@@ -14,7 +15,8 @@ import { UserService } from './sb-admin/service/user.service';
         AppLayoutModule
     ],
     providers: [
-        UserService
+        UserService,
+        UserCountService
     ],
     bootstrap: [AppComponent]
 })
