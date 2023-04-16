@@ -10,6 +10,8 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { DashboardsRoutingModule } from './dashboard-routing.module';
 import {InputTextModule} from 'primeng/inputtext';
+import {MessagesModule} from 'primeng/messages';
+import { MessageModule } from "primeng/message";
 
 @NgModule({
     imports: [
@@ -22,7 +24,9 @@ import {InputTextModule} from 'primeng/inputtext';
         PanelMenuModule,
         ButtonModule,
         DashboardsRoutingModule,
-        InputTextModule
+        InputTextModule,
+        MessagesModule,
+        MessageModule
     ],
     declarations: [DashboardComponent]
 })

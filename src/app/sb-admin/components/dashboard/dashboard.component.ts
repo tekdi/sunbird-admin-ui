@@ -8,113 +8,119 @@ import { UserCountService } from '../../service/user-count.service';
 import { TenantDetails } from './tenantDetails';
 
 
-
-
 @Component({
-    templateUrl: './dashboard.component.html',
+  templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-    items!: MenuItem[];
+  items!: MenuItem[];
 
-    users!: User[];
+  users!: User[];
 
-    chartData: any;
+  chartData: any;
 
-    chartOptions: any;
+  chartOptions: any;
 
-    subscription!: Subscription;
+  subscription!: Subscription;
 
-    tenantDetail: TenantDetails[] = [];
+  tenantDetail: TenantDetails[] = [];
 
-    cols: any[] = [];
+  cols: any[] = [];
 
-    loading: boolean = true;
+  loading: boolean = true;
 
-    constructor(private userService: UserService, public layoutService: LayoutService, private userCountService: UserCountService) {
+  tenantUserCount: any[] = [];
+
+ 
+
+
+  constructor(private userService: UserService, public layoutService: LayoutService, private userCountService: UserCountService) {
+   
+  }
+
+  
+
+  ngOnInit() {
+
+    this.cols = [
+      { field: 'orgName', header: 'Organization Name' },
+      { field: 'userCount', header: 'User Registered' }
+    ];
+
+    this.getTenant().subscribe((data: any) => {
+      if (data && data.length > 0) {
+        this.tenantUserCount = data;
+        this.getTenantUsercount(data);
+      }
+      else {
+        this.tenantUserCount = [];
+      }
+    });
+  }
+
+  //Get all tenant data
+  getTenant() {
+    const body = {
+      "request": {
+        "filters": {
+          "isRootOrg": true
+        },
+        "fields": [
+          "id",
+          "channel",
+          "orgName",
+          "externalId",
+          "isRootOrg"
+        ],
+        "sortBy": {
+          "createdDate": "Desc"
+        },
+        "limit": 1002
+      }
 
     }
+    return this.userCountService.getTenant(body).pipe(
+      map((data: any) => {
+        this.tenantDetail = data.result.response.content;
+        return this.tenantDetail;
+      })
+    );
+  }
 
-    ngOnInit() {
-
-        this.cols = [
-            { field: 'orgName', header: 'Organization Name' },
-            { field: 'userCount', header: 'User Registered' }
-        ];
-
-        this.getTenant().subscribe((data: any) => {
-            if (data) {
-
-                this.getTenantUsercount(data);
-            }
-        });
-
-        //this.userService.getUsers().then(data => this.users = data);
-    }
-
-    //Get all tenant data
-    getTenant() {
-        const body = {
-            "request": {
-              "filters": {
-                "isRootOrg": true
-              },
-              "fields": [
-                "id",
-                "channel",
-                "orgName",
-                "externalId",
-                "isRootOrg"
-              ],
-              "sortBy": {
-                "createdDate": "Desc"
-              },
-              "limit": 1002
-            }
-      
-          }
-        return this.userCountService.getTenant(body).pipe(
-            map((data: any) => {
-                this.tenantDetail = data.result.response.content;
-                return this.tenantDetail;
-            })
-        );
-    }
-
-    //Get user count of each tenant 
-    getTenantUsercount(tenantDetail: any): void {
-        tenantDetail.map((tenant: any) => {
-            const body = {
-                "request": {
-                  "filters": {
-                    "rootOrgId": tenant.id
-                  },
-                  "fields": [
-                    "firstName",
-                    "lastName",
-                    "userName",
-                    "id",
-                    "email",
-                    "phone",
-                    "createdDate",
-                    "roles",
-                    "managedBy"
-                  ],
-                  "limit": 10
-                }
-              };
-            this.userCountService.getUserCountOfaTenant(body).subscribe((counttenant: any) => {
-                tenant.userCount = counttenant?.result?.response?.count;
-                if (tenantDetail[tenantDetail.length - 1].id === tenant.id) {
-                    this.loading = false;
-                }
-            });
-        });
-    }
-
-    ngOnDestroy(): void {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
+  //Get user count of each tenant 
+  getTenantUsercount(tenantDetail: any): void {
+    tenantDetail.map((tenant: any) => {
+      const body = {
+        "request": {
+          "filters": {
+            "rootOrgId": tenant.id
+          },
+          "fields": [
+            "firstName",
+            "lastName",
+            "userName",
+            "id",
+            "email",
+            "phone",
+            "createdDate",
+            "roles",
+            "managedBy"
+          ],
+          "limit": 10
         }
+      };
+      this.userCountService.getUserCountOfaTenant(body).subscribe((counttenant: any) => {
+        tenant.userCount = counttenant?.result?.response?.count;
+        if (tenantDetail[tenantDetail.length - 1].id === tenant.id) {
+          this.loading = false;
+        }
+      });
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
+  }
 }
