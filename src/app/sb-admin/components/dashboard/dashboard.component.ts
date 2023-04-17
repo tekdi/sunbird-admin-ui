@@ -1,25 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { User } from '../../api/user';
 import { UserService } from '../../service/user.service';
 import { map, Subscription } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { UserCountService } from '../../service/user-count.service';
 import { TenantDetails } from './tenantDetails';
 
+//i18n
+import $ from 'jquery';
+
 
 @Component({
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-
-  items!: MenuItem[];
-
-  users!: User[];
-
-  chartData: any;
-
-  chartOptions: any;
 
   subscription!: Subscription;
 
@@ -31,16 +24,30 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   tenantUserCount: any[] = [];
 
- 
-
-
   constructor(private userService: UserService, public layoutService: LayoutService, private userCountService: UserCountService) {
-   
+
   }
 
-  
-
   ngOnInit() {
+
+    //i18n
+    $(document).ready(function () {
+      $("#eng").click(function () {
+        localStorage.setItem('lang', 'en');
+        document.location.reload();
+      });
+      $("#de").click(function () {
+        localStorage.setItem('lang', 'ta');
+        document.location.reload();
+      });
+    });
+    $(document).ready(function () {
+      $("#flip").click(function () {
+        $("#panel").slideToggle("fast");
+      });
+    });
+
+
 
     this.cols = [
       { field: 'orgName', header: 'Organization Name' },

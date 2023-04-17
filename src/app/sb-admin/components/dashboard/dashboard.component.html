@@ -1,8 +1,9 @@
 <div class="grid">
     <div class="col-12 xl:col-12">
         <div class="card">
-            <h5>Dashboard</h5>
-            <p-message severity="warn"  text="User Count Data Not Found !!" *ngIf="!tenantUserCount || tenantUserCount.length === 0"></p-message>
+            <h5>{{ 'DASHBOARD' | i18next }}</h5>
+            <p-message severity="warn" text="User Count Data Not Found !!"
+                *ngIf="!tenantUserCount || tenantUserCount.length === 0"></p-message>
             <p-table #myTab [value]="tenantDetail" [loading]="loading" [paginator]="true" [rows]="10"
                 responsiveLayout="scroll" [globalFilterFields]="['orgName']">
                 <ng-template pTemplate="caption">
@@ -14,8 +15,10 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pSortableColumn="orgName">Organization Name<p-sortIcon field="orgName"></p-sortIcon></th>
-                        <th pSortableColumn="userCount">User Registered<p-sortIcon field="userCount"> </p-sortIcon></th>
+                        <th pSortableColumn="orgName">{{ 'DASHBOARD_ORGANIZATION_NAME' | i18next }}<p-sortIcon
+                                field="orgName"></p-sortIcon></th>
+                        <th pSortableColumn="userCount">{{ 'DASHBOARD_USER_REGISTERED' | i18next }}<p-sortIcon
+                                field="userCount"> </p-sortIcon></th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-user>
@@ -28,4 +31,3 @@
         </div>
     </div>
 </div>
-
