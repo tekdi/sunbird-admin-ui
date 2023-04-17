@@ -1,8 +1,9 @@
 const PROXY_CONFIG = [
     {
         context: [
+            "/api",
+            "/assets",
             "/search"
-
         ],
         "target": "https://sunbirdsaas.com",
         "secure": false,
