@@ -16,8 +16,8 @@ import { MessageModule } from "primeng/message";
 //i18next
 import { APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 import { I18NextModule, ITranslationService, I18NEXT_SERVICE, defaultInterpolationFormat } from 'angular-i18next';
-import en from "src/locales/en/translation.json";
-import ta from "src/locales/ta/translation.json";
+import en from "src/locales/en/en.json";
+import ta from "src/locales/ta/ta.json";
 
 //i18next
 export function appInit(i18next: ITranslationService) {

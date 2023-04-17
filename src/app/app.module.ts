@@ -9,8 +9,8 @@ import { UserCountService } from './sb-admin/service/user-count.service';
 //i18next
 import { APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 import { I18NextModule, ITranslationService, I18NEXT_SERVICE, defaultInterpolationFormat } from 'angular-i18next';
-import en from "../locales/en/translation.json"
-import ta from "../locales/ta/translation.json"
+import en from "../locales/en/en.json"
+import ta from "../locales/ta/ta.json"
 
 
 //i18next
