@@ -11,8 +11,6 @@ import $ from 'jquery';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  subscription!: Subscription;
-
   tenantDetail: TenantDetails[] = [];
 
   cols: any[] = [];
@@ -25,7 +23,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   {}
 
   ngOnInit() {
-    //i18n
     $(document).ready(function () {
       $("#eng").click(function () {
         localStorage.setItem('lang', 'en');
@@ -117,10 +114,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       });
     });
   }
-
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
+  
+  ngOnDestroy(): void { }
 }

@@ -12,7 +12,6 @@ import { DashboardsRoutingModule } from './dashboard-routing.module';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from "primeng/message";
-//i18next
 import { APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 import { I18NextModule, ITranslationService, I18NEXT_SERVICE, defaultInterpolationFormat } from 'angular-i18next';
 import en from "src/locales/en/en.json";

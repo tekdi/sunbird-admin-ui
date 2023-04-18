@@ -5,7 +5,6 @@ import { AppLayoutModule } from './layout/app.layout.module';
 import { NotfoundComponent } from './sb-admin/components/notfound/notfound.component';
 import { UserService } from './sb-admin/service/user.service';
 import { UserCountService } from './sb-admin/service/user-count.service';
-//i18next
 import { APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 import { I18NextModule, ITranslationService, I18NEXT_SERVICE, defaultInterpolationFormat } from 'angular-i18next';
 import en from "../locales/en/en.json"
