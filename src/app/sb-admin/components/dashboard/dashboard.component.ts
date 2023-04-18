@@ -11,11 +11,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   tenantDetail: TenantDetails[] = [];
 
-  cols: any[] = [];
-
   loading: boolean = true;
 
-  tenantUserCount: any[] = [];
+  tenantUserCountResponse: any[] = [];
 
   constructor(private userCountService: UserCountService) 
   {}
@@ -26,25 +24,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
         localStorage.setItem('lang', 'en');
         document.location.reload();
       });
-      $("#tam").click(function () {
-        localStorage.setItem('lang', 'ta');
-        document.location.reload();
-      });
     });
-    $(document).ready(function () {
-      $("#flip").click(function () {
-        $("#panel").slideToggle("fast");
-      });
-    });
-
-    this.cols = [
-      { field: 'orgName', header: 'Organization Name' },
-      { field: 'userCount', header: 'User Registered' }
-    ];
 
     this.getTenant().subscribe((data: any) => {
       if (data && data.length > 0) {
-        this.tenantUserCount = data;
+        this.tenantUserCountResponse = data;
         this.getTenantUsercount(data);
       }
     });

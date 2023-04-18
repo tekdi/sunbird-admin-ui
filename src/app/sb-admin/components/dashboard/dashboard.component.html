@@ -3,7 +3,7 @@
         <div class="card">
             <h5>{{ 'DASHBOARD' | i18next }}</h5>
             <p-message severity="warn" text="{{ 'DASHBOARD_WARNING' | i18next }}"
-                *ngIf="!tenantUserCount || tenantUserCount.length === 0"></p-message>
+                *ngIf="!tenantUserCountResponse || tenantUserCountResponse.length === 0"></p-message>
             <p-table #myTab [value]="tenantDetail" [loading]="loading" [paginator]="true" [rows]="10"
                 responsiveLayout="scroll" [globalFilterFields]="['orgName']">
                 <ng-template pTemplate="caption">

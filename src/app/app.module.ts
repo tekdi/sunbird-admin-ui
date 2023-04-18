@@ -8,7 +8,6 @@ import { UserCountService } from './sb-admin/service/user-count.service';
 import { APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 import { I18NextModule, ITranslationService, I18NEXT_SERVICE, defaultInterpolationFormat } from 'angular-i18next';
 import en from "../locales/en/en.json"
-import ta from "../locales/ta/ta.json"
 
 export function appInit(i18next: ITranslationService) {
     let lang = localStorage.getItem('lang');
@@ -19,9 +18,6 @@ export function appInit(i18next: ITranslationService) {
         resources: {
             en: {
                 translation: en
-            },
-            ta: {
-                translation: ta
             }
         },
         ns: ['translation'],
