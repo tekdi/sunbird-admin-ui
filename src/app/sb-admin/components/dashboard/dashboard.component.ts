@@ -1,7 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserService } from '../../service/user.service';
-import { map, Subscription } from 'rxjs';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { map } from 'rxjs';
 import { UserCountService } from '../../service/user-count.service';
 import { TenantDetails } from './tenantDetails';
 import $ from 'jquery';
@@ -19,7 +17,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   tenantUserCount: any[] = [];
 
-  constructor(private userService: UserService, public layoutService: LayoutService, private userCountService: UserCountService) 
+  constructor(private userCountService: UserCountService) 
   {}
 
   ngOnInit() {
@@ -48,9 +46,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       if (data && data.length > 0) {
         this.tenantUserCount = data;
         this.getTenantUsercount(data);
-      }
-      else {
-        this.tenantUserCount = [];
       }
     });
   }
@@ -114,6 +109,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       });
     });
   }
-  
+
   ngOnDestroy(): void { }
 }
