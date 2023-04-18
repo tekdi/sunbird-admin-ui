@@ -5,15 +5,12 @@ import { AppLayoutModule } from './layout/app.layout.module';
 import { NotfoundComponent } from './sb-admin/components/notfound/notfound.component';
 import { UserService } from './sb-admin/service/user.service';
 import { UserCountService } from './sb-admin/service/user-count.service';
-
 //i18next
 import { APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 import { I18NextModule, ITranslationService, I18NEXT_SERVICE, defaultInterpolationFormat } from 'angular-i18next';
 import en from "../locales/en/en.json"
 import ta from "../locales/ta/ta.json"
 
-
-//i18next
 export function appInit(i18next: ITranslationService) {
     let lang = localStorage.getItem('lang');
     const data = i18next.init({
@@ -40,7 +37,6 @@ export function appInit(i18next: ITranslationService) {
 export function localeIdFactory(i18next: ITranslationService) {
     return i18next.language;
 }
-
 
 export const I18N_PROVIDERS = [
     {

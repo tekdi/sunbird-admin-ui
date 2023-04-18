@@ -4,10 +4,7 @@ import { map, Subscription } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { UserCountService } from '../../service/user-count.service';
 import { TenantDetails } from './tenantDetails';
-
-//i18n
 import $ from 'jquery';
-
 
 @Component({
   templateUrl: './dashboard.component.html',
@@ -24,19 +21,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   tenantUserCount: any[] = [];
 
-  constructor(private userService: UserService, public layoutService: LayoutService, private userCountService: UserCountService) {
-
-  }
+  constructor(private userService: UserService, public layoutService: LayoutService, private userCountService: UserCountService) 
+  {}
 
   ngOnInit() {
-
     //i18n
     $(document).ready(function () {
       $("#eng").click(function () {
         localStorage.setItem('lang', 'en');
         document.location.reload();
       });
-      $("#de").click(function () {
+      $("#tam").click(function () {
         localStorage.setItem('lang', 'ta');
         document.location.reload();
       });
@@ -46,8 +41,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         $("#panel").slideToggle("fast");
       });
     });
-
-
 
     this.cols = [
       { field: 'orgName', header: 'Organization Name' },

@@ -4,12 +4,12 @@ const PROXY_CONFIG = [
             "/api",
             "/assets",
             "/search"
+
         ],
-        "target": "https://sunbirdsaas.com",
+        "target": "http://localhost:3000",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
     }
 ]
-
 module.exports = PROXY_CONFIG;
