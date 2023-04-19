@@ -23,7 +23,7 @@ jobs:
           command: npm run lint
       - run:
           name: Testing
-          command: 'npm run test-coverage | tee /tmp/logs/test_cases.log'
+          command: 'npm run test-coverage'
       - run:
           name: Install  Node.js v14.20.0 with build in nvm tool
           command: |
