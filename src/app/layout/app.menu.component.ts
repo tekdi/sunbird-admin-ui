@@ -21,6 +21,17 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
+                label: 'Organization Management',
+                icon: 'pi pi-fw pi-briefcase',
+                items: [
+                    {
+                        label: 'Organization',
+                        icon: 'pi pi-fw pi-user',
+                        routerLink: ['/pages/sb-organization']
+                    }
+                ]
+            },
+            {
                 label: 'User Management',
                 icon: 'pi pi-fw pi-briefcase',
                 items: [
