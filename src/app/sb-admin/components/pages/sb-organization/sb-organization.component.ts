@@ -1,48 +1,58 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { OrganizationDetail } from './OrganizationDetail';
+import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sb-organization',
   templateUrl: './sb-organization.component.html',
   styleUrls: ['./sb-organization.component.scss']
 })
-export class SbOrganizationComponent {
+export class SbOrganizationComponent implements OnDestroy {
 
- organization =[
-    {
-      "organizationName": "Org1",
-      "channel": "org1_channel",
-      "isRootOrg": true,
-      "id": 1234567890
-    },
-    {
-      "organizationName": "Org2",
-      "channel": "org2_channel",
-      "isRootOrg": false,
-      "id": 2345678901
-    },
-    {
-      "organizationName": "Org3",
-      "channel": "org3_channel",
-      "isRootOrg": true,
-      "id": 3456789012
-    },
-    {
-      "organizationName": "Org4",
-      "channel": "org4_channel",
-      "isRootOrg": false,
-      "id": 4567890123
-    },
-    {
-      "organizationName": "Org5",
-      "channel": "org5_channel",
-      "isRootOrg": true,
-      "id": 5678901234
-    },
-    {
-      "organizationName": "Org6",
-      "channel": "org6_channel",
-      "isRootOrg": false,
-      "id": 6789012345
-    }]
+  organizationDetail: OrganizationDetail[] = [];
 
+  loading: boolean = true;
+
+  organizationDetailResponse: any[] = [];
+
+  private subscription: Subscription | any;
+
+  constructor(private orgList: OrganizationListService) { }
+
+  ngOnInit() {
+    this.getOrganization();
+  }
+
+  //Get all tenant data
+  getOrganization() {
+    const body = {
+      "request": {
+        "filters": {
+          "isRootOrg": true
+        },
+        "fields": [
+          "id",
+          "channel",
+          "orgName",
+          "externalId",
+          "isRootOrg"
+        ],
+        "sortBy": {
+          "createdDate": "Desc"
+        },
+        "limit": 1002
+      }
+
+    }
+    this.subscription = this.orgList.getOrganizationList(body).subscribe((data: any) => {
+      this.organizationDetail = data.result.response.content;
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }
+
+
