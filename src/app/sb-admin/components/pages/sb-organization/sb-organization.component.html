@@ -1,18 +1,29 @@
 <div class="grid">
     <div class="col-12 xl:col-12">
         <div class="card">
-            <h5>Users</h5>
-            <p-table  [paginator]="true" [rows]="5" responsiveLayout="scroll">
+            <h5>Organizations</h5>
+            <p-table #myTab [value]="organization"   [paginator]="true" [rows]="5" responsiveLayout="scroll" [globalFilterFields]="['organizationName','channel','isRootOrg','id']">
+                <ng-template pTemplate="caption">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"> </i>
+                        <input type="text" pInputText placeholder="Search"
+                            (input)="myTab.filterGlobal($any($event.target).value,'contains')" />
+                    </span>
+                </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pSortableColumn="name">Name<p-sortIcon field="firstName"></p-sortIcon></th>
-                        <th pSortableColumn="channel">Organization<p-sortIcon field="channel"></p-sortIcon></th>
+                        <th pSortableColumn="organizationName">Organization Name<p-sortIcon field="organizationName"></p-sortIcon></th>
+                        <th pSortableColumn="channel">Channel<p-sortIcon field="channel"></p-sortIcon></th>
+                        <th pSortableColumn="isRootOrg">isRootOrg<p-sortIcon field="isRootOrg"></p-sortIcon></th>
+                        <th pSortableColumn="id">id<p-sortIcon field="id"></p-sortIcon></th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-user>
+                <ng-template pTemplate="body" let-organization>
                     <tr>
-                        <td style="width: 35%; min-width: 7rem;">{{user.firstName}}</td>
-                        <td style="width: 35%; min-width: 8rem;">{{user.channel}}</td>
+                        <td style="width: 35%; min-width: 7rem;">{{organization.organizationName}}</td>
+                        <td style="width: 35%; min-width: 8rem;">{{organization.channel}}</td>
+                        <td style="width: 35%; min-width: 7rem;">{{organization.isRootOrg}}</td>
+                        <td style="width: 35%; min-width: 8rem;">{{organization.id}}</td>
                     </tr>
                 </ng-template>
             </p-table>

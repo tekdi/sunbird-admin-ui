@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SbOrganizationRoutingModule } from './sb-organization-routing.module';
 import { SbOrganizationComponent } from './sb-organization.component';
 import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { TableModule } from 'primeng/table';
   imports: [
     CommonModule,
     SbOrganizationRoutingModule,
-    TableModule
+    TableModule,
+    InputTextModule
   ]
 })
 export class SbOrganizationModule { }
