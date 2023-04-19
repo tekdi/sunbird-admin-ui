@@ -1,32 +1,51 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~sunbird-admin-ui
-    docker:
-     - image: circleci/node:14.18.2-browsers
+    working_directory: ~/sunbird-admin-ui
+    machine:
+      image: ubuntu-2004:202111-01
     steps:
+      - checkout:
+          path: ~/sunbird-admin-ui
       - run:
-          name: Show current branch
-          command: echo ${CIRCLE_BRANCH}
+          name: Node version
+          command: 'node --version'
       - run:
-          environment:
-            NG_CLI_ANALYTICS: "ci"
-          command: npm install
-      - run: cd projects/sb-user-management && sudo npm install
+          name: Installing Angular cli
+          command: 'npm install -g @angular/cli@14.2.10 --no-progress'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: Node install
+          name: Installing NPM deps
+          command: 'npm install --no-progress'
+      - run:
+          name: Linting
           command: npm run lint
       - run:
+          name: Building
+          command: 'mkdir -p /tmp/logs && node --max_old_space_size=6000 ./node_modules/@angular/cli/bin/ng build --configuration production --optimization=false  | tee /tmp/logs/build.log'
+      - run:
           name: Testing
-          command: npm run test
+          command: 'npm run test-coverage | tee /tmp/logs/test_cases.log'
+      - run:
+          name: Install  Node.js v14.20.0 with build in nvm tool
+          command: |
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            nvm install v14 && nvm use v14 && nvm alias default v14
+            node -v
+      - run:
+          name: Alter Node version
+          command: 'node --version'
       - run:
           name: Install sonar scanner
-          command: 'sudo npm install -i -g sonarqube-scanner'
+          command: npm install -g sonarqube-scanner
       - run:
-          name: Sonar scanner
-          command: cd ~/sunbird-admin-ui && sonar-scanner
+          name: Run sonar scanner
+          command: 'cd ~/knowlg-portal && sonar-scanner'
 workflows:
   version: 2.1
   build_and_test:
     jobs:
       - build
+
