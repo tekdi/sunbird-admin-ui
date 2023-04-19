@@ -1,32 +1,32 @@
-version: 2.1
-jobs:
-  build:
-    working_directory: ~/sunbird-admin-ui
-    machine:
-      image: ubuntu-2004:202111-01
-    steps:
-      - checkout:
-          path: ~/sunbird-admin-ui
-      - run:
-          name: Node version
-          command: 'node --version'
-      - run:
-          name: Installing Angular cli
-          command: 'npm install -g @angular/cli@14.2.10 --no-progress'
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: Installing NPM deps
-          command: 'npm install --no-progress'
-      - run:
-          name: Linting
-          command: npm run lint
-      - run:
-          name: Testing
-          command: 'npm run test-coverage'
-workflows:
   version: 2.1
-  build_and_test:
-    jobs:
-      - build
+  jobs:
+    build:
+      working_directory: ~/sunbird-admin-ui
+      machine:
+        image: ubuntu-2004:202111-01
+      steps:
+        - checkout:
+            path: ~/sunbird-admin-ui
+        - run:
+            name: Node version
+            command: 'node --version'
+        - run:
+            name: Installing Angular cli
+            command: 'npm install -g @angular/cli@14.2.10 --no-progress'
+        - restore_cache:
+            key: dependency-cache-{{ checksum "package.json" }}
+        - run:
+            name: Installing NPM deps
+            command: 'npm install --no-progress'
+        - run:
+            name: Linting
+            command: npm run lint
+        - run:
+            name: Testing
+            command: 'npm run test-coverage'
+  workflows:
+    version: 2.1
+    build_and_test:
+      jobs:
+        - build
 
