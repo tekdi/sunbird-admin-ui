@@ -1,12 +1,12 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/admin-portal
+    working_directory: ~sunbird-admin-ui
     docker:
      - image: circleci/node:14.18.2-browsers
     steps:
       - checkout:
-          path: ~/admin-portal
+          path: ~sunbird-admin-ui
       - run:
           name: Show current branch
           command: echo ${CIRCLE_BRANCH}
