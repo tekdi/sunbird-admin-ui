@@ -5,8 +5,6 @@ jobs:
     docker:
      - image: circleci/node:14.18.2-browsers
     steps:
-      - checkout:
-          path: ~sunbird-admin-ui
       - run:
           name: Show current branch
           command: echo ${CIRCLE_BRANCH}
