@@ -1,1 +1,23 @@
-<p>sb-organization works!</p>
+<div class="grid">
+    <div class="col-12 xl:col-12">
+        <div class="card">
+            <h5>Users</h5>
+            <p-table  [paginator]="true" [rows]="5" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="name">Name<p-sortIcon field="firstName"></p-sortIcon></th>
+                        <th pSortableColumn="channel">Organization<p-sortIcon field="channel"></p-sortIcon></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-user>
+                    <tr>
+                        <td style="width: 35%; min-width: 7rem;">{{user.firstName}}</td>
+                        <td style="width: 35%; min-width: 8rem;">{{user.channel}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+
+
