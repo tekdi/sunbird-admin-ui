@@ -1,9 +1,6 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~sunbird-admin-ui
-    docker:
-     - image: circleci/node:14.18.2-browsers
     steps:
       - run:
           name: Show current branch
