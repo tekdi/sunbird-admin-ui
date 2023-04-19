@@ -14,7 +14,7 @@ jobs:
           environment:
             NG_CLI_ANALYTICS: "ci"
           command: npm install
-      - run: cd projects/sb-user-mgmt && sudo npm install
+      - run: cd projects/sb-user-management && sudo npm install
       - run:
           name: Node install
           command: npm run lint
