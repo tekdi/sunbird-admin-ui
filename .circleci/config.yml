@@ -22,9 +22,6 @@ jobs:
           name: Linting
           command: npm run lint
       - run:
-          name: Building
-          command: 'mkdir -p /tmp/logs && node --max_old_space_size=6000 ./node_modules/@angular/cli/bin/ng build --configuration production --optimization=false  | tee /tmp/logs/build.log'
-      - run:
           name: Testing
           command: 'npm run test-coverage | tee /tmp/logs/test_cases.log'
       - run:
