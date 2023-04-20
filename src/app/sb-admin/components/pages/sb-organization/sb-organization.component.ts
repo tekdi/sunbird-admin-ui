@@ -30,18 +30,7 @@ export class SbOrganizationComponent implements OnDestroy {
       "request": {
         "filters": {
           "isRootOrg": true
-        },
-        "fields": [
-          "id",
-          "channel",
-          "orgName",
-          "externalId",
-          "isRootOrg"
-        ],
-        "sortBy": {
-          "createdDate": "Desc"
-        },
-        "limit": 1002
+        }
       }
 
     }
