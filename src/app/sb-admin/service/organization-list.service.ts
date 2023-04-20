@@ -10,7 +10,7 @@ export class OrganizationListService {
 
   constructor(private http: HttpClient) { }
 
-  getOrganizationList(body: any): Observable<Object> {
+  getAllOrganizationList(body: any): Observable<Object> {
     let header = new HttpHeaders({
       "Content-Type": 'application/json'
     })

@@ -13,18 +13,16 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pSortableColumn="orgName">Organization Name<p-sortIcon
+                        <th pSortableColumn="orgName">Organizations<p-sortIcon
                                 field="orgName"></p-sortIcon></th>
-                        <th pSortableColumn="channel">Channel<p-sortIcon field="channel"></p-sortIcon></th>
-                        <th pSortableColumn="isRootOrg">isRootOrg<p-sortIcon field="isRootOrg"></p-sortIcon></th>
-                        <th pSortableColumn="id">id<p-sortIcon field="id"></p-sortIcon></th>
+                        <th pSortableColumn="channel">Channels<p-sortIcon field="channel"></p-sortIcon></th>
+                        <th pSortableColumn="id">Channel Id<p-sortIcon field="id"></p-sortIcon></th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-organization>
                     <tr>
                         <td style="width: 35%; min-width: 7rem;">{{organization.orgName}}</td>
                         <td style="width: 35%; min-width: 8rem;">{{organization.channel}}</td>
-                        <td style="width: 35%; min-width: 7rem;">{{organization.isRootOrg}}</td>
                         <td style="width: 35%; min-width: 8rem;">{{organization.id}}</td>
                     </tr>
                 </ng-template>

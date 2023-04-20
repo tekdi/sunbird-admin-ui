@@ -21,11 +21,11 @@ export class SbOrganizationComponent implements OnDestroy {
   constructor(private orgList: OrganizationListService) { }
 
   ngOnInit() {
-    this.getOrganization();
+    this.getAllOrganizationList();
   }
 
   //Get all tenant data
-  getOrganization() {
+  getAllOrganizationList() {
     const body = {
       "request": {
         "filters": {
@@ -45,7 +45,7 @@ export class SbOrganizationComponent implements OnDestroy {
       }
 
     }
-    this.subscription = this.orgList.getOrganizationList(body).subscribe((data: any) => {
+    this.subscription = this.orgList.getAllOrganizationList(body).subscribe((data: any) => {
       this.organizationDetail = data.result.response.content;
     })
   }
