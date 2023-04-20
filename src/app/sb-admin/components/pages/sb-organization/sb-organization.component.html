@@ -13,10 +13,10 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pSortableColumn="orgName">Organization Name<p-sortIcon
+                        <th scope="col" pSortableColumn="orgName">Organization Name<p-sortIcon
                                 field="orgName"></p-sortIcon></th>
-                        <th pSortableColumn="channel">Channel Name<p-sortIcon field="channel"></p-sortIcon></th>
-                        <th pSortableColumn="id">Channel Id<p-sortIcon field="id"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="channel">Channel Name<p-sortIcon field="channel"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="id">Channel Id<p-sortIcon field="id"></p-sortIcon></th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-organization>
