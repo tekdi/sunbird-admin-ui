@@ -15,9 +15,9 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pSortableColumn="orgName">{{ 'DASHBOARD_ORGANIZATION_NAME' | i18next }}<p-sortIcon
+                        <th scope="col" pSortableColumn="orgName">{{ 'DASHBOARD_ORGANIZATION_NAME' | i18next }}<p-sortIcon
                                 field="orgName"></p-sortIcon></th>
-                        <th pSortableColumn="userCount">{{ 'DASHBOARD_USERS_REGISTERED' | i18next }}<p-sortIcon
+                        <th scope="col" pSortableColumn="userCount">{{ 'DASHBOARD_USERS_REGISTERED' | i18next }}<p-sortIcon
                                 field="userCount"> </p-sortIcon></th>
                     </tr>
                 </ng-template>
