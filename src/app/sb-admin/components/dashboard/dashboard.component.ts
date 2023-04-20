@@ -40,18 +40,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       "request": {
         "filters": {
           "isRootOrg": true
-        },
-        "fields": [
-          "id",
-          "channel",
-          "orgName",
-          "externalId",
-          "isRootOrg"
-        ],
-        "sortBy": {
-          "createdDate": "Desc"
-        },
-        "limit": 1002
+        }
       }
 
     }
@@ -70,19 +59,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         "request": {
           "filters": {
             "rootOrgId": tenant.id
-          },
-          "fields": [
-            "firstName",
-            "lastName",
-            "userName",
-            "id",
-            "email",
-            "phone",
-            "createdDate",
-            "roles",
-            "managedBy"
-          ],
-          "limit": 10
+          }
         }
       };
       this.userCountService.getUserCountOfaTenant(body).subscribe((counttenant: any) => {
