@@ -14,12 +14,7 @@ export class SbOrganizationComponent implements OnDestroy {
 
   loading: boolean = true;
 
-  organizationDetailResponse: any[] = [];
-
   private subscription: Subscription | any;
-
-  demo:any[]=[];
-
 
   constructor(private orgList: OrganizationListService) { }
 
@@ -27,7 +22,7 @@ export class SbOrganizationComponent implements OnDestroy {
     this.getAllOrganizationList();
   }
 
-  //Get all tenant data
+  //Get all Organization  data
   getAllOrganizationList() {
     const body = {
       "request": {

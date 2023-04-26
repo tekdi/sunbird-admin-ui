@@ -2,5 +2,10 @@
   "DASHBOARD":"Dashboard",
   "DASHBOARD_ORGANIZATION_NAME": "Organization Name",
   "DASHBOARD_USERS_REGISTERED": "Registered Users",
-  "DASHBOARD_WARNING": "Tenants Users Count Data Not Found !!"
+  "DASHBOARD_WARNING": "Tenants Users Count Data Not Found !!",
+  "ORGANIZATION_LIST_WARNING":"Organization Data Not Found",
+  "ORGANIZATION":"Organization",
+  "ORGANIZATION_NAME":"Organization Name",
+  "CHANNEL NAME":"Channel Name",
+  "CHANNEL ID":"Channel ID"
 }
