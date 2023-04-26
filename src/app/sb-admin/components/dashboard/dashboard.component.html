@@ -1,38 +1,33 @@
-    <div class="grid">
-        <div *ngFor="let item of items; index as i;" class="col-12 lg:col-6 xl:col-3">
-            <div class="card mb-0">
-                <div class="flex justify-content-between mb-3">
-                    <div>
-                        <span class="block text-500 font-medium mb-3">{{item.label}} </span>
-                        <div class="text-900 font-medium text-xl">0000</div>
-                    </div>
-                    <div class="flex align-items-center justify-content-center {{item.icon}} border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                        <i class="pi pi-user text-green-500 text-xl"></i>
-                    </div>
-                </div>
-                <span class="text-green-500 font-medium">00 new </span>
-                <span class="text-500">newly registered</span>
-            </div>
-        </div>
-
-        <div class="col-12 xl:col-12">
-            <div class="card">
-                <h5>Users</h5>
-                <p-table [value]="users" [paginator]="true" [rows]="5" responsiveLayout="scroll">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th pSortableColumn="name">Name<p-sortIcon field="firstName"></p-sortIcon></th>
-                            <th pSortableColumn="channel">Organization<p-sortIcon field="channel"></p-sortIcon></th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-user>
-                        <tr>
-                            <td style="width: 35%; min-width: 7rem;">{{user.firstName}}</td>
-                            <td style="width: 35%; min-width: 8rem;">{{user.channel}}</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
+<div class="grid">
+    <div class="col-12 xl:col-12">
+        <div class="card">
+            <h5>{{ 'DASHBOARD' | i18next }}</h5>
+            <p-message severity="warn" text="{{ 'DASHBOARD_WARNING' | i18next }}"
+                *ngIf="!tenantUserCountResponse || tenantUserCountResponse.length === 0"></p-message>
+            <p-table #myTab [value]="tenantDetail" [loading]="loading" [paginator]="true" [rows]="10"
+                responsiveLayout="scroll" [globalFilterFields]="['orgName']">
+                <ng-template pTemplate="caption">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"> </i>
+                        <input type="text" pInputText placeholder="Organization Name"
+                            (input)="myTab.filterGlobal($any($event.target).value,'contains')" />
+                    </span>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th scope="col" pSortableColumn="orgName">{{ 'DASHBOARD_ORGANIZATION_NAME' | i18next }}<p-sortIcon
+                                field="orgName"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="userCount">{{ 'DASHBOARD_USERS_REGISTERED' | i18next }}<p-sortIcon
+                                field="userCount"> </p-sortIcon></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-user>
+                    <tr>
+                        <td>{{user.orgName}}</td>
+                        <td>{{user.userCount}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
         </div>
     </div>
-
+</div>

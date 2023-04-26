@@ -1,46 +1,75 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { User } from '../../api/user';
-import { UserService } from '../../service/user.service';
-import { Subscription } from 'rxjs';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { map } from 'rxjs';
+import { UserCountService } from '../../service/user-count.service';
+import { TenantDetails } from './tenantDetails';
+import $ from 'jquery';
 
 @Component({
-    templateUrl: './dashboard.component.html',
+  templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-    items!: MenuItem[];
+  tenantDetail: TenantDetails[] = [];
 
-    users!: User[];
+  loading: boolean = true;
 
-    chartData: any;
+  tenantUserCountResponse: any[] = [];
 
-    chartOptions: any;
+  constructor(private userCountService: UserCountService) 
+  {}
 
-    subscription!: Subscription;
+  ngOnInit() {
+    $(document).ready(function () {
+      $("#eng").click(function () {
+        localStorage.setItem('lang', 'en');
+        document.location.reload();
+      });
+    });
 
-    constructor(private userService: UserService, public layoutService: LayoutService) {
-    }
+    this.getTenant().subscribe((data: any) => {
+      if (data && data.length > 0) {
+        this.tenantUserCountResponse = data;
+        this.getTenantUsercount(data);
+      }
+    });
+  }
 
-    ngOnInit() {
-        this.userService.getUsers().then(data => this.users = data);
-
-        //TODO:- Need to replace this with actual org data and map it
-        this.items = [
-            { label: 'ORG_1', icon: 'bg-blue-100' },
-            { label: 'ORG_2', icon: 'bg-green-100' },
-            { label: 'ORG_3', icon: 'bg-cyan-100' },
-            { label: 'ORG_4', icon: 'bg-purple-100' },
-            { label: 'ORG_5', icon: 'bg-blue-100' },
-            { label: 'ORG_6', icon: 'bg-green-100' },
-            { label: 'ORG_7', icon: 'bg-cyan-100' }
-        ];
-    }
-
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
+  //Get all tenant data
+  getTenant() {
+    const body = {
+      "request": {
+        "filters": {
+          "isRootOrg": true
         }
+      }
+
     }
+    return this.userCountService.getTenant(body).pipe(
+      map((data: any) => {
+        this.tenantDetail = data.result.response.content;
+        return this.tenantDetail;
+      })
+    );
+  }
+
+  //Get user count of each tenant 
+  getTenantUsercount(tenantDetail: any): void {
+    tenantDetail.map((tenant: any) => {
+      const body = {
+        "request": {
+          "filters": {
+            "rootOrgId": tenant.id
+          }
+        }
+      };
+      this.userCountService.getUserCountOfaTenant(body).subscribe((counttenant: any) => {
+        tenant.userCount = counttenant?.result?.response?.count;
+        if (tenantDetail[tenantDetail.length - 1].id === tenant.id) {
+          this.loading = false;
+        }
+      });
+    });
+  }
+
+  ngOnDestroy(): void { }
 }
