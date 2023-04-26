@@ -2,7 +2,9 @@
     <div class="col-12 xl:col-12">
         <div class="card">
             <h5>Organizations</h5>
-            <p-table #myTab [value]="organizationDetail" [paginator]="true" [rows]="10" responsiveLayout="scroll"
+            <p-message severity="warn" text="Data Not Found"
+            *ngIf="!organizationDetail || organizationDetail.length === 0"></p-message>
+            <p-table #myTab [value]="organizationDetail" [loading]='loading' [paginator]="true" [rows]="10" responsiveLayout="scroll"
                 [globalFilterFields]="['organizationName','channel','isRootOrg','id']">
                 <ng-template pTemplate="caption">
                     <span class="p-input-icon-left">

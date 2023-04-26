@@ -4,7 +4,8 @@ import { SbOrganizationRoutingModule } from './sb-organization-routing.module';
 import { SbOrganizationComponent } from './sb-organization.component';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
-
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from "primeng/message";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,9 @@ import { InputTextModule } from 'primeng/inputtext';
     CommonModule,
     SbOrganizationRoutingModule,
     TableModule,
-    InputTextModule
+    InputTextModule,
+    MessageModule,
+    MessagesModule
   ]
 })
 export class SbOrganizationModule { }

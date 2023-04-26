@@ -18,6 +18,9 @@ export class SbOrganizationComponent implements OnDestroy {
 
   private subscription: Subscription | any;
 
+  demo:any[]=[];
+
+
   constructor(private orgList: OrganizationListService) { }
 
   ngOnInit() {
@@ -36,6 +39,7 @@ export class SbOrganizationComponent implements OnDestroy {
     }
     this.subscription = this.orgList.getAllOrganizationList(body).subscribe((data: any) => {
       this.organizationDetail = data.result.response.content;
+      this.loading = false;
     })
   }
 
