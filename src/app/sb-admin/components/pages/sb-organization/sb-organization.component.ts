@@ -32,10 +32,16 @@ export class SbOrganizationComponent implements OnDestroy {
       }
 
     }
-    this.subscription = this.orgList.getAllOrganizationList(body).subscribe((data: any) => {
+    this.subscription = this.orgList.getAllOrganizationList(body).subscribe(
+      (data: any) => {
       this.organizationDetail = data.result.response.content;
       this.loading = false;
-    })
+    },
+    (error:any)=>{
+      console.log(error);
+      this.loading = false;
+    }
+    );
   }
 
   ngOnDestroy(): void {
