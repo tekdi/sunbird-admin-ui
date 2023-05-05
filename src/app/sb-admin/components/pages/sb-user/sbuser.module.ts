@@ -17,6 +17,9 @@ import { DialogModule } from 'primeng/dialog';
 import { SbUserComponent } from './sbuser.component';
 import { SbUserRoutingModule } from './sbuser-routing.module';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { PaginatorModule } from 'primeng/paginator';
+import { CheckboxModule } from 'primeng/checkbox';
+
 
 @NgModule({
     imports: [
@@ -36,7 +39,9 @@ import { MultiSelectModule } from 'primeng/multiselect';
         InputNumberModule,
         DialogModule,
         SbUserRoutingModule,
-        MultiSelectModule
+        MultiSelectModule,
+        PaginatorModule,
+        CheckboxModule
     ],
     declarations: [SbUserComponent]
 })
