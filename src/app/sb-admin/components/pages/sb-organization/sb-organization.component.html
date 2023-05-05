@@ -1,0 +1,36 @@
+<div class="grid">
+    <div class="col-12 xl:col-12">
+        <div class="card">
+            <h5>{{ 'ORGANIZATION' | i18next}}</h5>
+            <p-message severity="warn" text="{{ 'ORGANIZATION_LIST_WARNING' | i18next }}"
+                *ngIf="!organizationDetail || organizationDetail.length === 0"></p-message>
+            <p-table #myTab [value]="organizationDetail" [loading]='loading' [paginator]="true" [rows]="10"
+                responsiveLayout="scroll" [globalFilterFields]="['organizationName','channel','isRootOrg','id']">
+                <ng-template pTemplate="caption">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"> </i>
+                        <input type="text" pInputText placeholder="Search"
+                            (input)="myTab.filterGlobal($any($event.target).value,'contains')" />
+                    </span>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th scope="col" pSortableColumn="orgName">{{ 'ORGANIZATION_NAME' | i18next }}<p-sortIcon
+                                field="orgName"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="channel">{{ 'CHANNEL_NAME' | i18next }}<p-sortIcon
+                                field="channel"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="id">{{ 'CHANNEL_ID' |i18next }}<p-sortIcon
+                                field="id"></p-sortIcon></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-organization>
+                    <tr>
+                        <td style="width: 35%; min-width: 7rem;">{{organization.orgName}}</td>
+                        <td style="width: 35%; min-width: 8rem;">{{organization.channel}}</td>
+                        <td style="width: 35%; min-width: 8rem;">{{organization.id}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
