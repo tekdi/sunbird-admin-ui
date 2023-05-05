@@ -21,7 +21,7 @@
             </p-toolbar>
             <p-table #myTable [value]="OrganizationsUsersList" [columns]="cols"
                 [totalRecords]="OrganizationsUsersList.length" responsiveLayout="scroll" [rows]="10" [paginator]="true"
-                [globalFilterFields]="['name','country.name','representative.name','status']"
+                [globalFilterFields]="['rootOrgName','firstName','lastName','email','phone',]"
                 [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple"
                 [rowHover]="true" dataKey="userId" [selection]="selectedUsers">
@@ -40,13 +40,13 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th pSortableColumn="rootOrgName">Organization<p-sortIcon field="rootOrgName"></p-sortIcon></th>
-                        <th pSortableColumn="firstName">First Name <p-sortIcon field="firstName"></p-sortIcon></th>
-                        <th pSortableColumn="lastName">Last Name <p-sortIcon field="lastName"></p-sortIcon></th>
-                        <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
-                        <th pSortableColumn="phone">Phone <p-sortIcon field="phone"></p-sortIcon></th>
-                        <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
-                        <th pSortableColumn="action">Action <p-sortIcon field="action"></p-sortIcon></th>
+                        <th pSortableColumn="rootOrgName">{{ 'ORGANIZATION'  | i18next}}<p-sortIcon field="rootOrgName"></p-sortIcon></th>
+                        <th pSortableColumn="firstName">{{ 'FIRST_NAME' |i18next }}<p-sortIcon field="firstName"></p-sortIcon></th>
+                        <th pSortableColumn="lastName">{{ 'LAST_NAME' |i18next }}<p-sortIcon field="lastName"></p-sortIcon></th>
+                        <th pSortableColumn="email">{{ 'EMAIL' | i18next }} <p-sortIcon field="email"></p-sortIcon></th>
+                        <th pSortableColumn="phone">{{ 'PHONE' |i18next }}<p-sortIcon field="phone"></p-sortIcon></th>
+                        <th pSortableColumn="status">{{ 'STATUS' | i18next }}<p-sortIcon field="status"></p-sortIcon></th>
+                        <th pSortableColumn="action">{{ 'ACTION' | i18next }}<p-sortIcon field="action"></p-sortIcon></th>
                         <th></th>
                     </tr>
                 </ng-template>
@@ -92,7 +92,6 @@
         <p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="User Details" [modal]="true"
             class="p-fluid">
             <ng-template pTemplate="content">
-                <!-- <img [src]="'assets/sb-admin/images/user/' + user.image" [alt]="user.image" width="150" class="mt-0 mx-auto mb-5 block shadow-2" *ngIf="user.image"> -->
                 <div class="field">
                     <label for="firstName">First Name</label>
                     <input type="text" pInputText id="firstName" [(ngModel)]="user.firstName" required autofocus

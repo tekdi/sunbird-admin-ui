@@ -12,6 +12,7 @@ import { OrganizationsUsersList } from './organizationsUsersList';
   providers: [MessageService]
 })
 export class SbUserComponent implements OnInit {
+
   userDialog: boolean = false;
   deleteUserDialog: boolean = false;
   deleteUsersDialog: boolean = false;
@@ -22,43 +23,18 @@ export class SbUserComponent implements OnInit {
   cols: any[] = [];
   statuses: any[] = [];
   organizations: any[] = [];
-  rowsPerPageOptions = [5, 10, 20];
   OrganizationsUsersList: OrganizationsUsersList[] = [];
-  allOrganizations: any[] = [];
-  userListArray: any[] = [];
-  userLists = [];
-  outputjson: any[] = [];
-  totalRecords: any;
-  isChecked: string[] = [];
-
+  
   constructor(private userService: UserService, private messageService: MessageService) { }
+
   ngOnInit() {
     this.getOrganizations().subscribe((data: any) => {
       if (data && data.length > 0) {
-        // this.allOrganizations = data;
         this.getOrganizationList(data);
-        //console.log(data);
       }
     });
-    console.log('final', this.OrganizationsUsersList);
-
-    this.cols = [
-      { field: "firstName", header: "First Name" },
-      { field: "lastName", header: "Last Name" },
-      //{ field: 'role', header: 'Role' },
-      { field: "email", header: "Email" },
-      { field: "phone", header: "Phone" },
-      { field: "status", header: "Status" },
-      { field: "channel", header: "Channel" },
-    ];
-
-  this.statuses = [
-      { label: 'ACTIVE', value: 'active' },
-      { label: 'INACTIVE', value: 'inactive' }
-  ];
-
   }
-  //Get all tenant data
+
   getOrganizations() {
     const body = {
       "request": {
@@ -70,11 +46,11 @@ export class SbUserComponent implements OnInit {
     return this.userService.getOrganizations(body).pipe(
       map((data: any) => {
         this.organizations = data?.result?.response?.content;
-        // console.log(this.organizations);
         return this.organizations;
       })
     );
   }
+
   getOrganizationList(usersList: any): void {
     let updated = [];
     usersList.forEach((UserList: any) => {
@@ -95,19 +71,14 @@ export class SbUserComponent implements OnInit {
         }
       };
       this.userService.getOrganizationUserList(body).subscribe((Users: any) => {
-        // this.organizationList = Users.organizationList;
         updated = Users?.result?.response?.content;
-        console.log('updated', updated);
         if (updated && updated.length > 0) {
           this.OrganizationsUsersList.push(...updated);
-          console.log(this.OrganizationsUsersList);
         }
-        //    setTimeout(() => {
-        //   }, 5000);
       });
     });
   }
-  
+
   openNew() {
     this.user = {};
     this.submitted = false;
