@@ -13,5 +13,7 @@
   "EMAIL":"Email",
   "PHONE":"Phone",
   "STATUS":"Status",
-  "ACTION":"Action"
+  "ACTION":"Action",
+  "USER":"User",
+  "ORGANIZATION_USER_LIST_WARNING": "User Data Not Found"
 }

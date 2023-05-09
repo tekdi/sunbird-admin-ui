@@ -6,7 +6,6 @@ import { UserService } from 'src/app/sb-admin/service/user.service';
 import { map } from 'rxjs';
 import { OrganizationsUsersList } from './organizationsUsersList';
 
-
 @Component({
   templateUrl: './sbuser.component.html',
   providers: [MessageService]
@@ -22,6 +21,7 @@ export class SbUserComponent implements OnInit {
   submitted: boolean = false;
   cols: any[] = [];
   statuses: any[] = [];
+  loading: boolean = true;
   organizations: any[] = [];
   OrganizationsUsersList: OrganizationsUsersList[] = [];
   
@@ -74,8 +74,13 @@ export class SbUserComponent implements OnInit {
         updated = Users?.result?.response?.content;
         if (updated && updated.length > 0) {
           this.OrganizationsUsersList.push(...updated);
+          this.loading = false;
         }
-      });
+      },(error:any) => {
+        console.error(error);
+        this.loading = false;
+      }
+      );
     });
   }
 

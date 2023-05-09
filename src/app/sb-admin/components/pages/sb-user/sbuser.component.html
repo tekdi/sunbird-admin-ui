@@ -19,7 +19,7 @@
                         (click)="myTable.exportCSV()"></button>
                 </ng-template>
             </p-toolbar>
-            <p-table #myTable [value]="OrganizationsUsersList" [columns]="cols"
+            <p-table #myTable [value]="OrganizationsUsersList" [columns]="cols" [loading]='loading'
                 [totalRecords]="OrganizationsUsersList.length" responsiveLayout="scroll" [rows]="10" [paginator]="true"
                 [globalFilterFields]="['rootOrgName','firstName','lastName','email','phone',]"
                 [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
@@ -27,7 +27,9 @@
                 [rowHover]="true" dataKey="userId" [selection]="selectedUsers">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                        <h5 class="m-0">Users</h5>
+                        <h5 class="m-0">{{ 'USER' | i18next }}</h5>
+                        <p-message severity="warn" text="{{ 'ORGANIZATION_USER_LIST_WARNING' | i18next }}"
+                               *ngIf="!OrganizationsUsersList || OrganizationsUsersList.length === 0"></p-message>
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input pInputText type="text" (input)="onGlobalFilter(myTable, $event)"

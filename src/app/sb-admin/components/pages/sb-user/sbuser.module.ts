@@ -20,6 +20,9 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { PaginatorModule } from 'primeng/paginator';
 import { CheckboxModule } from 'primeng/checkbox';
 import { I18NextModule} from 'angular-i18next';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from "primeng/message";
+
 
 @NgModule({
     imports: [
@@ -42,6 +45,8 @@ import { I18NextModule} from 'angular-i18next';
         MultiSelectModule,
         PaginatorModule,
         CheckboxModule,
+        MessagesModule,
+        MessageModule,
         I18NextModule.forRoot()
     ],
     declarations: [SbUserComponent]
