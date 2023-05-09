@@ -24,7 +24,7 @@ export class SbUserComponent implements OnInit {
   loading: boolean = true;
   organizations: any[] = [];
   OrganizationsUsersList: OrganizationsUsersList[] = [];
-  
+
   constructor(private userService: UserService, private messageService: MessageService) { }
 
   ngOnInit() {
@@ -76,7 +76,7 @@ export class SbUserComponent implements OnInit {
           this.OrganizationsUsersList.push(...updated);
           this.loading = false;
         }
-      },(error:any) => {
+      }, (error: any) => {
         console.error(error);
         this.loading = false;
       }

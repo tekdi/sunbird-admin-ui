@@ -15,5 +15,5 @@
   "STATUS":"Status",
   "ACTION":"Action",
   "USER":"User",
-  "ORGANIZATION_USER_LIST_WARNING": "User Data Not Found"
+  "ORGANIZATION_USER_LIST_WARNING": "Organization Users Data Not Found"
 }

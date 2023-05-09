@@ -4,7 +4,6 @@ import { User } from '../api/user';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-
 @Injectable()
 export class UserService {
 
@@ -25,8 +24,6 @@ export class UserService {
     })
     return this.http.post(environment.userUrl, body, { headers: header })
   }
-
-
 
   getUsersSmall() {
     return this.http.get<any>('assets/sb-admin/data/products-small.json')
