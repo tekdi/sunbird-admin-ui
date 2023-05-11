@@ -6,14 +6,16 @@
   "ORGANIZATION_LIST_WARNING":"Organization Data Not Found",
   "ORGANIZATION":"Organization",
   "ORGANIZATION_NAME":"Organization Name",
-  "CHANNEL_NAME":"Channel Name",
-  "CHANNEL_ID":"Channel ID",
-  "FIRST_NAME":"First Name",
-  "LAST_NAME":"Last Name",
-  "EMAIL":"Email",
-  "PHONE":"Phone",
+  "ORGANIZATION_CHANNEL_NAME":"Channel Name",
+  "ORGANIZATION_CHANNEL_ID":"Channel ID",
+  "USER_FIRST_NAME":"First Name",
+  "USER_LAST_NAME":"Last Name",
+  "USER_EMAIL":"Email",
+  "USER_PHONE":"Phone",
   "STATUS":"Status",
   "ACTION":"Action",
   "USER":"User",
-  "ORGANIZATION_USER_LIST_WARNING": "Organization Users Data Not Found"
+  "ORGANIZATION_USER_LIST_WARNING": "Organization Users Data Not Found",
+  "ADD_USER":"Add User",
+  "DELETE_USER":"Delete User"
 }
