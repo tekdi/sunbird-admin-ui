@@ -8,6 +8,9 @@ import { UserCountService } from './sb-admin/service/user-count.service';
 import { APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 import { I18NextModule, ITranslationService, I18NEXT_SERVICE, defaultInterpolationFormat } from 'angular-i18next';
 import en from "../locales/en/en.json"
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
+
 
 export function appInit(i18next: ITranslationService) {
     let lang = localStorage.getItem('lang');
@@ -53,6 +56,9 @@ export const I18N_PROVIDERS = [
     imports: [
         AppRoutingModule,
         AppLayoutModule,
+        FormsModule,
+        ReactiveFormsModule,
+        DialogModule,
         I18NextModule.forRoot(),
     ],
     providers: [

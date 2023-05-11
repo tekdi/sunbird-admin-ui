@@ -7,8 +7,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from "primeng/message";
 import { I18NextModule} from 'angular-i18next';
-
-
+import { ToastModule } from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,15 @@ import { I18NextModule} from 'angular-i18next';
     InputTextModule,
     MessageModule,
     MessagesModule,
+    ToastModule,
+    ToolbarModule,
+    ButtonModule,
+    DialogModule,
+    DynamicDialogModule,
     I18NextModule.forRoot()
+  ],
+  providers:[
+   DialogService
   ]
 })
 export class SbOrganizationModule { }

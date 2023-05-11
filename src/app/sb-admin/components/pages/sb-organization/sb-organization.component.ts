@@ -1,7 +1,10 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { OrganizationDetail } from './OrganizationDetail';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 import { Subscription } from 'rxjs';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { AddOrEditOrgComponent } from './add-or-edit-org/add-or-edit-org.component';
+
 
 @Component({
   selector: 'app-sb-organization',
@@ -10,13 +13,16 @@ import { Subscription } from 'rxjs';
 })
 export class SbOrganizationComponent implements OnDestroy {
 
+
   organizationDetail: OrganizationDetail[] = [];
 
   loading: boolean = true;
 
   private subscription: Subscription | any;
 
-  constructor(private orgList: OrganizationListService) { }
+  ref:any;
+
+  constructor(private orgList: OrganizationListService, public dialogService: DialogService) { }
 
   ngOnInit() {
     this.getAllOrganizationList();
@@ -43,6 +49,18 @@ export class SbOrganizationComponent implements OnDestroy {
     }
     );
   }
+
+
+  addOrg(){
+    this.ref = this.dialogService.open(AddOrEditOrgComponent, { 
+      header: 'Add Organization',
+      width: '40%',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: true
+    });
+  }
+
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
