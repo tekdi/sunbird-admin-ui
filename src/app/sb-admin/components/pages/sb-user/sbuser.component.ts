@@ -52,10 +52,12 @@ export class SbUserComponent implements OnInit {
             { field: "status", header: "Status" },
             { field: "channel", header: "Channel" },
         ];
+
         this.statuses = [
             { label: 'ACTIVE', value: 'active' },
             { label: 'INACTIVE', value: 'inactive' }
         ];
+
     }
 
     getUserList() {
@@ -79,6 +81,14 @@ export class SbUserComponent implements OnInit {
                 this.users.unshift(result);
             }
         });
+    }
+
+    editUser() {
+
+    }
+    
+    deleteSelectedUsers() {
+        this.deleteUsersDialog = true;
     }
 
     deleteUser(user: User) {
