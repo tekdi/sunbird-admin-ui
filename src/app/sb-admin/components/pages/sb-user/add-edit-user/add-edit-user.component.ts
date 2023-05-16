@@ -106,7 +106,7 @@ export class AddEditUserComponent {
       this.messages = [
         { severity: 'success', summary: 'Success', detail: response.params.status }
       ];
-      this.ref.close(true);
+      this.ref.close(this.addEditUserForm.value);
       console.log(response);
     }, (error) => {
       this.messages = [

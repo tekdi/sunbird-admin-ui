@@ -33,6 +33,8 @@ export class SbUserComponent implements OnInit {
     organizations: any[] = [];
 
     rowsPerPageOptions = [5, 10, 20];
+    addEditUserForm: any;
+    newUser: any;
     constructor(
         private userService: UserService,
         private messageService: MessageService,
@@ -41,7 +43,7 @@ export class SbUserComponent implements OnInit {
 
     ngOnInit() {
         this.getUserList();
-  this.cols = [
+        this.cols = [
             { field: "firstName", header: "First Name" },
             { field: "lastName", header: "Last Name" },
             //{ field: 'role', header: 'Role' },
@@ -50,31 +52,18 @@ export class SbUserComponent implements OnInit {
             { field: "status", header: "Status" },
             { field: "channel", header: "Channel" },
         ];
-
         this.statuses = [
             { label: 'ACTIVE', value: 'active' },
             { label: 'INACTIVE', value: 'inactive' }
         ];
-
     }
-    
+
     getUserList() {
         const body = {
             "request": {
                 "filters": {
                     "rootOrgId": ["0136268742469222406"]
                 },
-                "fields": [
-                    "firstName",
-                    "lastName",
-                    "userName",
-                    "id",
-                    "email",
-                    "phone",
-                    "createdDate",
-                    "roles",
-                    "managedBy"
-                ],
                 "limit": 1000
             }
         }
@@ -86,19 +75,10 @@ export class SbUserComponent implements OnInit {
     addNewUser() {
         const ref = this.dialogService.open(AddEditUserComponent, { header: 'Create New User', width: '30%', height: 'auto' });
         ref.onClose.subscribe((result) => {
-            if (result === true) {
-                this.getUserList();
+            if (result) {
+                this.users.unshift(result);
             }
         });
-    }
-
-    deleteSelectedUsers() {
-        this.deleteUsersDialog = true;
-    }
-
-    editUser(user: User) {
-        this.user = { ...user };
-        this.userDialog = true;
     }
 
     deleteUser(user: User) {
@@ -121,8 +101,8 @@ export class SbUserComponent implements OnInit {
     }
 
     hideDialog() {
-            this.userDialog = false;
-            this.submitted = false;
+        this.userDialog = false;
+        this.submitted = false;
     }
 
     // saveUser() {

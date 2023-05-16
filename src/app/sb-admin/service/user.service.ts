@@ -66,12 +66,5 @@ getUserList(payload:any): Observable<any>{
         })
         return this.http.post(environment.userCreateUrl, payload, { headers: header });
     }
-    editUser(payload: any): Observable<any> {
-        let header = new HttpHeaders({
-            "Content-Type": 'application/json',
-            "Authorization": environment.authKey,
-            "x-authenticated-user-token": environment.userToken,
-        })
-        return this.http.post(environment.userUpdateUrl, payload, { headers: header });
-    }
+    
 }
