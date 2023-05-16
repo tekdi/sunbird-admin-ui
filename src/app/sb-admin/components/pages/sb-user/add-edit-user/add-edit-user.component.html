@@ -1,0 +1,85 @@
+<p-toast></p-toast>
+<form [formGroup]="addEditUserForm">
+    <div class="card p-fluid">
+        <div class="field">
+            <label for="firstName">First Name * </label>
+            <input type="text" pInputText id="firstName" autofocus
+                [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['firstName'].errors}"
+                formControlName="firstName" />
+            <div>
+                <small *ngIf="submitted && addEditUserForm.controls['firstName'].errors">First Name is required.</small>
+            </div>
+        </div>
+        <div class="field">
+            <label for="lastName">Last Name *</label>
+            <input type="text" pInputText id="lastName" autofocus
+                [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['lastName'].errors}"
+                formControlName="lastName" />
+            <div>
+                <small *ngIf="submitted && addEditUserForm.controls['lastName'].errors">Last Name is required.</small>
+            </div>
+        </div>
+        <div class="field">
+            <label for="userName">User Name *</label>
+            <input type="text" pInputText id="userName" autofocus
+                [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['userName'].errors}"
+                formControlName="userName" />
+            <div> <small class="ng-dirty ng-invalid"
+                    *ngIf="submitted && addEditUserForm.controls['userName'].errors">User Name is
+                    required.</small>
+            </div>
+        </div>
+        <div class="field">
+            <label for="password">Password *</label>
+            <input type="password" pInputText id="password" autofocus
+                [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['password'].errors}"
+                formControlName="password" />
+            <div><small class=danger *ngIf="submitted && addEditUserForm.controls['password'].errors">Password is
+                    required.</small>
+            </div>
+        </div>
+        <div class="field">
+            <label for="email">Email Id</label>
+            <input type="email" pInputText id="email" autofocus formControlName="email"
+                [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['email'].errors}" />
+            <div *ngIf="!(addEditUserForm.controls['phone'].value || addEditUserForm.controls['email'].value)">
+                <small>Please enter Phone or Email to proceed.</small>
+            </div>
+        </div>
+        <div class="field">
+            <label for="phone">Phone No</label>
+            <input type="text" pInputText id="phone" autofocus formControlName="phone"
+                [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['phone'].errors}"
+                formControlName="phone" />
+
+            <div *ngIf="!(addEditUserForm.controls['phone'].value || addEditUserForm.controls['email'].value)">
+                <small>Please enter Phone or Email to proceed.</small>
+            </div>
+        </div>
+        <div class="field">
+            <label for="multiselect">Role *</label>
+            <p-multiSelect [options]="roles" formControlName="roles" optionLabel="name" placeholder="Select a Role"
+                optionValue="value"
+                [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['roles'].errors}"></p-multiSelect>
+            <div><small class=danger *ngIf="submitted && addEditUserForm.controls['roles'].errors">Role is
+                    required.</small>
+            </div>
+        </div>
+        <div class="field">
+            <label for="multiselect">Organization *</label>
+            <p-dropdown formControlName="channel" [options]="organizations" optionLabel="orgName"
+                placeholder="Select a Organization" optionValue="channel"
+                [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['channel'].errors}"></p-dropdown>
+            <div><small class=danger *ngIf="submitted && addEditUserForm.controls['channel'].errors">Organization is
+                    required.</small>
+            </div>
+        </div>
+        <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+        <div class="flex justify-content-end mt-5">
+            <button pButton pRipple type="button" label="Cancel" icon="pi pi-times" Class="p-button-secondary"
+                style="margin-right: 10px; width: 30%;" (click)="cancel()"></button>
+            <button pButton pRipple label="Submit" type="button" icon="pi pi-check" class="p-button-success"
+                style="width: 30%;" (click)="saveUser()"></button>
+        </div>
+    </div>
+</form>

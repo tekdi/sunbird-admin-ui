@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ButtonModule } from 'primeng/button';
@@ -17,6 +17,10 @@ import { DialogModule } from 'primeng/dialog';
 import { SbUserComponent } from './sbuser.component';
 import { SbUserRoutingModule } from './sbuser-routing.module';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { PasswordModule } from "primeng/password";
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     imports: [
@@ -36,8 +40,15 @@ import { MultiSelectModule } from 'primeng/multiselect';
         InputNumberModule,
         DialogModule,
         SbUserRoutingModule,
-        MultiSelectModule
+        MultiSelectModule,
+        DynamicDialogModule,
+        PasswordModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
-    declarations: [SbUserComponent]
+    declarations: [SbUserComponent, AddEditUserComponent],
+    providers:[DialogService,
+        MessageService
+    ]
 })
 export class SbUserModule { }

@@ -3,6 +3,8 @@ import { User } from 'src/app/sb-admin/api/user';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { UserService } from 'src/app/sb-admin/service/user.service';
+import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({
     templateUrl: './sbuser.component.html',
@@ -31,16 +33,15 @@ export class SbUserComponent implements OnInit {
     organizations: any[] = [];
 
     rowsPerPageOptions = [5, 10, 20];
-
-    constructor(private userService: UserService, private messageService: MessageService) { }
+    constructor(
+        private userService: UserService,
+        private messageService: MessageService,
+        public dialogService: DialogService,
+    ) { }
 
     ngOnInit() {
-        this.userService.getUsers().then(data => {
-            this.users = data
-            console.log(data);
-        });
-
-        this.cols = [
+        this.getUserList();
+  this.cols = [
             { field: "firstName", header: "First Name" },
             { field: "lastName", header: "Last Name" },
             //{ field: 'role', header: 'Role' },
@@ -48,24 +49,47 @@ export class SbUserComponent implements OnInit {
             { field: "phone", header: "Phone" },
             { field: "status", header: "Status" },
             { field: "channel", header: "Channel" },
-          ];
+        ];
 
         this.statuses = [
             { label: 'ACTIVE', value: 'active' },
             { label: 'INACTIVE', value: 'inactive' }
         ];
 
-        this.organizations = [
-            { name: 'NULP', code: 'NULP' },
-            { name: 'SHIKSHALOKAM', code: 'SHIKSHALOKAM' },
-            { name: 'TEKDI_TEST', code: 'TEKDI_TEST' }
-        ];
+    }
+    
+    getUserList() {
+        const body = {
+            "request": {
+                "filters": {
+                    "rootOrgId": ["0136268742469222406"]
+                },
+                "fields": [
+                    "firstName",
+                    "lastName",
+                    "userName",
+                    "id",
+                    "email",
+                    "phone",
+                    "createdDate",
+                    "roles",
+                    "managedBy"
+                ],
+                "limit": 1000
+            }
+        }
+        this.userService.getUserList(body).subscribe((Response) => {
+            this.users = Response.result.response.content
+        });
     }
 
-    openNew() {
-        this.user = {};
-        this.submitted = false;
-        this.userDialog = true;
+    addNewUser() {
+        const ref = this.dialogService.open(AddEditUserComponent, { header: 'Create New User', width: '30%', height: 'auto' });
+        ref.onClose.subscribe((result) => {
+            if (result === true) {
+                this.getUserList();
+            }
+        });
     }
 
     deleteSelectedUsers() {
@@ -97,32 +121,32 @@ export class SbUserComponent implements OnInit {
     }
 
     hideDialog() {
-        this.userDialog = false;
-        this.submitted = false;
-    }
-
-    saveUser() {
-        this.submitted = true;
-
-        if (this.user.firstName?.trim()) {
-            if (this.user.id) {
-                // @ts-ignore
-                this.user.inventoryStatus = this.user.inventoryStatus.value ? this.user.inventoryStatus.value : this.user.inventoryStatus;
-                this.users[this.findIndexById(this.user.id)] = this.user;
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Updated', life: 3000 });
-            } else {
-                this.user.id = this.createId();
-                // @ts-ignore
-                this.user.inventoryStatus = this.user.inventoryStatus ? this.user.inventoryStatus.value : 'INSTOCK';
-                this.users.push(this.user);
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Created', life: 3000 });
-            }
-
-            this.users = [...this.users];
             this.userDialog = false;
-            this.user = {};
-        }
+            this.submitted = false;
     }
+
+    // saveUser() {
+    //     this.submitted = true;
+
+    //     if (this.user.firstName?.trim()) {
+    //         if (this.user.id) {
+    //             // @ts-ignore
+    //             this.user.inventoryStatus = this.user.inventoryStatus.value ? this.user.inventoryStatus.value : this.user.inventoryStatus;
+    //             this.users[this.findIndexById(this.user.id)] = this.user;
+    //             this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Updated', life: 3000 });
+    //         } else {
+    //             this.user.id = this.createId();
+    //             // @ts-ignore
+    //             this.user.inventoryStatus = this.user.inventoryStatus ? this.user.inventoryStatus.value : 'INSTOCK';
+    //             this.users.push(this.user);
+    //             this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Created', life: 3000 });
+    //         }
+
+    //         this.users = [...this.users];
+    //         this.userDialog = false;
+    //         this.user = {};
+    //     }
+    // }
 
     findIndexById(id: string): number {
         let index = -1;
