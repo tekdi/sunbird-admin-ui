@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="field">
-            <label for="email">Email Id</label>
+            <label for="email">Email Id *</label>
             <input type="email" pInputText id="email" autofocus formControlName="email"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['email'].errors}" />
             <div *ngIf="!(addEditUserForm.controls['phone'].value || addEditUserForm.controls['email'].value)">
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="field">
-            <label for="phone">Phone No</label>
+            <label for="phone">Phone No *</label>
             <input type="text" pInputText id="phone" autofocus formControlName="phone"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['phone'].errors}"
                 formControlName="phone" />
