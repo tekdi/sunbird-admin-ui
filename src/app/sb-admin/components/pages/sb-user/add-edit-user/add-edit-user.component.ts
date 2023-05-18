@@ -76,7 +76,7 @@ export class AddEditUserComponent {
       }
     }
     this.userService.getOrganizations(payload).subscribe((response) => {
-      this.organizations = response.result.response.content;
+      this.organizations = response?.result?.response?.content;
     });
   }
 
