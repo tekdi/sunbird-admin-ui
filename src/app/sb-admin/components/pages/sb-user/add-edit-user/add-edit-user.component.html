@@ -3,7 +3,7 @@
     <div class="card p-fluid">
         <div class="field">
             <label for="firstName">{{ 'USER_FIRST_NAME' | i18next }} * </label>
-            <input type="text" pInputText id="firstName" autofocus
+            <input type="text" pInputText id="firstName" autofocus placeholder="{{'ENTER_USER_FIRST_NAME' | i18next}}"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['firstName'].errors}" formControlName="firstName" />
             <div>
                 <small *ngIf="submitted && addEditUserForm.controls['firstName'].errors">{{ 'USER_FIRST_NAME_REQUIRED' | i18next }}.</small>
@@ -11,7 +11,7 @@
         </div>
         <div class="field">
             <label for="lastName">{{ 'USER_LAST_NAME' | i18next }} *</label>
-            <input type="text" pInputText id="lastName" autofocus
+            <input type="text" pInputText id="lastName" autofocus placeholder="{{'ENTER_USER_LAST_NAME' | i18next}}"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['lastName'].errors}" formControlName="lastName" />
             <div>
                 <small *ngIf="submitted && addEditUserForm.controls['lastName'].errors">{{ 'USER_LAST_NAME_REQUIRED' | i18next }}.</small>
@@ -19,7 +19,7 @@
         </div>
         <div class="field">
             <label for="userName">{{ 'USER_NAME' | i18next }} *</label>
-            <input type="text" pInputText id="userName" autofocus
+            <input type="text" pInputText id="userName" autofocus placeholder="{{'ENTER_USER_NAME' | i18next}}"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['userName'].errors}" formControlName="userName" />
             <div> <small class="ng-dirty ng-invalid"
                     *ngIf="submitted && addEditUserForm.controls['userName'].errors">{{ 'USER_NAME_REQUIRED' | i18next }}.</small>
@@ -27,22 +27,22 @@
         </div>
         <div class="field">
             <label for="password">{{ 'PASSWORD' | i18next }} *</label>
-            <input type="password" pInputText id="password" autofocus
+            <input type="password" pInputText id="password" autofocus placeholder="{{'ENTER_PASSWORD' | i18next}}"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['password'].errors}" formControlName="password" />
             <div><small class=danger *ngIf="submitted && addEditUserForm.controls['password'].errors">{{ 'PASSWORD_REQUIRED' | i18next }}.</small>
             </div>
         </div>
         <div class="field">
             <label for="email">{{ 'USER_EMAIL' |i18next }} *</label>
-            <input type="email" pInputText id="email" autofocus formControlName="email"
+            <input type="email" pInputText id="email" autofocus formControlName="email" placeholder="{{'ENTER_USER_EMAIL' | i18next}}"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['email'].errors}" />
             <div *ngIf="submitted && !(addEditUserForm.controls['phone'].value || addEditUserForm.controls['email'].value)">
                 <small>{{ 'PHONE_OR_EMAIL_REQUIRED' | i18next }}.</small>
             </div>
         </div>
         <div class="field">
-            <label for="phone">{{ 'USER_PHONE_NUMBER' |i18next }} *</label>
-            <input type="text" pInputText id="phone" autofocus formControlName="phone"
+            <label for="phone">{{ 'PHONE_NUMBER' |i18next }} *</label>
+            <input type="text" pInputText id="phone" autofocus formControlName="phone" placeholder="{{'ENTER_PHONE_NUMBER' | i18next}}"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['phone'].errors}" formControlName="phone" />
             <div *ngIf="submitted && !(addEditUserForm.controls['phone'].value || addEditUserForm.controls['email'].value)">
                 <small>{{ 'PHONE_OR_EMAIL_REQUIRED' | i18next }}.</small>
@@ -50,16 +50,15 @@
         </div>
         <div class="field">
             <label for="multiselect">{{ 'USER_ROLE' | i18next }} *</label>
-            <p-multiSelect [options]="roles" formControlName="roles" optionLabel="name" placeholder="Select a Role"
+            <p-multiSelect [options]="roles" formControlName="roles" optionLabel="name" placeholder="{{'SELECT_ROLE' | i18next}}"
                 optionValue="value"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['roles'].errors}"></p-multiSelect>
-            <div><small class=danger *ngIf="submitted && addEditUserForm.controls['roles'].errors">{{ 'ROLE_REQUIRED' |i18next }}.</small>
+            <div><small class=danger *ngIf="submitted && addEditUserForm.controls['roles'].errors">{{ 'ROLE_REQUIRED' | i18next }}.</small>
             </div>
         </div>
         <div class="field">
             <label for="multiselect">{{ 'ORGANIZATION_NAME' | i18next }} *</label>
-            <p-dropdown formControlName="channel" [options]="organizations" optionLabel="orgName"
-                placeholder="Select a Organization" optionValue="channel"
+            <p-dropdown formControlName="channel" [options]="organizations" optionLabel="orgName" placeholder="{{'SELECT_ORGANIZATION' | i18next}}" optionValue="channel"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['channel'].errors}"></p-dropdown>
             <div><small class=danger *ngIf="submitted && addEditUserForm.controls['channel'].errors">{{ 'ORGANIZATION_NAME_REQUIRED' | i18next }}.</small>
             </div>

@@ -5,6 +5,7 @@ import { Table } from 'primeng/table';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
 import { DialogService } from 'primeng/dynamicdialog';
+import { I18NextPipe } from 'angular-i18next';
 
 @Component({
     templateUrl: './sbuser.component.html',
@@ -39,6 +40,7 @@ export class SbUserComponent implements OnInit {
         private userService: UserService,
         private messageService: MessageService,
         public dialogService: DialogService,
+        private i18nextPipe: I18NextPipe
     ) { }
 
     ngOnInit() {
@@ -52,7 +54,6 @@ export class SbUserComponent implements OnInit {
             { field: "status", header: "Status" },
             { field: "channel", header: "Channel" },
         ];
-
         this.statuses = [
             { label: 'ACTIVE', value: 'active' },
             { label: 'INACTIVE', value: 'inactive' }
@@ -65,17 +66,16 @@ export class SbUserComponent implements OnInit {
             "request": {
                 "filters": {
                     "rootOrgId": []
-                },
-                "limit": 1000
+                }
             }
         }
-        this.userService.getUserList(body).subscribe((Response) => {
-            this.users = Response.result.response.content
+        this.userService.getUserList(body).subscribe((response) => {
+            this.users = response.result.response.content
         });
     }
 
     addNewUser() {
-        const ref = this.dialogService.open(AddEditUserComponent, { header: 'Create New User', width: '30%', height: 'auto' });
+        const ref = this.dialogService.open(AddEditUserComponent, { header: this.i18nextPipe.transform('CREATE_NEW_USER'), width: '30%', height: 'auto' });
         ref.onClose.subscribe((result) => {
             if (result) {
                 this.users.unshift(result);
@@ -86,7 +86,7 @@ export class SbUserComponent implements OnInit {
     editUser(user: any) {
         const ref = this.dialogService.open(AddEditUserComponent, {
             data: user,
-            header: 'Edit User',
+            header: this.i18nextPipe.transform('EDIT_USER'),
             width: '30%',
             height: 'auto'
         });

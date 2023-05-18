@@ -13,7 +13,6 @@
   "USER_NAME": "User Name",
   "PASSWORD": "Password",
   "USER_EMAIL": "Email",
-  "USER_PHONE_NUMBER": "Phone",
   "STATUS": "Status",
   "ACTION": "Action",
   "USER_ROLE": "Roles",
@@ -27,5 +26,15 @@
   "PASSWORD_REQUIRED": "Password is required",
   "PHONE_OR_EMAIL_REQUIRED": "Please enter Phone or Email to proceed",
   "ROLE_REQUIRED": "Role is required",
-  "ORGANIZATION_NAME_REQUIRED": "Organization name is required"
+  "ORGANIZATION_NAME_REQUIRED": "Organization name is required",
+  "CREATE_NEW_USER": "Create New User",
+  "EDIT_USER": "Edit User",
+  "ENTER_USER_FIRST_NAME": "Enter firstname",
+  "ENTER_USER_LAST_NAME": "Enter lastname",
+  "ENTER_USER_NAME": "Enter user name",
+  "ENTER_PASSWORD": "Enter password",
+  "ENTER_USER_EMAIL": "Enter user email",
+  "ENTER_PHONE_NUMBER": "Enter Phone Number",
+  "SELECT_ROLE": "Select a Role",
+  "SELECT_ORGANIZATION": "Select a Organization"
 }

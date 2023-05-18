@@ -21,7 +21,7 @@ import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { PasswordModule } from "primeng/password";
 import { MessageService } from 'primeng/api';
-import { I18NextModule} from 'angular-i18next';
+import { I18NextModule } from 'angular-i18next';
 
 @NgModule({
     imports: [
@@ -49,7 +49,7 @@ import { I18NextModule} from 'angular-i18next';
         I18NextModule
     ],
     declarations: [SbUserComponent, AddEditUserComponent],
-    providers:[DialogService,
+    providers: [DialogService,
         MessageService
     ]
 })

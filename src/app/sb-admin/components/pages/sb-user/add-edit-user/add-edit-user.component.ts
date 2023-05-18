@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { Message, MessageService } from 'primeng/api';
+import { Roles } from 'src/app/constant.config';
 
 @Component({
   selector: 'app-add-edit-user',
@@ -16,10 +17,10 @@ export class AddEditUserComponent {
   channel: string = "";
   emailPhoneRequired: boolean = false;
   organizations: any[] = [];
-  roles: any[] = [];
   selectedRole: any[] = [];
   selectedOrganization!: any;
   messages!: Message[];
+  roles = Roles
   constructor(
     private formBuilder: FormBuilder,
     public ref: DynamicDialogRef,
@@ -31,16 +32,6 @@ export class AddEditUserComponent {
   ngOnInit(): void {
     this.getOrganizations();
     this.initializeForm();
-    this.submitted = false;
-
-    this.roles = [
-      { name: 'Content Creator', value: 'CONTENT_CREATOR' },
-      { name: 'Content Reviewer', value: 'CONTENT_REVIEWER' },
-      { name: 'Book Creator', value: 'BOOK_CREATOR' },
-      { name: 'Book Reviewer', value: 'BOOK_REVIEWER' },
-      { name: 'Org Admin', value: 'ORG_ADMIN' },
-      { name: 'public', value: 'PUBLIC' }
-    ]
   }
   cancel() {
     this.ref.close();
@@ -59,9 +50,9 @@ export class AddEditUserComponent {
       channel: ['', Validators.required],
       roles: ['', Validators.required],
     })
-    if(this.config.data){
+    if (this.config.data) {
       let user = this.config.data;
-      user = {...user, roles: user.organisations[0].roles}
+      user = { ...user, roles: user.organisations[0].roles }
       this.addEditUserForm.patchValue(user);
     }
   }
@@ -81,12 +72,11 @@ export class AddEditUserComponent {
         ],
         "sortBy": {
           "createdDate": "Desc"
-        },
-        "limit": 1000
+        }
       }
     }
-    this.userService.getOrganizations(payload).subscribe((Response) => {
-      this.organizations = Response.result.response.content;
+    this.userService.getOrganizations(payload).subscribe((response) => {
+      this.organizations = response.result.response.content;
     });
   }
 
@@ -110,7 +100,6 @@ export class AddEditUserComponent {
         { severity: 'success', summary: 'Success', detail: response.params.status }
       ];
       this.ref.close(this.addEditUserForm.value);
-      console.log(response);
     }, (error) => {
       this.messages = [
       ];
