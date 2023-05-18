@@ -1,1 +1,1 @@
-# sunbird-admin-ui
+# Sunbird Admin UI
