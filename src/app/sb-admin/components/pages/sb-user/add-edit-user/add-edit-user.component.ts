@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Organization } from './organizations';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { Message, MessageService } from 'primeng/api';
 
@@ -15,7 +14,6 @@ export class AddEditUserComponent {
   addEditUserForm!: FormGroup
   submitted: boolean = false;
   channel: string = "";
-  Organization: Organization[] = [];
   emailPhoneRequired: boolean = false;
   organizations: any[] = [];
   roles: any[] = [];
@@ -26,7 +24,8 @@ export class AddEditUserComponent {
     private formBuilder: FormBuilder,
     public ref: DynamicDialogRef,
     private userService: UserService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    public config: DynamicDialogConfig
   ) { }
 
   ngOnInit(): void {
@@ -60,6 +59,11 @@ export class AddEditUserComponent {
       channel: ['', Validators.required],
       roles: ['', Validators.required],
     })
+    if(this.config.data){
+      let user = this.config.data;
+      user = {...user, roles: user.organisations[0].roles}
+      this.addEditUserForm.patchValue(user);
+    }
   }
 
   getOrganizations() {
@@ -83,7 +87,6 @@ export class AddEditUserComponent {
     }
     this.userService.getOrganizations(payload).subscribe((Response) => {
       this.organizations = Response.result.response.content;
-      console.log(Response);
     });
   }
 

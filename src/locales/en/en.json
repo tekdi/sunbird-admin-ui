@@ -1,6 +1,23 @@
 {
-  "DASHBOARD":"Dashboard",
-  "DASHBOARD_ORGANIZATION_NAME": "Organization Name",
-  "DASHBOARD_USERS_REGISTERED": "Registered Users",
-  "DASHBOARD_WARNING": "Tenants Users Count Data Not Found !!"
+  "USER_FIRST_NAME": "First Name",
+  "USER_LAST_NAME": "Last Name",
+  "USER_NAME": "User Name",
+  "PASSWORD": "Password",
+  "USER_EMAIL": "Email",
+  "USER_PHONE_NUMBER": "Phone",
+  "STATUS": "Status",
+  "ACTION": "Action",
+  "ORGANIZATION_NAME": "Organization Name",
+  "USER_ROLE": "Roles",
+  "ADD_USER": "Add User",
+  "DELETE_USER": "Delete User",
+  "CANCLE": "Cancle",
+  "SUBMIT": "Submit",
+  "USER_FIRST_NAME_REQUIRED": "First Name is required",
+  "USER_LAST_NAME_REQUIRED": "Last Name is required",
+  "USER_NAME_REQUIRED": "User Name is required",
+  "PASSWORD_REQUIRED": "Password is required",
+  "PHONE_OR_EMAIL_REQUIRED": "Please enter Phone or Email to proceed",
+  "ROLE_REQUIRED": "Role is required",
+  "ORGANIZATION_NAME_REQUIRED": "Organization name is required"
 }

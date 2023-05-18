@@ -64,7 +64,7 @@ export class SbUserComponent implements OnInit {
         const body = {
             "request": {
                 "filters": {
-                    "rootOrgId": ["0136268742469222406"]
+                    "rootOrgId": []
                 },
                 "limit": 1000
             }
@@ -83,10 +83,16 @@ export class SbUserComponent implements OnInit {
         });
     }
 
-    editUser() {
+    editUser(user: any) {
+        const ref = this.dialogService.open(AddEditUserComponent, {
+            data: user,
+            header: 'Edit User',
+            width: '30%',
+            height: 'auto'
+        });
 
     }
-    
+
     deleteSelectedUsers() {
         this.deleteUsersDialog = true;
     }
@@ -114,29 +120,6 @@ export class SbUserComponent implements OnInit {
         this.userDialog = false;
         this.submitted = false;
     }
-
-    // saveUser() {
-    //     this.submitted = true;
-
-    //     if (this.user.firstName?.trim()) {
-    //         if (this.user.id) {
-    //             // @ts-ignore
-    //             this.user.inventoryStatus = this.user.inventoryStatus.value ? this.user.inventoryStatus.value : this.user.inventoryStatus;
-    //             this.users[this.findIndexById(this.user.id)] = this.user;
-    //             this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Updated', life: 3000 });
-    //         } else {
-    //             this.user.id = this.createId();
-    //             // @ts-ignore
-    //             this.user.inventoryStatus = this.user.inventoryStatus ? this.user.inventoryStatus.value : 'INSTOCK';
-    //             this.users.push(this.user);
-    //             this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Created', life: 3000 });
-    //         }
-
-    //         this.users = [...this.users];
-    //         this.userDialog = false;
-    //         this.user = {};
-    //     }
-    // }
 
     findIndexById(id: string): number {
         let index = -1;

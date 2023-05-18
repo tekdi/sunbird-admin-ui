@@ -5,8 +5,8 @@
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
                     <div class="my-2">
-                        <button pButton pRipple label="Add User" icon="pi pi-plus" class="p-button-success mr-2" (click)="addNewUser()"></button>
-                        <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedUsers()" [disabled]="!selectedUsers || !selectedUsers.length"></button>
+                        <button pButton pRipple label="{{ 'ADD_USER' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2" (click)="addNewUser()"></button>
+                        <button pButton pRipple label="{{ 'DELETE_USER' |i18next }}" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedUsers()" [disabled]="!selectedUsers || !selectedUsers.length"></button>
                     </div>
                 </ng-template>
 
@@ -31,13 +31,13 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th pSortableColumn="channel">Organization<p-sortIcon field="channel"></p-sortIcon></th>
-                        <th pSortableColumn="firstName">First Name <p-sortIcon field="firstName"></p-sortIcon></th>
-                        <th pSortableColumn="lastName">Last Name <p-sortIcon field="lastName"></p-sortIcon></th>
-                        <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
-                        <th pSortableColumn="phone">Phone <p-sortIcon field="phone"></p-sortIcon></th>
-                        <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
-                        <th pSortableColumn="action">Action <p-sortIcon field="action"></p-sortIcon></th>
+                        <th pSortableColumn="rootOrgName">{{ 'ORGANIZATION'  | i18next}}<p-sortIcon field="rootOrgName"></p-sortIcon></th>
+                        <th pSortableColumn="firstName">{{ 'USER_FIRST_NAME' |i18next }}<p-sortIcon field="firstName"></p-sortIcon></th>
+                        <th pSortableColumn="lastName">{{ 'USER_LAST_NAME' |i18next }}<p-sortIcon field="lastName"></p-sortIcon></th>
+                        <th pSortableColumn="email">{{ 'USER_EMAIL' | i18next }} <p-sortIcon field="email"></p-sortIcon></th>
+                        <th pSortableColumn="phone">{{ 'USER_PHONE' |i18next }}<p-sortIcon field="phone"></p-sortIcon></th>
+                        <th pSortableColumn="status">{{ 'STATUS' | i18next }}<p-sortIcon field="status"></p-sortIcon></th>
+                        <th pSortableColumn="action">{{ 'ACTION' | i18next }}<p-sortIcon field="action"></p-sortIcon></th>
                         <th></th>
                     </tr>
                 </ng-template>
@@ -47,7 +47,7 @@
                             <p-tableCheckbox [value]="user"></p-tableCheckbox>
                         </td>
                         <td style="width:14%; min-width:10rem;"><span class="p-column-title">Organization</span>
-                            {{user.channel}}
+                            {{user.rootOrgName}}
                         </td>
                         <td style="width:14%; min-width:10rem;"><span class="p-column-title">First Name</span>
                             {{user.firstName}}
@@ -69,7 +69,7 @@
                         </td>
                         <td>
                             <div class="flex">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editUser()"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editUser(user)"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteUser(user)"></button>
                             </div>
                         </td>
