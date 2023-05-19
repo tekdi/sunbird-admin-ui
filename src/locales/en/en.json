@@ -17,5 +17,6 @@
   "USER":"User",
   "ORGANIZATION_USER_LIST_WARNING": "Organization Users Data Not Found",
   "ADD_USER":"Add User",
-  "DELETE_USER":"Delete User"
+  "DELETE_USER":"Delete User",
+  "SEARCH":"Search..."
 }

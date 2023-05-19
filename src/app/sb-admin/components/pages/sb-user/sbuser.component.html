@@ -14,7 +14,7 @@
             </p-toolbar>
             <p-table #myTable [value]="OrganizationsUsersList" [columns]="cols" [loading]='loading'
                 [totalRecords]="OrganizationsUsersList.length" responsiveLayout="scroll" [rows]="10" [paginator]="true"
-                [globalFilterFields]="['rootOrgName','firstName','lastName','email','phone',]"
+                [globalFilterFields]="['rootOrgName','firstName','lastName','email','phone']"
                 [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple"
                 [rowHover]="true" dataKey="userId" [selection]="selectedUsers">
@@ -26,7 +26,7 @@
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input pInputText type="text" (input)="onGlobalFilter(myTable, $event)"
-                                placeholder="Search..." class="w-full sm:w-auto" />
+                                placeholder="{{ 'SEARCH' | i18next }}" class="w-full sm:w-auto" />
                         </span>
                     </div>
                 </ng-template>
