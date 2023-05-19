@@ -12,6 +12,9 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
     ButtonModule,
     DialogModule,
     DynamicDialogModule,
+    FormsModule,
     I18NextModule.forRoot()
   ],
   providers:[

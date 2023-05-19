@@ -55,9 +55,10 @@ export class SbOrganizationComponent implements OnDestroy {
     this.ref = this.dialogService.open(AddOrEditOrgComponent, { 
       header: 'Add Organization',
       width: '40%',
-      contentStyle: { overflow: 'auto' },
-      baseZIndex: 10000,
-      maximizable: true
+      contentStyle: { 
+        overflow: 'auto'
+      },
+      baseZIndex: 10000
     });
   }
 

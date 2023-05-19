@@ -1,17 +1,31 @@
-<form>
+<!-- add-or-edit-org.component.html -->
+
+<form class="my-form">
     <div class="field">
-        <label for="firstName">First Name</label>
-        <input type="text" pInputText id="firstName" required autofocus  formControlName="firstName"/>
-        <small class="ng-dirty ng-invalid" >First Name is required.</small>
+      <label for="firstName">First Name</label>
+      <input type="text" pInputText id="firstName" formControlName="firstName" required/>
+      <small *ngIf="form.controls['firstName'].invalid && (form.controls['firstName'].dirty || form.controls['firstName'].touched)">First Name is required.</small>
     </div>
     <div class="field">
-        <label for="lastName">Last Name</label>
-        <input type="text" pInputText id="lastName" required autofocus formControlName="lastName"/>
-        <small class="ng-dirty ng-invalid">Last Name is required.</small>
+      <label for="lastName">Last Name</label>
+      <input type="text" pInputText id="lastName" formControlName="lastName" required/>
+      <small *ngIf="form.controls['lastName'].invalid && (form.controls['lastName'].dirty || form.controls['lastName'].touched)">Last Name is required.</small>
     </div>
-<ng-template pTemplate="footer">
-</ng-template>
-</form>
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="email" pInputText id="email" formControlName="email" required/>
+      <small *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)">Please enter a valid email address.</small>
+    </div>
+    <div class="field">
+      <label for="phone">Phone</label>
+      <input type="text" pInputText id="phone" formControlName="phone"/>
+    </div>
+  </form>
+  <div class="button-container">
+    <button pButton type="button" label="Save" >save</button>
+    <button pButton type="button" label="Cancel">Cancel</button>
+  </div>
+  
 <!-- <p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="User Details" [modal]="true" class="p-fluid">
     <ng-template pTemplate="content">
         <div class="field">
