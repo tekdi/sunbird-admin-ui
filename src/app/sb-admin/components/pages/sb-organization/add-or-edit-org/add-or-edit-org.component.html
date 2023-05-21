@@ -1,86 +1,21 @@
-<!-- add-or-edit-org.component.html -->
-
-<form class="my-form">
-    <div class="field">
-      <label for="firstName">First Name</label>
-      <input type="text" pInputText id="firstName" formControlName="firstName" required/>
-      <small *ngIf="form.controls['firstName'].invalid && (form.controls['firstName'].dirty || form.controls['firstName'].touched)">First Name is required.</small>
+<form>
+    <div class="card p-fluid">
+        <div class="field">
+            <label for="firstName">Name </label>
+            <input type="text" pInputText id="firstName" autofocus placeholder="" formControlName="firstName" />
+        </div>
+        <div class="field">
+            <label for="password">Password</label>
+            <input type="password" pInputText id="password" autofocus placeholder="" formControlName="password" />
+        </div>
+        <div class="field">
+            <label for="phone">Phone</label>
+            <input type="text" pInputText id="phone" autofocus formControlName="phone" placeholder="" formControlName="phone" />
+        </div>
+        <!-- <button  pRipple  label="Cancel" icon="pi pi-times" Class="p-button-secondary"
+               ></button>
+            <button pButton pRipple label="Save" type="button" icon="pi pi-check" class="p-button-success"></button>
+      -->
+      <button type="button">Save</button>
     </div>
-    <div class="field">
-      <label for="lastName">Last Name</label>
-      <input type="text" pInputText id="lastName" formControlName="lastName" required/>
-      <small *ngIf="form.controls['lastName'].invalid && (form.controls['lastName'].dirty || form.controls['lastName'].touched)">Last Name is required.</small>
-    </div>
-    <div class="field">
-      <label for="email">Email</label>
-      <input type="email" pInputText id="email" formControlName="email" required/>
-      <small *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)">Please enter a valid email address.</small>
-    </div>
-    <div class="field">
-      <label for="phone">Phone</label>
-      <input type="text" pInputText id="phone" formControlName="phone"/>
-    </div>
-  </form>
-  <div class="button-container">
-    <button pButton type="button" label="Save" >save</button>
-    <button pButton type="button" label="Cancel">Cancel</button>
-  </div>
-  
-<!-- <p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="User Details" [modal]="true" class="p-fluid">
-    <ng-template pTemplate="content">
-        <div class="field">
-            <label for="firstName">First Name</label>
-            <input type="text" pInputText id="firstName" [(ngModel)]="user.firstName" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !user.firstName}"/>
-            <small class="ng-dirty ng-invalid" *ngIf="submitted && !user.firstName">First Name is required.</small>
-        </div>
-        <div class="field">
-            <label for="lastName">Last Name</label>
-            <input type="text" pInputText id="lastName" [(ngModel)]="user.lastName" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !user.lastName}"/>
-            <small class="ng-dirty ng-invalid" *ngIf="submitted && !user.lastName">Last Name is required.</small>
-        </div>
-        <div class="field">
-            <label for="email">Email Id</label>
-            <input type="text" pInputText id="email" [(ngModel)]="user.email" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !user.email}"/>
-            <small class="ng-dirty ng-invalid" *ngIf="submitted && !user.email">Email id is required.</small>
-        </div>
-        <div class="field">
-            <label for="phone">Phone No</label>
-            <input type="text" pInputText id="phone" [(ngModel)]="user.phone" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !user.phone}"/>
-            <small class="ng-dirty ng-invalid" *ngIf="submitted && !user.phone">Phone number is required.</small>
-        </div>
-        <div class="field">
-            <label for="status">Status</label>
-            <p-dropdown [(ngModel)]="user.status" inputId="inventoryStatus" optionValue="label" [options]="statuses" placeholder="Select">
-                <ng-template pTemplate="selectedItem">
-                    <span *ngIf="user && user.status" [class]="'user-badge status-' + user.status.toString().toLowerCase()">{{user.status}}</span>
-                </ng-template>
-                <ng-template let-option pTemplate="item">
-                    <span [class]="'user-badge status-' + option.value">{{option.label}}</span>
-                </ng-template>
-            </p-dropdown>
-        </div>
-
-        <div class="field">
-            <label class="mb-3">Role</label>
-            <div class="formgrid grid">
-                <div class="field-radiobutton col-6">
-                    <p-radioButton id="role1" name="role" value="Accessories" [(ngModel)]="user.roles"></p-radioButton>
-                    <label for="role1">Public</label>
-                </div>
-                <div class="field-radiobutton col-6">
-                    <p-radioButton id="role2" name="category" value="Clothing" [(ngModel)]="user.roles"></p-radioButton>
-                    <label for="role2">Other</label>
-                </div>
-            </div>
-        </div>
-        <span class="p-float-label">
-            <p-multiSelect [options]="organizations" [(ngModel)]="user.channel" optionLabel="name"></p-multiSelect>
-            <label for="multiselect">Organizations</label>
-        </span>
-    </ng-template>
-
-    <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveUser()"></button>
-    </ng-template>
-</p-dialog> -->
+</form>

@@ -12,13 +12,17 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { AddOrEditOrgComponent } from './add-or-edit-org/add-or-edit-org.component';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { RippleModule } from 'primeng/ripple';
 
 @NgModule({
   declarations: [
-    SbOrganizationComponent
+    SbOrganizationComponent,
+    AddOrEditOrgComponent
+
   ],
   imports: [
     CommonModule,
@@ -33,10 +37,13 @@ import { FormsModule } from '@angular/forms';
     DialogModule,
     DynamicDialogModule,
     FormsModule,
+    ReactiveFormsModule,
+    RippleModule,
     I18NextModule.forRoot()
   ],
   providers:[
-   DialogService
+   DialogService,
+   DynamicDialogRef
   ]
 })
 export class SbOrganizationModule { }

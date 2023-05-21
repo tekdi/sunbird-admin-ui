@@ -18,11 +18,11 @@ export class SbOrganizationComponent implements OnDestroy {
 
   loading: boolean = true;
 
+  
   private subscription: Subscription | any;
 
-  ref:any;
-
-  constructor(private orgList: OrganizationListService, public dialogService: DialogService) { }
+  
+  constructor(private orgList: OrganizationListService, public dialogService: DialogService,public ref:DynamicDialogRef) { }
 
   ngOnInit() {
     this.getAllOrganizationList();
