@@ -14,7 +14,7 @@
             </p-toolbar>
             <p-table #myTable [value]="OrganizationsUsersList" [columns]="cols" [loading]='loading'
                 [totalRecords]="OrganizationsUsersList.length" responsiveLayout="scroll" [rows]="10" [paginator]="true"
-                [globalFilterFields]="['rootOrgName','firstName','lastName','email','phone']"
+                [globalFilterFields]="globalFilterFields"
                 [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple"
                 [rowHover]="true" dataKey="userId" [selection]="selectedUsers">

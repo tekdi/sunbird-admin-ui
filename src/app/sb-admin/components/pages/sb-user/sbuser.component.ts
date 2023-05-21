@@ -24,6 +24,7 @@ export class SbUserComponent implements OnInit {
   loading: boolean = true;
   organizations: any[] = [];
   OrganizationsUsersList: OrganizationsUsersList[] = [];
+  globalFilterFields: string[] = ['rootOrgName', 'firstName', 'lastName', 'email', 'phone'];
 
   constructor(private userService: UserService, private messageService: MessageService) { }
 
