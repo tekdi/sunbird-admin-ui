@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/sb-admin/api/user';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { UserService } from 'src/app/sb-admin/service/user.service';
@@ -15,9 +14,6 @@ export class SbUserComponent implements OnInit {
   userDialog: boolean = false;
   deleteUserDialog: boolean = false;
   deleteUsersDialog: boolean = false;
-  users: User[] = [];
-  user: User = {};
-  selectedUsers: User[] = [];
   submitted: boolean = false;
   cols: any[] = [];
   statuses: any[] = [];
