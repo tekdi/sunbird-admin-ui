@@ -65,12 +65,16 @@ export class SbUserComponent implements OnInit {
         const body = {
             "request": {
                 "filters": {
-                    "rootOrgId": []
+                    "rootOrgId": [],
+                },
+                "sortBy": {
+                    "createdDate": "Desc"
                 }
             }
         }
-        this.userService.getUserList(body).subscribe((response) => {
-            this.users = response.result.response.content
+        this.userService.getUserList(body).subscribe((response) => { 
+            this.users = response?.result?.response?.content
+            this.users.sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime());
         });
     }
 
@@ -90,7 +94,7 @@ export class SbUserComponent implements OnInit {
             width: '30%',
             height: 'auto'
         });
-
+        
     }
 
     deleteSelectedUsers() {
