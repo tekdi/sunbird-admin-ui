@@ -13,9 +13,9 @@
                 </ng-template>
             </p-toolbar>
             <p-table #myTable [value]="OrganizationsUsersList" [columns]="cols" [loading]='loading'
-                [totalRecords]="OrganizationsUsersList.length" responsiveLayout="scroll" [rows]="10" [paginator]="true"
+                [totalRecords]="OrganizationsUsersList.length" responsiveLayout="scroll" [rows]="rows" [paginator]="true"
                 [globalFilterFields]="globalFilterFields"
-                [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple"
                 [rowHover]="true" dataKey="userId" [selection]="selectedUsers">
                 <ng-template pTemplate="caption">

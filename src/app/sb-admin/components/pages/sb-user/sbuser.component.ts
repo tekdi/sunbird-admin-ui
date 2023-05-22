@@ -25,6 +25,8 @@ export class SbUserComponent implements OnInit {
   organizations: any[] = [];
   OrganizationsUsersList: OrganizationsUsersList[] = [];
   globalFilterFields: string[] = ['rootOrgName', 'firstName', 'lastName', 'email', 'phone'];
+  rowsPerPageOptions:number[]=[10,20,30];
+  rows:number=10;
 
   constructor(private userService: UserService, private messageService: MessageService) { }
 
