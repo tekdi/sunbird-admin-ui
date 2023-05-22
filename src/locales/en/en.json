@@ -1,5 +1,5 @@
 {
-  "DASHBOARD":"Dashboard",
+  "ORG_DASHBOARD":"Dashboard",
   "ORG_DASHBOARD_NAME": "Organization Name",
   "ORG_DASHBOARD_USERS_REGISTERED": "Registered Users",
   "ORG_DASHBOARD_WARNING": "Tenants Users Count Data Not Found !!",
