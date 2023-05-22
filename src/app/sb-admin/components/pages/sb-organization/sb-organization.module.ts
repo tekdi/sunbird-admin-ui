@@ -17,6 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddOrEditOrgComponent } from './add-or-edit-org/add-or-edit-org.component';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { RippleModule } from 'primeng/ripple';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { RippleModule } from 'primeng/ripple';
     FormsModule,
     ReactiveFormsModule,
     RippleModule,
+    InputTextareaModule,
     I18NextModule.forRoot()
   ],
   providers:[

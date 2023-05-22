@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
-//import { DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 
 @Component({
@@ -11,21 +11,27 @@ import { Validators } from '@angular/forms';
 })
 export class AddOrEditOrgComponent {
   addEditOrgForm!:FormGroup;
+  submitted :boolean=false;
 
-  constructor(public formBuilder:FormBuilder){
+  constructor(public formBuilder:FormBuilder,public ref: DynamicDialogRef,){
+    this.addEditOrgForm = this.formBuilder.group({
+      orgName: ['', Validators.required],
+      description: ['', Validators.required],
+      channel: ['', Validators.required],
+      organisationType: ['', Validators.required],
+    })
 
   }
   ngOnInit(){
-    this.initializeForm();
-
   }
-  initializeForm() {
-    this.addEditOrgForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      phone: ['', Validators.pattern("[0-9]{10}")],
-      password: ['', Validators.required],
-     
-    })
+
+  cancel() {
+    this.ref.close();
+  }
+
+  saveOrg(){
+    this.submitted=true;
+    //console.log(this.addEditOrgForm.value);
   }
 }
 

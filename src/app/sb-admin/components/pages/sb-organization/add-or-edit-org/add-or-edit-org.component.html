@@ -1,21 +1,33 @@
-<form>
+<form [formGroup]="addEditOrgForm" (click)="saveOrg()">
     <div class="card p-fluid">
         <div class="field">
-            <label for="firstName">Name </label>
-            <input type="text" pInputText id="firstName" autofocus placeholder="" formControlName="firstName" />
+            <label for="orgName">OrganizationName </label>
+            <input type="text" name="orgName" pInputText id="orgName" autofocus placeholder="Organization Name"
+                formControlName="orgName" />
+            <small style="color: red;" *ngIf="submitted && addEditOrgForm.controls['orgName'].errors">Invalid</small>
+        </div>
+
+        <div class="field">
+            <label for="description">Description</label>
+            <textarea pInputTextarea placeholder="Description" autofocus formControlName="description"></textarea>
+            <small style="color: red;"
+                *ngIf="submitted && addEditOrgForm.controls['description'].errors">Invalid</small>
         </div>
         <div class="field">
-            <label for="password">Password</label>
-            <input type="password" pInputText id="password" autofocus placeholder="" formControlName="password" />
+            <label for="channel">Channel</label>
+            <input type="text" pInputText id="channel" autofocus formControlName="channel" placeholder="channel" />
+            <small style="color: red;" *ngIf="submitted && addEditOrgForm.controls['channel'].errors">Invalid</small>
         </div>
         <div class="field">
-            <label for="phone">Phone</label>
-            <input type="text" pInputText id="phone" autofocus formControlName="phone" placeholder="" formControlName="phone" />
+            <label for="organisationType">Organisation Type</label>
+            <input type="text" pInputText id="organisationType" autofocus formControlName="organisationType"
+                placeholder="Organisation Type" />
+            <small style="color: red;"
+                *ngIf="submitted && addEditOrgForm.controls['organisationType'].errors">Invalid</small>
         </div>
-        <!-- <button  pRipple  label="Cancel" icon="pi pi-times" Class="p-button-secondary"
-               ></button>
-            <button pButton pRipple label="Save" type="button" icon="pi pi-check" class="p-button-success"></button>
-      -->
-      <button type="button">Save</button>
     </div>
+    <button pButton pRipple type="button" label="Cancel" icon="pi pi-times" Class="p-button-secondary"
+        (click)="cancel()"></button>&nbsp;
+    <button [disabled]="addEditOrgForm.invalid" pButton pRipple label="SUBMIT" icon="pi pi-check"
+        class="p-button-success"></button>
 </form>
