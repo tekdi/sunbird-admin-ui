@@ -23,7 +23,7 @@ export class SbUserComponent implements OnInit {
   loading: boolean = true;
   organizations: any[] = [];
   OrganizationsUsersList: OrganizationsUsersList[] = [];
-  globalFilterFields: string[] = ['rootOrgName', 'firstName', 'lastName', 'email', 'phone'];
+  globalFilterFields: string[] = ['channel', 'firstName', 'lastName', 'email', 'phone'];
   rowsPerPageOptions:number[]=[10,20,30];
   rows:number=10;
   

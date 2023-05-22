@@ -35,7 +35,7 @@
                         <th>
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th scope="col" pSortableColumn="rootOrgName">{{ 'CHANNEL'  | i18next}}<p-sortIcon field="rootOrgName"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="channel">{{ 'CHANNEL'  | i18next}}<p-sortIcon field="channel"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="firstName">{{ 'USER_FIRST_NAME' |i18next }}<p-sortIcon field="firstName"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="lastName">{{ 'USER_LAST_NAME' |i18next }}<p-sortIcon field="lastName"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="email">{{ 'USER_EMAIL' | i18next }} <p-sortIcon field="email"></p-sortIcon></th>
@@ -51,7 +51,7 @@
                             <p-tableCheckbox [value]="user"></p-tableCheckbox>
                         </td>
                         <td ><span class="p-column-title">Organization</span>
-                            {{user.rootOrgName}}
+                            {{user.channel}}
                         </td>
                         <td><span class="p-column-title">First Name</span>
                             {{user.firstName}}
