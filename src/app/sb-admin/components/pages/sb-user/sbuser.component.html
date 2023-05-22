@@ -5,9 +5,9 @@
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
                     <div class="my-2">
-                        <button pButton pRipple label="{{ 'ADD_USER' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2"
+                        <button pButton pRipple label="{{ 'USER_ADD' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2"
                             ></button>
-                        <button pButton pRipple label="{{ 'DELETE_USER' |i18next }}" icon="pi pi-trash" class="p-button-danger"
+                        <button pButton pRipple label="{{ 'USER_DELETE' |i18next }}" icon="pi pi-trash" class="p-button-danger"
                             [disabled]="!selectedUsers || !selectedUsers.length"></button>
                     </div>
                 </ng-template>
@@ -21,12 +21,12 @@
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
                         <h5 class="m-0">{{ 'USER' | i18next }}</h5>
-                        <p-message severity="warn" text="{{ 'ORGANIZATION_USER_LIST_WARNING' | i18next }}"
+                        <p-message severity="warn" text="{{ 'ORGANIZATION_USERS_LIST_WARNING' | i18next }}"
                                *ngIf="!OrganizationsUsersList || OrganizationsUsersList.length === 0"></p-message>
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input pInputText type="text" (input)="onGlobalFilter(myTable, $event)"
-                                placeholder="{{ 'SEARCH' | i18next }}" class="w-full sm:w-auto" />
+                                placeholder="{{ 'USER_SEARCH' | i18next }}" class="w-full sm:w-auto" />
                         </span>
                     </div>
                 </ng-template>
@@ -40,8 +40,8 @@
                         <th pSortableColumn="lastName">{{ 'USER_LAST_NAME' |i18next }}<p-sortIcon field="lastName"></p-sortIcon></th>
                         <th pSortableColumn="email">{{ 'USER_EMAIL' | i18next }} <p-sortIcon field="email"></p-sortIcon></th>
                         <th pSortableColumn="phone">{{ 'USER_PHONE' |i18next }}<p-sortIcon field="phone"></p-sortIcon></th>
-                        <th pSortableColumn="status">{{ 'STATUS' | i18next }}<p-sortIcon field="status"></p-sortIcon></th>
-                        <th pSortableColumn="action">{{ 'ACTION' | i18next }}<p-sortIcon field="action"></p-sortIcon></th>
+                        <th pSortableColumn="status">{{ 'USER_STATUS' | i18next }}<p-sortIcon field="status"></p-sortIcon></th>
+                        <th pSortableColumn="action">{{ 'USER_ACTION' | i18next }}<p-sortIcon field="action"></p-sortIcon></th>
                         <th></th>
                     </tr>
                 </ng-template>

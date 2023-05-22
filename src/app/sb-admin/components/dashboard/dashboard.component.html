@@ -2,22 +2,22 @@
     <div class="col-12 xl:col-12">
         <div class="card">
             <h5>{{ 'DASHBOARD' | i18next }}</h5>
-            <p-message severity="warn" text="{{ 'DASHBOARD_WARNING' | i18next }}"
+            <p-message severity="warn" text="{{ 'ORG_DASHBOARD_LIST_WARNING' | i18next }}"
                 *ngIf="!tenantUserCountResponse || tenantUserCountResponse.length === 0"></p-message>
             <p-table #myTab [value]="tenantDetail" [loading]="loading" [paginator]="true" [rows]="10"
                 responsiveLayout="scroll" [globalFilterFields]="['orgName']">
                 <ng-template pTemplate="caption">
                     <span class="p-input-icon-left">
                         <i class="pi pi-search"> </i>
-                        <input type="text" pInputText placeholder="Organization Name"
+                        <input type="text" pInputText placeholder="{{ 'ORG_DASHBOARD_NAME' | i18next }}"
                             (input)="myTab.filterGlobal($any($event.target).value,'contains')" />
                     </span>
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th scope="col" pSortableColumn="orgName">{{ 'DASHBOARD_ORGANIZATION_NAME' | i18next }}<p-sortIcon
+                        <th scope="col" pSortableColumn="orgName">{{ 'ORG_DASHBOARD_NAME' | i18next }}<p-sortIcon
                                 field="orgName"></p-sortIcon></th>
-                        <th scope="col" pSortableColumn="userCount">{{ 'DASHBOARD_USERS_REGISTERED' | i18next }}<p-sortIcon
+                        <th scope="col" pSortableColumn="userCount">{{ 'ORG_DASHBOARD_USERS_REGISTERED' | i18next }}<p-sortIcon
                                 field="userCount"> </p-sortIcon></th>
                     </tr>
                 </ng-template>

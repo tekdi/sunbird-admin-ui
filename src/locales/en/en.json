@@ -1,9 +1,9 @@
 {
   "DASHBOARD":"Dashboard",
-  "DASHBOARD_ORGANIZATION_NAME": "Organization Name",
-  "DASHBOARD_USERS_REGISTERED": "Registered Users",
-  "DASHBOARD_WARNING": "Tenants Users Count Data Not Found !!",
-  "ORGANIZATION_LIST_WARNING":"Organization Data Not Found",
+  "ORG_DASHBOARD_NAME": "Organization Name",
+  "ORG_DASHBOARD_USERS_REGISTERED": "Registered Users",
+  "ORG_DASHBOARD_WARNING": "Tenants Users Count Data Not Found !!",
+  "ORG_DASHBOARD_LIST_WARNING":"Organization Data Not Found",
   "ORGANIZATION":"Organization",
   "ORGANIZATION_NAME":"Organization Name",
   "ORGANIZATION_CHANNEL_NAME":"Channel Name",
@@ -12,11 +12,11 @@
   "USER_LAST_NAME":"Last Name",
   "USER_EMAIL":"Email",
   "USER_PHONE":"Phone",
-  "STATUS":"Status",
-  "ACTION":"Action",
+  "USER_STATUS":"Status",
+  "USER_ACTION":"Action",
   "USER":"User",
-  "ORGANIZATION_USER_LIST_WARNING": "Organization Users Data Not Found",
-  "ADD_USER":"Add User",
-  "DELETE_USER":"Delete User",
-  "SEARCH":"Search..."
+  "ORGANIZATION_USERS_LIST_WARNING": "Organization Users Data Not Found",
+  "USER_ADD":"Add User",
+  "USER_DELETE":"Delete User",
+  "USER_SEARCH":"Search..."
 }
