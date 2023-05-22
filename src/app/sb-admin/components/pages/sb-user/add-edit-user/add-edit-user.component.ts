@@ -49,6 +49,7 @@ export class AddEditUserComponent {
       password: ['', Validators.required],
       channel: ['', Validators.required],
       roles: ['', Validators.required],
+      status:["ACTIVE"]
     })
     if (this.config.data) {
       let user = this.config.data;
@@ -58,7 +59,7 @@ export class AddEditUserComponent {
   }
 
   getOrganizations() {
-    const payload = {
+    const body = {
       "request": {
         "filters": {
           "isRootOrg": true
@@ -75,9 +76,10 @@ export class AddEditUserComponent {
         }
       }
     }
-    this.userService.getOrganizations(payload).subscribe((response) => {
-      this.organizations = response?.result?.response?.content;
-    });
+    this.userService.getOrganizations(body).subscribe(
+      (data: any) => {
+        this.organizations = data?.result?.response?.content;
+      });
   }
 
   saveUser() {

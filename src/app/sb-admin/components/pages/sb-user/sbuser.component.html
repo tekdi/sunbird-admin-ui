@@ -5,39 +5,43 @@
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
                     <div class="my-2">
-                        <button pButton pRipple label="{{ 'ADD_USER' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2" (click)="addNewUser()"></button>
-                        <button pButton pRipple label="{{ 'DELETE_USER' |i18next }}" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedUsers()" [disabled]="!selectedUsers || !selectedUsers.length"></button>
+                        <button pButton pRipple label="{{ 'USER_ADD' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2" (click)="addNewUser()"
+                            ></button>
+                        <button pButton pRipple label="{{ 'USER_DELETE' |i18next }}" icon="pi pi-trash" class="p-button-danger">
+                        </button>
                     </div>
                 </ng-template>
-
-                <ng-template pTemplate="right">
-                    <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
-                    <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="dt.exportCSV()"></button>
-                </ng-template>
             </p-toolbar>
-
-            <p-table #dt [value]="users" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','country.name','representative.name','status']" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedUsers" selectionMode="multiple" [rowHover]="true" dataKey="id">
+            <p-table #myTable [value]="OrganizationsUsersList" [columns]="cols" [loading]='loading'
+                [totalRecords]="OrganizationsUsersList.length" responsiveLayout="scroll" [rows]="rows" [paginator]="true"
+                [globalFilterFields]="globalFilterFields"
+                [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple"
+                [rowHover]="true" dataKey="userId">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                        <h5 class="m-0">Users</h5>
+                        <h5 class="m-0">{{ 'USER' | i18next }}</h5>
+                        <p-message severity="warn" text="{{ 'ORGANIZATION_USERS_LIST_WARNING' | i18next }}"
+                               *ngIf="!OrganizationsUsersList || OrganizationsUsersList.length === 0"></p-message>
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
                             <i class="pi pi-search"></i>
-                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                            <input pInputText type="text" (input)="onGlobalFilter(myTable, $event)"
+                                placeholder="{{ 'USER_SEARCH' | i18next }}" class="w-full sm:w-auto" />
                         </span>
                     </div>
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th style="width: 3rem">
+                        <th>
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th pSortableColumn="rootOrgName">{{ 'ORGANIZATION'  | i18next}}<p-sortIcon field="rootOrgName"></p-sortIcon></th>
-                        <th pSortableColumn="firstName">{{ 'USER_FIRST_NAME' | i18next }}<p-sortIcon field="firstName"></p-sortIcon></th>
-                        <th pSortableColumn="lastName">{{ 'USER_LAST_NAME' | i18next }}<p-sortIcon field="lastName"></p-sortIcon></th>
-                        <th pSortableColumn="email">{{ 'USER_EMAIL' | i18next }} <p-sortIcon field="email"></p-sortIcon></th>
-                        <th pSortableColumn="phone">{{ 'PHONE_NUMBER' | i18next }}<p-sortIcon field="phone"></p-sortIcon></th>
-                        <th pSortableColumn="status">{{ 'STATUS' | i18next }}<p-sortIcon field="status"></p-sortIcon></th>
-                        <th pSortableColumn="action">{{ 'ACTION' | i18next }}<p-sortIcon field="action"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="rootOrgName">{{ 'CHANNEL'  | i18next}}<p-sortIcon field="rootOrgName"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="firstName">{{ 'USER_FIRST_NAME' |i18next }}<p-sortIcon field="firstName"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="lastName">{{ 'USER_LAST_NAME' |i18next }}<p-sortIcon field="lastName"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="email">{{ 'USER_EMAIL' | i18next }} <p-sortIcon field="email"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="phone">{{ 'USER_PHONE' |i18next }}<p-sortIcon field="phone"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="status">{{ 'USER_STATUS' | i18next }}<p-sortIcon field="status"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="action">{{ 'USER_ACTION' | i18next }}<p-sortIcon field="action"></p-sortIcon></th>
                         <th></th>
                     </tr>
                 </ng-template>
@@ -46,58 +50,37 @@
                         <td>
                             <p-tableCheckbox [value]="user"></p-tableCheckbox>
                         </td>
-                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">Organization</span>
+                        <td ><span class="p-column-title">Organization</span>
                             {{user.rootOrgName}}
                         </td>
-                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">First Name</span>
+                        <td><span class="p-column-title">First Name</span>
                             {{user.firstName}}
                         </td>
-                        <td style="width:14%; min-width:10rem;">
+                        <td >
                             <span class="p-column-title">Last Name</span>
                             {{user.lastName}}
                         </td>
-                        <td style="width:14%; min-width:8rem;">
+                        <td>
                             <span class="p-column-title">Email</span>
                             {{user.email}}
                         </td>
-                        <td style="width:14%; min-width:10rem;">
+                        <td>
                             <span class="p-column-title">Phone</span>
                             {{user.phone}}
                         </td>
-                        <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Status</span>
+                        <td><span class="p-column-title">Status</span>
                             {{user.status ? "Active" : "Inactive"}}
                         </td>
                         <td>
                             <div class="flex">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editUser(user)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteUser(user)"></button>
+                                <button pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-success mr-2" ></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"></button>
                             </div>
                         </td>
                     </tr>
                 </ng-template>
             </p-table>
         </div>
-
-        <p-dialog [(visible)]="deleteUserDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
-            <div class="flex align-items-center justify-content-center">
-                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                <span *ngIf="user">Are you sure you want to delete <b>{{user.firstName}}</b>?</span>
-            </div>
-            <ng-template pTemplate="footer">
-                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteUserDialog = false"></button>
-                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
-            </ng-template>
-        </p-dialog>
-               
-        <p-dialog [(visible)]="deleteUsersDialog" header="Confirm" [modal]="true">
-            <div class="flex align-items-center justify-content-center">
-                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                <span>Are you sure you want to delete selected users?</span>
-            </div>
-            <ng-template pTemplate="footer">
-                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteUsersDialog = false"></button>
-                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDeleteSelected()"></button>
-            </ng-template>
-        </p-dialog>
     </div>
 </div>

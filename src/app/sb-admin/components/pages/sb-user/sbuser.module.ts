@@ -21,7 +21,11 @@ import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { PasswordModule } from "primeng/password";
 import { MessageService } from 'primeng/api';
+import { PaginatorModule } from 'primeng/paginator';
+import { CheckboxModule } from 'primeng/checkbox';
 import { I18NextModule } from 'angular-i18next';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from "primeng/message";
 
 @NgModule({
     imports: [
@@ -46,7 +50,11 @@ import { I18NextModule } from 'angular-i18next';
         PasswordModule,
         FormsModule,
         ReactiveFormsModule,
-        I18NextModule
+        PaginatorModule,
+        CheckboxModule,
+        MessagesModule,
+        MessageModule,
+        I18NextModule.forRoot()
     ],
     declarations: [SbUserComponent, AddEditUserComponent],
     providers: [DialogService,

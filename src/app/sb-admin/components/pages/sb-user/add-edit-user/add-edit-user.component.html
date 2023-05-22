@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="field">
-            <label for="phone">{{ 'PHONE_NUMBER' |i18next }} *</label>
+            <label for="phone">{{ 'USER_PHONE' |i18next }} *</label>
             <input type="text" pInputText id="phone" autofocus formControlName="phone" placeholder="{{'ENTER_PHONE_NUMBER' | i18next}}"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['phone'].errors}" formControlName="phone" />
             <div *ngIf="submitted && !(addEditUserForm.controls['phone'].value || addEditUserForm.controls['email'].value)">
@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="field">
-            <label for="multiselect">{{ 'ORGANIZATION_NAME' | i18next }} *</label>
+            <label for="multiselect">{{ 'CHANNEL_NAME' | i18next }} *</label>
             <p-dropdown formControlName="channel" [options]="organizations" optionLabel="orgName" placeholder="{{'SELECT_ORGANIZATION' | i18next}}" optionValue="channel"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['channel'].errors}"></p-dropdown>
             <div><small class=danger *ngIf="submitted && addEditUserForm.controls['channel'].errors">{{ 'ORGANIZATION_NAME_REQUIRED' | i18next }}.</small>
