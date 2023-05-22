@@ -32,7 +32,7 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th style="width: 3rem">
+                        <th>
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
                         <th pSortableColumn="rootOrgName">{{ 'ORGANIZATION'  | i18next}}<p-sortIcon field="rootOrgName"></p-sortIcon></th>
@@ -64,7 +64,7 @@
                             <span class="p-column-title">Email</span>
                             {{user.email}}
                         </td>
-                        <td style="width:14%; min-width:10rem;">
+                        <td>
                             <span class="p-column-title">Phone</span>
                             {{user.phone}}
                         </td>
