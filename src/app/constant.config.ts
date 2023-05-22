@@ -5,6 +5,6 @@ export const Roles = [
     { name: 'Book Creator', value: 'BOOK_CREATOR' },
     { name: 'Book Reviewer', value: 'BOOK_REVIEWER' },
     { name: 'Org Admin', value: 'ORG_ADMIN' },
-    { name: 'public', value: 'PUBLIC' }
+    { name: 'Public', value: 'PUBLIC' }
 ]
 

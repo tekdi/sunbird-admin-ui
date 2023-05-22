@@ -102,7 +102,7 @@ export class SbUserComponent implements OnInit {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
   addNewUser() {
-    const ref = this.dialogService.open(AddEditUserComponent, { header: this.i18nextPipe.transform('CREATE_NEW_USER'), width: '30%', height: 'auto' });
+    const ref = this.dialogService.open(AddEditUserComponent, { header: this.i18nextPipe.transform('USER_CREATE'), width: '30%', height: 'auto' });
     ref.onClose.subscribe((result) => {
         if (result) {
             this.OrganizationsUsersList.unshift(result);
@@ -113,7 +113,7 @@ export class SbUserComponent implements OnInit {
     editUser(user: any) {
         this.dialogService.open(AddEditUserComponent, {
             data: user,
-            header: this.i18nextPipe.transform('EDIT_USER'),
+            header: this.i18nextPipe.transform('USER_EDIT'),
             width: '30%',
             height: 'auto'
         });
