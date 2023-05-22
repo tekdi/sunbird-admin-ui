@@ -110,13 +110,13 @@ export class SbUserComponent implements OnInit {
     });
 }
 
-editUser(user: any) {
-    const ref = this.dialogService.open(AddEditUserComponent, {
-        data: user,
-        header: this.i18nextPipe.transform('EDIT_USER'),
-        width: '30%',
-        height: 'auto'
-    }); 
-}
+    editUser(user: any) {
+        this.dialogService.open(AddEditUserComponent, {
+            data: user,
+            header: this.i18nextPipe.transform('EDIT_USER'),
+            width: '30%',
+            height: 'auto'
+        });
+    }
 }
 
