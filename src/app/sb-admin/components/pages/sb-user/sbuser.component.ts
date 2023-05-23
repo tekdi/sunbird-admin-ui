@@ -26,7 +26,6 @@ export class SbUserComponent implements OnInit {
   rows: number = 10;
   user!: User;
   selectedUserRole:string[]=[];
-  messages!: Message[];
 
   roles = [
     { name: 'Content Creator', value: 'CONTENT_CREATOR' },
@@ -36,7 +35,7 @@ export class SbUserComponent implements OnInit {
     { name: 'Org Admin', value: 'ORG_ADMIN' },
     { name: 'Public', value: 'PUBLIC' }
 ]
-  constructor(private userService: UserService,private messageService: MessageService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.getOrganizations().subscribe((data: any) => {
@@ -86,7 +85,6 @@ export class SbUserComponent implements OnInit {
     });
   }
 
-
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
@@ -105,22 +103,13 @@ export class SbUserComponent implements OnInit {
           "userId": this.user.userId,
           "organisationId": this.user.rootOrgId,
           "roles": this.selectedUserRole
-
         }
       }
-      this.userService.saveUserRole(body).subscribe((response) => {
+      this.userService.saveUserRole(body).subscribe(() => {
         this.user.organisations[0].roles = this.selectedUserRole;
-        this.messages = [
-          { severity: 'success', summary: 'Success', detail: response.params.status }
-        ];
         this.hideDialog();
-      }, (error) => {
-        this.messages = [
-        ];
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.params.errmsg })
       })
     }
-
   }
   hideDialog(){
     this.userDialog=false;

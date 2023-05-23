@@ -84,9 +84,9 @@
     </div>
 </div>
 
-
 <p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="User Details" [modal]="true" class="p-fluid"> 
     <ng-template pTemplate="content">
+        <p-toast [baseZIndex]="5000"></p-toast>
         <div class="card p-fluid">
             <div class="field">
                 <label for="multiselect">{{ 'USER_ROLE' | i18next }} *</label>
@@ -99,8 +99,8 @@
     </ng-template>
 
     <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" appendTo="body"
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-success" appendTo="body"
             (click)="saveUserRole()"></button>
     </ng-template>
 </p-dialog>
