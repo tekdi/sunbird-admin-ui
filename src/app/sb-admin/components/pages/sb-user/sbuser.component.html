@@ -73,8 +73,7 @@
                         </td>
                         <td>
                             <div class="flex">
-                                <button pButton pRipple icon="pi pi-pencil"
-                                    class="p-button-rounded p-button-success mr-2" ></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2" (click)="editRole(user)"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"></button>
                             </div>
                         </td>
@@ -84,3 +83,24 @@
         </div>
     </div>
 </div>
+
+
+<p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="User Details" [modal]="true" class="p-fluid"> 
+    <ng-template pTemplate="content">
+        <div class="card p-fluid">
+            <div class="field">
+                <label for="multiselect">{{ 'USER_ROLE' | i18next }} *</label>
+                <p-multiSelect optionLabel="name" placeholder="{{'USER_ROLE_PLACEHOLDER' | i18next}}" optionValue="value"
+                    [options]="roles" appendTo="body" [(ngModel)]="selectedUserRole" [ngClass]="{'ng-invalid ng-dirty' : submitted && selectedUserRole?.length === 0}"></p-multiSelect>
+                    <div><small class=danger *ngIf="submitted && selectedUserRole?.length === 0">{{ 'USER_ROLE_REQUIRED' | i18next }}.</small>
+                    </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" appendTo="body"
+            (click)="saveUserRole()"></button>
+    </ng-template>
+</p-dialog>

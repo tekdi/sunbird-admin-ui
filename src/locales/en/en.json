@@ -18,5 +18,8 @@
   "ORGANIZATION_USERS_LIST_WARNING": "Organization Users Data Not Found",
   "USER_ADD":"Add User",
   "USER_DELETE":"Delete User",
-  "USER_SEARCH":"Search..."
+  "USER_SEARCH":"Search...",
+  "USER_ROLE":"User role",
+  "USER_ROLE_PLACEHOLDER":"Select User Role",
+  "USER_ROLE_REQUIRED":"User Role Required"
 }

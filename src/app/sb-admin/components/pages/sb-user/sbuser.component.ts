@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { Message, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { map } from 'rxjs';
 import { OrganizationsUsersList } from './organizationsUsersList';
+import { User } from 'src/app/sb-admin/api/user';
 
 @Component({
   templateUrl: './sbuser.component.html',
@@ -21,10 +22,21 @@ export class SbUserComponent implements OnInit {
   organizations: any[] = [];
   OrganizationsUsersList: OrganizationsUsersList[] = [];
   globalFilterFields: string[] = ['rootOrgName', 'firstName', 'lastName', 'email', 'phone'];
-  rowsPerPageOptions:number[]=[10,20,30];
-  rows:number=10;
+  rowsPerPageOptions: number[] = [10, 20, 30];
+  rows: number = 10;
+  user!: User;
+  selectedUserRole:string[]=[];
+  messages!: Message[];
 
-  constructor(private userService: UserService, private messageService: MessageService) { }
+  roles = [
+    { name: 'Content Creator', value: 'CONTENT_CREATOR' },
+    { name: 'Content Reviewer', value: 'CONTENT_REVIEWER' },
+    { name: 'Book Creator', value: 'BOOK_CREATOR' },
+    { name: 'Book Reviewer', value: 'BOOK_REVIEWER' },
+    { name: 'Org Admin', value: 'ORG_ADMIN' },
+    { name: 'Public', value: 'PUBLIC' }
+]
+  constructor(private userService: UserService,private messageService: MessageService) { }
 
   ngOnInit() {
     this.getOrganizations().subscribe((data: any) => {
@@ -57,16 +69,7 @@ export class SbUserComponent implements OnInit {
         "request": {
           "filters": {
             "rootOrgId": UserList.id
-          },
-          "fields": [
-            "rootOrgName",
-            "firstName",
-            "lastName",
-            "userName",
-            "userId",
-            "email",
-            "phone"
-          ],
+          }
         }
       };
       this.userService.getOrganizationUserList(body).subscribe((Users: any) => {
@@ -83,9 +86,45 @@ export class SbUserComponent implements OnInit {
     });
   }
 
- 
+
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
+  editRole(user: any) {
+    this.userDialog = true;
+    this.user = user;
+    this.selectedUserRole = this.user.organisations[0].roles
+  }
+
+  saveUserRole() {
+    this.submitted = true;
+    if (this.selectedUserRole.length > 0) {
+      const body = {
+        "request": {
+          "userId": this.user.userId,
+          "organisationId": this.user.rootOrgId,
+          "roles": this.selectedUserRole
+
+        }
+      }
+      this.userService.saveUserRole(body).subscribe((response) => {
+        this.user.organisations[0].roles = this.selectedUserRole;
+        this.messages = [
+          { severity: 'success', summary: 'Success', detail: response.params.status }
+        ];
+        this.hideDialog();
+      }, (error) => {
+        this.messages = [
+        ];
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.params.errmsg })
+      })
+    }
+
+  }
+  hideDialog(){
+    this.userDialog=false;
+    this.submitted=false;
   }
 }
 
