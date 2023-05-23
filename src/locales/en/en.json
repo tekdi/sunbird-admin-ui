@@ -2,7 +2,7 @@
   "USER_NAME": "User Name",
   "USER_PASSWORD": "Password",
   "USER_ROLE": "Roles",
-  "USER_CANCLE": "Cancle",
+  "USER_CANCEL": "Cancel",
   "USER_SUBMIT": "Submit",
   "USER_FIRST_NAME_REQUIRED": "First Name is required",
   "USER_LAST_NAME_REQUIRED": "Last Name is required",
@@ -42,5 +42,6 @@
   "USER_ADD":"Add User",
   "USER_DELETE":"Delete User",
   "USER_SEARCH":"Search...",
-  "USER_CHANNEL_NAME":"Channel"
+  "USER_CHANNEL_NAME":"Channel",
+  "USER_ORGANIZATION_NAME":"Organization Name"
 }

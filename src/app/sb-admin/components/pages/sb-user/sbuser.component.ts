@@ -13,7 +13,7 @@ import { OrganizationsUsersList } from './organizationsUsersList';
   providers: [MessageService]
 })
 export class SbUserComponent implements OnInit {
-
+ createUser:any = { header: this.i18nextPipe.transform('USER_CREATE'), width: '30%', height: 'auto' };
   userDialog: boolean = false;
   deleteUserDialog: boolean = false;
   deleteUsersDialog: boolean = false;
@@ -33,7 +33,7 @@ export class SbUserComponent implements OnInit {
     public dialogService: DialogService,
     private i18nextPipe: I18NextPipe
 
-             ) { }
+  ) { }
 
   ngOnInit() {
     this.getOrganizations().subscribe((data: any) => {
@@ -102,7 +102,7 @@ export class SbUserComponent implements OnInit {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
   addNewUser() {
-    const ref = this.dialogService.open(AddEditUserComponent, { header: this.i18nextPipe.transform('USER_CREATE'), width: '30%', height: 'auto' });
+    const ref = this.dialogService.open(AddEditUserComponent, this.createUser);
     ref.onClose.subscribe((result) => {
         if (result) {
             this.OrganizationsUsersList.unshift(result);
@@ -110,7 +110,7 @@ export class SbUserComponent implements OnInit {
     });
 }
 
-    editUser(user: any) {
+    editUser(user: OrganizationsUsersList) {
         this.dialogService.open(AddEditUserComponent, {
             data: user,
             header: this.i18nextPipe.transform('USER_EDIT'),

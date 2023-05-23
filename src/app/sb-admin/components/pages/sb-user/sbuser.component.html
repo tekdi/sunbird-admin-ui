@@ -50,25 +50,25 @@
                         <td>
                             <p-tableCheckbox [value]="user"></p-tableCheckbox>
                         </td>
-                        <td ><span class="p-column-title">Organization</span>
+                        <td ><span class="p-column-title">{{'USER_ORGANIZATION_NAME' | i18next}}</span>
                             {{user.channel}}
                         </td>
-                        <td><span class="p-column-title">First Name</span>
+                        <td><span class="p-column-title">{{'USER_FIRST_NAME' | i18next}}</span>
                             {{user.firstName}}
                         </td>
                         <td >
-                            <span class="p-column-title">Last Name</span>
+                            <span class="p-column-title">{{'USER_LAST_NAME' | i18next}}</span>
                             {{user.lastName}}
                         </td>
                         <td>
-                            <span class="p-column-title">Email</span>
+                            <span class="p-column-title">{{'USER_EMAIL' | i18next}}</span>
                             {{user.email}}
                         </td>
                         <td>
-                            <span class="p-column-title">Phone</span>
+                            <span class="p-column-title">{{'USER_PHONE' | i18next}}</span>
                             {{user.phone}}
                         </td>
-                        <td><span class="p-column-title">Status</span>
+                        <td><span class="p-column-title">{{'USER_STATUS' | i18next}}</span>
                             {{user.status ? "Active" : "Inactive"}}
                         </td>
                         <td>

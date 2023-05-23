@@ -53,7 +53,7 @@ export class AddEditUserComponent {
     })
     if (this.config.data) {
       let user = this.config.data;
-      user = { ...user, roles: user.organisations[0].roles }
+      user = { ...user, roles: user?.organisations[0]?.roles }
       this.addEditUserForm.patchValue(user);
     }
   }

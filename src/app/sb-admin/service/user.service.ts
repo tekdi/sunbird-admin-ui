@@ -30,6 +30,6 @@ export class UserService {
       "Authorization": environment.authKey,
       "x-authenticated-user-token": environment.userToken,
     })
-    return this.http.post(environment.userCreateUrl, payload, { headers: header });
+    return this.http.post(environment.userRoleUrl, payload, { headers: header });
   }
 }
