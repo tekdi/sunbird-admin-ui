@@ -91,8 +91,8 @@
             <div class="field">
                 <label for="multiselect">{{ 'USER_ROLE' | i18next }} *</label>
                 <p-multiSelect optionLabel="name" placeholder="{{'USER_ROLE_PLACEHOLDER' | i18next}}" optionValue="value"
-                    [options]="roles" appendTo="body" [(ngModel)]="selectedUserRole" [ngClass]="{'ng-invalid ng-dirty' : submitted && selectedUserRole?.length === 0}"></p-multiSelect>
-                    <div><small class=danger *ngIf="submitted && selectedUserRole?.length === 0">{{ 'USER_ROLE_REQUIRED' | i18next }}.</small>
+                    [options]="roles" appendTo="body" [(ngModel)]="selectedUserRole" [ngClass]="{'ng-invalid ng-dirty' : submitted && selectedUserRole.length === 0}"></p-multiSelect>
+                    <div><small class=danger *ngIf="submitted && selectedUserRole.length === 0">{{ 'USER_ROLE_REQUIRED' | i18next }}.</small>
                     </div>
             </div>
         </div>
