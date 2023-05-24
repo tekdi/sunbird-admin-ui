@@ -13,15 +13,9 @@ import { AddOrEditOrgComponent } from './add-or-edit-org/add-or-edit-org.compone
 })
 export class SbOrganizationComponent implements OnDestroy {
 
-
   organizationDetail: OrganizationDetail[] = [];
-
   loading: boolean = true;
-
-  
   private subscription: Subscription | any;
-  
-
   
   constructor(private orgList: OrganizationListService, public dialogService: DialogService,public ref:DynamicDialogRef) { }
 
@@ -50,8 +44,7 @@ export class SbOrganizationComponent implements OnDestroy {
     }
     );
   }
-
-
+  
   addOrg(){
     this.ref = this.dialogService.open(AddOrEditOrgComponent, { 
       header: 'Add Organization',
@@ -66,7 +59,6 @@ export class SbOrganizationComponent implements OnDestroy {
     }
   });
   }
-
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
