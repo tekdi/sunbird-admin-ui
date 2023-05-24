@@ -20,6 +20,7 @@ export class SbOrganizationComponent implements OnDestroy {
 
   
   private subscription: Subscription | any;
+  
 
   
   constructor(private orgList: OrganizationListService, public dialogService: DialogService,public ref:DynamicDialogRef) { }
@@ -57,9 +58,13 @@ export class SbOrganizationComponent implements OnDestroy {
       width: '40%',
       contentStyle: { 
         overflow: 'auto'
-      },
-      baseZIndex: 10000
+      }
     });
+    this.ref.onClose.subscribe((newOrganizationData: any) => {
+    if (newOrganizationData) {
+      this.organizationDetail.unshift(newOrganizationData);
+    }
+  });
   }
 
 

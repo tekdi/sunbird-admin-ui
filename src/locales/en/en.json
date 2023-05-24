@@ -15,5 +15,13 @@
   "STATUS":"Status",
   "ACTION":"Action",
   "USER":"User",
-  "ORGANIZATION_USER_LIST_WARNING": "Organization Users Data Not Found"
+  "ORGANIZATION_USER_LIST_WARNING": "Organization Users Data Not Found",
+  "ADD_ORGANIZATION_DESCRIPTION" : "Description",
+  "ADD_ORGANIZATION_TYPE": "Organisation Type",
+  "ADD_ORGANIZATION_SUBMIT" : "SUBMIT",
+  "ADD_ORGANIZATION_CANCEL" : "CANCEL",
+  "ADD_ORGANIZATION_NAME_INVALID": "Invalid Organisation Name",
+  "ADD_ORGANIZATION_DESCRIPTION_INVALID": "Invalid Organisation Description",
+  "ADD_ORGANIZATION_CHANNEL_INVALID": "Invalid Channel Name",
+  "ADD_ORGANIZATION_TYPE_INVALID": "Please Select Organization Name"
 }

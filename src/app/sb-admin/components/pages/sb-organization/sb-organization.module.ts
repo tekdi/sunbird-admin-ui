@@ -18,6 +18,9 @@ import { AddOrEditOrgComponent } from './add-or-edit-org/add-or-edit-org.compone
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { RippleModule } from 'primeng/ripple';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MessageService } from 'primeng/api';
+import { DropdownModule } from 'primeng/dropdown';
+
 
 
 @NgModule({
@@ -42,11 +45,13 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     ReactiveFormsModule,
     RippleModule,
     InputTextareaModule,
+    DropdownModule,
     I18NextModule.forRoot()
   ],
   providers:[
    DialogService,
-   DynamicDialogRef
+   DynamicDialogRef,
+   MessageService
   ]
 })
 export class SbOrganizationModule { }
