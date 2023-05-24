@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../api/user';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -23,5 +22,14 @@ export class UserService {
       "x-authenticated-user-token": environment.userToken,
     })
     return this.http.post(environment.userUrl, body, { headers: header })
+  }
+
+  addNewUser(payload: any): Observable<any> {
+    let header = new HttpHeaders({
+      "Content-Type": 'application/json',
+      "Authorization": environment.authKey,
+      "x-authenticated-user-token": environment.userToken,
+    })
+    return this.http.post(environment.userRoleUrl, payload, { headers: header });
   }
 }

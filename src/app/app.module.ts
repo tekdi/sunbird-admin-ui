@@ -7,9 +7,9 @@ import { UserService } from './sb-admin/service/user.service';
 import { UserCountService } from './sb-admin/service/user-count.service';
 import { APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 import { I18NextModule, ITranslationService, I18NEXT_SERVICE, defaultInterpolationFormat } from 'angular-i18next';
-import en from "../locales/en/en.json"
+import en from "../locales/en/en.json";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
 
 
 export function appInit(i18next: ITranslationService) {
@@ -60,6 +60,9 @@ export const I18N_PROVIDERS = [
         ReactiveFormsModule,
         DialogModule,
         I18NextModule.forRoot(),
+        FormsModule,
+        ReactiveFormsModule,
+        ToastModule    
     ],
     providers: [
         UserService,
