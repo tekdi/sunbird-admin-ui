@@ -10,7 +10,7 @@ import { I18NextModule, ITranslationService, I18NEXT_SERVICE, defaultInterpolati
 import en from "../locales/en/en.json";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
-
+import { DialogModule } from 'primeng/dialog';
 
 export function appInit(i18next: ITranslationService) {
     let lang = localStorage.getItem('lang');
