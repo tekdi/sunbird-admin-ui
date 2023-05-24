@@ -4,6 +4,7 @@ import { OrganizationListService } from 'src/app/sb-admin/service/organization-l
 import { Subscription } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddOrEditOrgComponent } from './add-or-edit-org/add-or-edit-org.component';
+import { start } from 'repl';
 
 
 @Component({
@@ -34,8 +35,8 @@ export class SbOrganizationComponent implements OnDestroy {
     this.subscription = this.orgList.getAllOrganizationList(body).subscribe(
       (data: any) => {
         this.organizationDetail = data.result.response.content;
-        console.log(this.organizationDetail);
-        this.sortByCreatedDate();
+        this.organizationDetail.sort((startDate:any ,endDate :any)=>
+          new Date(endDate.createdDate).getTime() - new Date(startDate.createdDate).getTime());
         this.loading = false;
       },
       (error: any) => {
@@ -57,14 +58,6 @@ export class SbOrganizationComponent implements OnDestroy {
       if (newOrganizationData) {
         this.organizationDetail.unshift(newOrganizationData);
       }
-    });
-  }
-
-  sortByCreatedDate() {
-    this.organizationDetail.sort((EndDate: any, StartDate: any) => {
-      const dateEnd = new Date(EndDate.createdDate);
-      const dateStart = new Date(StartDate.createdDate);
-      return dateStart.getTime() - dateEnd.getTime();
     });
   }
 
