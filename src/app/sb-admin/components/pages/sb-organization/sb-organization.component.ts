@@ -16,14 +16,13 @@ export class SbOrganizationComponent implements OnDestroy {
   organizationDetail: OrganizationDetail[] = [];
   loading: boolean = true;
   private subscription: Subscription | any;
-  
-  constructor(private orgList: OrganizationListService, public dialogService: DialogService,public ref:DynamicDialogRef) { }
+
+  constructor(private orgList: OrganizationListService, public dialogService: DialogService, public ref: DynamicDialogRef) { }
 
   ngOnInit() {
     this.getAllOrganizationList();
   }
 
-  //Get all Organization  data
   getAllOrganizationList() {
     const body = {
       "request": {
@@ -31,33 +30,42 @@ export class SbOrganizationComponent implements OnDestroy {
           "isRootOrg": true
         }
       }
-
     }
     this.subscription = this.orgList.getAllOrganizationList(body).subscribe(
       (data: any) => {
-      this.organizationDetail = data.result.response.content;
-      this.loading = false;
-    },
-    (error:any)=>{
-      console.log(error);
-      this.loading = false;
-    }
+        this.organizationDetail = data.result.response.content;
+        console.log(this.organizationDetail);
+        this.sortByCreatedDate();
+        this.loading = false;
+      },
+      (error: any) => {
+        console.log(error);
+        this.loading = false;
+      }
     );
   }
-  
-  addOrg(){
-    this.ref = this.dialogService.open(AddOrEditOrgComponent, { 
+
+  addOrg() {
+    this.ref = this.dialogService.open(AddOrEditOrgComponent, {
       header: 'Add Organization',
       width: '40%',
-      contentStyle: { 
+      contentStyle: {
         overflow: 'auto'
       }
     });
     this.ref.onClose.subscribe((newOrganizationData: any) => {
-    if (newOrganizationData) {
-      this.organizationDetail.unshift(newOrganizationData);
-    }
-  });
+      if (newOrganizationData) {
+        this.organizationDetail.unshift(newOrganizationData);
+      }
+    });
+  }
+
+  sortByCreatedDate() {
+    this.organizationDetail.sort((EndDate: any, StartDate: any) => {
+      const dateEnd = new Date(EndDate.createdDate);
+      const dateStart = new Date(StartDate.createdDate);
+      return dateStart.getTime() - dateEnd.getTime();
+    });
   }
 
   ngOnDestroy(): void {
