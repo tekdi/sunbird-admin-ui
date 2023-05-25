@@ -21,8 +21,6 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MessageService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
 
-
-
 @NgModule({
   declarations: [
     SbOrganizationComponent,
