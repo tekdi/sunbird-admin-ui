@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddOrEditOrgComponent } from './add-or-edit-org/add-or-edit-org.component';
 import { MessageService, Message } from 'primeng/api';
+import { I18NextPipe } from 'angular-i18next';
 
 @Component({
   selector: 'app-sb-organization',
@@ -20,7 +21,7 @@ export class SbOrganizationComponent implements OnDestroy {
   rows:number=10;
   messages: Message[] = [];
 
-  constructor(private orgList: OrganizationListService, public dialogService: DialogService, public ref: DynamicDialogRef, private messageService: MessageService) { }
+  constructor(private orgList: OrganizationListService, public dialogService: DialogService, public ref: DynamicDialogRef, private messageService: MessageService,private i18nextPipe: I18NextPipe) { }
 
   ngOnInit() {
     this.getAllOrganizationList();
@@ -59,14 +60,10 @@ export class SbOrganizationComponent implements OnDestroy {
     this.ref.onClose.subscribe((newOrganizationData: any) => {
       if (newOrganizationData) {
         this.organizationDetail.unshift(newOrganizationData);
-        this.displaySuccessMessage('Organization added successfully');
+        this.messageService.add({ severity: 'success', summary: this.i18nextPipe.transform('ADD_ORGANIZATION_SUCCESSFULLY')})
       }
     });
   }
-  displaySuccessMessage(message: string) {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
-  }
-
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

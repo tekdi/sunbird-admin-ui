@@ -23,19 +23,16 @@
   "USER_SELECT_ORGANIZATION": "Select a Organization",
   "USER_PHONE_PLACEHOLDER":"Enter Pnone",
   "USER_EMAIL_PLACEHOLDER":"Enter Email",
-
   "ORG_DASHBOARD":"Dashboard",
   "ORG_DASHBOARD_NAME": "Organization Name",
   "ORG_DASHBOARD_USERS_REGISTERED": "Registered Users",
   "ORG_DASHBOARD_WARNING": "Tenants Users Count Data Not Found !!",
   "ORG_DASHBOARD_LIST_WARNING":"Organization Data Not Found",
-
   "ORGANIZATION":"Organization",
   "ORGANIZATION_NAME":"Organization Name",
   "ORGANIZATION_CHANNEL_NAME":"Channel Name",
   "ORGANIZATION_CHANNEL_ID":"Channel ID",
   "ORGANIZATION_SEARCH": "Search",
-
   "ADD_ORGANIZATION_DESCRIPTION" : "Description",
   "ADD_ORGANIZATION_TYPE": "Organisation Type",
   "ADD_ORGANIZATION_SUBMIT" : "SUBMIT",
@@ -45,8 +42,9 @@
   "ADD_ORGANIZATION_CHANNEL_INVALID": "Invalid Channel Name",
   "ADD_ORGANIZATION_TYPE_INVALID": "Please Select Organization Name",
   "ADD_ORGANIZATION" : "Add Organization",
-
-  
+  "ADD_ORGANIZATION_BLANK_FIELD_MSG":"Fields should not be blank",
+  "ADD_ORGANIZATION_SUCCESSFULLY":"Organization added successfully",
+  "ADD_ORGANIZATION_ALREADY_EXIT":"Channel Already Exit",
   "USER_FIRST_NAME":"First Name",
   "USER_LAST_NAME":"Last Name",
   "USER_EMAIL":"Email",

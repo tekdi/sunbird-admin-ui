@@ -4,7 +4,8 @@ import { Validators } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 import { Message } from 'primeng/api';
-
+import { OrganizationType } from 'src/app/constant.config';
+import { I18NextPipe } from 'angular-i18next';
 
 @Component({
   selector: 'app-add-or-edit-org',
@@ -15,9 +16,9 @@ export class AddOrEditOrgComponent {
   addEditOrgForm: FormGroup;
   submitted: boolean = false;
   messages!: Message[];
-  organizationType: any;
+  organizationType= OrganizationType;
 
-  constructor(public formBuilder: FormBuilder, public ref: DynamicDialogRef, private addOrgservice: OrganizationListService) {
+  constructor(public formBuilder: FormBuilder, public ref: DynamicDialogRef, private addOrgservice: OrganizationListService,private i18nextPipe: I18NextPipe) {
     this.addEditOrgForm = formBuilder.group({
       orgName: ['', Validators.required],
       description: ['', Validators.required],
@@ -27,12 +28,7 @@ export class AddOrEditOrgComponent {
       isTenant: true
     })
   }
-  ngOnInit() {
-    this.organizationType = [
-      { name: 'school', value: 'school' },
-      { name: 'board', value: 'board' }
-    ]
-  }
+  ngOnInit() { }
 
   cancel() {
     this.ref.close();
@@ -42,7 +38,7 @@ export class AddOrEditOrgComponent {
     this.submitted = true;
     if (this.addEditOrgForm.invalid) {
       this.messages = [
-        { severity: 'error', detail: 'Fields should not be blank' }
+        { severity: 'error',summary:this.i18nextPipe.transform('ADD_ORGANIZATION_BLANK_FIELD_MSG')}
       ];
       return;
     }
@@ -57,12 +53,11 @@ export class AddOrEditOrgComponent {
       };
       this.ref.close(updatedFormValues);
     }, (error: any) => {
-      if (error.status = 400) {
         this.messages = [
-          { severity: 'error', detail: 'Channel Already Exit' }
+          { severity: 'error',summary: this.i18nextPipe.transform('ADD_ORGANIZATION_ALREADY_EXIT')}
         ]
       }
-    })
+   )
   }
 }
 
