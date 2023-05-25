@@ -20,9 +20,15 @@ export class SbOrganizationComponent implements OnDestroy {
   globalFilterFields :string []=['organizationName','channel','id'];
   rows:number=10;
   messages: Message[] = [];
+  addOrgDialog = {
+    header: this.i18nextPipe.transform('ADD_ORGANIZATION'),
+    width: '40%',
+    contentStyle: {
+      overflow: 'auto'
+    }
+  };
 
   constructor(private orgList: OrganizationListService, public dialogService: DialogService, public ref: DynamicDialogRef, private messageService: MessageService,private i18nextPipe: I18NextPipe) { }
-
   ngOnInit() {
     this.getAllOrganizationList();
   }
@@ -50,13 +56,7 @@ export class SbOrganizationComponent implements OnDestroy {
   }
 
   addOrg() {
-    this.ref = this.dialogService.open(AddOrEditOrgComponent, {
-      header: 'Add Organization',
-      width: '40%',
-      contentStyle: {
-        overflow: 'auto'
-      }
-    });
+    this.ref = this.dialogService.open(AddOrEditOrgComponent, this.addOrgDialog);
     this.ref.onClose.subscribe((newOrganizationData: any) => {
       if (newOrganizationData) {
         this.organizationDetail.unshift(newOrganizationData);
