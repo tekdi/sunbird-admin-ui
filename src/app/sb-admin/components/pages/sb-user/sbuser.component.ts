@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { Message, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
@@ -25,15 +25,18 @@ export class SbUserComponent implements OnInit {
   loading: boolean = true;
   organizations: any[] = [];
   OrganizationsUsersList: OrganizationsUsersList[] = [];
-  globalFilterFields: string[] = ['channel', 'firstName', 'lastName', 'email', 'phone'];
+  globalFilterFields: string[] = ['channel', 'firstName', 'lastName', 'email', 'phone',];
   rowsPerPageOptions:number[]=[10,20,30];
   rows:number=10;
   user!: User;
   selectedUserRole:string[]=[];
   roles = Roles;
+  messages!: Message[];
+
   constructor(private userService: UserService,
     public dialogService: DialogService,
-    private i18nextPipe: I18NextPipe
+    private i18nextPipe: I18NextPipe,
+    private messageService: MessageService,
 
   ) { }
 
@@ -95,7 +98,7 @@ export class SbUserComponent implements OnInit {
   editRole(user: any) {
     this.userDialog = true;
     this.user = user;
-    this.selectedUserRole = this.user.organisations[0].roles
+    this.selectedUserRole = this.user?.organisations[0]?.roles
   }
 
   saveUserRole() {
@@ -108,11 +111,14 @@ export class SbUserComponent implements OnInit {
           "roles": this.selectedUserRole
         }
       }
-      this.userService.saveUserRole(body).subscribe(() => {
+      this.userService.saveUserRole(body).subscribe((response) => {
         this.user.organisations[0].roles = this.selectedUserRole;
-        this.hideDialog();
+        this.messages = [
+        ];
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: response.params.status })
+        this.hideDialog();    
       })
-    }
+    } 
   }
   hideDialog(){
     this.userDialog=false;

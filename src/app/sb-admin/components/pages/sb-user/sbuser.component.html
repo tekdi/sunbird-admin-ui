@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="grid">
     <div class="col-12">
         <div class="card px-6 py-6">
@@ -40,7 +41,8 @@
                         <th scope="col" pSortableColumn="lastName">{{ 'USER_LAST_NAME' |i18next }}<p-sortIcon field="lastName"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="email">{{ 'USER_EMAIL' | i18next }} <p-sortIcon field="email"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="phone">{{ 'USER_PHONE' |i18next }}<p-sortIcon field="phone"></p-sortIcon></th>
-                        <th scope="col" pSortableColumn="status">{{ 'USER_STATUS' | i18next }}<p-sortIcon field="status"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="organisations[0]?.roles">{{ 'USER_ROLES' | i18next }}<p-sortIcon field="organisations[0]?.roles"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="status">{{ 'USER_STATUS' | i18next }}<p-sortIcon field="status"></p-sortIcon></th>                   
                         <th scope="col" pSortableColumn="action">{{ 'USER_ACTION' | i18next }}<p-sortIcon field="action"></p-sortIcon></th>
                         <th></th>
                     </tr>
@@ -68,6 +70,10 @@
                             <span class="p-column-title">{{'USER_PHONE' | i18next}}</span>
                             {{user.phone}}
                         </td>
+                        <td>
+                            <span class="p-column-title">{{'USER_ROLES' | i18next}}</span>
+                            {{user?.organisations[0]?.roles}}
+                        </td>
                         <td><span class="p-column-title">{{'USER_STATUS' | i18next}}</span>
                             {{user.status ? "Active" : "Inactive"}}
                         </td>
@@ -84,9 +90,8 @@
     </div>
 </div>
 
-<p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="User Details" [modal]="true" class="p-fluid"> 
+<p-dialog [(visible)]="userDialog" header="{{'USER_EDIT_ROLE' | i18next}}" [modal]="true" class="p-fluid"> 
     <ng-template pTemplate="content">
-        <p-toast [baseZIndex]="5000"></p-toast>
         <div class="card p-fluid">
             <div class="field">
                 <label for="multiselect">{{ 'USER_ROLE' | i18next }} *</label>
@@ -99,8 +104,8 @@
     </ng-template>
 
     <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-success" appendTo="body"
+        <button pButton pRipple label="{{ 'USER_CANCEL' | i18next }}" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
+        <button pButton pRipple label="{{ 'USER_SAVE' | i18next }}" icon="pi pi-check" class="p-button-success" appendTo="body"
             (click)="saveUserRole()"></button>
     </ng-template>
 </p-dialog>
