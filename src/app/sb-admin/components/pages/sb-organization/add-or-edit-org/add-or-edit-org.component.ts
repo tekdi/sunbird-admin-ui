@@ -5,6 +5,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 import { Message } from 'primeng/api';
 
+
 @Component({
   selector: 'app-add-or-edit-org',
   templateUrl: './add-or-edit-org.component.html',
@@ -32,31 +33,35 @@ export class AddOrEditOrgComponent {
       { name: 'board', value: 'board' }
     ]
   }
-  
+
   cancel() {
     this.ref.close();
   }
-  
+
   saveOrg() {
     this.submitted = true;
+    if (this.addEditOrgForm.invalid) {
+      this.messages = [
+        { severity: 'error', detail: 'Fields should not be blank' }
+      ];
+      return;
+    }
     const body = {
       "request": this.addEditOrgForm.value
     }
-    this.messages = [];
     this.addOrgservice.addOrg(body).subscribe((response) => {
       const id = response.result.organisationId
       const updatedFormValues = {
         ...this.addEditOrgForm.value,
         id: id
       };
-      this.messages = [
-        { severity: 'success', summary: 'success'}
-      ];
       this.ref.close(updatedFormValues);
     }, (error: any) => {
-      this.messages = [
-        { severity: 'error', summary: 'Error'}
-      ]
+      if (error.status = 400) {
+        this.messages = [
+          { severity: 'error', detail: 'Channel Already Exit' }
+        ]
+      }
     })
   }
 }

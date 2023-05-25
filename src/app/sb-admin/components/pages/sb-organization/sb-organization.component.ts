@@ -4,7 +4,7 @@ import { OrganizationListService } from 'src/app/sb-admin/service/organization-l
 import { Subscription } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddOrEditOrgComponent } from './add-or-edit-org/add-or-edit-org.component';
-
+import { MessageService, Message } from 'primeng/api';
 
 @Component({
   selector: 'app-sb-organization',
@@ -18,8 +18,9 @@ export class SbOrganizationComponent implements OnDestroy {
   private subscription: Subscription | any;
   globalFilterFields :string []=['organizationName','channel','id'];
   rows:number=10;
+  messages: Message[] = [];
 
-  constructor(private orgList: OrganizationListService, public dialogService: DialogService, public ref: DynamicDialogRef) { }
+  constructor(private orgList: OrganizationListService, public dialogService: DialogService, public ref: DynamicDialogRef, private messageService: MessageService) { }
 
   ngOnInit() {
     this.getAllOrganizationList();
@@ -58,8 +59,12 @@ export class SbOrganizationComponent implements OnDestroy {
     this.ref.onClose.subscribe((newOrganizationData: any) => {
       if (newOrganizationData) {
         this.organizationDetail.unshift(newOrganizationData);
+        this.displaySuccessMessage('Organization added successfully');
       }
     });
+  }
+  displaySuccessMessage(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
   }
 
   ngOnDestroy(): void {

@@ -8,6 +8,7 @@
                     </div>
                 </ng-template>
             </p-toolbar>
+            <p-messages id="messages" [value]="messages"></p-messages>
           <p-table #myTab [value]="organizationDetail" [loading]='loading' [paginator]="true" [rows]="rows"
                 responsiveLayout="scroll" [globalFilterFields]="globalFilterFields">
                 <ng-template pTemplate="caption">
