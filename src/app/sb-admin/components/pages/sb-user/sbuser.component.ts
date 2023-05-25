@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { Message, MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { UserService } from 'src/app/sb-admin/service/user.service';
+import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
+import { DialogService } from 'primeng/dynamicdialog';
+import { I18NextPipe } from 'angular-i18next';
 import { map } from 'rxjs';
 import { OrganizationsUsersList } from './organizationsUsersList';
 import { User } from 'src/app/sb-admin/api/user';
+import { Roles } from 'src/app/constant.config';
 
 @Component({
   templateUrl: './sbuser.component.html',
   providers: [MessageService]
 })
 export class SbUserComponent implements OnInit {
-
+ createUser:any = { header: this.i18nextPipe.transform('USER_CREATE'), width: '30%', height: 'auto' };
   userDialog: boolean = false;
   deleteUserDialog: boolean = false;
   deleteUsersDialog: boolean = false;
@@ -21,21 +25,17 @@ export class SbUserComponent implements OnInit {
   loading: boolean = true;
   organizations: any[] = [];
   OrganizationsUsersList: OrganizationsUsersList[] = [];
-  globalFilterFields: string[] = ['rootOrgName', 'firstName', 'lastName', 'email', 'phone'];
-  rowsPerPageOptions: number[] = [10, 20, 30];
-  rows: number = 10;
+  globalFilterFields: string[] = ['channel', 'firstName', 'lastName', 'email', 'phone'];
+  rowsPerPageOptions:number[]=[10,20,30];
+  rows:number=10;
   user!: User;
   selectedUserRole:string[]=[];
+  roles = Roles;
+  constructor(private userService: UserService,
+    public dialogService: DialogService,
+    private i18nextPipe: I18NextPipe
 
-  roles = [
-    { name: 'Content Creator', value: 'CONTENT_CREATOR' },
-    { name: 'Content Reviewer', value: 'CONTENT_REVIEWER' },
-    { name: 'Book Creator', value: 'BOOK_CREATOR' },
-    { name: 'Book Reviewer', value: 'BOOK_REVIEWER' },
-    { name: 'Org Admin', value: 'ORG_ADMIN' },
-    { name: 'Public', value: 'PUBLIC' }
-]
-  constructor(private userService: UserService) { }
+  ) { }
 
   ngOnInit() {
     this.getOrganizations().subscribe((data: any) => {
@@ -68,7 +68,10 @@ export class SbUserComponent implements OnInit {
         "request": {
           "filters": {
             "rootOrgId": UserList.id
-          }
+          },
+          "sortBy": {
+            "createdDate": "Desc"
+         }
         }
       };
       this.userService.getOrganizationUserList(body).subscribe((Users: any) => {
@@ -115,5 +118,22 @@ export class SbUserComponent implements OnInit {
     this.userDialog=false;
     this.submitted=false;
   }
+  addNewUser() {
+    const ref = this.dialogService.open(AddEditUserComponent, this.createUser);
+    ref.onClose.subscribe((result) => {
+        if (result) {
+            this.OrganizationsUsersList.unshift(result);
+        }
+    });
+}
+
+    editUser(user: OrganizationsUsersList) {
+        this.dialogService.open(AddEditUserComponent, {
+            data: user,
+            header: this.i18nextPipe.transform('USER_EDIT'),
+            width: '30%',
+            height: 'auto'
+        });
+    }
 }
 

@@ -5,7 +5,7 @@
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
                     <div class="my-2">
-                        <button pButton pRipple label="{{ 'USER_ADD' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2"
+                        <button pButton pRipple label="{{ 'USER_ADD' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2" (click)="addNewUser()"
                             ></button>
                         <button pButton pRipple label="{{ 'USER_DELETE' |i18next }}" icon="pi pi-trash" class="p-button-danger">
                         </button>
@@ -35,7 +35,7 @@
                         <th>
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th scope="col" pSortableColumn="rootOrgName">{{ 'ORGANIZATION'  | i18next}}<p-sortIcon field="rootOrgName"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="channel">{{ 'USER_CHANNEL_NAME'  | i18next}}<p-sortIcon field="channel"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="firstName">{{ 'USER_FIRST_NAME' |i18next }}<p-sortIcon field="firstName"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="lastName">{{ 'USER_LAST_NAME' |i18next }}<p-sortIcon field="lastName"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="email">{{ 'USER_EMAIL' | i18next }} <p-sortIcon field="email"></p-sortIcon></th>
@@ -50,25 +50,25 @@
                         <td>
                             <p-tableCheckbox [value]="user"></p-tableCheckbox>
                         </td>
-                        <td ><span class="p-column-title">Organization</span>
-                            {{user.rootOrgName}}
+                        <td ><span class="p-column-title">{{'USER_ORGANIZATION_NAME' | i18next}}</span>
+                            {{user.channel}}
                         </td>
-                        <td><span class="p-column-title">First Name</span>
+                        <td><span class="p-column-title">{{'USER_FIRST_NAME' | i18next}}</span>
                             {{user.firstName}}
                         </td>
                         <td >
-                            <span class="p-column-title">Last Name</span>
+                            <span class="p-column-title">{{'USER_LAST_NAME' | i18next}}</span>
                             {{user.lastName}}
                         </td>
                         <td>
-                            <span class="p-column-title">Email</span>
+                            <span class="p-column-title">{{'USER_EMAIL' | i18next}}</span>
                             {{user.email}}
                         </td>
                         <td>
-                            <span class="p-column-title">Phone</span>
+                            <span class="p-column-title">{{'USER_PHONE' | i18next}}</span>
                             {{user.phone}}
                         </td>
-                        <td><span class="p-column-title">Status</span>
+                        <td><span class="p-column-title">{{'USER_STATUS' | i18next}}</span>
                             {{user.status ? "Active" : "Inactive"}}
                         </td>
                         <td>
