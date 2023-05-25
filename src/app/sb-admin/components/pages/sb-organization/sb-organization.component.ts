@@ -17,6 +17,8 @@ export class SbOrganizationComponent implements OnDestroy {
   organizationDetail: OrganizationDetail[] = [];
   loading: boolean = true;
   private subscription: Subscription | any;
+  globalFilterFields :string []=['organizationName','channel','id'];
+  rows:number=10;
 
   constructor(private orgList: OrganizationListService, public dialogService: DialogService, public ref: DynamicDialogRef) { }
 
