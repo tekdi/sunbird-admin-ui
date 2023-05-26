@@ -41,7 +41,6 @@
                         <th scope="col" pSortableColumn="lastName">{{ 'USER_LAST_NAME' |i18next }}<p-sortIcon field="lastName"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="email">{{ 'USER_EMAIL' | i18next }} <p-sortIcon field="email"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="phone">{{ 'USER_PHONE' |i18next }}<p-sortIcon field="phone"></p-sortIcon></th>
-                        <th scope="col" pSortableColumn="organisations[0]?.roles">{{ 'USER_ROLES' | i18next }}<p-sortIcon field="organisations[0]?.roles"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="status">{{ 'USER_STATUS' | i18next }}<p-sortIcon field="status"></p-sortIcon></th>                   
                         <th scope="col" pSortableColumn="action">{{ 'USER_ACTION' | i18next }}<p-sortIcon field="action"></p-sortIcon></th>
                         <th></th>
@@ -69,10 +68,6 @@
                         <td>
                             <span class="p-column-title">{{'USER_PHONE' | i18next}}</span>
                             {{user.phone}}
-                        </td>
-                        <td>
-                            <span class="p-column-title">{{'USER_ROLES' | i18next}}</span>
-                            {{user?.organisations[0]?.roles}}
                         </td>
                         <td><span class="p-column-title">{{'USER_STATUS' | i18next}}</span>
                             {{user.status ? "Active" : "Inactive"}}

@@ -98,7 +98,7 @@ export class SbUserComponent implements OnInit {
   editRole(user: any) {
     this.userDialog = true;
     this.user = user;
-    this.selectedUserRole = this.user?.organisations[0]?.roles
+    this.selectedUserRole = user?.organisations[0]?.roles
   }
 
   saveUserRole() {
