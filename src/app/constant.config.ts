@@ -8,7 +8,3 @@ export const Roles = [
     { name: 'Public', value: 'PUBLIC' }
 ]
 
-export const OrganizationType = [
-    { name: 'school', value: 'school' },
-    { name: 'board', value: 'board' }
-  ]

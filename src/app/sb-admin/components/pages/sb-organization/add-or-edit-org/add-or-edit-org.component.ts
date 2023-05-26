@@ -4,7 +4,6 @@ import { Validators } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 import { Message } from 'primeng/api';
-import { OrganizationType } from 'src/app/constant.config';
 import { I18NextPipe } from 'angular-i18next';
 
 @Component({
@@ -16,14 +15,13 @@ export class AddOrEditOrgComponent {
   addEditOrgForm: FormGroup;
   submitted: boolean = false;
   messages!: Message[];
-  organizationType= OrganizationType;
 
   constructor(public formBuilder: FormBuilder, public ref: DynamicDialogRef, private addOrgservice: OrganizationListService,private i18nextPipe: I18NextPipe) {
     this.addEditOrgForm = formBuilder.group({
       orgName: ['', Validators.required],
       description: ['', Validators.required],
       channel: ['', Validators.required],
-      organisationType: ['', Validators.required],
+      organisationType: 'board',
       isRootOrg: true,
       isTenant: true
     })

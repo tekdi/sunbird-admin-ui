@@ -1,31 +1,32 @@
-<form [formGroup]="addEditOrgForm" >
+<form [formGroup]="addEditOrgForm">
     <div class="card p-fluid">
         <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
         <div class="field">
-            <label for="orgName">{{ 'ORGANIZATION_NAME' | i18next}}</label>
-            <input type="text" name="orgName" pInputText id="orgName" autofocus placeholder="{{ 'ORGANIZATION_NAME' | i18next}}"
-                formControlName="orgName" />
-            <small *ngIf="submitted && addEditOrgForm.controls['orgName'].errors">{{ 'ADD_ORGANIZATION_NAME_INVALID' | i18next}}</small>
-        </div>
-
-        <div class="field">
-            <label for="description">{{ 'ADD_ORGANIZATION_DESCRIPTION' | i18next}}</label>
-            <textarea pInputTextarea placeholder="{{ 'ADD_ORGANIZATION_DESCRIPTION' | i18next }}" autofocus formControlName="description"></textarea>
-            <small *ngIf="submitted && addEditOrgForm.controls['description'].errors">{{ 'ADD_ORGANIZATION_DESCRIPTION_INVALID' | i18next}}</small>
+            <label for="orgName">{{ 'ORGANIZATION_NAME' | i18next}} *</label>
+            <input type="text" name="orgName" pInputText id="orgName" autofocus
+                placeholder="{{ 'ORGANIZATION_NAME' | i18next}}" formControlName="orgName" />
+            <small *ngIf="submitted && addEditOrgForm.controls['orgName'].errors">{{ 'ADD_ORGANIZATION_NAME_INVALID' |
+                i18next}}</small>
         </div>
         <div class="field">
-            <label for="channel">{{ 'ORGANIZATION_CHANNEL_NAME' | i18next}}</label>
-            <input type="text" pInputText id="channel" autofocus formControlName="channel" placeholder="{{ 'ORGANIZATION_CHANNEL_NAME' | i18next}}" />
-            <small *ngIf="submitted && addEditOrgForm.controls['channel'].errors">{{ 'ADD_ORGANIZATION_CHANNEL_INVALID' | i18next}}</small>
+            <label for="description">{{ 'ADD_ORGANIZATION_DESCRIPTION' | i18next}} *</label>
+            <textarea pInputTextarea placeholder="{{ 'ADD_ORGANIZATION_DESCRIPTION' | i18next }}" autofocus
+                formControlName="description"></textarea>
+            <small *ngIf="submitted && addEditOrgForm.controls['description'].errors">{{
+                'ADD_ORGANIZATION_DESCRIPTION_INVALID' | i18next}}</small>
         </div>
         <div class="field">
-            <label for="organisationType">{{'ADD_ORGANIZATION_TYPE' | i18next}}</label>
-            <p-dropdown [options]="organizationType" optionLabel="name" optionValue="value" formControlName="organisationType" placeholder="{{'ADD_ORGANIZATION_TYPE' | i18next}}"></p-dropdown>
-            <small *ngIf="submitted && addEditOrgForm.controls['organisationType'].errors">{{ 'ADD_ORGANIZATION_TYPE_INVALID' | i18next }}</small>
+            <label for="channel">{{ 'ORGANIZATION_CHANNEL_NAME' | i18next}} *</label>
+            <input type="text" pInputText id="channel" autofocus formControlName="channel"
+                placeholder="{{ 'ORGANIZATION_CHANNEL_NAME' | i18next}}" />
+            <small *ngIf="submitted && addEditOrgForm.controls['channel'].errors">{{ 'ADD_ORGANIZATION_CHANNEL_INVALID'
+                | i18next}}</small>
         </div>
     </div>
-    <button pButton pRipple type="button" label="{{ 'ADD_ORGANIZATION_CANCEL' | i18next }}" icon="pi pi-times" Class="p-button-secondary"
-        (click)="cancel()"></button>&nbsp;
-    <button  (click)="saveOrg()" pButton pRipple label="{{ 'ADD_ORGANIZATION_SUBMIT' | i18next }}" icon="pi pi-check"
-        class="p-button-success"></button>
+    <div class="p-col-12 p-md-6 p-lg-4 p-xl-3 p-button-container" style="float:right">
+        <button (click)="saveOrg()" pButton pRipple label="{{ 'ADD_ORGANIZATION_SUBMIT' | i18next }}" icon="pi pi-check"
+            class="p-button p-button-success"></button>&nbsp;
+        <button pButton pRipple type="button" label="{{ 'ADD_ORGANIZATION_CANCEL' | i18next }}" icon="pi pi-times"
+            class="p-button p-button-danger" (click)="cancel()"></button>
+    </div>
 </form>
