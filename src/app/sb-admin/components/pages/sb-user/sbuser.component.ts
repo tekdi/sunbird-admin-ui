@@ -19,7 +19,6 @@ export class SbUserComponent implements OnInit {
   deleteUsersDialog: boolean = false;
   submitted: boolean = false;
   cols: any[] = [];
-  statuses: any[] = [];
   loading: boolean = true;
   organizations: any[] = [];
   OrganizationsUsersList: OrganizationsUsersList[] = [];
