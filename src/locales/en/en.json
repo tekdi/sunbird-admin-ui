@@ -43,5 +43,6 @@
   "USER_DELETE":"Delete User",
   "USER_SEARCH":"Search...",
   "USER_CHANNEL_NAME":"Channel",
-  "USER_ORGANIZATION_NAME":"Organization Name"
+  "USER_ORGANIZATION_NAME":"Organization Name",
+  "USER_DELETED":"User Deleted"
 }

@@ -26,13 +26,14 @@ export class SbUserComponent implements OnInit {
   globalFilterFields: string[] = ['channel', 'firstName', 'lastName', 'email', 'phone'];
   rowsPerPageOptions:number[]=[10,20,30];
   rows:number=10;
-  
+  user: any;
+  messages:string[]=[];
 
   constructor(private userService: UserService,
     private messageService: MessageService,
     public dialogService: DialogService,
-    private i18nextPipe: I18NextPipe
-
+    private i18nextPipe: I18NextPipe, 
+ 
   ) { }
 
   ngOnInit() {
@@ -97,7 +98,7 @@ export class SbUserComponent implements OnInit {
     });
   }
 
- 
+
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
@@ -118,5 +119,26 @@ export class SbUserComponent implements OnInit {
             height: 'auto'
         });
     }
-}
 
+  deleteUser(user: OrganizationsUsersList) {
+    this.deleteUserDialog = true;
+    this.user = user;
+  }
+  confirmDelete() {
+    const payload = {
+      "request": {
+        "userId": this.user.userId
+      }
+    }
+    
+    this.userService.blockUser(payload).subscribe(response => {
+      this.messages = [];
+      this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_DELETED') })
+      this.deleteUserDialog = false;
+    }, (error) => {
+      this.messages = [];
+      this.messageService.add({ severity: 'error', detail: error.error.params.errmsg })
+    })
+  }
+
+}
