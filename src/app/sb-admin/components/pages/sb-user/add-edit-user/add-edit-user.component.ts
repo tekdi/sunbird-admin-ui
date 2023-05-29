@@ -99,7 +99,7 @@ export class AddEditUserComponent {
     this.messages = [];
     this.userService.addNewUser(payload).subscribe(response => {
       this.messages = [
-        { severity: 'success', summary: 'Success', detail: response.params.status }
+        { severity: 'success', summary: 'Roles added successfully', detail: response.params.status }
       ];
       this.ref.close(this.addEditUserForm.value);
     }, (error) => {
