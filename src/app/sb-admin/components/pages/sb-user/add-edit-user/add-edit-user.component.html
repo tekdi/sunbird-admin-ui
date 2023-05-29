@@ -13,7 +13,7 @@
             <label for="lastName">{{ 'USER_LAST_NAME' | i18next }} *</label>
             <input type="text" pInputText id="lastName" autofocus placeholder="{{'USER_LAST_NAME_PLACEHOLDER' | i18next}}"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['lastName'].errors}" formControlName="lastName" />
-            <div class="text-red-500" *ngIf="submitted && !(addEditUserForm.controls['phone'].value || addEditUserForm.controls['email'].value)">
+            <div class="text-red-500">
                 <small *ngIf="submitted && addEditUserForm.controls['lastName'].errors">{{ 'USER_LAST_NAME_REQUIRED' | i18next }}.</small>
             </div>
         </div>
@@ -21,8 +21,8 @@
             <label for="userName">{{ 'USER_NAME' | i18next }} *</label>
             <input type="text" pInputText id="userName" autofocus placeholder="{{'USER_NAME_PLACEOLDER' | i18next}}"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['userName'].errors}" formControlName="userName" />
-            <div class="text-red-500" *ngIf="submitted && !(addEditUserForm.controls['phone'].value || addEditUserForm.controls['email'].value)">
-                 <small class="ng-dirty ng-invalid" class="text-red-500" *ngIf="submitted && addEditUserForm.controls['userName'].errors">{{ 'USER_NAME_REQUIRED' | i18next }}.</small>
+            <div class="text-red-500">
+                 <small class="ng-dirty ng-invalid" *ngIf="submitted && addEditUserForm.controls['userName'].errors">{{ 'USER_NAME_REQUIRED' | i18next }}.</small>
             </div>
         </div>
         <div class="field">
