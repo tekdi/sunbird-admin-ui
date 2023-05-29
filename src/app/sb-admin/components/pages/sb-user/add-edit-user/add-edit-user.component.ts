@@ -46,7 +46,7 @@ export class AddEditUserComponent {
       phoneVerified: true,
       email: ['', Validators.email],
       emailVerified: true,
-      password: ['', Validators.required,Validators.pattern],
+      password: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
       channel: ['', Validators.required],
       roles: ['', Validators.required],
       status:["ACTIVE"]
