@@ -113,10 +113,7 @@ export class SbUserComponent implements OnInit {
       }
       this.userService.saveUserRole(body).subscribe((response) => {
         this.user.organisations[0].roles = this.selectedUserRole;
-        this.messages = [
-        ];
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: response.params.status })
-        this.hideDialog();    
+        this.hideDialog();
       })
     } 
   }
