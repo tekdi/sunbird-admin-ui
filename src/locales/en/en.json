@@ -47,5 +47,6 @@
   "USER_ORGANIZATION_NAME":"Organization Name",
   "USER_EDIT_ROLE":"Edit User Role",
   "USER_SAVE":"Save",
-  "USER_ROLES":" Roles"
+  "USER_ROLES":" Roles",
+  "USER_ROLE_ADDED":"User Role Updated Successfully"
 }
