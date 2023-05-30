@@ -117,6 +117,9 @@ export class SbUserComponent implements OnInit {
         ];
         this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_ROLE_ADDED')})
         this.hideDialog();    
+      }, (error) => {
+        this.messages = [];
+        this.messageService.add({ severity: 'error', detail: error.error.params.errmsg })
       })
     } 
   }
