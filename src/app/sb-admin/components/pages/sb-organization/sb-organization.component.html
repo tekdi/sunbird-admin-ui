@@ -1,17 +1,24 @@
 <div class="grid">
     <div class="col-12 xl:col-12">
         <div class="card">
-            <h5>{{ 'ORGANIZATION' | i18next}}</h5>
-            <p-message severity="warn" text="{{ 'ORG_DASHBOARD_LIST_WARNING' | i18next }}"
-                *ngIf="!organizationDetail || organizationDetail.length === 0"></p-message>
-            <p-table #myTab [value]="organizationDetail" [loading]='loading' [paginator]="true" [rows]="10"
-                responsiveLayout="scroll" [globalFilterFields]="['organizationName','channel','isRootOrg','id']">
+            <h5 class="m-0">{{ 'ORGANIZATION' | i18next}}</h5><br>
+            <p-messages id="messages" [value]="messages"></p-messages>
+            <p-table #myTab [value]="organizationDetail" [loading]='loading' [paginator]="true" [rows]="rows"
+                responsiveLayout="scroll" [globalFilterFields]="globalFilterFields">
                 <ng-template pTemplate="caption">
-                    <span class="p-input-icon-left">
-                        <i class="pi pi-search"> </i>
-                        <input type="text" pInputText placeholder="Search"
-                            (input)="myTab.filterGlobal($any($event.target).value,'contains')" />
-                    </span>
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input type="text" pInputText placeholder="{{ 'ORGANIZATION_SEARCH' | i18next }}"
+                                (input)="myTab.filterGlobal($any($event.target).value,'contains')" />
+                        </span>
+                        <p-message severity="warn" text="{{ 'ORGANIZATION_LIST_WARNING' | i18next }}"
+                            *ngIf="!organizationDetail || organizationDetail.length === 0"></p-message>
+                        <div class="my-2">
+                            <button pButton pRipple label="{{ 'ADD_ORGANIZATION' | i18next }}" icon="pi pi-plus"
+                                class="p-button-success mr-2" (click)="addOrg()"></button>
+                        </div>
+                    </div>
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
@@ -25,12 +32,13 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-organization>
                     <tr>
-                        <td style="width: 35%; min-width: 7rem;">{{organization.orgName}}</td>
-                        <td style="width: 35%; min-width: 8rem;">{{organization.channel}}</td>
-                        <td style="width: 35%; min-width: 8rem;">{{organization.id}}</td>
+                        <td>{{organization.orgName}}</td>
+                        <td>{{organization.channel}}</td>
+                        <td>{{organization.id}}</td>
                     </tr>
                 </ng-template>
             </p-table>
         </div>
+
     </div>
 </div>
