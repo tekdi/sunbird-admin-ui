@@ -75,7 +75,8 @@
                             <div class="flex">
                                 <button pButton pRipple icon="pi pi-pencil"
                                     class="p-button-rounded p-button-success mr-2" ></button>
-                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteUser(user)"></button>
+                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="blockUser(user)" *ngIf="user.status"></button>
+                                    <button pButton pRipple icon="pi pi-unlock" class="p-button-rounded p-button-warning" (click)="unblockUser(user)" *ngIf="!user.status"></button>
                             </div>
                         </td>
                     </tr>
@@ -85,11 +86,22 @@
             <p-dialog [(visible)]="deleteUserDialog" header="Confirm" [modal]="true" >
                 <div class="flex align-items-center justify-content-center">
                     <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                    <span *ngIf="user">Are you sure you want to delete <b>{{user.firstName}}</b>?</span>
+                    <span *ngIf="user">Are you sure you want to block <b>{{user.firstName}}</b>?</span>
                 </div>
                 <ng-template pTemplate="footer">
-                    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteUserDialog = false"></button>
-                    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+                    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="{{'USER_NO' | i18next}}" (click)="deleteUserDialog = false"></button>
+                    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="{{'USER_YES' | i18next}}" (click)="confirmDelete()"></button>
+                </ng-template>            
+            </p-dialog>
+
+            <p-dialog [(visible)]="unblockUserDialog" header="Confirm" [modal]="true" >
+                <div class="flex align-items-center justify-content-center">
+                    <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                    <span *ngIf="user">Are you sure you want to unblock <b>{{user.firstName}}</b>?</span>
+                </div>
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="{{'USER_NO' | i18next}}" (click)="unblockUserDialog = false"></button>
+                    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="{{'USER_YES' | i18next}}" (click)="confirmDeleteUser()"></button>
                 </ng-template>            
             </p-dialog>
         </div>

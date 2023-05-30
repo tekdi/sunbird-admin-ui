@@ -28,6 +28,7 @@ export class SbUserComponent implements OnInit {
   rows:number=10;
   user: any;
   messages:string[]=[];
+  unblockUserDialog:boolean=false;
 
   constructor(private userService: UserService,
     private messageService: MessageService,
@@ -120,7 +121,7 @@ export class SbUserComponent implements OnInit {
         });
     }
 
-  deleteUser(user: OrganizationsUsersList) {
+    blockUser(user: OrganizationsUsersList) {
     this.deleteUserDialog = true;
     this.user = user;
   }
@@ -129,11 +130,11 @@ export class SbUserComponent implements OnInit {
       "request": {
         "userId": this.user.userId
       }
-    }
-    
+    }   
     this.userService.blockUser(payload).subscribe(response => {
       this.messages = [];
-      this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_DELETED') })
+      this.user.status = 0;
+      this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_BLOCK_SUUCCESSFULLY') })
       this.deleteUserDialog = false;
     }, (error) => {
       this.messages = [];
@@ -141,4 +142,24 @@ export class SbUserComponent implements OnInit {
     })
   }
 
+  unblockUser(user: OrganizationsUsersList){
+    this.unblockUserDialog = true;
+    this.user = user;
+  }
+  confirmDeleteUser() {
+    const payload = {
+      "request": {
+        "userId": this.user.userId
+      }
+    } 
+    this.userService.unblockUser(payload).subscribe(response => {
+      this.messages = [];
+      this.user.status = 1;
+      this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_UNBLOCK_SUUCCESSFULLY') })
+      this.unblockUserDialog = false;
+    }, (error) => {
+      this.messages = [];
+      this.messageService.add({ severity: 'error', detail: error.error.params.errmsg })
+    })
+  }
 }
