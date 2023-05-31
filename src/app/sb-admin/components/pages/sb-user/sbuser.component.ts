@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { Message, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
@@ -7,6 +7,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { I18NextPipe } from 'angular-i18next';
 import { map } from 'rxjs';
 import { OrganizationsUsersList } from './organizationsUsersList';
+import i18next from 'i18next';
 
 @Component({
   templateUrl: './sbuser.component.html',
@@ -25,7 +26,7 @@ export class SbUserComponent implements OnInit {
   globalFilterFields: string[] = ['channel', 'firstName', 'lastName', 'email', 'phone'];
   rowsPerPageOptions:number[]=[10,20,30];
   rows:number=10;
-  
+  messages!: Message[];
 
   constructor(private userService: UserService,
     private messageService: MessageService,
@@ -103,11 +104,15 @@ export class SbUserComponent implements OnInit {
   addNewUser() {
     const ref = this.dialogService.open(AddEditUserComponent, this.createUser);
     ref.onClose.subscribe((result) => {
-        if (result) {
-            this.OrganizationsUsersList.unshift(result);
-        }
+      if (result) {
+        this.OrganizationsUsersList.unshift(result);
+        this.messages = [
+        ];
+        this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_ADDED_SUCCESSFULLY') }
+        )
+      }
     });
-}
+  }
 
     editUser(user: OrganizationsUsersList) {
         this.dialogService.open(AddEditUserComponent, {
