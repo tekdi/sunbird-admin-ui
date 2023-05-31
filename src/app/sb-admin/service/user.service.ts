@@ -24,12 +24,20 @@ export class UserService {
     return this.http.post(environment.userUrl, body, { headers: header })
   }
 
+  saveUserRole(payload: any): Observable<any> {
+    let header = new HttpHeaders({
+      "Content-Type": 'application/json',
+      "Authorization": environment.authKey,
+      "x-authenticated-user-token": environment.userToken,
+    })
+    return this.http.post(environment.userUpdateRoleUrl, payload, { headers: header });
+  }
   addNewUser(payload: any): Observable<any> {
     let header = new HttpHeaders({
       "Content-Type": 'application/json',
       "Authorization": environment.authKey,
       "x-authenticated-user-token": environment.userToken,
     })
-    return this.http.post(environment.userRoleUrl, payload, { headers: header });
+    return this.http.post(environment.userCreateUrl, payload, { headers: header });
   }
 }

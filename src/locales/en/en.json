@@ -55,6 +55,11 @@
   "USER_ADD":"Add User",
   "USER_DELETE":"Delete User",
   "USER_SEARCH":"Search...",
+  "USER_ROLE_PLACEHOLDER":"Select User Role",
   "USER_CHANNEL_NAME":"Channel",
-  "USER_ORGANIZATION_NAME":"Organization Name"
+  "USER_ORGANIZATION_NAME":"Organization Name",
+  "USER_EDIT_ROLE":"Edit User Role",
+  "USER_SAVE":"Save",
+  "USER_ROLES":" Roles",
+  "USER_ROLE_ADDED":"User Role Updated Successfully"
 }
