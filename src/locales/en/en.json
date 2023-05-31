@@ -51,7 +51,6 @@
   "COMMON_PHONE":"Phone",
   "COMMON_STATUS":"Status",
   "COMMON_ACTION":"Action",
-  "COMMON_USERS":"Users",
   "ORGANIZATION_USERS_LIST_WARNING": "Organization Users Data Not Found",
   "USER_ADD":"Add User",
   "USER_DELETE":"Delete User",
