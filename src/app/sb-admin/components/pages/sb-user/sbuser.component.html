@@ -29,9 +29,9 @@
                         <th scope="col" pSortableColumn="lastName">{{ 'USER_LAST_NAME' |i18next }}<p-sortIcon field="lastName"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="channel">{{ 'USER_CHANNEL_NAME'  | i18next}}<p-sortIcon field="channel"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="email">{{ 'USER_EMAIL' | i18next }} <p-sortIcon field="email"></p-sortIcon></th>
-                        <th scope="col" pSortableColumn="phone">{{ 'USER_PHONE' |i18next }}<p-sortIcon field="phone"></p-sortIcon></th>
-                        <th scope="col" pSortableColumn="status">{{ 'USER_STATUS' | i18next }}<p-sortIcon field="status"></p-sortIcon></th>
-                        <th scope="col">{{ 'USER_ACTION' | i18next }}</th>
+                        <th scope="col" pSortableColumn="phone">{{ 'COMMON_PHONE' |i18next }}<p-sortIcon field="phone"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="status">{{ 'COMMON_STATUS' | i18next }}<p-sortIcon field="status"></p-sortIcon></th>
+                        <th scope="col">{{ 'COMMON_ACTION' | i18next }}</th>
                         <th></th>
                     </tr>
                 </ng-template>
@@ -53,11 +53,11 @@
                             {{user.email}}
                         </td>
                         <td>
-                            <span class="p-column-title">{{'USER_PHONE' | i18next}}</span>
+                            <span class="p-column-title">{{'COMMON_PHONE' | i18next}}</span>
                             {{user.phone}}
                         </td>
                         <td>
-                            <span class="p-column-title" >{{'USER_STATUS' | i18next}}</span>
+                            <span class="p-column-title" >{{'COMMON_STATUS' | i18next}}</span>
                             {{user.status ? "Active" : "Inactive"}}
                         </td>
                         <td>
