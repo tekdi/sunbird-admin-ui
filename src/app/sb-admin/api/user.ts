@@ -14,4 +14,7 @@ export interface User {
     userName?: string;
     email?: string;
     status?: Number;
+    userId:string;
+    rootOrgId?:string;
+    organisations:any;
 }
