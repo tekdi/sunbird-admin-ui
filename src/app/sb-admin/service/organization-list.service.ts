@@ -16,4 +16,13 @@ export class OrganizationListService {
     })
     return this.http.post(environment.orgUrl, body, { headers: header })
   }
+
+  addOrg(body : any):Observable<any>{
+    let header=new HttpHeaders({
+      "Content-Type": 'application/json',
+      "Authorization": environment.authKey,
+      "x-authenticated-user-token": environment.userToken,
+    })
+ return this.http.post(environment.addOrgUrl,body,{headers: header})
+}
 }
