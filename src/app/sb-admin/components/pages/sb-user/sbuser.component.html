@@ -29,9 +29,9 @@
                         <th scope="col" pSortableColumn="lastName">{{ 'USER_LAST_NAME' |i18next }}<p-sortIcon field="lastName"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="channel">{{ 'USER_CHANNEL_NAME'  | i18next}}<p-sortIcon field="channel"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="email">{{ 'USER_EMAIL' | i18next }} <p-sortIcon field="email"></p-sortIcon></th>
-                        <th scope="col" pSortableColumn="phone">{{ 'COMMON_PHONE' |i18next }}<p-sortIcon field="phone"></p-sortIcon></th>
-                        <th scope="col" pSortableColumn="status">{{ 'COMMON_STATUS' | i18next }}<p-sortIcon field="status"></p-sortIcon></th>
-                        <th scope="col">{{ 'COMMON_ACTION' | i18next }}</th>
+                        <th scope="col" pSortableColumn="phone">{{ 'USER_PHONE' |i18next }}<p-sortIcon field="phone"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="status">{{ 'USER_STATUS' | i18next }}<p-sortIcon field="status"></p-sortIcon></th>
+                        <th scope="col">{{ 'USER_ACTION' | i18next }}</th>
                         <th></th>
                     </tr>
                 </ng-template>
@@ -53,16 +53,20 @@
                             {{user.email}}
                         </td>
                         <td>
-                            <span class="p-column-title">{{'COMMON_PHONE' | i18next}}</span>
+                            <span class="p-column-title">{{'USER_PHONE' | i18next}}</span>
                             {{user.phone}}
                         </td>
                         <td>
-                            <span class="p-column-title" >{{'COMMON_STATUS' | i18next}}</span>
+                            <span class="p-column-title" >{{'USER_STATUS' | i18next}}</span>
                             {{user.status ? "Active" : "Inactive"}}
                         </td>
                         <td>
                             <div class="flex">
+<<<<<<< HEAD
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" ></button>
+=======
                                 <button [disabled]="!user.status" pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2" (click)="editRole(user)"></button>
+>>>>>>> bf2983ccf7eb2bc712245dfcb3016d5301fba0a0
                                 <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"></button>
                             </div>
                         </td>
