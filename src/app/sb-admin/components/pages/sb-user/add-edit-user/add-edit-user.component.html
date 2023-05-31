@@ -19,7 +19,7 @@
         </div>
         <div class="field">
             <label for="userName">{{ 'USER_NAME' | i18next }} *</label>
-            <input type="text" pInputText id="userName" autofocus placeholder="{{'USER_NAME_PLACEOLDER' | i18next}}"
+            <input type="text" pInputText id="userName" autofocus placeholder="{{'USER_NAME_PLACEHOLDER' | i18next}}"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['userName'].errors}" formControlName="userName" />
             <div class="text-red-500">
                  <small class="ng-dirty ng-invalid" *ngIf="submitted && addEditUserForm.controls['userName'].errors">{{ 'USER_NAME_REQUIRED' | i18next }}.</small>
@@ -43,7 +43,7 @@
         </div>
         <div class="field">
             <label for="phone">{{ 'USER_PHONE' |i18next }} *</label>
-            <input type="text" pInputText id="phone" autofocus formControlName="phone" placeholder="{{'USER_PHONE_PLACEHOLDER' | i18next}}"
+            <input type="text" pInputText id="phone" autofocus formControlName="phone" placeholder="{{'USER_PHONE_NUMBER_PLACEHOLDER' | i18next}}"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['phone'].errors}" formControlName="phone" />
             <div class="text-red-500">
                 <small *ngIf="submitted && !(addEditUserForm.controls['phone'].value || addEditUserForm.controls['email'].value)">{{ 'USER_PHONE_OR_USER_EMAIL_REQUIRED' | i18next }}.</small>
