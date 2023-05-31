@@ -23,6 +23,6 @@ export class OrganizationListService {
       "Authorization": environment.authKey,
       "x-authenticated-user-token": environment.userToken,
     })
- return this.http.post(environment.orgUrl,body,{headers: header})
+ return this.http.post(environment.addOrgUrl,body,{headers: header})
 }
 }
