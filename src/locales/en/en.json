@@ -13,15 +13,6 @@
   "USER_ORGANIZATION_NAME_REQUIRED": "Organization name is required",
   "USER_CREATE": "Create New User",
   "USER_EDIT": "Edit User",
-  "USER_FIRST_NAME_PLACEHOLDER": "Enter Firstname",
-  "USER_LAST_NAME_PLACEHOLDER": "Enter Lastname",
-  "USER_NAME_PLACEHOLDER": "Enter User Name",
-  "USER_PASSWORD_PLACEHOLDER": "Enter Password",
-  "USER_EMAIL_PLACEHOLDER": "Enter User Email",
-  "USER_PHONE_NUMBER_PLACEHOLDER": "Enter Phone Number",
-  "USER_SELECT_ROLE": "Select a Role",
-  "USER_SELECT_ORGANIZATION": "Select a Organization",
-  "USER_PHONE_PLACEHOLDER":"Enter Phone",
   "ORG_DASHBOARD":"Dashboard",
   "ORG_DASHBOARD_NAME": "Organization Name",
   "ORG_DASHBOARD_USERS_REGISTERED": "Registered Users",
@@ -61,5 +52,6 @@
   "USER_EDIT_ROLE":"Edit User Role",
   "USER_SAVE":"Save",
   "USER_ROLES":" Roles",
-  "USER_ROLE_ADDED":"User Role Updated Successfully"
+  "USER_ROLE_ADDED":"User Role Updated Successfully",
+  "COMMON_USER":"Users"
 }
