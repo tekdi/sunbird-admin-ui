@@ -18,7 +18,7 @@
   "USER_NAME_PLACEHOLDER": "Enter User Name",
   "USER_PASSWORD_PLACEHOLDER": "Enter Password",
   "USER_ROLE_PLACEHOLDER":"Select User Role",
-  "USER_SELECT_ORGANIZATION": "Select a Organization",
+  "USER_ORGANIZATION_PLACEHOLDER": "Select a Organization",
   "USER_PHONE_PLACEHOLDER":"Enter Phone",
   "USER_EMAIL_PLACEHOLDER":"Enter Email",
   "ORG_DASHBOARD":"Dashboard",
