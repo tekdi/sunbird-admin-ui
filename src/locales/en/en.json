@@ -65,5 +65,7 @@
   "USER_EDIT_ROLE":"Edit User Role",
   "USER_SAVE":"Save",
   "USER_ROLES":" Roles",
-  "USER_ROLE_ADDED":"User Role Updated Successfully"
+  "USER_ROLE_ADDED":"User Role Updated Successfully",
+  "ARE_YOU_SURE_WANT_TO_BLOCK":"Are you sure you want to block",
+  "ARE_YOU_SURE_WANT_TO_UNBLOCK":"Are you sure you want to unblock"
 }
