@@ -91,7 +91,7 @@
             <p-dialog [(visible)]="deleteUserDialog" header="Confirm" [modal]="true" >
                 <div class="flex align-items-center justify-content-center">
                     <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                    <span *ngIf="user">{{ARE_YOU_SURE_WANT_TO_BLOCK | i18next}} <b>{{user.firstName}}</b>?</span>
+                    <span *ngIf="user">{{'USER_BLOCK_CONFIRMATION' | i18next}} <b>{{user.firstName}}</b>?</span>
                 </div>
                 <ng-template pTemplate="footer">
                     <button pButton pRipple icon="pi pi-times" class="p-button-text" label="{{'COMMON_NO' | i18next}}" (click)="deleteUserDialog = false"></button>
@@ -102,7 +102,7 @@
             <p-dialog [(visible)]="unblockUserDialog" header="Confirm" [modal]="true" >
                 <div class="flex align-items-center justify-content-center">
                     <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                    <span *ngIf="user">{{'ARE_YOU_SURE_WANT_TO_UNBLOCK' | i18next}} <b>{{user.firstName}}</b>?</span>
+                    <span *ngIf="user">{{'USER_UNBLOCK_CONFIRMATION' | i18next}} <b>{{user.firstName}}</b>?</span>
                 </div>
                 <ng-template pTemplate="footer">
                     <button pButton pRipple icon="pi pi-times" class="p-button-text" label="{{'COMMON_NO' | i18next}}" (click)="unblockUserDialog = false"></button>
