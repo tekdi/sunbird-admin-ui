@@ -153,7 +153,7 @@ export class SbUserComponent implements OnInit {
     this.deleteUserDialog = true;
     this.user = user;
   }
-  confirmDelete() {
+  confirmBlock() {
     const payload = {
       "request": {
         "userId": this.user.userId
@@ -174,7 +174,7 @@ export class SbUserComponent implements OnInit {
     this.unblockUserDialog = true;
     this.user = user;
   }
-  confirmDeleteUser() {
+  confirmUnblock() {
     const payload = {
       "request": {
         "userId": this.user.userId

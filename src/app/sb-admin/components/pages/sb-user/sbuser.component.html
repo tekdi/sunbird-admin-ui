@@ -78,7 +78,7 @@
                 </div>
                 <ng-template pTemplate="footer">
                     <button pButton pRipple icon="pi pi-times" class="p-button-text" label="{{'COMMON_NO' | i18next}}" (click)="deleteUserDialog = false"></button>
-                    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="{{'COMMON_YES' | i18next}}" (click)="confirmDelete()"></button>
+                    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="{{'COMMON_YES' | i18next}}" (click)="confirmBlock()"></button>
                 </ng-template>            
             </p-dialog>
 
@@ -89,7 +89,7 @@
                 </div>
                 <ng-template pTemplate="footer">
                     <button pButton pRipple icon="pi pi-times" class="p-button-text" label="{{'COMMON_NO' | i18next}}" (click)="unblockUserDialog = false"></button>
-                    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="{{'COMMON_YES' | i18next}}" (click)="confirmDeleteUser()"></button>
+                    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="{{'COMMON_YES' | i18next}}" (click)="confirmUnblock()"></button>
                 </ng-template>            
             </p-dialog>
         </div>

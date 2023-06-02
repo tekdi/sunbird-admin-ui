@@ -56,15 +56,15 @@
   "USER_CHANNEL_NAME":"Organizaton",
   "USER_ADDED_SUCCESSFULLY":"User Added Successfully",
   "USER_ORGANIZATION_NAME":"Organization Name",
-  "USER_BLOCK_SUUCCESSFULLY":"User Block Successfully",
-  "USER_UNBLOCK_SUUCCESSFULLY":"User Unblock Successfully",
-  "COMMON_YES":"Yes",
-  "COMMON_NO":"No",
   "USER_EDIT_ROLE":"Edit User Role",
   "USER_SAVE":"Save",
   "USER_ROLES":" Roles",
   "USER_ROLE_ADDED":"User Role Updated Successfully",
+  "COMMON_USER":"Users",
   "USER_BLOCK_CONFIRMATION":"Are you sure you want to block",
   "USER_UNBLOCK_CONFIRMATION":"Are you sure you want to unblock",
-  "COMMON_USER":"Users"
+  "USER_BLOCK_SUUCCESSFULLY":"User Block Successfully",
+  "USER_UNBLOCK_SUUCCESSFULLY":"User Unblock Successfully",
+  "COMMON_YES":"Yes",
+  "COMMON_NO":"No"
 }
