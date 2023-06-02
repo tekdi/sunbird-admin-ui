@@ -5,7 +5,7 @@ const PROXY_CONFIG = [
             "/assets",
             "/search"
         ],
-        "target": "http://localhost:3000",
+        "target": "https://sunbirdsaas.com",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
