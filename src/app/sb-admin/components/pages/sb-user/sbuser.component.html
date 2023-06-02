@@ -2,17 +2,7 @@
 <div class="grid">
     <div class="col-12">
         <div class="card px-6 py-6">
-            <p-toast></p-toast>
-            <p-toolbar styleClass="mb-4">
-                <ng-template pTemplate="left">
-                    <div class="my-2">
-                        <button pButton pRipple label="{{ 'USER_ADD' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2" (click)="addNewUser()"
-                            ></button>
-                        <button pButton pRipple label="{{ 'USER_DELETE' |i18next }}" icon="pi pi-trash" class="p-button-danger">
-                        </button>
-                    </div>
-                </ng-template>
-            </p-toolbar>
+            <h5 class="m-0">{{ 'COMMON_USER' | i18next}}</h5><br>                 
             <p-table #myTable [value]="OrganizationsUsersList" [columns]="cols" [loading]='loading'
                 [totalRecords]="OrganizationsUsersList.length" responsiveLayout="scroll" [rows]="rows" [paginator]="true"
                 [globalFilterFields]="globalFilterFields"
@@ -21,45 +11,42 @@
                 [rowHover]="true" dataKey="userId">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                        <h5 class="m-0">{{ 'USER' | i18next }}</h5>
-                        <p-message severity="warn" text="{{ 'ORGANIZATION_USERS_LIST_WARNING' | i18next }}"
-                               *ngIf="!OrganizationsUsersList || OrganizationsUsersList.length === 0"></p-message>
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input pInputText type="text" (input)="onGlobalFilter(myTable, $event)"
                                 placeholder="{{ 'USER_SEARCH' | i18next }}" class="w-full sm:w-auto" />
-                        </span>
+                        </span>            
+                        <p-message severity="warn" text="{{ 'ORGANIZATION_USERS_LIST_WARNING' | i18next }}"
+                               *ngIf="!OrganizationsUsersList || OrganizationsUsersList.length === 0"></p-message>
+                    
+                        <button pButton pRipple label="{{ 'USER_ADD' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2" (click)="addNewUser()"
+                            ></button>
                     </div>
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>
-                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                        </th>
-                        <th scope="col" pSortableColumn="channel">{{ 'USER_CHANNEL_NAME'  | i18next}}<p-sortIcon field="channel"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="firstName">{{ 'USER_FIRST_NAME' |i18next }}<p-sortIcon field="firstName"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="lastName">{{ 'USER_LAST_NAME' |i18next }}<p-sortIcon field="lastName"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="channel">{{ 'USER_CHANNEL_NAME'  | i18next}}<p-sortIcon field="channel"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="email">{{ 'USER_EMAIL' | i18next }} <p-sortIcon field="email"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="phone">{{ 'USER_PHONE' |i18next }}<p-sortIcon field="phone"></p-sortIcon></th>
-                        <th scope="col" pSortableColumn="status">{{ 'USER_STATUS' | i18next }}<p-sortIcon field="status"></p-sortIcon></th>                   
-                        <th scope="col" pSortableColumn="action">{{ 'USER_ACTION' | i18next }}<p-sortIcon field="action"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="status">{{ 'USER_STATUS' | i18next }}<p-sortIcon field="status"></p-sortIcon></th>
+                        <th scope="col">{{ 'USER_ACTION' | i18next }}</th>
                         <th></th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-user>
                     <tr>
                         <td>
-                            <p-tableCheckbox [value]="user"></p-tableCheckbox>
-                        </td>
-                        <td ><span class="p-column-title">{{'USER_ORGANIZATION_NAME' | i18next}}</span>
-                            {{user.channel}}
-                        </td>
-                        <td><span class="p-column-title">{{'USER_FIRST_NAME' | i18next}}</span>
+                            <span class="p-column-title">{{'USER_FIRST_NAME' | i18next}}</span>
                             {{user.firstName}}
                         </td>
                         <td >
                             <span class="p-column-title">{{'USER_LAST_NAME' | i18next}}</span>
                             {{user.lastName}}
+                        </td>
+                        <td ><span class="p-column-title">{{'USER_ORGANIZATION_NAME' | i18next}}</span>
+                            {{user.channel}}
                         </td>
                         <td>
                             <span class="p-column-title">{{'USER_EMAIL' | i18next}}</span>
@@ -69,7 +56,8 @@
                             <span class="p-column-title">{{'USER_PHONE' | i18next}}</span>
                             {{user.phone}}
                         </td>
-                        <td><span class="p-column-title">{{'USER_STATUS' | i18next}}</span>
+                        <td>
+                            <span class="p-column-title" >{{'USER_STATUS' | i18next}}</span>
                             {{user.status ? "Active" : "Inactive"}}
                         </td>
                         <td>
