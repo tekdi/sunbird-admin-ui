@@ -30,12 +30,12 @@ export class SbUserComponent implements OnInit {
   user!: User;
   selectedUserRole:string[]=[];
   roles = Roles;
-  messages:string[]=[];
+  messages!: Message[];
   unblockUserDialog:boolean=false;
 
   constructor(private userService: UserService,
     public dialogService: DialogService,
-    private i18nextPipe: I18NextPipe, 
+    private i18nextPipe: I18NextPipe,
     private messageService: MessageService,
 
   ) { }
@@ -149,7 +149,7 @@ export class SbUserComponent implements OnInit {
         });
     }
 
-    blockUser(user: User) {
+  blockUser(user: User) {
     this.deleteUserDialog = true;
     this.user = user;
   }

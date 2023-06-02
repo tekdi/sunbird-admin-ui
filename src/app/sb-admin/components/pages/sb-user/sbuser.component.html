@@ -62,14 +62,9 @@
                         </td>
                         <td>
                             <div class="flex">
-
-                                <button [disabled]="!user.status" pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2"
-                                    (click)="editRole(user)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="blockUser(user)"
-                                    *ngIf="user.status"></button>
+                                <button [disabled]="!user.status" pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2" (click)="editRole(user)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="blockUser(user)" *ngIf="user.status"></button>
                                 <button pButton pRipple icon="pi pi-unlock" class="p-button-rounded p-button-warning" (click)="unblockUser(user)" *ngIf="!user.status"></button>
-                                
-
                             </div>
                         </td>
                     </tr>
