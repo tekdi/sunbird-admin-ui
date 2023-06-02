@@ -17,8 +17,7 @@ import { Roles } from 'src/app/constant.config';
 export class SbUserComponent implements OnInit {
  createUser:any = { header: this.i18nextPipe.transform('USER_CREATE'), width: '30%', height: 'auto' };
   userDialog: boolean = false;
-  deleteUserDialog: boolean = false;
-  deleteUsersDialog: boolean = false;
+  blockUnblockUserDialog: boolean = false;
   submitted: boolean = false;
   cols: any[] = [];
   loading: boolean = true;
@@ -31,7 +30,6 @@ export class SbUserComponent implements OnInit {
   selectedUserRole:string[]=[];
   roles = Roles;
   messages!: Message[];
-  unblockUserDialog:boolean=false;
 
   constructor(private userService: UserService,
     public dialogService: DialogService,
@@ -149,8 +147,8 @@ export class SbUserComponent implements OnInit {
         });
     }
 
-  blockUser(user: User) {
-    this.deleteUserDialog = true;
+  blockUnblockUser(user: User) {
+    this.blockUnblockUserDialog = true;
     this.user = user;
   }
   confirmBlock() {
@@ -158,36 +156,20 @@ export class SbUserComponent implements OnInit {
       "request": {
         "userId": this.user.userId
       }
-    }   
-    this.userService.blockUser(payload).subscribe(response => {
+    }
+    this.userService.blockUnblockUser(payload, this.user?.status).subscribe(response => {
       this.messages = [];
-      this.user.status = 0;
-      this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_BLOCK_SUUCCESSFULLY') })
-      this.deleteUserDialog = false;
-    }, (error) => {
-      this.messages = [];
-      this.messageService.add({ severity: 'error', detail: error.error.params.errmsg })
-    })
-  }
-
-  unblockUser(user: User){
-    this.unblockUserDialog = true;
-    this.user = user;
-  }
-  confirmUnblock() {
-    const payload = {
-      "request": {
-        "userId": this.user.userId
+      if (this.user.status) {
+        this.user.status = 0;
+        this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_BLOCK_SUUCCESSFULLY') });
+      } else {
+        this.user.status = 1;
+        this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_UNBLOCK_SUUCCESSFULLY') });
       }
-    } 
-    this.userService.unblockUser(payload).subscribe(response => {
+      this.blockUnblockUserDialog = false;
+    }, (error: any) => {
       this.messages = [];
-      this.user.status = 1;
-      this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_UNBLOCK_SUUCCESSFULLY') })
-      this.unblockUserDialog = false;
-    }, (error) => {
-      this.messages = [];
-      this.messageService.add({ severity: 'error', detail: error.error.params.errmsg })
+      this.messageService.add({ severity: 'error', detail: error.error.params.errmsg });
     })
   }
 }

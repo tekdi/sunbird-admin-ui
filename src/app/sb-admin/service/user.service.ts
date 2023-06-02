@@ -41,21 +41,16 @@ export class UserService {
     return this.http.post(environment.userCreateUrl, payload, { headers: header });
   }
 
-  blockUser(payload: any): Observable<any> {
+  blockUnblockUser(payload: any, userStatus: any): Observable<any> {
     let header = new HttpHeaders({
       "Content-Type": 'application/json',
       "Authorization": environment.authKey,
       "x-authenticated-user-token": environment.userToken,
     })
-    return this.http.post(environment.blockUserUrl, payload, { headers: header });
-  }
-
-  unblockUser(payload: any): Observable<any> {
-    let header = new HttpHeaders({
-      "Content-Type": 'application/json',
-      "Authorization": environment.authKey,
-      "x-authenticated-user-token": environment.userToken,
-    })
-    return this.http.post(environment.unblockUserUrl, payload, { headers: header });
+    if (userStatus) {
+      return this.http.post(environment.blockUserUrl, payload, { headers: header });
+    } else {
+      return this.http.post(environment.unblockUserUrl, payload, { headers: header });
+    }
   }
 }

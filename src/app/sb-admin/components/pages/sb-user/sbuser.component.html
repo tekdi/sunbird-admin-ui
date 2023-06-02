@@ -2,7 +2,7 @@
 <div class="grid">
     <div class="col-12">
         <div class="card px-6 py-6">
-            <h5 class="m-0">{{ 'COMMON_USER' | i18next}}</h5><br>                 
+            <h5 class="m-0">{{ 'COMMON_USERS' | i18next}}</h5><br>                 
             <p-table #myTable [value]="OrganizationsUsersList" [columns]="cols" [loading]='loading'
                 [totalRecords]="OrganizationsUsersList.length" responsiveLayout="scroll" [rows]="rows" [paginator]="true"
                 [globalFilterFields]="globalFilterFields"
@@ -63,35 +63,26 @@
                         <td>
                             <div class="flex">
                                 <button [disabled]="!user.status" pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2" (click)="editRole(user)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="blockUser(user)" *ngIf="user.status"></button>
-                                <button pButton pRipple icon="pi pi-unlock" class="p-button-rounded p-button-warning" (click)="unblockUser(user)" *ngIf="!user.status"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="blockUnblockUser(user)" *ngIf="user.status"></button>
+                                <button pButton pRipple icon="pi pi-unlock" class="p-button-rounded p-button-warning" (click)="blockUnblockUser(user)" *ngIf="!user.status"></button>
                             </div>
                         </td>
                     </tr>
                 </ng-template>
             </p-table>
 
-            <p-dialog [(visible)]="deleteUserDialog" header="Confirm" [modal]="true" >
+            <p-dialog [(visible)]="blockUnblockUserDialog" header="Confirm" [modal]="true" >
                 <div class="flex align-items-center justify-content-center">
                     <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                    <span *ngIf="user">{{'USER_BLOCK_CONFIRMATION' | i18next}} <b>{{user.firstName}}</b>?</span>
+                    <span *ngIf="user?.status === 1 ">{{'USER_BLOCK_CONFIRMATION' | i18next}} <b>{{user?.firstName}}</b>?</span>
+                    <span *ngIf="user?.status === 0" >{{'USER_UNBLOCK_CONFIRMATION' | i18next}} <b>{{user?.firstName}}</b>?</span>
                 </div>
                 <ng-template pTemplate="footer">
-                    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="{{'COMMON_NO' | i18next}}" (click)="deleteUserDialog = false"></button>
+                    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="{{'COMMON_NO' | i18next}}" (click)="blockUnblockUserDialog = false"></button>
                     <button pButton pRipple icon="pi pi-check" class="p-button-text" label="{{'COMMON_YES' | i18next}}" (click)="confirmBlock()"></button>
                 </ng-template>            
             </p-dialog>
 
-            <p-dialog [(visible)]="unblockUserDialog" header="Confirm" [modal]="true" >
-                <div class="flex align-items-center justify-content-center">
-                    <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                    <span *ngIf="user">{{'USER_UNBLOCK_CONFIRMATION' | i18next}} <b>{{user.firstName}}</b>?</span>
-                </div>
-                <ng-template pTemplate="footer">
-                    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="{{'COMMON_NO' | i18next}}" (click)="unblockUserDialog = false"></button>
-                    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="{{'COMMON_YES' | i18next}}" (click)="confirmUnblock()"></button>
-                </ng-template>            
-            </p-dialog>
         </div>
     </div>
 </div>
