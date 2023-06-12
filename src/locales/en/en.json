@@ -60,5 +60,6 @@
   "USER_SAVE":"Save",
   "USER_ROLES":" Roles",
   "USER_ROLE_ADDED":"User Role Updated Successfully",
-  "COMMON_USER":"Users"
+  "COMMON_USER":"Users",
+  "COMMON_LOGIN":"Login"
 }

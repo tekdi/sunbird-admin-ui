@@ -11,6 +11,9 @@ import en from "../locales/en/en.json";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
+import { UserLoginService } from './sb-admin/service/user-login.service';
+import { AuthInterceptor } from './auth.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 export function appInit(i18next: ITranslationService) {
     let lang = localStorage.getItem('lang');
@@ -67,7 +70,11 @@ export const I18N_PROVIDERS = [
     providers: [
         UserService,
         UserCountService,
-        I18N_PROVIDERS
+        UserLoginService,
+        I18N_PROVIDERS,
+        { 
+            provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true
+        },
     ],
     bootstrap: [AppComponent]
 })

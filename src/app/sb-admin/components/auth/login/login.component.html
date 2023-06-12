@@ -1,0 +1,37 @@
+<form [formGroup]="userLogInForm">   
+    <div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+        <div class="flex flex-column align-items-center justify-content-center">
+            
+            <img src="assets/layout/images/{{'sunbird'}}.svg" alt="Sunbird logo" class="mb-5 w-12rem flex-shrink-0">
+            <div style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
+                <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+                    <p-toast></p-toast>
+                    <div class="text-center mb-5">
+                        <div class="text-900 text-3xl font-medium mb-3">{{ 'COMMON_LOGIN' | i18next }}</div>
+                    </div>
+    
+                    <div>
+                        <div class="field">
+                            <label for="username" class="block text-900 text-xl font-medium mb-2">{{ 'USER_NAME' | i18next }} *</label>
+                            <input pInputText id="username" autofocus placeholder="{{'USER_NAME_PLACEHOLDER' | i18next}}" type="text" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem"
+                                [ngClass]="{'ng-invalid ng-dirty' : submitted && userLogInForm.controls['username'].errors}" formControlName="username" />
+                            <div class="text-red-500">
+                                 <small class="ng-dirty ng-invalid" *ngIf="submitted && userLogInForm.controls['username'].errors">{{ 'USER_NAME_REQUIRED' | i18next }}.</small>
+                            </div>
+                        </div>
+                    
+                        <div class="field">
+                            <label for="password" class="block text-900 font-medium text-xl mb-2">{{ 'USER_PASSWORD' | i18next }} *</label>
+                            <p-password id="password" id="password" autofocus placeholder="{{'USER_PASSWORD_PLACEHOLDER' | i18next}}" [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"
+                                [ngClass]="{'ng-invalid ng-dirty' : submitted && userLogInForm.controls['password'].errors}" formControlName="password" />
+                            <div class="text-red-500 w-30rem" >
+                                <small *ngIf="submitted && userLogInForm.controls['password'].errors">{{ 'USER_PASSWORD_REQUIRED' | i18next }}</small>                              
+                            </div>
+                        </div>
+                        <button pButton pRipple label="{{'USER_SUBMIT' | i18next }}" class="w-full p-3 text-xl" (click)="userLogIn()"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
