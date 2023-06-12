@@ -2,7 +2,8 @@
 <div class="grid">
     <div class="col-12">
         <div class="card px-6 py-6">
-            <h5 class="m-0">{{ 'COMMON_USER' | i18next}}</h5><br>                 
+            <h5 class="m-0">{{ 'COMMON_USER' | i18next}}</h5><br> 
+            <h5>{{ 'USER_TOTAL' | i18next }} <p-chip label="{{count}}" icon="pi pi-user"></p-chip></h5>                  
             <p-table #myTable [value]="OrganizationsUsersList" [columns]="cols" [loading]='loading'
                 [totalRecords]="OrganizationsUsersList.length" responsiveLayout="scroll" [rows]="rows" [paginator]="true"
                 [globalFilterFields]="globalFilterFields"

@@ -26,6 +26,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { I18NextModule } from 'angular-i18next';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from "primeng/message";
+import { ChipModule } from 'primeng/chip';
+
 
 @NgModule({
     imports: [
@@ -54,6 +56,7 @@ import { MessageModule } from "primeng/message";
         CheckboxModule,
         MessagesModule,
         MessageModule,
+        ChipModule,
         I18NextModule.forRoot()
     ],
     declarations: [SbUserComponent, AddEditUserComponent],
