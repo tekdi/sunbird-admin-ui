@@ -18,11 +18,13 @@ import { RippleModule } from 'primeng/ripple';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MessageService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
+import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
 
 @NgModule({
   declarations: [
     SbOrganizationComponent,
-    AddOrEditOrgComponent
+    AddOrEditOrgComponent,
+    AddSubOrgComponent
 
   ],
   imports: [
