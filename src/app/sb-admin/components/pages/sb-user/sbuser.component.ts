@@ -22,7 +22,6 @@ export class SbUserComponent implements OnInit {
   deleteUsersDialog: boolean = false;
   submitted: boolean = false;
   cols: any[] = [];
-  statuses: any[] = [];
   loading: boolean = true;
   organizations: any[] = [];
   OrganizationsUsersList: OrganizationsUsersList[] = [];
@@ -136,6 +135,9 @@ export class SbUserComponent implements OnInit {
     ref.onClose.subscribe((result) => {
       if (result) {
         this.OrganizationsUsersList.unshift(result);
+        this.messages = [];
+        this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_ADDED_SUCCESSFULLY') }
+        )
       }
     });
   }
