@@ -30,6 +30,7 @@ export class SbUserComponent implements OnInit {
   selectedUserRole:string[]=[];
   roles = Roles;
   messages!: Message[];
+  count :number=0;
 
   constructor(private userService: UserService,
     public dialogService: DialogService,
@@ -79,6 +80,7 @@ export class SbUserComponent implements OnInit {
         updated = Users?.result?.response?.content;
         if (updated && updated.length > 0) {
           this.OrganizationsUsersList.push(...updated);
+          this.count=this.OrganizationsUsersList.length;
           this.loading = false;
         }
       }, (error: any) => {
@@ -130,6 +132,7 @@ export class SbUserComponent implements OnInit {
     ref.onClose.subscribe((result) => {
       if (result) {
         this.OrganizationsUsersList.unshift(result);
+        this.count=this.OrganizationsUsersList.length;
         this.messages = [
         ];
         this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_ADDED_SUCCESSFULLY') }

@@ -19,6 +19,7 @@ export class SbOrganizationComponent implements OnDestroy {
   private subscription: Subscription | any;
   globalFilterFields :string []=['organizationName','channel','id'];
   rows:number=10;
+  count :number=0;
   messages: Message[] = [];
   addOrgDialog = {
     header: this.i18nextPipe.transform('ADD_ORGANIZATION'),
@@ -44,6 +45,7 @@ export class SbOrganizationComponent implements OnDestroy {
     this.subscription = this.orgList.getAllOrganizationList(body).subscribe(
       (data: any) => {
         this.organizationDetail = data.result.response.content;
+        this.count=this.organizationDetail.length;
         this.organizationDetail.sort((startDate:any ,endDate :any)=>
           new Date(endDate.createdDate).getTime() - new Date(startDate.createdDate).getTime());
         this.loading = false;
@@ -60,6 +62,7 @@ export class SbOrganizationComponent implements OnDestroy {
     this.ref.onClose.subscribe((newOrganizationData: any) => {
       if (newOrganizationData) {
         this.organizationDetail.unshift(newOrganizationData);
+        this.count=this.organizationDetail.length;
         this.messageService.add({ severity: 'success', summary: this.i18nextPipe.transform('ADD_ORGANIZATION_SUCCESSFULLY')})
       }
     });
