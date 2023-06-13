@@ -31,6 +31,7 @@
   "ORGANIZATION_CHANNEL_NAME":"Channel Name",
   "ORGANIZATION_CHANNEL_ID":"Channel ID",
   "ORGANIZATION_SEARCH": "Search",
+  "ORGANIZATION_TOTAL":"Number of Organization Found",
   "ADD_ORGANIZATION_DESCRIPTION" : "Description",
   "ADD_ORGANIZATION_TYPE": "Organisation Type",
   "ADD_ORGANIZATION_SUBMIT" : "SUBMIT",
@@ -60,5 +61,6 @@
   "USER_SAVE":"Save",
   "USER_ROLES":" Roles",
   "USER_ROLE_ADDED":"User Role Updated Successfully",
+  "USER_TOTAL": "Number of Users Found ",
   "COMMON_USER":"Users"
 }
