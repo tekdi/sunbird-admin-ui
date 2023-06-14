@@ -74,7 +74,7 @@
             <p-dialog [(visible)]="blockUnblockUserDialog" header="Confirm" [modal]="true" >
                 <div class="flex align-items-center justify-content-center">
                     <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                     <span> {{ user?.status === 1 ? ('USER_BLOCK_CONFIRMATION' | i18next) : ('USER_UNBLOCK_CONFIRMATION' | i18next)}} <b>{{user?.firstName}}</b>?</span>
+                     <span> {{ user?.status === 1 ? ('USER_BLOCK_CONFIRMATION' | i18next) : ('USER_UNBLOCK_CONFIRMATION' | i18next)}} <b>{{user?.firstName}} {{user?.lastName}}</b>?</span>
                 </div>
                 <ng-template pTemplate="footer">
                     <button pButton pRipple icon="pi pi-times" class="p-button-text" label="{{'COMMON_NO' | i18next}}" (click)="blockUnblockUserDialog = false"></button>
