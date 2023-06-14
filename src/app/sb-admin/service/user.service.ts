@@ -12,32 +12,17 @@ export class UserService {
     let header = new HttpHeaders({
       "Content-Type": 'application/json'
     })
-    return this.http.post(environment.orgUrl, body, { headers: header })
+    return this.http.post(environment.orgUrl, body)
   }
 
   getOrganizationUserList(body: any): Observable<Object> {
-    let header = new HttpHeaders({
-      "Content-Type": 'application/json',
-      "Authorization": environment.authKey,
-      "x-authenticated-user-token": environment.userToken,
-    })
-    return this.http.post(environment.userUrl, body, { headers: header })
+    return this.http.post(environment.userUrl, body)
   }
 
   saveUserRole(payload: any): Observable<any> {
-    let header = new HttpHeaders({
-      "Content-Type": 'application/json',
-      "Authorization": environment.authKey,
-      "x-authenticated-user-token": environment.userToken,
-    })
-    return this.http.post(environment.userUpdateRoleUrl, payload, { headers: header });
+    return this.http.post(environment.userUpdateRoleUrl, payload);
   }
   addNewUser(payload: any): Observable<any> {
-    let header = new HttpHeaders({
-      "Content-Type": 'application/json',
-      "Authorization": environment.authKey,
-      "x-authenticated-user-token": environment.userToken,
-    })
-    return this.http.post(environment.userCreateUrl, payload, { headers: header });
+    return this.http.post(environment.userCreateUrl, payload);
   }
 }

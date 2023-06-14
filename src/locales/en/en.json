@@ -61,6 +61,7 @@
   "USER_SAVE":"Save",
   "USER_ROLES":" Roles",
   "USER_ROLE_ADDED":"User Role Updated Successfully",
-  "USER_TOTAL": "Number of Users Found ",
-  "COMMON_USER":"Users"
+  "COMMON_USER":"Users",
+  "COMMON_LOGIN":"Login",
+  "USER_TOTAL": "Number of Users Found "
 }
