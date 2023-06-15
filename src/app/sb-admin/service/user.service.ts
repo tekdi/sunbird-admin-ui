@@ -13,7 +13,7 @@ export class UserService {
     let header = new HttpHeaders({
       "Content-Type": 'application/json'
     })
-    return this.http.post(config.URLS.ORG_URL, body, { headers: header })
+    return this.http.post(config.URLS.ORGNIZATION_SEARCH_URL, body, { headers: header })
   }
 
   getOrganizationUserList(body: any): Observable<Object> {
@@ -22,7 +22,7 @@ export class UserService {
       "Authorization": environment.authKey,
       "x-authenticated-user-token": environment.userToken,
     })
-    return this.http.post(config.URLS.USER_URL, body, { headers: header })
+    return this.http.post(config.URLS.USER_SEARCH_URL, body, { headers: header })
   }
 
   saveUserRole(payload: any): Observable<any> {

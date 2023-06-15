@@ -15,7 +15,7 @@ export class UserCountService {
     let header = new HttpHeaders({
       "Content-Type": 'application/json'
     })
-    return this.http.post(config.URLS.ORG_URL, body, { headers: header })
+    return this.http.post(config.URLS.ORGNIZATION_SEARCH_URL, body, { headers: header })
   }
 
   getUserCountOfaTenant(body: any): Observable<Object> {
@@ -24,6 +24,6 @@ export class UserCountService {
       "Authorization": environment.authKey,
       "x-authenticated-user-token": environment.userToken,
     })
-    return this.http.post(config.URLS.USER_URL, body, { headers: header })
+    return this.http.post(config.URLS.USER_SEARCH_URL, body, { headers: header })
   }
 }
