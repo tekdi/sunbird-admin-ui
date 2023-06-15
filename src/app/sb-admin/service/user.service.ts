@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import config from 'src/config/url.config.json';
 
 @Injectable()
 export class UserService {
@@ -12,7 +13,7 @@ export class UserService {
     let header = new HttpHeaders({
       "Content-Type": 'application/json'
     })
-    return this.http.post(environment.orgUrl, body, { headers: header })
+    return this.http.post(config.URLS.ORG_URL, body, { headers: header })
   }
 
   getOrganizationUserList(body: any): Observable<Object> {
@@ -21,7 +22,7 @@ export class UserService {
       "Authorization": environment.authKey,
       "x-authenticated-user-token": environment.userToken,
     })
-    return this.http.post(environment.userUrl, body, { headers: header })
+    return this.http.post(config.URLS.USER_URL, body, { headers: header })
   }
 
   saveUserRole(payload: any): Observable<any> {
@@ -30,7 +31,7 @@ export class UserService {
       "Authorization": environment.authKey,
       "x-authenticated-user-token": environment.userToken,
     })
-    return this.http.post(environment.userUpdateRoleUrl, payload, { headers: header });
+    return this.http.post(config.URLS.USER_UPDATE_ROLE_URL, payload, { headers: header });
   }
   addNewUser(payload: any): Observable<any> {
     let header = new HttpHeaders({
@@ -38,7 +39,7 @@ export class UserService {
       "Authorization": environment.authKey,
       "x-authenticated-user-token": environment.userToken,
     })
-    return this.http.post(environment.userCreateUrl, payload, { headers: header });
+    return this.http.post(config.URLS.USER_CREATE_URL, payload, { headers: header });
   }
 
   blockUnblockUser(payload: any, userStatus: any): Observable<any> {
@@ -48,9 +49,9 @@ export class UserService {
       "x-authenticated-user-token": environment.userToken,
     })
     if (userStatus) {
-      return this.http.post(environment.blockUserUrl, payload, { headers: header });
+      return this.http.post(config.URLS.BLOCK_USER_URL, payload, { headers: header });
     } else {
-      return this.http.post(environment.unblockUserUrl, payload, { headers: header });
+      return this.http.post(config.URLS.UNBLOCK_USER_URL, payload, { headers: header });
     }
   }
 }

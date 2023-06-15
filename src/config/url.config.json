@@ -1,0 +1,15 @@
+{
+    "URLS": {
+        "PORT": "http://localhost:4200/",
+        "INSTANCE": "https://sunbirdsaas.com/",
+        "APIURL": "https://sunbirdsaas.com/api",
+        "TARGET": "https://sunbirdsaas.com",
+        "ADD_ORG_URL": "api/org/v1/create",
+        "ORG_URL": "api/org/v1/search",
+        "USER_URL": "api/user/v1/search",
+        "USER_CREATE_URL": "api/user/v3/create",
+        "USER_UPDATE_ROLE_URL": "api/user/v1/role/assign",
+        "BLOCK_USER_URL": "api/user/v1/block",
+        "UNBLOCK_USER_URL": "api/user/v1/unblock"
+    }
+}
