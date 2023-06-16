@@ -34,6 +34,7 @@ export class SbUserComponent implements OnInit {
   messages!: Message[];
   totalRecords: number = 0;
   users: User[] = [];
+  selectedOrg:string='';
 
   constructor(private userService: UserService,
     public dialogService: DialogService,
@@ -43,11 +44,7 @@ export class SbUserComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.getOrganizations().subscribe((data: any) => {
-    //   if (data && data.length > 0) {
-    //     this.getOrganizationList(data);
-    //   }
-    // });
+    this.getOrganizations();
   }
 
   getOrganizations() {
@@ -58,40 +55,10 @@ export class SbUserComponent implements OnInit {
         }
       }
     }
-    return this.userService.getOrganizations(body).pipe(
-      map((data: any) => {
-        this.organizations = data?.result?.response?.content;
-        return this.organizations;
-      })
-    );
+    this.userService.getOrganizations(body).subscribe((response: any) => {
+      this.organizations = response?.result?.response?.content;
+    })
   }
-
-  // getOrganizationList(usersList: any): void {
-  //   let updated = [];
-  //   usersList.forEach((UserList: any) => {
-  //     const body = {
-  //       "request": {
-  //         "filters": {
-  //           "rootOrgId": UserList.id
-  //         },
-  //         "sortBy": {
-  //           "createdDate": "Desc"
-  //        }
-  //       }
-  //     };
-  //     this.userService.getOrganizationUserList(body).subscribe((Users: any) => {
-  //       updated = Users?.result?.response?.content;
-  //       if (updated && updated.length > 0) {
-  //         this.OrganizationsUsersList.push(...updated);
-  //         this.loading = false;
-  //       }
-  //     }, (error: any) => {
-  //       console.error(error);
-  //       this.loading = false;
-  //     }
-  //     );
-  //   });
-  // }
 
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
@@ -130,6 +97,7 @@ export class SbUserComponent implements OnInit {
     this.userDialog = false;
     this.submitted = false;
   }
+  
   addNewUser() {
     const ref = this.dialogService.open(AddEditUserComponent, this.createUser);
     ref.onClose.subscribe((result) => {
@@ -154,6 +122,7 @@ export class SbUserComponent implements OnInit {
     const body = {
       "request": {
         "filters": {
+          "rootOrgName": this.selectedOrg ? [this.selectedOrg] : []
         },
         "limit": event?.rows,
         "offset": event?.first ? (event?.first / 10) + 1 : 0,

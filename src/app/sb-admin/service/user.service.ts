@@ -15,15 +15,6 @@ export class UserService {
     return this.http.post(environment.orgUrl, body, { headers: header })
   }
 
-  // getOrganizationUserList(body: any): Observable<Object> {
-  //   let header = new HttpHeaders({
-  //     "Content-Type": 'application/json',
-  //     "Authorization": environment.authKey,
-  //     "x-authenticated-user-token": environment.userToken,
-  //   })
-  //   return this.http.post(environment.userUrl, body, { headers: header })
-  // }
-
   saveUserRole(payload: any): Observable<any> {
     let header = new HttpHeaders({
       "Content-Type": 'application/json',
