@@ -1,7 +1,5 @@
 {
     "URLS": {
-        "APIURL": "https://sunbirdsaas.com/api",
-        "TARGET": "https://sunbirdsaas.com",
         "ORGANIZATION_CREATE_URL": "api/org/v1/create",
         "ORGNIZATION_SEARCH_URL": "api/org/v1/search",
         "USER_SEARCH_URL": "api/user/v1/search",
