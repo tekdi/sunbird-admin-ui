@@ -8,3 +8,7 @@ export const Roles = [
     { name: 'Public', value: 'PUBLIC' }
 ]
 
+export const Status = [
+    { name : 'active', 'value' : '1'},
+    { name : 'inActive', 'value' : '0'}
+]

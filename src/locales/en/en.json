@@ -61,6 +61,7 @@
   "USER_ORGANIZATION_PLACEHOLDER": "Select an Organization",
   "USER_PHONE_PLACEHOLDER":"Enter Phone",
   "USER_EMAIL_PLACEHOLDER":"Enter Email",
+  "USER_STATUS_PLACEHOLDER":"Enter Status",
     
   "USER_CHANNEL_NAME":"Organizaton",
   "USER_ADDED_SUCCESSFULLY":"User Added Successfully",
@@ -75,7 +76,7 @@
   "USER_BLOCK_SUUCCESSFULLY": "User Block Successfully",
   "USER_UNBLOCK_SUUCCESSFULLY":"User Unblock Successfully",
 
-  "COMMON_USER":"Users",
+  "COMMON_USERS":"Users",
   "COMMON_YES":"Yes",
   "COMMON_NO":"No"
 }

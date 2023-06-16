@@ -3,7 +3,7 @@
     <div class="col-12">
         <div class="card px-6 py-6">
             <h5 class="m-0">{{ 'COMMON_USERS' | i18next}}</h5><br>                 
-            <h5>{{ 'USER_TOTAL' | i18next }} <p-chip label="{{count}}" icon="pi pi-user"></p-chip></h5>                  
+            <h5>{{ 'USER_TOTAL' | i18next }} <p-chip label="{{totalRecords}}" icon="pi pi-user"></p-chip></h5>                  
             <p-table #myTable [value]="OrganizationsUsersList" [columns]="cols" [loading]='loading'
                 [totalRecords]="totalRecords" responsiveLayout="scroll" [rows]="rows" [paginator]="true"
                 [globalFilterFields]="globalFilterFields"
@@ -13,10 +13,6 @@
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
-                            <i class="pi pi-search"></i>
-                            <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" [(ngModel)]="selectedOrg"
-                                optionLabel="orgName" (onChange)="loadUserList($event)"
-                                placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel"></p-dropdown>
                         </span>
                         <p-message severity="warn" text="{{ 'ORGANIZATION_USERS_LIST_WARNING' | i18next }}"
                             *ngIf="!OrganizationsUsersList || OrganizationsUsersList.length === 0"></p-message>
@@ -35,6 +31,23 @@
                         <th scope="col">{{ 'USER_ACTION' | i18next }}</th>
                         <th></th>
                     </tr>
+                    <tr>                      
+                        <th></th>
+                        <th></th>
+                        <th>
+                            <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" [(ngModel)]="selectedOrg"
+                                optionLabel="orgName" (onChange)="loadUserList($event)"
+                                placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel"></p-dropdown>
+                        </th>
+                        <th></th>
+                        <th></th>
+                        <th>
+                            <p-dropdown [options]="status" [filter]="true" [showClear]="true" [(ngModel)]="selectedStatus"
+                                optionLabel="name" (onChange)="loadUserList($event)" placeholder="{{'USER_STATUS_PLACEHOLDER' | i18next}}"
+                                optionValue="value"></p-dropdown>
+                        </th>
+                    </tr>
+
                 </ng-template>
                 <ng-template pTemplate="body" let-user>
                     <tr>

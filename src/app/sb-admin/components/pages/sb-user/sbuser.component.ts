@@ -10,6 +10,7 @@ import { OrganizationsUsersList } from './organizationsUsersList';
 import { User } from 'src/app/sb-admin/api/user';
 import { Roles } from 'src/app/constant.config';
 import { event } from 'jquery';
+import { Status } from 'src/app/constant.config';
 
 @Component({
   templateUrl: './sbuser.component.html',
@@ -33,8 +34,10 @@ export class SbUserComponent implements OnInit {
   messages!: Message[];
   totalRecords: number = 0;
   users: User[] = [];
-  selectedOrg:string='';
-  count :number=0;
+  selectedOrg: string = '';
+  selectedStatus : string = '';
+  status = Status;
+
 
   constructor(private userService: UserService,
     public dialogService: DialogService,
@@ -103,36 +106,30 @@ export class SbUserComponent implements OnInit {
     ref.onClose.subscribe((result) => {
       if (result) {
         this.OrganizationsUsersList.unshift(result);
-        this.count=this.OrganizationsUsersList.length;
-        this.messages = [
-        ];
+        this.totalRecords = this.OrganizationsUsersList.length;
+        this.messages = [];
         this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_ADDED_SUCCESSFULLY') }
         )
       }
     });
   }
 
-  editUser(user: OrganizationsUsersList) {
-    this.dialogService.open(AddEditUserComponent, {
-      data: user,
-      header: this.i18nextPipe.transform('USER_EDIT'),
-      width: '30%',
-      height: 'auto'
-    });
-  }
   loadUserList(event: LazyLoadEvent) {
-    const body = {
+    let body = {
       "request": {
         "filters": {
-          "rootOrgName": this.selectedOrg ? [this.selectedOrg] : []
+          "rootOrgName": this.selectedOrg ? [this.selectedOrg] : [],
+          "status": this.selectedStatus ? [this.selectedStatus] : []        
         },
         "limit": event?.rows,
         "offset": event?.first ? (event?.first / 10) + 1 : 0,
         "sortBy": {
-          "createdDate": "Desc"
         }
       }
     };
+    // body.request.sortBy = {...body.request, sortBy }
+    // const sortBy = {}; 
+    // sortBy[event.sortField]=
     this.userService.loadUserList(body).subscribe(users => {
       this.OrganizationsUsersList = users?.result?.response?.content;
 
