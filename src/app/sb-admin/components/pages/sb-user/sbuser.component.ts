@@ -7,9 +7,8 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { I18NextPipe } from 'angular-i18next';
 import { map } from 'rxjs';
 import { OrganizationsUsersList } from './organizationsUsersList';
-import { User } from 'src/app/sb-admin/api/user';
+import { SearchFilterValue, User } from 'src/app/sb-admin/api/user';
 import { Roles } from 'src/app/constant.config';
-import { event } from 'jquery';
 import { Status } from 'src/app/constant.config';
 
 @Component({
@@ -34,13 +33,10 @@ export class SbUserComponent implements OnInit {
   messages!: Message[];
   totalRecords: number = 0;
   users: User[] = [];
-  selectedOrg: string = '';
-  selectedStatus : string = '';
   status = Status;
-  selectedFirstname!: string;
-  selectedLastname!: string;
-  firstName:string='';
-  lastName:string='';
+  first: number = 0
+  filteredValue = SearchFilterValue;
+  timeout: any = null;
 
   constructor(private userService: UserService,
     public dialogService: DialogService,
@@ -92,7 +88,7 @@ export class SbUserComponent implements OnInit {
         ];
         this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_ROLE_ADDED') })
         this.hideDialog();
-        this.loadUserList({first: 0});
+        this.loadUserList({ first: 0 });
       }, (error) => {
         this.messages = [];
         this.messageService.add({ severity: 'error', detail: error.error.params.errmsg })
@@ -103,7 +99,7 @@ export class SbUserComponent implements OnInit {
     this.userDialog = false;
     this.submitted = false;
   }
-  
+
   addNewUser() {
     const ref = this.dialogService.open(AddEditUserComponent, this.createUser);
     ref.onClose.subscribe((result) => {
@@ -117,28 +113,33 @@ export class SbUserComponent implements OnInit {
     });
   }
 
-  loadUserList(event: LazyLoadEvent) {
-    let body = {
-      "request": {
-        "filters": {
-          "rootOrgName": this.selectedOrg ? [this.selectedOrg] : [],
-          "status": this.selectedStatus ? [this.selectedStatus] : []        
-        },
-        "limit": event?.rows,
-        "offset": event?.first ? (event?.first / 10) + 1 : 0,       
+  loadUserList(event: any) {
+    let filters = this.filteredValue;
+    filters.email ? filters.email : delete filters.email;
+    filters.phone ? filters.phone : delete filters.phone;
+    filters.firstName ? [filters.firstName] : delete filters.firstName;
+    filters.lastName ? [filters.lastName] : delete filters.lastName;
+    filters.rootOrgName ? [filters.rootOrgName] : delete filters.rootOrgName;
+    filters.status ? [filters.status] : delete filters.status;
+
+    var body = {
+      request: {
+        filters: filters,
+        limit: event?.rows,
+        offset: event?.first ? (event?.first / 10) + 1 : 0,
       }
-    };
-    // body.request.sortBy = {...body.request, sortBy }
-    // const sortBy = {}; 
-    // sortBy[event.sortField]=
+    }
+
     this.userService.loadUserList(body).subscribe(users => {
       this.OrganizationsUsersList = users?.result?.response?.content;
-
       this.totalRecords = users?.result?.response?.count;
       this.loading = false;
     }, (error: any) => {
       this.loading = false;
+      this.messages = [];
+      this.messageService.add({ severity: 'error', detail: error.error.params.errmsg });
     })
+
   }
 
   blockUnblockUser(user: User) {
@@ -167,35 +168,21 @@ export class SbUserComponent implements OnInit {
     })
   }
 
-  searchFirstname(){
-    const body = {
-      "request": {
-        "filters": {
-          "firstName": this.selectedFirstname ? this.selectedFirstname : []
-        }
-      }
-    }
-    this.userService.loadUserList(body).subscribe(users => {
-      this.OrganizationsUsersList = users?.result?.response?.content;
-      this.loading = false;
-    }, (error: any) => {
-      this.loading = false;
-    })
+  onSearch(event: any): void {
+    this.first = 0
+    // if(event.target.value && event.target.value.length > 3){
+    //   this.loadUserList(event);
+    // } else {
+    //   this.OrganizationsUsersList = []
+    //   this.totalRecords = 0;
+    // }
+    clearTimeout(this.timeout);
+    var $this = this;
+    this.timeout = setTimeout(function () {
+      $this.loadUserList(event);
+    }, 2000);
+
   }
 
-  searchLastname(){
-    const body = {
-      "request": {
-        "filters": {
-          "lastName": this.selectedLastname ? this.selectedLastname : []
-        }
-      }
-    }
-    this.userService.loadUserList(body).subscribe(users => {
-      this.OrganizationsUsersList = users?.result?.response?.content;
-      this.loading = false;
-    }, (error: any) => {
-      this.loading = false;
-    })
-  }
+  
 }

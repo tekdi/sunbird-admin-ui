@@ -9,6 +9,6 @@ export const Roles = [
 ]
 
 export const Status = [
-    { name : 'active', 'value' : '1'},
-    { name : 'inActive', 'value' : '0'}
+    { name : 'Active', 'value' : '1'},
+    { name : 'Inactive', 'value' : '0'}
 ]
