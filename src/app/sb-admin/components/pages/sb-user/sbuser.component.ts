@@ -28,7 +28,7 @@ export class SbUserComponent implements OnInit {
   rowsPerPageOptions:number[]=[10,20,30];
   rows:number=10;
   user!: User;
-  selectedUserRole:string[]= [];
+  selectedUserRole:string[]=[];
   roles = Roles;
   messages!: Message[];
   totalRecords: number = 0;
@@ -87,7 +87,7 @@ export class SbUserComponent implements OnInit {
         this.messages = [
         ];
         this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_ROLE_ADDED')})
-        this.hideDialog();
+        this.hideDialog();    
       }, (error) => {
         this.messages = [];
         this.messageService.add({ severity: 'error', detail: error.error.params.errmsg })
@@ -98,7 +98,6 @@ export class SbUserComponent implements OnInit {
     this.userDialog=false;
     this.submitted=false;
   }
-
   addNewUser() {
     const ref = this.dialogService.open(AddEditUserComponent, this.createUser);
     ref.onClose.subscribe((result) => {
@@ -169,12 +168,6 @@ export class SbUserComponent implements OnInit {
 
   onSearch(event: any): void {
     this.first = 0
-    // if(event.target.value && event.target.value.length > 3){
-    //   this.loadUserList(event);
-    // } else {
-    //   this.OrganizationsUsersList = []
-    //   this.totalRecords = 0;
-    // }
     clearTimeout(this.timeout);
     var $this = this;
     this.timeout = setTimeout(function () {

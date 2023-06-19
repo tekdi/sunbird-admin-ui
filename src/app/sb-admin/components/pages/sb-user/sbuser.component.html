@@ -6,17 +6,17 @@
             <h5>{{ 'USER_TOTAL' | i18next }} <p-chip label="{{totalRecords}}" icon="pi pi-user"></p-chip></h5>                  
             <p-table #myTable [value]="OrganizationsUsersList" [columns]="cols" [loading]='loading'
                 [totalRecords]="totalRecords" responsiveLayout="scroll" [rows]="rows" [paginator]="true"
-                [globalFilterFields]="globalFilterFields" [(first)]="first"
+                [globalFilterFields]="globalFilterFields"
                 [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple"
-                [rowHover]="true" dataKey="userId" [lazy]="true" (onLazyLoad)="loadUserList($event)">
+                [rowHover]="true" dataKey="userId" [lazy]="true" (onLazyLoad)="loadUserList($event)" [(first)]="first">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
                         </span>
                         <p-message severity="warn" text="{{ 'ORGANIZATION_USERS_LIST_WARNING' | i18next }}"
                                *ngIf="!OrganizationsUsersList || OrganizationsUsersList.length === 0"></p-message>
-
+                    
                         <button pButton pRipple label="{{ 'USER_ADD' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2" (click)="addNewUser()"
                             ></button>
                     </div>
@@ -41,7 +41,7 @@
                                     placeholder="{{ 'USER_SEARCH_FIRST_NAME' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.firstName" >
                             </span>   
                         </th>
-                        <th>
+                        <th >
                             <span class="block mt-2 md:mt-0 p-input-icon-left">
                                 <i class="pi pi-search"></i>
                                 <input pInputText type="text" (input)="onSearch($event)"
