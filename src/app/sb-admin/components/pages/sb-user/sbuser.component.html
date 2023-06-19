@@ -3,9 +3,9 @@
     <div class="col-12">
         <div class="card px-6 py-6">
             <h5 class="m-0">{{ 'COMMON_USERS' | i18next}}</h5><br>                 
-            <h5>{{ 'USER_TOTAL' | i18next }} <p-chip label="{{totalRecords}}" icon="pi pi-user"></p-chip></h5>                  
+            <h5>{{ 'USER_TOTAL' | i18next }} <p-chip label="{{count}}" icon="pi pi-user"></p-chip></h5>                  
             <p-table #myTable [value]="OrganizationsUsersList" [columns]="cols" [loading]='loading'
-                [totalRecords]="totalRecords" responsiveLayout="scroll" [rows]="rows" [paginator]="true"
+                [totalRecords]="count" responsiveLayout="scroll" [rows]="rows" [paginator]="true"
                 [globalFilterFields]="globalFilterFields"
                 [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple"

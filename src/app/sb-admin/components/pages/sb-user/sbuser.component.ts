@@ -30,7 +30,7 @@ export class SbUserComponent implements OnInit {
   selectedUserRole:string[]=[];
   roles = Roles;
   messages!: Message[];
-  totalRecords: number = 0;
+  count :number=0;
   users: User[] = [];
   status = Status;
   first: number = 0
@@ -98,8 +98,9 @@ export class SbUserComponent implements OnInit {
     ref.onClose.subscribe((result) => {
       if (result) {
         this.OrganizationsUsersList.unshift(result);
-        this.totalRecords = this.OrganizationsUsersList.length;
-        this.messages = [];
+        this.count=this.OrganizationsUsersList.length;
+        this.messages = [
+        ];
         this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_ADDED_SUCCESSFULLY') }
         )
       }
@@ -125,7 +126,7 @@ export class SbUserComponent implements OnInit {
 
     this.userService.loadUserList(body).subscribe(users => {
       this.OrganizationsUsersList = users?.result?.response?.content;
-      this.totalRecords = users?.result?.response?.count;
+      this.count = users?.result?.response?.count;
       this.loading = false;
     }, (error: any) => {
       this.loading = false;
