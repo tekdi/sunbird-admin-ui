@@ -16,7 +16,7 @@ import { Status } from 'src/app/constant.config';
   providers: [MessageService]
 })
 export class SbUserComponent implements OnInit {
-createUser:any = { header: this.i18nextPipe.transform('USER_CREATE'), width: '30%', height: 'auto' };
+ createUser:any = { header: this.i18nextPipe.transform('USER_CREATE'), width: '30%', height: 'auto' };
   userDialog: boolean = false;
   blockUnblockUserDialog: boolean = false;
   submitted: boolean = false;
@@ -25,8 +25,8 @@ createUser:any = { header: this.i18nextPipe.transform('USER_CREATE'), width: '30
   organizations: any[] = [];
   OrganizationsUsersList: OrganizationsUsersList[] = [];
   globalFilterFields: string[] = ['channel', 'firstName', 'lastName', 'email', 'phone',];
-  rowsPerPageOptions:number[]=[10, 20, 30];
-  rows:number= 10;
+  rowsPerPageOptions:number[]=[10,20,30];
+  rows:number=10;
   user!: User;
   selectedUserRole:string[]= [];
   roles = Roles;
@@ -86,14 +86,13 @@ createUser:any = { header: this.i18nextPipe.transform('USER_CREATE'), width: '30
         this.user.organisations[0].roles = this.selectedUserRole;
         this.messages = [
         ];
-        this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_ROLE_ADDED') })
+        this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_ROLE_ADDED')})
         this.hideDialog();
-        this.loadUserList({ first: 0 });
       }, (error) => {
         this.messages = [];
         this.messageService.add({ severity: 'error', detail: error.error.params.errmsg })
       })
-    }
+    } 
   }
   hideDialog(){
     this.userDialog=false;
