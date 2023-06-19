@@ -24,7 +24,6 @@ export class SbUserComponent implements OnInit {
   loading: boolean = true;
   organizations: any[] = [];
   OrganizationsUsersList: OrganizationsUsersList[] = [];
-  globalFilterFields: string[] = ['channel', 'firstName', 'lastName', 'email', 'phone',];
   rowsPerPageOptions:number[]=[10,20,30];
   rows:number=10;
   user!: User;
@@ -60,10 +59,6 @@ export class SbUserComponent implements OnInit {
     this.userService.getOrganizations(body).subscribe((response: any) => {
       this.organizations = response?.result?.response?.content;
     })
-  }
-
-  onGlobalFilter(table: Table, event: Event) {
-    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
 
   editRole(user: any) {
