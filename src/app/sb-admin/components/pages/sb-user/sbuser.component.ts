@@ -16,7 +16,7 @@ import { Status } from 'src/app/constant.config';
   providers: [MessageService]
 })
 export class SbUserComponent implements OnInit {
-  createUser: any = { header: this.i18nextPipe.transform('USER_CREATE'), width: '30%', height: 'auto' };
+createUser:any = { header: this.i18nextPipe.transform('USER_CREATE'), width: '30%', height: 'auto' };
   userDialog: boolean = false;
   blockUnblockUserDialog: boolean = false;
   submitted: boolean = false;
@@ -25,10 +25,10 @@ export class SbUserComponent implements OnInit {
   organizations: any[] = [];
   OrganizationsUsersList: OrganizationsUsersList[] = [];
   globalFilterFields: string[] = ['channel', 'firstName', 'lastName', 'email', 'phone',];
-  rowsPerPageOptions: number[] = [10, 20, 30];
-  rows: number = 10;
+  rowsPerPageOptions:number[]=[10, 20, 30];
+  rows:number= 10;
   user!: User;
-  selectedUserRole: string[] = [];
+  selectedUserRole:string[]= [];
   roles = Roles;
   messages!: Message[];
   totalRecords: number = 0;
@@ -95,9 +95,9 @@ export class SbUserComponent implements OnInit {
       })
     }
   }
-  hideDialog() {
-    this.userDialog = false;
-    this.submitted = false;
+  hideDialog(){
+    this.userDialog=false;
+    this.submitted=false;
   }
 
   addNewUser() {
