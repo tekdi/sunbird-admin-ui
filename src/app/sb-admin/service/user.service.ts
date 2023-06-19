@@ -54,4 +54,22 @@ export class UserService {
       return this.http.post(environment.unblockUserUrl, payload, { headers: header });
     }
   }
+
+  searchFname(): Observable<any> {
+    let header = new HttpHeaders({
+      "Content-Type": 'application/json',
+      "Authorization": environment.authKey,
+      "x-authenticated-user-token": environment.userToken,
+    })
+    return this.http.post(environment.userUrl , { headers: header });
+  }
+
+  searchLastname(): Observable<any> {
+    let header = new HttpHeaders({
+      "Content-Type": 'application/json',
+      "Authorization": environment.authKey,
+      "x-authenticated-user-token": environment.userToken,
+    })
+    return this.http.post(environment.userUrl , { headers: header });
+  }
 }

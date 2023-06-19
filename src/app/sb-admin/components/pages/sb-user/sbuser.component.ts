@@ -37,7 +37,10 @@ export class SbUserComponent implements OnInit {
   selectedOrg: string = '';
   selectedStatus : string = '';
   status = Status;
-
+  selectedFirstname!: string;
+  selectedLastname!: string;
+  firstName:string='';
+  lastName:string='';
 
   constructor(private userService: UserService,
     public dialogService: DialogService,
@@ -122,9 +125,7 @@ export class SbUserComponent implements OnInit {
           "status": this.selectedStatus ? [this.selectedStatus] : []        
         },
         "limit": event?.rows,
-        "offset": event?.first ? (event?.first / 10) + 1 : 0,
-        "sortBy": {
-        }
+        "offset": event?.first ? (event?.first / 10) + 1 : 0,       
       }
     };
     // body.request.sortBy = {...body.request, sortBy }
@@ -133,7 +134,7 @@ export class SbUserComponent implements OnInit {
     this.userService.loadUserList(body).subscribe(users => {
       this.OrganizationsUsersList = users?.result?.response?.content;
 
-      this.totalRecords = users?.result?.response?.count
+      this.totalRecords = users?.result?.response?.count;
       this.loading = false;
     }, (error: any) => {
       this.loading = false;
@@ -163,6 +164,38 @@ export class SbUserComponent implements OnInit {
     }, (error: any) => {
       this.messages = [];
       this.messageService.add({ severity: 'error', detail: error.error.params.errmsg });
+    })
+  }
+
+  searchFirstname(){
+    const body = {
+      "request": {
+        "filters": {
+          "firstName": this.selectedFirstname ? this.selectedFirstname : []
+        }
+      }
+    }
+    this.userService.loadUserList(body).subscribe(users => {
+      this.OrganizationsUsersList = users?.result?.response?.content;
+      this.loading = false;
+    }, (error: any) => {
+      this.loading = false;
+    })
+  }
+
+  searchLastname(){
+    const body = {
+      "request": {
+        "filters": {
+          "lastName": this.selectedLastname ? this.selectedLastname : []
+        }
+      }
+    }
+    this.userService.loadUserList(body).subscribe(users => {
+      this.OrganizationsUsersList = users?.result?.response?.content;
+      this.loading = false;
+    }, (error: any) => {
+      this.loading = false;
     })
   }
 }

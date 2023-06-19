@@ -78,5 +78,8 @@
 
   "COMMON_USERS":"Users",
   "COMMON_YES":"Yes",
-  "COMMON_NO":"No"
+  "COMMON_NO":"No",
+
+  "USER_SEARCH_FIRST_NAME":"Search Firstname",
+  "USER_SEARCH_LAST_NAME":"Search Lastname"
 }

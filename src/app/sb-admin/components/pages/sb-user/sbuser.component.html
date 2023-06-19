@@ -31,9 +31,22 @@
                         <th scope="col">{{ 'USER_ACTION' | i18next }}</th>
                         <th></th>
                     </tr>
+                    
                     <tr>                      
-                        <th></th>
-                        <th></th>
+                        <th>
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="searchFirstname()"
+                                    placeholder="{{ 'USER_SEARCH_FIRST_NAME' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="selectedFirstname" >
+                            </span>   
+                        </th>
+                        <th>
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="searchLastname()"
+                                    placeholder="{{ 'USER_SEARCH_LAST_NAME' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="selectedLastname" />
+                            </span>
+                        </th>
                         <th>
                             <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" [(ngModel)]="selectedOrg"
                                 optionLabel="orgName" (onChange)="loadUserList($event)"
