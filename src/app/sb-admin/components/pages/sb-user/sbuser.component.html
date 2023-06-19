@@ -6,7 +6,6 @@
             <h5>{{ 'USER_TOTAL' | i18next }} <p-chip label="{{count}}" icon="pi pi-user"></p-chip></h5>                  
             <p-table #myTable [value]="OrganizationsUsersList" [columns]="cols" [loading]='loading'
                 [totalRecords]="count" responsiveLayout="scroll" [rows]="rows" [paginator]="true"
-                [globalFilterFields]="globalFilterFields"
                 [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple"
                 [rowHover]="true" dataKey="userId" [lazy]="true" (onLazyLoad)="loadUserList($event)" [(first)]="first">
