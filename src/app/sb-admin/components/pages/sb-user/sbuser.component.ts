@@ -162,15 +162,23 @@ export class SbUserComponent implements OnInit {
     })
   }
 
-  onSearch(event: any): void {
+  onSearch(event: any, column: string): void {
     this.first = 0
-    clearTimeout(this.timeout);
-    var $this = this;
-    this.timeout = setTimeout(function () {
-      $this.loadUserList(event);
-    }, 2000);
-
+    if (column === 'organizations' || column === 'status') {
+      this.loadUserList(event);
+    }
+    else if (event.target.value.length > 3) {
+      var $this = this;
+      this.timeout = setTimeout(function () {
+        $this.loadUserList(event);
+      }, 2000);
+    }
+    else if (event.target.value.length === 0) {
+      var $this = this;
+      this.timeout = setTimeout(function () {
+        $this.loadUserList(event);
+      }, 1000);
+    }
   }
-
   
 }

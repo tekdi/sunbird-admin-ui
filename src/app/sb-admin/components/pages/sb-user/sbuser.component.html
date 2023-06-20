@@ -36,39 +36,39 @@
                         <th>
                             <span class="block mt-2 md:mt-0 p-input-icon-left">
                                 <i class="pi pi-search"></i>
-                                <input pInputText type="text" (input)="onSearch($event)"
+                                <input pInputText type="text" (input)="onSearch($event,'firstName')"
                                     placeholder="{{ 'USER_SEARCH_FIRST_NAME' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.firstName" >
                             </span>   
                         </th>
                         <th>
                             <span class="block mt-2 md:mt-0 p-input-icon-left">
                                 <i class="pi pi-search"></i>
-                                <input pInputText type="text" (input)="onSearch($event)"
+                                <input pInputText type="text" (input)="onSearch($event,'lastName')"
                                     placeholder="{{ 'USER_SEARCH_LAST_NAME' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.lastName" />
                             </span>
                         </th>
                         <th>
                             <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" [(ngModel)]="filteredValue.rootOrgName"
-                                optionLabel="channel" (onChange)="onSearch($event)" appendTo="body"
+                                optionLabel="channel" (onChange)="onSearch($event,'organizations')" appendTo="body"
                                 placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel"></p-dropdown>
                         </th>                        
                         <th>
                             <span class="block mt-2 md:mt-0 p-input-icon-left">
                                 <i class="pi pi-search"></i>
-                                <input pInputText type="text" (input)="onSearch($event)"
+                                <input pInputText type="text" (input)="onSearch($event,'email')"
                                     placeholder="{{ 'USER_SEARCH_EMAIL' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.email" >
                             </span>   
                         </th>
                         <th>
                             <span class="block mt-2 md:mt-0 p-input-icon-left">
                                 <i class="pi pi-search"></i>
-                                <input pInputText type="text" (input)="onSearch($event)"
+                                <input pInputText type="text" (input)="onSearch($event,'phone')"
                                     placeholder="{{ 'USER_SEARCH_PHONE' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.phone" >
                             </span>   
                         </th>
                         <th>
                             <p-dropdown [options]="status" [filter]="true" [showClear]="true" [(ngModel)]="filteredValue.status"
-                                optionLabel="name" (onChange)="onSearch($event)" placeholder="{{'USER_STATUS_PLACEHOLDER' | i18next}}"
+                                optionLabel="name" (onChange)="onSearch($event,'status')" placeholder="{{'USER_STATUS_PLACEHOLDER' | i18next}}"
                                 optionValue="value" appendTo="body"></p-dropdown>
                         </th>
                         <th>
