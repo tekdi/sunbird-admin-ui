@@ -49,9 +49,9 @@ export class UserService {
       "x-authenticated-user-token": environment.userToken,
     })
     if (userStatus) {
-      return this.http.post(config.URLS.BLOCK_USER_URL, payload, { headers: header });
+      return this.http.post(config.URLS.USER_BLOCK_URL, payload, { headers: header });
     } else {
-      return this.http.post(config.URLS.UNBLOCK_USER_URL, payload, { headers: header });
+      return this.http.post(config.URLS.USER_UNBLOCK_URL, payload, { headers: header });
     }
   }
 }

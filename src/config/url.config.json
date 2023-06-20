@@ -5,7 +5,7 @@
         "USER_SEARCH_URL": "api/user/v1/search",
         "USER_CREATE_URL": "api/user/v3/create",
         "USER_UPDATE_ROLE_URL": "api/user/v1/role/assign",
-        "BLOCK_USER_URL": "api/user/v1/block",
-        "UNBLOCK_USER_URL": "api/user/v1/unblock"
+        "USER_BLOCK_URL": "api/user/v1/block",
+        "USER_UNBLOCK_URL": "api/user/v1/unblock"
     }
 }
