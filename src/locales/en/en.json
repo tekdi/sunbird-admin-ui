@@ -76,14 +76,14 @@
   "USER_BLOCK_SUUCCESSFULLY": "User Block Successfully",
   "USER_UNBLOCK_SUUCCESSFULLY":"User Unblock Successfully",
 
-  "COMMON_USERS":"Users",
-  "COMMON_YES":"Yes",
-  "COMMON_NO":"No",
-
   "USER_SEARCH_FIRST_NAME":"Search Firstname",
   "USER_SEARCH_LAST_NAME":"Search Lastname",
   "USER_SEARCH_ORGANIZATION":"Search Organization",
   "USER_SEARCH_EMAIL":"Search Email",
   "USER_SEARCH_PHONE":"Search Phone",
-  "USER_SEARCH_STATUS":"Search Status"
+  "USER_SEARCH_STATUS":"Search Status",
+
+  "COMMON_USERS":"Users",
+  "COMMON_YES":"Yes",
+  "COMMON_NO":"No"
 }
