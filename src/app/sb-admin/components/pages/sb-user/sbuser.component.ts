@@ -23,7 +23,7 @@ export class SbUserComponent implements OnInit {
   cols: any[] = [];
   loading: boolean = true;
   organizations: any[] = [];
-  OrganizationsUsersList: OrganizationsUsersList[] = [];
+  organizationsUsersList: OrganizationsUsersList[] = [];
   rowsPerPageOptions:number[]=[10,20,30];
   rows:number=10;
   user!: User;
@@ -97,8 +97,8 @@ export class SbUserComponent implements OnInit {
     const ref = this.dialogService.open(AddEditUserComponent, this.createUser);
     ref.onClose.subscribe((result) => {
       if (result) {
-        this.OrganizationsUsersList.unshift(result);
-        this.count=this.OrganizationsUsersList.length;
+        this.organizationsUsersList.unshift(result);
+        this.count=this.organizationsUsersList.length;
         this.messages = [
         ];
         this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_ADDED_SUCCESSFULLY') }
@@ -125,7 +125,7 @@ export class SbUserComponent implements OnInit {
     }
 
     this.userService.loadUserList(body).subscribe(users => {
-      this.OrganizationsUsersList = users?.result?.response?.content;
+      this.organizationsUsersList = users?.result?.response?.content;
       this.count = users?.result?.response?.count;
       this.loading = false;
     }, (error: any) => {

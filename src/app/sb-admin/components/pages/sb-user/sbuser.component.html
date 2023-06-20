@@ -3,7 +3,7 @@
     <div class="col-12">
         <div class="card px-6 py-6">
             <h5 class="m-0">{{ 'COMMON_USERS' | i18next}}</h5><br>                 
-            <p-table #myTable [value]="OrganizationsUsersList" [columns]="cols" [loading]='loading'
+            <p-table #myTable [value]="organizationsUsersList" [columns]="cols" [loading]='loading'
                 [totalRecords]="count" responsiveLayout="scroll" [rows]="rows" [paginator]="true"
                 [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple"
@@ -14,7 +14,7 @@
                             {{ 'USER_TOTAL' | i18next }} <p-chip label="{{count}}" icon="pi pi-user"></p-chip>
                         </span>
                         <p-message severity="warn" text="{{ 'ORGANIZATION_USERS_LIST_WARNING' | i18next }}"
-                               *ngIf="!OrganizationsUsersList || OrganizationsUsersList.length === 0"></p-message>
+                               *ngIf="!organizationsUsersList || organizationsUsersList.length === 0"></p-message>
                     
                         <button pButton pRipple label="{{ 'USER_ADD' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2" (click)="addNewUser()"
                             ></button>
