@@ -29,10 +29,10 @@ export const SearchFilterValue: FilteredValue = {
 }
 
 export interface FilteredValue {
-    firstName?: any;
-    lastName?: any;
+    firstName?: string;
+    lastName?: string;
     phone?: string;
     email?: string;
-    rootOrgName?: any;
+    rootOrgName?: string;
     status?: string;
 }

@@ -111,12 +111,12 @@ export class SbUserComponent implements OnInit {
     let filters = this.filteredValue;
     filters.email ? filters.email : delete filters.email;
     filters.phone ? filters.phone : delete filters.phone;
-    filters.firstName ? [filters.firstName] : delete filters.firstName;
-    filters.lastName ? [filters.lastName] : delete filters.lastName;
-    filters.rootOrgName ? [filters.rootOrgName] : delete filters.rootOrgName;
-    filters.status ? [filters.status] : delete filters.status;
+    filters.firstName ? filters.firstName : delete filters.firstName;
+    filters.lastName ? filters.lastName : delete filters.lastName;
+    filters.rootOrgName ? filters.rootOrgName : delete filters.rootOrgName;
+    filters.status ? filters.status : delete filters.status;
 
-    var body = {
+    const body = {
       request: {
         filters: filters,
         limit: event?.rows,
