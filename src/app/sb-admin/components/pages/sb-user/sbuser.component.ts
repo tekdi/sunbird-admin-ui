@@ -105,12 +105,16 @@ export class SbUserComponent implements OnInit {
 
   loadUserList(event: any) {
     let filters = this.filteredValue;
-    filters.email ? filters.email : delete filters.email;
-    filters.phone ? filters.phone : delete filters.phone;
-    filters.firstName ? filters.firstName : delete filters.firstName;
-    filters.lastName ? filters.lastName : delete filters.lastName;
-    filters.rootOrgName ? filters.rootOrgName : delete filters.rootOrgName;
-    filters.status ? filters.status : delete filters.status;
+    // filters.email ? filters.email : delete filters.email;
+    // filters.phone ? filters.phone : delete filters.phone;
+    // filters.firstName ? filters.firstName : delete filters.firstName;
+    // filters.lastName ? filters.lastName : delete filters.lastName;
+    // filters.rootOrgName ? filters.rootOrgName : delete filters.rootOrgName;
+    // filters.status ? filters.status : delete filters.status;
+
+    Object.keys(filters).map(key => {
+      filters[key] ? filters[key] : delete filters[key];
+    });
 
     const body = {
       request: {
@@ -162,14 +166,14 @@ export class SbUserComponent implements OnInit {
     this.first = 0
     if (column === 'organizations' || column === 'status') {
       this.loadUserList(event);
-    }
-    else if (event.target.value.length > 3) {
+    } else if (event.target.value.length > 3) {
+      clearTimeout(this.timeout);
       let $this = this;
       this.timeout = setTimeout(function () {
         $this.loadUserList(event);
       }, 2000);
-    }
-    else if (event.target.value.length === 0) {
+    } else if (event.target.value.length === 0) {
+      clearTimeout(this.timeout);
       let $this = this;
       this.timeout = setTimeout(function () {
         $this.loadUserList(event);

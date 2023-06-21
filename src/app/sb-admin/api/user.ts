@@ -19,7 +19,7 @@ export interface User {
     organisations:any;
 }
 
-export const SearchFilterValue: FilteredValue = {
+export const SearchFilterValue: any = {
     firstName: '',
     lastName: '',
     phone: '',
