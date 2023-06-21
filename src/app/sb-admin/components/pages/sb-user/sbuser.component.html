@@ -107,7 +107,7 @@
                         <td>
                             <div class="flex">
                                 <button [disabled]="!user.status" pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2" (click)="editRole(user)"></button>
-                                <button pButton pRipple [icon]="user.status ? 'pi pi-trash' : 'pi pi-unlock'" class="p-button-rounded p-button-warning" (click)="blockUnblockUser(user)"></button>
+                                <button pButton pRipple [icon]="user.status ? 'pi pi-lock-open' : 'pi pi-lock'" class="p-button-rounded p-button-warning" (click)="blockUnblockUser(user)"></button>
                             </div>
                         </td>
                     </tr>
