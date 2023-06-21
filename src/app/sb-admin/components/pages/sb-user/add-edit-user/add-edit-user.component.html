@@ -60,7 +60,7 @@
         </div>
         <div class="field">
             <label for="multiselect">{{ 'USER_CHANNEL_NAME' | i18next }} *</label>
-            <p-dropdown formControlName="channel" [options]="organizations" optionLabel="orgName" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel"
+            <p-dropdown formControlName="channel" [options]="organizations" optionLabel="orgName" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel" [filter]="true" filterBy="channel" [showClear]="true"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['channel'].errors}"></p-dropdown>
             <div class="text-red-500">
                 <small *ngIf="submitted && addEditUserForm.controls['channel'].errors">{{ 'USER_ORGANIZATION_NAME_REQUIRED' | i18next }}.</small>
