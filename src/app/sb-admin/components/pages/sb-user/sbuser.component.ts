@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { LazyLoadEvent, Message, MessageService } from 'primeng/api';
-import { Table } from 'primeng/table';
+import { Message, MessageService } from 'primeng/api';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { I18NextPipe } from 'angular-i18next';
-import { map } from 'rxjs';
 import { OrganizationsUsersList } from './organizationsUsersList';
 import { SearchFilterValue, User } from 'src/app/sb-admin/api/user';
-import { Roles } from 'src/app/constant.config';
-import { Status } from 'src/app/constant.config';
-
+import { Roles, Status } from 'src/app/constant.config';
 @Component({
   templateUrl: './sbuser.component.html',
   providers: [MessageService]
@@ -168,13 +164,13 @@ export class SbUserComponent implements OnInit {
       this.loadUserList(event);
     }
     else if (event.target.value.length > 3) {
-      var $this = this;
+      let $this = this;
       this.timeout = setTimeout(function () {
         $this.loadUserList(event);
       }, 2000);
     }
     else if (event.target.value.length === 0) {
-      var $this = this;
+      let $this = this;
       this.timeout = setTimeout(function () {
         $this.loadUserList(event);
       }, 1000);
