@@ -27,12 +27,3 @@ export const SearchFilterValue: any = {
     rootOrgName: '',
     status: ''
 }
-
-export interface FilteredValue {
-    firstName?: string;
-    lastName?: string;
-    phone?: string;
-    email?: string;
-    rootOrgName?: string;
-    status?: string;
-}

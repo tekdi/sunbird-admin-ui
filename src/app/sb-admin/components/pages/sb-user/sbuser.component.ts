@@ -105,13 +105,6 @@ export class SbUserComponent implements OnInit {
 
   loadUserList(event: any) {
     let filters = this.filteredValue;
-    // filters.email ? filters.email : delete filters.email;
-    // filters.phone ? filters.phone : delete filters.phone;
-    // filters.firstName ? filters.firstName : delete filters.firstName;
-    // filters.lastName ? filters.lastName : delete filters.lastName;
-    // filters.rootOrgName ? filters.rootOrgName : delete filters.rootOrgName;
-    // filters.status ? filters.status : delete filters.status;
-
     Object.keys(filters).map(key => {
       filters[key] ? filters[key] : delete filters[key];
     });
@@ -180,5 +173,5 @@ export class SbUserComponent implements OnInit {
       }, 1000);
     }
   }
-  
+
 }
