@@ -106,9 +106,7 @@ export class SbUserComponent implements OnInit {
   loadUserList(event: any) {
     let filters = this.filteredValue;
     Object.keys(filters).forEach(key => {
-      if (filters[key]) {
-        filters[key]
-      } else {
+      if (!filters[key]) {
         delete filters[key]
       }
     });
