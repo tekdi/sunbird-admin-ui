@@ -62,5 +62,11 @@
   "USER_ROLES":" Roles",
   "USER_ROLE_ADDED":"User Role Updated Successfully",
   "USER_TOTAL": "Number of Users Found ",
-  "COMMON_USER":"Users"
+  "COMMON_USER":"Users",
+
+  "USER_DASHBOARD_ROLE_NAME":"User Role",
+  "USER_DASHBOARD_USERS_ROLE_COUNT":"User Role Count",
+  "USER_ROLE_DASHBOARD_LIST_WARNING":"User Role Data Not Found",
+  "USER_DASHBOARD":"User Dashboard",
+  "SELECT_USER_DASHBOARD_ROLE":"Select User Role"
 }
