@@ -40,4 +40,22 @@ export class UserService {
     })
     return this.http.post(environment.userCreateUrl, payload, { headers: header });
   }
+
+  getAllUserRole(body: any): Observable<Object> {
+    let header = new HttpHeaders({
+      "Content-Type": 'application/json',
+      "Authorization": environment.authKey,
+      "x-authenticated-user-token": environment.userToken,
+    })
+    return this.http.post(environment.allUserRoleUrl, body, { headers: header })
+  }
+
+  getUserRoleCount(body: any): Observable<Object> {
+    let header = new HttpHeaders({
+      "Content-Type": 'application/json',
+      "Authorization": environment.authKey,
+      "x-authenticated-user-token": environment.userToken,
+    })
+    return this.http.post(environment.userRoleCount, body, { headers: header })
+  }
 }

@@ -18,3 +18,8 @@ export interface User {
     rootOrgId?:string;
     organisations:any;
 }
+
+export interface userRoleCountModel {
+    roleName: string;
+    count: number;
+  }
