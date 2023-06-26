@@ -61,7 +61,7 @@ export class UserService {
       "Authorization": environment.authKey,
       "x-authenticated-user-token": environment.userToken,
     })
-    return this.http.post(environment.allUserRoleUrl, body, { headers: header })
+    return this.http.post(config.URLS.USER_DASHBOARD_ALL_USER_ROLE_URL, body, { headers: header })
   }
 
   getUserRoleCount(body: any): Observable<Object> {
@@ -70,6 +70,6 @@ export class UserService {
       "Authorization": environment.authKey,
       "x-authenticated-user-token": environment.userToken,
     })
-    return this.http.post(environment.userRoleCount, body, { headers: header })
+    return this.http.post(config.URLS.USER_DASHBOARD_USERS_ROLE_COUNT, body, { headers: header })
   }
 }
