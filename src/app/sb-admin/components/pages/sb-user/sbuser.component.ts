@@ -17,8 +17,7 @@ import { Roles } from 'src/app/constant.config';
 export class SbUserComponent implements OnInit {
  createUser:any = { header: this.i18nextPipe.transform('USER_CREATE'), width: '30%', height: 'auto' };
   userDialog: boolean = false;
-  deleteUserDialog: boolean = false;
-  deleteUsersDialog: boolean = false;
+  blockUnblockUserDialog: boolean = false;
   submitted: boolean = false;
   cols: any[] = [];
   loading: boolean = true;
@@ -150,5 +149,30 @@ export class SbUserComponent implements OnInit {
             height: 'auto'
         });
     }
-}
 
+  blockUnblockUser(user: User) {
+    this.blockUnblockUserDialog = true;
+    this.user = user;
+  }
+  confirmBlock() {
+    const payload = {
+      "request": {
+        "userId": this.user.userId
+      }
+    }
+    this.userService.blockUnblockUser(payload, this.user?.status).subscribe(response => {
+      this.messages = [];
+      if (this.user.status) {
+        this.user.status = 0;
+        this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_BLOCK_SUUCCESSFULLY') });
+      } else {
+        this.user.status = 1;
+        this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_UNBLOCK_SUUCCESSFULLY') });
+      }
+      this.blockUnblockUserDialog = false;
+    }, (error: any) => {
+      this.messages = [];
+      this.messageService.add({ severity: 'error', detail: error.error.params.errmsg });
+    })
+  }
+}
