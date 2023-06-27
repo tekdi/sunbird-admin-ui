@@ -19,6 +19,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MessageService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
 import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
     RippleModule,
     InputTextareaModule,
     DropdownModule,
+    ChipModule,
     I18NextModule.forRoot()
   ],
   providers:[
