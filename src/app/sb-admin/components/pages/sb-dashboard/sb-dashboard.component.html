@@ -4,13 +4,13 @@
             <h5>{{ 'USER_DASHBOARD' | i18next }}</h5>
             <p-message severity="warn" text="{{ 'USER_ROLE_DASHBOARD_LIST_WARNING' | i18next }}" 
             *ngIf="!userRoleCount || userRoleCount.length === 0"></p-message>
-            <p-table #myTable [value]="userRoleCount" [loading]="loading" [paginator]="true" [rows]="10"
+            <p-table #sbDashboardTable [value]="userRoleCount" [loading]="loading" [paginator]="true" [rows]="10"
                 responsiveLayout="scroll" [globalFilterFields]="['roleName']">
                 <ng-template pTemplate="caption">
                     <span class="p-input-icon-left">
                         <i class="pi pi-search"> </i>
                         <input type="text" pInputText placeholder="{{ 'USER_DASHBOARD_ROLE' | i18next }}"
-                        (input)="myTable.filterGlobal($any($event.target).value,'contains')" />
+                        (input)="sbDashboardTable.filterGlobal($any($event.target).value,'contains')" />
                     </span>
                 </ng-template>
                 <ng-template pTemplate="header">
