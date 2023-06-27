@@ -6,7 +6,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { I18NextPipe } from 'angular-i18next';
 import { OrganizationsUsersList } from './organizationsUsersList';
 import { SearchFilterValue, User } from 'src/app/sb-admin/api/user';
-import { Roles, Status } from 'src/app/constant.config';
+import { Roles } from 'src/app/constant.config';
 @Component({
   templateUrl: './sbuser.component.html',
   providers: [MessageService]
@@ -28,10 +28,13 @@ export class SbUserComponent implements OnInit {
   messages!: Message[];
   count :number=0;
   users: User[] = [];
-  status = Status;
   first: number = 0
   filteredValue = SearchFilterValue;
   timeout: any = null;
+  status = [
+    { name : 'Active', 'value' : '1'},
+    { name : 'Inactive', 'value' : '0'}
+]
 
   constructor(private userService: UserService,
     public dialogService: DialogService,
@@ -126,7 +129,7 @@ export class SbUserComponent implements OnInit {
     }, (error: any) => {
       this.loading = false;
       this.messages = [];
-      this.messageService.add({ severity: 'error', detail: error.error.params.errmsg });
+      this.messageService.add({ severity: 'error', detail: error?.error?.params?.errmsg });
     })
 
   }
@@ -158,18 +161,17 @@ export class SbUserComponent implements OnInit {
   }
 
   onSearch(event: any, column: string): void {
+    let $this = this;
     this.first = 0
     if (column === 'organizations' || column === 'status') {
       this.loadUserList(event);
     } else if (event.target.value.length > 3) {
-      clearTimeout(this.timeout);
-      let $this = this;
+      clearTimeout(this.timeout);     
       this.timeout = setTimeout(function () {
         $this.loadUserList(event);
       }, 2000);
     } else if (event.target.value.length === 0) {
       clearTimeout(this.timeout);
-      let $this = this;
       this.timeout = setTimeout(function () {
         $this.loadUserList(event);
       }, 1000);

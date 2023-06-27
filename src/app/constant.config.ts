@@ -7,8 +7,3 @@ export const Roles = [
     { name: 'Org Admin', value: 'ORG_ADMIN' },
     { name: 'Public', value: 'PUBLIC' }
 ]
-
-export const Status = [
-    { name : 'Active', 'value' : '1'},
-    { name : 'Inactive', 'value' : '0'}
-]
