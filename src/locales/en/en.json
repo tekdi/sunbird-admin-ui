@@ -78,10 +78,8 @@
 
   "USER_SEARCH_FIRST_NAME":"Search Firstname",
   "USER_SEARCH_LAST_NAME":"Search Lastname",
-  "USER_SEARCH_ORGANIZATION":"Search Organization",
   "USER_SEARCH_EMAIL":"Search Email",
   "USER_SEARCH_PHONE":"Search Phone",
-  "USER_SEARCH_STATUS":"Select Status",
 
   "COMMON_USERS":"Users",
   "COMMON_YES":"Yes",
