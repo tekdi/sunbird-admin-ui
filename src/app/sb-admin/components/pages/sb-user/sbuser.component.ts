@@ -31,6 +31,7 @@ export class SbUserComponent implements OnInit {
   first: number = 0
   filteredValue = SearchFilterValue;
   timeout: any = null;
+  pageOffsetConstant: number = 10;
   status = [
     { name : 'Active', 'value' : '1'},
     { name : 'Inactive', 'value' : '0'}
@@ -121,7 +122,7 @@ export class SbUserComponent implements OnInit {
       request: {
         filters: filters,
         limit: event?.rows,
-        offset: event?.first ? (event?.first / 10) + 1 : 0,
+        offset: event?.first ? (event?.first / this.pageOffsetConstant) + 1 : 0,
       }
     }
 
