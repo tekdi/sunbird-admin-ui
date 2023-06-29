@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder ,FormGroup,Validators} from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { I18NextPipe } from 'angular-i18next';
-import { Validators } from '@angular/forms';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 import { Message } from 'primeng/api';
 import { UserService } from 'src/app/sb-admin/service/user.service';
