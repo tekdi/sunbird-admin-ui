@@ -57,7 +57,10 @@ export class SbUserComponent implements OnInit {
     }
     this.userService.getOrganizations(body).subscribe((response: any) => {
       this.organizations = response?.result?.response?.content;
-    })
+    }, (error) => {
+      this.messages = [];
+      this.messageService.add({ severity: 'error', detail: error?.error?.params?.errmsg })
+    });
   }
 
   editRole(user: any) {
@@ -84,7 +87,7 @@ export class SbUserComponent implements OnInit {
         this.hideDialog();    
       }, (error) => {
         this.messages = [];
-        this.messageService.add({ severity: 'error', detail: error.error.params.errmsg })
+        this.messageService.add({ severity: 'error', detail: error?.error?.params?.errmsg })
       })
     } 
   }
