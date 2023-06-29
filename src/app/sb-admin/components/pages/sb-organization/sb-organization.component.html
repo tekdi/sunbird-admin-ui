@@ -3,7 +3,7 @@
         <div class="card">
             <h5 class="m-0">{{ 'ORGANIZATION' | i18next}}</h5><br>
             <p-messages id="messages" [value]="messages"></p-messages>
-            <h5>{{ 'ORGANIZATION_TOTAL' | i18next }} <p-chip label="{{count}}"  icon="pi pi-user"></p-chip></h5>   
+            <h5>{{ 'ORGANIZATION_TOTAL' | i18next }} <p-chip label="{{count}}" icon="pi pi-user"></p-chip></h5>
             <p-table #myTab [value]="organizationDetail" [loading]='loading' [paginator]="true" [rows]="rows"
                 responsiveLayout="scroll" [globalFilterFields]="globalFilterFields">
                 <ng-template pTemplate="caption">
@@ -18,6 +18,8 @@
                         <div class="my-2">
                             <button pButton pRipple label="{{ 'ADD_ORGANIZATION' | i18next }}" icon="pi pi-plus"
                                 class="p-button-success mr-2" (click)="addOrg()"></button>
+                            <button pButton pRipple label="{{ 'ADD_SUB_ORGANIZATION' | i18next }}" icon="pi pi-plus"
+                                class="p-button-success mr-2" (click)="addSubOrg()"></button>
                         </div>
                     </div>
                 </ng-template>
