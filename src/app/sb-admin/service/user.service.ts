@@ -16,7 +16,7 @@ export class UserService {
     return this.http.post(config.URLS.ORGNIZATION_SEARCH_URL, body, { headers: header })
   }
 
-  getOrganizationUserList(body: any): Observable<Object> {
+  loadUserList(body: any): Observable<any> {
     let header = new HttpHeaders({
       "Content-Type": 'application/json',
       "Authorization": environment.authKey,

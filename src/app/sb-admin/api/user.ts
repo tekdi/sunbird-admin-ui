@@ -23,3 +23,11 @@ export interface userRoleCountModel {
     roleName: string;
     count: number;
   }
+export const SearchFilterValue: any = {
+    firstName: '',
+    lastName: '',
+    phone: '',
+    email: '',
+    rootOrgName: '',
+    status: ''
+}

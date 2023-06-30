@@ -3,22 +3,18 @@
     <div class="col-12">
         <div class="card px-6 py-6">
             <h5 class="m-0">{{ 'COMMON_USERS' | i18next}}</h5><br>                 
-            <h5>{{ 'USER_TOTAL' | i18next }} <p-chip label="{{count}}" icon="pi pi-user"></p-chip></h5>                  
-            <p-table #myTable [value]="OrganizationsUsersList" [columns]="cols" [loading]='loading'
-                [totalRecords]="OrganizationsUsersList.length" responsiveLayout="scroll" [rows]="rows" [paginator]="true"
-                [globalFilterFields]="globalFilterFields"
+            <p-table #myTable [value]="organizationsUsersList" [columns]="cols" [loading]='loading'
+                [totalRecords]="count" responsiveLayout="scroll" [rows]="rows" [paginator]="true"
                 [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple"
-                [rowHover]="true" dataKey="userId">
+                [rowHover]="true" dataKey="userId" [lazy]="true" (onLazyLoad)="loadUserList($event)" [(first)]="first">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
-                            <i class="pi pi-search"></i>
-                            <input pInputText type="text" (input)="onGlobalFilter(myTable, $event)"
-                                placeholder="{{ 'USER_SEARCH' | i18next }}" class="w-full sm:w-auto" />
-                        </span>            
+                            {{ 'USER_TOTAL' | i18next }} <p-chip label="{{count}}" icon="pi pi-user"></p-chip>
+                        </span>
                         <p-message severity="warn" text="{{ 'ORGANIZATION_USERS_LIST_WARNING' | i18next }}"
-                               *ngIf="!OrganizationsUsersList || OrganizationsUsersList.length === 0"></p-message>
+                               *ngIf="!organizationsUsersList || organizationsUsersList.length === 0"></p-message>
                     
                         <button pButton pRipple label="{{ 'USER_ADD' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2" (click)="addNewUser()"
                             ></button>
@@ -35,6 +31,49 @@
                         <th scope="col">{{ 'USER_ACTION' | i18next }}</th>
                         <th></th>
                     </tr>
+                    
+                    <tr>                      
+                        <th scope="col">
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="onSearch($event,'firstName')"
+                                    placeholder="{{ 'USER_SEARCH_FIRST_NAME' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.firstName" >
+                            </span>   
+                        </th>
+                        <th scope="col">
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="onSearch($event,'lastName')"
+                                    placeholder="{{ 'USER_SEARCH_LAST_NAME' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.lastName" />
+                            </span>
+                        </th>
+                        <th scope="col">
+                            <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" [(ngModel)]="filteredValue.rootOrgName"
+                                optionLabel="channel" (onChange)="onSearch($event,'organizations')" appendTo="body"
+                                placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel"></p-dropdown>
+                        </th>                        
+                        <th scope="col">
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="onSearch($event,'email')"
+                                    placeholder="{{ 'USER_SEARCH_EMAIL' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.email" >
+                            </span>   
+                        </th>
+                        <th scope="col">
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="onSearch($event,'phone')"
+                                    placeholder="{{ 'USER_SEARCH_PHONE' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.phone" >
+                            </span>   
+                        </th>
+                        <th scope="col">
+                            <p-dropdown [options]="status" [filter]="true" [showClear]="true" [(ngModel)]="filteredValue.status"
+                                optionLabel="name" (onChange)="onSearch($event,'status')" placeholder="{{'USER_STATUS_PLACEHOLDER' | i18next}}"
+                                optionValue="value" appendTo="body"></p-dropdown>
+                        </th>
+                        <th scope="col"></th>
+                    </tr>
+
                 </ng-template>
                 <ng-template pTemplate="body" let-user>
                     <tr>
@@ -42,7 +81,7 @@
                             <span class="p-column-title">{{'USER_FIRST_NAME' | i18next}}</span>
                             {{user.firstName}}
                         </td>
-                        <td >
+                        <td>
                             <span class="p-column-title">{{'USER_LAST_NAME' | i18next}}</span>
                             {{user.lastName}}
                         </td>
