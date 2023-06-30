@@ -7,4 +7,3 @@ export const Roles = [
     { name: 'Org Admin', value: 'ORG_ADMIN' },
     { name: 'Public', value: 'PUBLIC' }
 ]
-
