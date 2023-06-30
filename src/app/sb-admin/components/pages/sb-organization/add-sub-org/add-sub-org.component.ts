@@ -18,7 +18,7 @@ export class AddSubOrgComponent {
   organizations: any[] = [];
   selectedOrg: any[] = []
 
-  constructor(public formBuilder: FormBuilder, public ref: DynamicDialogRef, private addSUBOrg: OrganizationListService, private orgList: UserService, private i18nextPipe: I18NextPipe) {
+  constructor(public formBuilder: FormBuilder, public dynamicDialogRef: DynamicDialogRef, private organizationListService: OrganizationListService, private orgList: UserService, private i18nextPipe: I18NextPipe) {
     this.addSubOrg = formBuilder.group({
       rootOrgName: ['', Validators.required],
       orgName: ['', Validators.required],
@@ -77,9 +77,8 @@ export class AddSubOrgComponent {
     const body = {
       "request": updatedFormValue
     }
-    this.addSUBOrg.addSubOrg(body).subscribe((response) => {
-      console.log(response);
-      this.ref.close(updatedFormValue);
+    this.organizationListService.addSubOrg(body).subscribe((response) => {
+      this.dynamicDialogRef.close(updatedFormValue);
     },
       (error: any) => {
         this.messages = [
@@ -90,7 +89,7 @@ export class AddSubOrgComponent {
   }
 
   cancel() {
-    this.ref.close();
+    this.dynamicDialogRef.close();
   }
 
 }

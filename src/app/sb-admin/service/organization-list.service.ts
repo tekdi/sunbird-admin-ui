@@ -28,7 +28,6 @@ export class OrganizationListService {
 }
 
 addSubOrg(body : any): Observable<any>{
-  console.log(body)
     let header=new HttpHeaders({
     "Content-Type": 'application/json',
     "Authorization": environment.authKey,
