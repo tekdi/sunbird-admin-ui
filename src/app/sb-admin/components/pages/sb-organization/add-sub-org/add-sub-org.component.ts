@@ -12,7 +12,7 @@ import { UserService } from 'src/app/sb-admin/service/user.service';
   styleUrls: ['./add-sub-org.component.scss']
 })
 export class AddSubOrgComponent {
-  addSubOrg: FormGroup;
+  addSubOrg!: FormGroup;
   submitted: boolean = false;
   messages!: Message[];
   organizations: any[] = [];
@@ -23,8 +23,7 @@ export class AddSubOrgComponent {
       rootOrgName: ['', Validators.required],
       orgName: ['', Validators.required],
       description: ['', Validators.required],
-      organisationType: 'school',
-      isRootOrg: false,
+      organisationType: 'board',
       isTenant: false
     })
   }
