@@ -14,15 +14,15 @@ export interface User {
     userName?: string;
     email?: string;
     status?: Number;
-    userId:string;
-    rootOrgId?:string;
-    organisations:any;
+    userId: string;
+    rootOrgId?: string;
+    organisations: any;
 }
 
 export interface userRoleCountModel {
     roleName: string;
     count: number;
-  }
+}
 export const SearchFilterValue: any = {
     firstName: '',
     lastName: '',

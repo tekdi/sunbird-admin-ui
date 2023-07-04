@@ -16,12 +16,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MessageService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
 import { ChipModule } from 'primeng/chip';
-import { SbDashboardComponent } from './sb-dashboard.component';
-import { SbDashboardRoutingModule } from './sb-dashboard-routing.module';
 
 @NgModule({
   declarations: [
-   SbDashboardComponent
 
   ],
   imports: [
@@ -41,7 +38,7 @@ import { SbDashboardRoutingModule } from './sb-dashboard-routing.module';
     InputTextareaModule,
     DropdownModule,
     ChipModule,
-    SbDashboardRoutingModule,
+    UserDashboardModule,
     I18NextModule.forRoot()
   ],
   providers:[
@@ -50,4 +47,4 @@ import { SbDashboardRoutingModule } from './sb-dashboard-routing.module';
    MessageService
   ]
 })
-export class SbDashboardModule { }
+export class UserDashboardModule { }

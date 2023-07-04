@@ -71,10 +71,10 @@
   "USER_ROLE_ADDED":"User Role Updated Successfully",
 
   "USER_DASHBOARD_ROLE_NAME":"User Role",
-  "USER_DASHBOARD_USERS_ROLE_COUNT":"User Role Count",
-  "USER_ROLE_DASHBOARD_LIST_WARNING":"User Role Data Not Found",
-  "USER_DASHBOARD":"User Dashboard",
-  "USER_DASHBOARD_ROLE":"Select User Role",
+  "USER_DASHBOARD_USERS_ROLE_COUNT":"Count",
+  "USER_ROLE_DASHBOARD_LIST_WARNING":"Users Data Not Found",
+  "USER_DASHBOARD":"Dashboard",
+  "USER_DASHBOARD_ROLE":"Enter User Role",
   "USER_TOTAL": "Number of Users Found",
 
   "USER_BLOCK_CONFIRMATION": "Are you sure you want to block",

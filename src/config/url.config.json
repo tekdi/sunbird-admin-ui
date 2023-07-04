@@ -6,8 +6,7 @@
         "USER_UPDATE_ROLE_URL": "api/user/v1/role/assign",
         "USER_BLOCK_URL": "api/user/v1/block",
         "USER_UNBLOCK_URL": "api/user/v1/unblock",
-        "USER_DASHBOARD_ALL_USER_ROLE_URL":"api/data/v1/form/read",
-        "USER_DASHBOARD_USERS_ROLE_COUNT":"api/user/v1/search",
+        "USER_ROLES_GET_URL":"api/data/v1/form/read",
         "USER_SEARCH_URL": "api/user/v1/search"
     }
 }
