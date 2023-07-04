@@ -1,42 +1,49 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
-
+import { I18NextPipe } from 'angular-i18next';
 @Component({
     selector: 'app-menu',
     templateUrl: './app.menu.component.html'
 })
 export class AppMenuComponent implements OnInit {
-
     model: any[] = [];
 
-    constructor(public layoutService: LayoutService) { }
+    constructor(public layoutService: LayoutService,
+        private i18nextPipe: I18NextPipe,) { }
 
     ngOnInit() {
         this.model = [
             {
-                label: 'Home'
+                label: this.i18nextPipe.transform('LABEL_HOME')
             },
             {
-                label: 'Org Management',
+                label: this.i18nextPipe.transform('ORG_MANAGEMENT'),
                 icon: 'pi pi-fw pi-briefcase',
                 items: [
-                    { 
-                         label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/']
+                    {
+                        label: this.i18nextPipe.transform('USER_DASHBOARD'),
+                        icon: 'pi pi-fw pi-home',
+                        routerLink: ['/']
                     },
                     {
-                        label: 'Organizations',
+                        label: this.i18nextPipe.transform('USER_CHANNEL_NAME'),
                         icon: 'pi pi-fw pi-user',
                         routerLink: ['/pages/sb-organization']
                     },
                 ]
             },
             {
-                label: 'User Management',
+                label: this.i18nextPipe.transform('USER_MANAGEMENT'),
                 icon: 'pi pi-fw pi-briefcase',
                 items: [
                     {
-                        label: 'Users',
+                        label: this.i18nextPipe.transform('USER_DASHBOARD'),
+                        icon: 'pi pi-fw pi-home',
+                        routerLink: ['/pages/user-dashboard']
+                    },
+                    {
+                        label: this.i18nextPipe.transform('COMMON_USERS'),
                         icon: 'pi pi-fw pi-user',
                         routerLink: ['/pages/sb-user']
                     }
