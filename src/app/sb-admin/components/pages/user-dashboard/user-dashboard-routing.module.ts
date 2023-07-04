@@ -7,4 +7,4 @@ import { UserDashboardComponent } from './user-dashboard.component';
   ])],
   exports: [RouterModule]
 })
-export class SbDashboardRoutingModule { }
+export class UserDashboardRoutingModule { }

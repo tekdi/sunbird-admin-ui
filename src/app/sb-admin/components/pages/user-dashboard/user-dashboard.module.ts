@@ -16,10 +16,12 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MessageService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
 import { ChipModule } from 'primeng/chip';
+import { UserDashboardComponent } from './user-dashboard.component';
+import { UserDashboardRoutingModule } from './user-dashboard-routing.module';
 
 @NgModule({
   declarations: [
-
+    UserDashboardComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,7 @@ import { ChipModule } from 'primeng/chip';
     InputTextareaModule,
     DropdownModule,
     ChipModule,
-    UserDashboardModule,
+    UserDashboardRoutingModule,
     I18NextModule.forRoot()
   ],
   providers:[
