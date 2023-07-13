@@ -7,6 +7,7 @@ import { I18NextPipe } from 'angular-i18next';
 import { OrganizationsUsersList } from './organizationsUsersList';
 import { SearchFilterValue, User } from 'src/app/sb-admin/api/user';
 import { Roles } from 'src/app/constant.config';
+import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 @Component({
   templateUrl: './sbuser.component.html',
   providers: [MessageService]
@@ -32,6 +33,8 @@ export class SbUserComponent implements OnInit {
   filteredValue = SearchFilterValue;
   timeout: any = null;
   pageOffsetConstant: number = 10;
+  suborgOptions: any[]=[];
+  isSubOrgDisabled: boolean = true;
   status = [
     { name : 'Active', 'value' : '1'},
     { name : 'Inactive', 'value' : '0'}
@@ -41,7 +44,7 @@ export class SbUserComponent implements OnInit {
     public dialogService: DialogService,
     private i18nextPipe: I18NextPipe,
     private messageService: MessageService,
-
+    private orgList : OrganizationListService
   ) { }
 
   ngOnInit() {
@@ -63,6 +66,27 @@ export class SbUserComponent implements OnInit {
       this.messageService.add({ severity: 'error', detail: error?.error?.params?.errmsg })
     });
   }
+
+  loadSuborgOptions(selectedChannel: string) {
+    const body = {
+      "request": {
+        "filters": {
+          "isRootOrg": false,
+          "isTenant": false,
+          "channel": selectedChannel
+
+        }
+      }
+    }
+
+    this.orgList.getSubOrgList(body).subscribe((data: any) => {
+    this.suborgOptions= data?.result?.response?.content;
+    this.isSubOrgDisabled = false;
+    }, error => {
+      console.error('Error:', error);
+    });
+  }
+
 
   editRole(user: any) {
     this.userDialog = true;

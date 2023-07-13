@@ -50,7 +50,12 @@
                         <th scope="col">
                             <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" [(ngModel)]="filteredValue.rootOrgName"
                                 optionLabel="channel" (onChange)="onSearch($event,'organizations')" appendTo="body"
-                                placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel"></p-dropdown>
+                                placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}"  (onChange)="loadSuborgOptions($event.value)" optionValue="channel">
+                            </p-dropdown><br><br>
+                            <p-dropdown [options]="suborgOptions" [filter]="true" [showClear]="true" [(ngModel)]="filteredValue.orgName"
+                                optionLabel="orgName" appendTo="body" (onChange)="onSearch($event,'organizations')" placeholder="Select Suborg" optionValue="orgName"
+                                [disabled]="isSubOrgDisabled">
+                            </p-dropdown>
                         </th>                        
                         <th scope="col">
                             <span class="block mt-2 md:mt-0 p-input-icon-left">

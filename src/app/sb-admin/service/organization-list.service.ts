@@ -26,4 +26,10 @@ export class OrganizationListService {
     })
  return this.http.post(config.URLS.ORGANIZATION_CREATE_URL,body,{headers: header})
 }
+  getSubOrgList(body:any): Observable<object>{
+    let header = new HttpHeaders({
+      "Content-Type": 'application/json'
+    })
+    return this.http.post(config.URLS.ORGNIZATION_SEARCH_URL, body, { headers: header })
+  }
 }
