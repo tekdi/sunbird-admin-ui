@@ -3,11 +3,11 @@
         <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
         <div class="field">
             <label for="rootName">{{ 'ADD_SUB_ORGANIZATION_ROOT' | i18next}}</label>
-            <p-dropdown formControlName="rootOrgName" [options]="organizations" optionLabel="orgName"
-                placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="orgName" [filter]="true"
+            <p-dropdown formControlName="channel" [options]="organizations" optionLabel="orgName"
+                placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel" [filter]="true"
                 filterBy="channel" [showClear]="true">
             </p-dropdown>
-            <small *ngIf="submitted && addSubOrg.controls['rootOrgName'].errors">{{ 'ADD_SUB_ORGANIZATION_NAME_INVALID'
+            <small *ngIf="submitted && addSubOrg.controls['channel'].errors">{{ 'ADD_SUB_ORGANIZATION_NAME_INVALID'
                 | i18next}}</small>
         </div>
         <div class="field">

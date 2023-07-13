@@ -20,7 +20,7 @@ export class AddSubOrgComponent {
 
   constructor(public formBuilder: FormBuilder, public dynamicDialogRef: DynamicDialogRef, private organizationListService: OrganizationListService, private orgList: UserService, private i18nextPipe: I18NextPipe) {
     this.addSubOrg = formBuilder.group({
-      rootOrgName: ['', Validators.required],
+      channel: ['', Validators.required],
       orgName: ['', Validators.required],
       description: ['', Validators.required],
       organisationType: 'board',
@@ -63,21 +63,11 @@ export class AddSubOrgComponent {
       ];
       return;
     }
-    const selectOrgName = this.addSubOrg.value.rootOrgName;
-    this.selectedOrg = this.organizations.filter(org => org.orgName === selectOrgName)
-    const channel = this.selectedOrg[0].channel;
-    const rootOrgId = this.selectedOrg[0].id;
-    const updatedFormValue = {
-      ...this.addSubOrg.value,
-      channel: channel,
-      rootOrgId: rootOrgId
-    }
-    delete(updatedFormValue.rootOrgName)
     const body = {
-      "request": updatedFormValue
+      "request": this.addSubOrg.value
     }
     this.organizationListService.addSubOrg(body).subscribe((response) => {
-      this.dynamicDialogRef.close(updatedFormValue);
+      this.dynamicDialogRef.close(this.addSubOrg.value);
     },
       (error: any) => {
         this.messages = [
