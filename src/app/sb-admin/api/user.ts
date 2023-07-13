@@ -18,3 +18,12 @@ export interface User {
     rootOrgId?:string;
     organisations:any;
 }
+
+export const SearchFilterValue: any = {
+    firstName: '',
+    lastName: '',
+    phone: '',
+    email: '',
+    rootOrgName: '',
+    status: ''
+}
