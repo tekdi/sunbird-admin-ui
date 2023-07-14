@@ -24,6 +24,13 @@ export class AddEditUserComponent {
   roles = Roles
   suborgOptions: any[]=[];
   isSubOrgDisabled: boolean = true;
+  selectedOption: string = 'yes';
+  ifYes:boolean= false;
+  ifNo:boolean= false;
+  orgTypeSelection: any[] = [
+      { name: 'Yes', value: 'yes' },
+      { name: 'No', value: 'no' }
+    ];
   constructor(
     private formBuilder: FormBuilder,
     public ref: DynamicDialogRef,
@@ -50,6 +57,7 @@ export class AddEditUserComponent {
       phoneVerified: true,
       email: ['', Validators.email],
       emailVerified: true,
+      selectedOption:['', Validators.required],
       password: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
       channel: ['', Validators.required],
       roles: ['', Validators.required],
@@ -103,6 +111,18 @@ export class AddEditUserComponent {
     }, error => {
       console.error('Error:', error);
     });
+  }
+
+  getDropdownVal(value: string): void {
+    console.log(value,'dd value')
+    this.selectedOption = value;
+    if(this.selectedOption==='yes'){
+      this.ifYes=true;
+      this.ifNo=false;
+    }else{
+      this.ifNo=true;
+      this.ifYes=true;
+    }
   }
 
 

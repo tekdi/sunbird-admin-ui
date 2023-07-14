@@ -59,6 +59,11 @@
             </div>
         </div>
         <div class="field">
+            <label for="multiselect">Do You want to create user in Root Organization? *</label>
+            <p-dropdown formControlName="selectedOption" [options]="orgTypeSelection"  (onChange)="getDropdownVal($event.value)" optionLabel="name" placeholder="Select" optionValue="value" 
+                ></p-dropdown>
+        </div>
+        <div class="field" *ngIf="ifYes || ifNo">
             <label for="multiselect">{{ 'USER_CHANNEL_NAME' | i18next }} *</label>
             <p-dropdown formControlName="channel" [options]="organizations"  (onChange)="loadSuborgOptions($event.value)" optionLabel="orgName" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel" [filter]="true" filterBy="channel" [showClear]="true"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['channel'].errors}"></p-dropdown>
@@ -66,7 +71,7 @@
                 <small *ngIf="submitted && addEditUserForm.controls['channel'].errors">{{ 'USER_ORGANIZATION_NAME_REQUIRED' | i18next }}.</small>
             </div>
         </div>
-        <div class="field">
+        <div class="field" *ngIf="ifNo">
             <label for="multiselect">Sub Organization *</label>
             <p-dropdown [options]="suborgOptions" [filter]="true" [showClear]="true" 
             optionLabel="orgName" appendTo="body"  placeholder="Select Suborg" optionValue="orgName"
