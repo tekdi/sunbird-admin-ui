@@ -10,7 +10,7 @@
   "ORGANIZATION_CHANNEL_NAME":"Channel Name",
   "ORGANIZATION_CHANNEL_ID":"Channel ID",
   "ORGANIZATION_SEARCH": "Search",
-  "ORGANIZATION_TOTAL":"Number of Organization Found",
+  "ORGANIZATION_TOTAL":"Total Organizations",
   "ORGANIZATION_USERS_LIST_WARNING": "Organization Users Data Not Found",
   
   "ADD_ORGANIZATION_DESCRIPTION" : "Description",
