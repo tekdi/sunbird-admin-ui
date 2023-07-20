@@ -7,13 +7,16 @@
   
   "ORGANIZATION":"Organizations",
   "ORGANIZATION_NAME":"Organization Name",
-  "ORGANIZATION_CHANNEL_NAME":"Channel Name",
-  "ORGANIZATION_CHANNEL_ID":"Channel ID",
+  "NUMBER_OF_SUB_ORG":"Number of Sub-Organizations",
+  "NUMBER_OF_USER_COUNT":"Number of Users",
   "ORGANIZATION_SEARCH": "Search",
   "ORGANIZATION_TOTAL":"Total Organizations",
+  "SUB_ORGANIZATION_TOTAL":"Total Sub-organizations",
+  "TOTAL_USER":"Total Users",
   "ORGANIZATION_USERS_LIST_WARNING": "Organization Users Data Not Found",
   
   "ADD_ORGANIZATION_DESCRIPTION" : "Description",
+  "ORGANIZATION_CHANNEL_NAME" : "Channel Name",
   "ADD_ORGANIZATION_TYPE": "Organisation Type",
   "ADD_ORGANIZATION_SUBMIT" : "SUBMIT",
   "ADD_ORGANIZATION_CANCEL" : "CANCEL",

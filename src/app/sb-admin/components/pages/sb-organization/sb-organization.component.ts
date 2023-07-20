@@ -7,6 +7,8 @@ import { AddOrEditOrgComponent } from './add-or-edit-org/add-or-edit-org.compone
 import { MessageService, Message } from 'primeng/api';
 import { I18NextPipe } from 'angular-i18next';
 import { UserService } from 'src/app/sb-admin/service/user.service';
+import { map } from 'rxjs';
+import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
 
 @Component({
   selector: 'app-sb-organization',
@@ -18,10 +20,11 @@ export class SbOrganizationComponent implements OnDestroy {
   organizationDetail: OrganizationDetail[] = [];
   loading: boolean = true;
   private subscription: Subscription | any;
-  globalFilterFields :string []=['organizationName','channel','id'];
-  rows:number=10;
-  orgCount :number=0;
-  userCount : number=0;
+  globalFilterFields: string[] = ['organizationName', 'channel', 'id'];
+  rows: number = 10;
+  orgCount: number = 0;
+  TotaluserCount: number = 0;
+  TotalsubOrgCount: number = 0;
   messages: Message[] = [];
   addOrgDialog = {
     header: this.i18nextPipe.transform('ADD_ORGANIZATION'),
@@ -31,13 +34,23 @@ export class SbOrganizationComponent implements OnDestroy {
     }
   };
 
-  constructor(private orgList: OrganizationListService,private userService: UserService,public dialogService: DialogService, public ref: DynamicDialogRef, private messageService: MessageService,private i18nextPipe: I18NextPipe) { }
+  constructor(private orgList: OrganizationListService, private userService: UserService, 
+    private userCountService: UserCountService, public dialogService: DialogService, 
+    public ref: DynamicDialogRef, private messageService: MessageService, private i18nextPipe: I18NextPipe) { }
+
   ngOnInit() {
-    this.getAllOrganizationList();
+    this.getTotalOrgCount();
     this.getTotalUserCount();
+    this.getTotalSubOrgCount();
+    this.getAllOrg().subscribe((data: any) => {
+      if (data && data.length > 0) {
+        this.getSubOrgCountOfEachOrg(data);
+        this.getUserCountOfEachOrg(data);
+      }
+    });
   }
 
-  getAllOrganizationList() {
+  getAllOrg() {
     const body = {
       "request": {
         "filters": {
@@ -45,14 +58,63 @@ export class SbOrganizationComponent implements OnDestroy {
         }
       }
     }
-    this.subscription = this.orgList.getAllOrganizationList(body).subscribe(
-      (data: any) => {
+    return this.orgList.getAllOrgSubOrg(body).pipe(
+      map((data: any) => {
         this.organizationDetail = data.result.response.content;
-        this.orgCount=this.organizationDetail.length;
-        this.organizationDetail.sort((startDate:any ,endDate :any)=>
+        this.organizationDetail.sort((startDate: any, endDate: any) =>
           new Date(endDate.createdDate).getTime() - new Date(startDate.createdDate).getTime());
-        this.loading = false;
+        return this.organizationDetail;
       },
+        (error: any) => {
+          console.log(error);
+          this.loading = false;
+        }
+      )
+    );
+  }
+
+  getSubOrgCountOfEachOrg(orgDetail: any) {
+    orgDetail.map((org: any) => {
+      const body = {
+        "request": {
+          "filters": {
+            "isRootOrg": false,
+            "isTenant": false,
+            "channel": org.channel
+
+          },
+          "sortBy": {
+            "createdDate": "Desc"
+          }
+        }
+      }
+      this.orgList.getAllOrgSubOrg(body).subscribe((subOrgCount: any) => {
+        org.subOrgCount = subOrgCount.result.response.count;
+      })
+    },
+      (error: any) => {
+        console.log(error);
+        this.loading = false;
+      }
+    )
+  }
+
+  getUserCountOfEachOrg(orgDetail: any): void {
+    orgDetail.map((org: any) => {
+      const body = {
+        "request": {
+          "filters": {
+            "rootOrgId": org.id
+          }
+        }
+      };
+      this.userCountService.getUserCountOfaTenant(body).subscribe((counttenant: any) => {
+        org.userCount = counttenant?.result?.response?.count;
+        if (orgDetail[orgDetail.length - 1].id === org.id) {
+          this.loading = false;
+        }
+      });
+    },
       (error: any) => {
         console.log(error);
         this.loading = false;
@@ -60,29 +122,68 @@ export class SbOrganizationComponent implements OnDestroy {
     );
   }
 
+  getTotalOrgCount() {
+    const body = {
+      "request": {
+        "filters": {
+          "isRootOrg": true
+        }
+      }
+    }
+    this.subscription = this.orgList.getAllOrgSubOrg(body).subscribe(
+      (data: any) => {
+        this.orgCount = data.result.response.count;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getTotalSubOrgCount() {
+    const body = {
+      "request": {
+        "filters": {
+          "isRootOrg": false
+        }
+      }
+    }
+    this.orgList.getAllOrgSubOrg(body).subscribe((response: any) => {
+      this.TotalsubOrgCount = response.result.response.count;
+    },
+      (error: any) => {
+        console.log(error);
+      }
+    )
+  }
+
+  getTotalUserCount() {
+    const body = {
+      "request": {
+        "filters": {
+        }
+      }
+    }
+    this.userService.loadUserList(body).subscribe((response: any) => {
+      this.TotaluserCount = response.result.response.count;
+    },
+      (error: any) => {
+        console.log(error);
+      }
+    )
+  }
+
   addOrg() {
     this.ref = this.dialogService.open(AddOrEditOrgComponent, this.addOrgDialog);
     this.ref.onClose.subscribe((newOrganizationData: any) => {
       if (newOrganizationData) {
         this.organizationDetail.unshift(newOrganizationData);
-        this.orgCount=this.organizationDetail.length;
-        this.messageService.add({ severity: 'success', summary: this.i18nextPipe.transform('ADD_ORGANIZATION_SUCCESSFULLY')})
+        this.orgCount = this.organizationDetail.length;
+        this.messageService.add({ severity: 'success', summary: this.i18nextPipe.transform('ADD_ORGANIZATION_SUCCESSFULLY') })
       }
     });
   }
- 
-  getTotalUserCount(){
-    const body={
-        "request": {
-            "filters": {
-            }
-        }
-    }
-    this.userService.loadUserList(body).subscribe((response:any) => {
-      this.userCount = response.result.response.count;
-    }) 
-  }
-   
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

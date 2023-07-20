@@ -3,4 +3,6 @@ export interface OrganizationDetail {
     channel: string;
     isRootOrg: string
     id: string;
+    userCount: number;
+    subOrgCount: number;
 }
