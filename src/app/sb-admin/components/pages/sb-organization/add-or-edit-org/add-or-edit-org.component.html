@@ -1,3 +1,4 @@
+<div *ngIf="mode === 'Add'">
 <form [formGroup]="addEditOrgForm">
     <div class="card p-fluid">
         <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
@@ -30,3 +31,37 @@
             class="p-button p-button-danger" (click)="cancel()"></button>
     </div>
 </form>
+</div>
+
+<div *ngIf="mode === 'Edit'">
+<form [formGroup]="EditOrgForm">
+    <div class="card p-fluid">
+        <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+        <div class="field">
+            <label for="orgName">{{ 'ORGANIZATION_NAME' | i18next}} </label>
+            <input type="text" name="orgName" pInputText id="orgName" autofocus
+                placeholder="{{ 'ORGANIZATION_NAME' | i18next}}" formControlName="orgName" />
+            <small *ngIf="submitted && EditOrgForm.controls['orgName'].errors">{{ 'ADD_ORGANIZATION_NAME_INVALID' |
+                    i18next}}</small>
+        </div>
+        <div class="field">
+            <label for="description">{{ 'ADD_ORGANIZATION_DESCRIPTION' | i18next}} </label>
+            <textarea pInputTextarea placeholder="{{ 'ADD_ORGANIZATION_DESCRIPTION' | i18next }}" autofocus
+             formControlName="description"></textarea>  
+            <small *ngIf="submitted && EditOrgForm.controls['description'].errors">{{
+                'ADD_ORGANIZATION_DESCRIPTION_INVALID' | i18next}}</small>       
+        </div>
+        <div class="field" >
+            <label for="description">{{ 'EDIT_ORGANIZATION_CHANNEL_ID' | i18next }}</label>
+            <input type="text" name="organisationId" pInputText id="organisationId" autofocus
+                     formControlName="organisati"   value="{{organization.id}}" readonly />
+        </div>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-4 p-xl-3 p-button-container">
+        <button (click)="ediitOrg()" pButton pRipple label="{{ 'EDIT_ORGANIZATION_SAVE' | i18next }}" icon="pi pi-check"
+            class="p-button p-button-success"></button>&nbsp;
+        <button pButton pRipple type="button" label="{{ 'ADD_ORGANIZATION_CANCEL' | i18next }}" icon="pi pi-times"
+            class="p-button p-button-danger" (click)="cancel()"></button>
+    </div>
+</form>
+</div>

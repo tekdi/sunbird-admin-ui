@@ -14,6 +14,7 @@
   "SUB_ORGANIZATION_TOTAL":"Total Sub-organizations",
   "TOTAL_USER":"Total Users",
   "ORGANIZATION_USERS_LIST_WARNING": "Organization Users Data Not Found",
+  "ORGANIZATION_LIST_WARNING":"Organisation Not Found",
   
   "ADD_ORGANIZATION_DESCRIPTION" : "Description",
   "ORGANIZATION_CHANNEL_NAME" : "Channel Name",
@@ -28,6 +29,13 @@
   "ADD_ORGANIZATION_BLANK_FIELD_MSG":"Fields should not be blank",
   "ADD_ORGANIZATION_SUCCESSFULLY":"Organization added successfully",
   "ADD_ORGANIZATION_ALREADY_EXIT":"Channel Already Exists",
+
+
+  "EDIT_ORGANIZATION_CHANNEL_ID": "Channel Id",
+  "EDIT_ORGANIZATION_SAVE": "SAVE",
+  "EDIT_ORGANIZATION_BLANK_FIELD_MSG": "Fields should not be blank",
+  "EDIT_ORGANIZATION_UPDATE_STATUS": "Successfully Updated",
+  "EDIT_ORGANIZATION_API_ERROR": "API Error",
   
   "USER_FIRST_NAME":"First Name",
   "USER_LAST_NAME":"Last Name",    

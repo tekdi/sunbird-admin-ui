@@ -16,7 +16,6 @@ import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
   styleUrls: ['./sb-organization.component.scss']
 })
 export class SbOrganizationComponent implements OnDestroy {
-
   organizationDetail: OrganizationDetail[] = [];
   loading: boolean = true;
   private subscription: Subscription | any;
@@ -26,16 +25,10 @@ export class SbOrganizationComponent implements OnDestroy {
   TotaluserCount: number = 0;
   TotalsubOrgCount: number = 0;
   messages: Message[] = [];
-  addOrgDialog = {
-    header: this.i18nextPipe.transform('ADD_ORGANIZATION'),
-    width: '40%',
-    contentStyle: {
-      overflow: 'auto'
-    }
-  };
 
-  constructor(private orgList: OrganizationListService, private userService: UserService, 
-    private userCountService: UserCountService, public dialogService: DialogService, 
+
+  constructor(private orgList: OrganizationListService, private userService: UserService,
+    private userCountService: UserCountService, public dialogService: DialogService,
     public ref: DynamicDialogRef, private messageService: MessageService, private i18nextPipe: I18NextPipe) { }
 
   ngOnInit() {
@@ -49,6 +42,7 @@ export class SbOrganizationComponent implements OnDestroy {
       }
     });
   }
+
 
   getAllOrg() {
     const body = {
@@ -174,7 +168,16 @@ export class SbOrganizationComponent implements OnDestroy {
   }
 
   addOrg() {
-    this.ref = this.dialogService.open(AddOrEditOrgComponent, this.addOrgDialog);
+    this.ref = this.dialogService.open(AddOrEditOrgComponent,
+      {
+        header: this.i18nextPipe.transform('ADD_ORGANIZATION'),
+        data: { mode: 'Add' },
+        width: '40%',
+        contentStyle: {
+          overflow: 'auto'
+        }
+      }
+    );
     this.ref.onClose.subscribe((newOrganizationData: any) => {
       if (newOrganizationData) {
         this.organizationDetail.unshift(newOrganizationData);
@@ -184,6 +187,25 @@ export class SbOrganizationComponent implements OnDestroy {
     });
   }
 
+  editOrganization(organization: any) {
+    this.ref = this.dialogService.open(AddOrEditOrgComponent, {
+      data: { mode: 'Edit', organization, },
+      width: '40%',
+      header: 'Edit Organization'
+    });
+    this.ref.onClose.subscribe((updatedData: any) => {
+      if (updatedData) {
+        this.messageService.add({
+          severity: 'success', summary: this.i18nextPipe.transform('EDIT_ORGANIZATION_UPDATE_STATUS')
+        })
+        const index = this.organizationDetail.findIndex((org) => org.id === updatedData.organisationId);
+        if (index !== -1) {
+          this.organizationDetail[index].orgName = updatedData.orgName;
+          this.organizationDetail[index].description = updatedData.description
+        }
+      }
+    })
+  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
