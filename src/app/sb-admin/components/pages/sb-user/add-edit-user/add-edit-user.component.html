@@ -60,9 +60,9 @@
         </div>
         <div class="field">
             <label for="multiselect">Do You want to create user in Root Organization? *</label>
-            <p-dropdown formControlName="selectedOption" [options]="orgTypeSelection"  (onChange)="getOrgType($event.value)" optionLabel="name" placeholder="Select" optionValue="value"></p-dropdown>
+            <p-dropdown formControlName="selectedOrgTypeOption" [options]="orgTypeSelection"  (onChange)="getOrgType($event.value)" optionLabel="name" placeholder="Select" optionValue="value"></p-dropdown>
         </div>
-        <div class="field"  *ngIf="ifYes">
+        <div class="field"  *ngIf="orgTypeRoot">
             <label for="multiselect" >{{ 'USER_CHANNEL_NAME' | i18next }} *</label>
             <p-dropdown formControlName="organisationId" [options]="organizations" optionLabel="orgName" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="id" [filter]="true" filterBy="channel" [showClear]="true"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['organisationId'].errors}"></p-dropdown>
@@ -71,7 +71,7 @@
             </div>
         </div>
 
-        <div class="field" *ngIf="ifNo">
+        <div class="field" *ngIf="orgTypeSubOrg">
             <label for="multiselect">{{ 'USER_CHANNEL_NAME' | i18next }} *</label>
             <p-dropdown formControlName="channelId" [options]="organizations"  (onChange)="loadSuborgOptions($event.value)" optionLabel="channel" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel" [filter]="true" filterBy="channel" [showClear]="true"
                 [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['channelId'].errors}"></p-dropdown>

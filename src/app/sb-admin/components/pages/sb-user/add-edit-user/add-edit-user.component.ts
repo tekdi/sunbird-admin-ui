@@ -19,16 +19,15 @@ export class AddEditUserComponent {
   emailPhoneRequired: boolean = false;
   organizations: any[] = [];
   selectedRole: any[] = [];
-  selectedOrganization!: any;
   messages!: Message[];
   roles = Roles;
   orgTypeSelection: any[] = [
     { name: 'Yes', value: 'yes' },
     { name: 'No', value: 'no' }
   ];
-  selectedOption: string = 'yes';
-  ifYes:boolean= false;
-  ifNo:boolean= false;
+  selectedOrgTypeOption: string = 'yes';
+  orgTypeRoot:boolean= false;
+  orgTypeSubOrg:boolean= false;
   isSubOrgDisabled: boolean = true;
   suborgOptions: any[]=[];
 
@@ -62,7 +61,7 @@ export class AddEditUserComponent {
       organisationId: ['', Validators.required],
       roles: ['', Validators.required],
       status:["ACTIVE"],
-      selectedOption:['', Validators.required],
+      selectedOrgTypeOption:['', Validators.required],
       channelId: ['']
     })
     if (this.config.data) {
@@ -116,13 +115,13 @@ export class AddEditUserComponent {
   }
 
   getOrgType(value: string): void {
-    this.selectedOption = value;
-    if(this.selectedOption==='yes'){
-      this.ifYes=true;
-      this.ifNo=false;
+    this.selectedOrgTypeOption = value;
+    if(this.selectedOrgTypeOption==='yes'){
+      this.orgTypeRoot=true;
+      this.orgTypeSubOrg=false;
     }else{
-      this.ifYes=false;
-      this.ifNo=true;
+      this.orgTypeRoot=false;
+      this.orgTypeSubOrg=true;
     }
   }
 
