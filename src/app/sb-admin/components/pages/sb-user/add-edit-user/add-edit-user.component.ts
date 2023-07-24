@@ -21,16 +21,17 @@ export class AddEditUserComponent {
   selectedRole: any[] = [];
   selectedOrganization!: any;
   messages!: Message[];
-  roles = Roles
-  suborgOptions: any[]=[];
-  isSubOrgDisabled: boolean = true;
+  roles = Roles;
+  orgTypeSelection: any[] = [
+    { name: 'Yes', value: 'yes' },
+    { name: 'No', value: 'no' }
+  ];
   selectedOption: string = 'yes';
   ifYes:boolean= false;
   ifNo:boolean= false;
-  orgTypeSelection: any[] = [
-      { name: 'Yes', value: 'yes' },
-      { name: 'No', value: 'no' }
-    ];
+  isSubOrgDisabled: boolean = true;
+  suborgOptions: any[]=[];
+
   constructor(
     private formBuilder: FormBuilder,
     public ref: DynamicDialogRef,
@@ -58,11 +59,11 @@ export class AddEditUserComponent {
       email: ['', Validators.email],
       emailVerified: true,
       password: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
-      channelId: ['', Validators.required],
-      selectedOption:['', Validators.required],
       organisationId: ['', Validators.required],
       roles: ['', Validators.required],
-      status:["ACTIVE"]
+      status:["ACTIVE"],
+      selectedOption:['', Validators.required],
+      channelId: ['']
     })
     if (this.config.data) {
       let user = this.config.data;
@@ -114,36 +115,19 @@ export class AddEditUserComponent {
     });
   }
 
-  getDropdownVal(value: string): void {
-    console.log(value,'dd value')
+  getOrgType(value: string): void {
     this.selectedOption = value;
-    if(this.selectedOption==='no'){
-      this.ifYes=false;
-      this.ifNo=true;
-    }else{
+    if(this.selectedOption==='yes'){
       this.ifYes=true;
       this.ifNo=false;
+    }else{
+      this.ifYes=false;
+      this.ifNo=true;
     }
   }
 
-
   saveUser() {
-    console.log(this.addEditUserForm.value);
-    const formData = this.addEditUserForm.value;
-    const apiData = {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      userName: formData.userName,
-      phone: formData.phone,
-      phoneVerified: formData.phoneVerified,
-      email: formData.email,
-      emailVerified: formData.emailVerified,
-      password: formData.password,
-      organisationId: formData.id,
-      roles: formData.roles,
-      status: formData.status
-    };
-    console.log(apiData)
+    console.log(this.addEditUserForm.value)
     this.submitted = true;
     if (!this.addEditUserForm.controls['phone'].value && !this.addEditUserForm.controls['email'].value) {
       this.emailPhoneRequired = true;
@@ -155,15 +139,14 @@ export class AddEditUserComponent {
     }
     const payload = {
       "params": {},
-      "request": apiData
+      "request": this.addEditUserForm.value
     }
-    console.log(apiData);
     this.messages = [];
     this.userService.addNewUser(payload).subscribe(response => {
       this.messages = [
         { severity: 'success', detail: response.params.status }
       ];
-      this.ref.close(apiData);
+      this.ref.close(this.addEditUserForm.value);
     }, (error) => {
       this.messages = [
       ];
