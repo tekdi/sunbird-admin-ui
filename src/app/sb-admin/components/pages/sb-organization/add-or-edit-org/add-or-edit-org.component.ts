@@ -17,8 +17,8 @@ export class AddOrEditOrgComponent {
   data: any;
   mode!: 'Add' | 'Edit';
   organization: any;
-  addEditOrgForm: FormGroup;
-  EditOrgForm: FormGroup
+  addEditOrgForm!: FormGroup;
+  EditOrgForm!: FormGroup
   submitted: boolean = false;
   messages!: Message[];
 
@@ -26,10 +26,21 @@ export class AddOrEditOrgComponent {
     this.data = this.dialogConfig.data;
     this.mode = this.data.mode;
     this.organization = this.data.organization;
-    console.log(this.organization)
+  //  console.log(this.organization,'dataaaaaa')
 
 
-    this.addEditOrgForm = formBuilder.group({
+   
+
+  }
+  ngOnInit() {
+    this.initializeAddForm();
+    this.initialzeEditForm();
+
+  }
+
+  initializeAddForm()
+  {
+    this.addEditOrgForm = this.formBuilder.group({
       orgName: ['', Validators.required],
       description: ['', Validators.required],
       channel: ['', Validators.required],
@@ -37,16 +48,15 @@ export class AddOrEditOrgComponent {
       isRootOrg: true,
       isTenant: true
     })
-
-    this.EditOrgForm = formBuilder.group({
-      orgName: [this.organization.orgName, Validators.required],
-      description: [this.organization.description, Validators.required],
-      organisationId: [this.organization.id]
+  }
+  initialzeEditForm(){
+    this.EditOrgForm = this.formBuilder.group({
+      orgName: [this.organization?.orgName, Validators.required],
+      description: [this.organization?.description, Validators.required],
+      organisationId: [this.organization?.id]
     })
   }
-  ngOnInit() {
 
-  }
 
   cancel() {
     this.ref.close();
@@ -64,10 +74,10 @@ export class AddOrEditOrgComponent {
       "request": this.addEditOrgForm.value
     }
     this.organizationListService.addOrg(body).subscribe((response) => {
-      const id = response.result.organisationId
       const updatedFormValues = {
         ...this.addEditOrgForm.value,
-        id: id
+        subOrgCount: 0,
+        userCount : 0
       };
       this.ref.close(updatedFormValues);
     }, (error: any) => {
