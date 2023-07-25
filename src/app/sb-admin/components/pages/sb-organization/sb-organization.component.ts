@@ -146,6 +146,7 @@ export class SbOrganizationComponent implements OnDestroy {
       };
       
       this.orgList.getUserType(body).subscribe((userType: any) => {
+        console.log(userType.result.form.data?.fields);
         org.userType =userType.result.form.data?.fields.map((field: any) => field.name);;
        // console.log( this.userType);
       })
