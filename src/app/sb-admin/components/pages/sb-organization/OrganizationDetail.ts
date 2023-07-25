@@ -7,15 +7,9 @@ export interface OrganizationDetail {
     subOrgCount: number;
     description: string;
     rootOrgId: string;
-    userType: UserType[];   
+    userType: UserType[];
 }
 
 export interface UserType {
-    userType1 : string;
-    userType2 : string;
-    userType3 : string;
-    userType4 : string;
-    userType5 : string;
-    userType6 : string;
-    userType7 : string;
+
 }

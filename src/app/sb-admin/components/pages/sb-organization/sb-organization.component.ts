@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { OrganizationDetail, UserType} from './OrganizationDetail';
+import { OrganizationDetail } from './OrganizationDetail';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 import { Subscription } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -18,7 +18,6 @@ import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
 })
 export class SbOrganizationComponent implements OnDestroy {
   organizationDetail: OrganizationDetail[] = [];
-  userType: UserType[]=[];
   loading: boolean = true;
   private subscription: Subscription | any;
   globalFilterFields: string[] = ['organizationName', 'channel', 'id'];
@@ -27,7 +26,7 @@ export class SbOrganizationComponent implements OnDestroy {
   TotaluserCount: number = 0;
   TotalsubOrgCount: number = 0;
   messages: Message[] = [];
-  userTypeofOrg:any;
+  userTypeofOrg: any;
 
 
   constructor(private orgList: OrganizationListService, private userService: UserService,
@@ -61,7 +60,7 @@ export class SbOrganizationComponent implements OnDestroy {
         this.organizationDetail = data.result.response.content;
         this.organizationDetail.sort((startDate: any, endDate: any) =>
           new Date(endDate.createdDate).getTime() - new Date(startDate.createdDate).getTime());
-          console.log(this.organizationDetail)
+        console.log(this.organizationDetail)
         return this.organizationDetail;
       },
         (error: any) => {
@@ -121,42 +120,27 @@ export class SbOrganizationComponent implements OnDestroy {
     );
   }
 
-  getUserType(orgDetail: any):void{
-
-    // const userTypes: UserType = {
-    //   userType1: "",
-    //   userType2: "",
-    //   userType3: "",
-    //   userType4: "",
-    //   userType5: "",
-    //   userType6: "",
-    //   userType7: "",
-    // };
-
-    
-    orgDetail.map((org: any, index: number) => {
+  getUserType(orgDetail: any): void {
+    orgDetail.map((org: any) => {
       const body = {
         "request": {
-        "type": "config",
-        "action": "get",
-        "subType": "userType",
-        "rootOrgId": org.rootOrgId,
-        "component": "portal"
+          "type": "config",
+          "action": "get",
+          "subType": "userType",
+          "rootOrgId": org.id,
+          "component": "portal"
         }
       };
-      
       this.orgList.getUserType(body).subscribe((userType: any) => {
-        console.log(userType.result.form.data?.fields);
-        org.userType =userType.result.form.data?.fields.map((field: any) => field.name);;
-       // console.log( this.userType);
+        //console.log(userType.result.form.data?.fields);
+        org.userType = userType.result.form.data?.fields.map((field: any) => field.name);;
       })
     },
       (error: any) => {
         console.log(error);
-       // this.loading = false;
       }
     );
-    }
+  }
 
   getTotalOrgCount() {
     const body = {
