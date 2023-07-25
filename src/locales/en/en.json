@@ -4,6 +4,7 @@
   "ORG_DASHBOARD_USERS_REGISTERED": "Registered Users",
   "ORG_DASHBOARD_WARNING": "Tenants Users Count Data Not Found !!",
   "ORG_DASHBOARD_LIST_WARNING":"Organization Data Not Found",
+  "ORG_MANAGEMENT":"Org Management",
   
   "ORGANIZATION":"Organizations",
   "ORGANIZATION_NAME":"Organization Name",
@@ -71,12 +72,19 @@
   "USER_EMAIL_PLACEHOLDER":"Enter Email",
   "USER_STATUS_PLACEHOLDER":"Select Status",
     
-  "USER_CHANNEL_NAME":"Organizaton",
+  "USER_CHANNEL_NAME":"Organizatons",
   "USER_ADDED_SUCCESSFULLY":"User Added Successfully",
   "USER_ORGANIZATION_NAME":"Organization Name",
   "USER_EDIT_ROLE":"Edit User Role",
   "USER_ROLES":"Roles",
   "USER_ROLE_ADDED":"User Role Updated Successfully",
+  "USER_MANAGEMENT":"User Management",
+
+  "USER_DASHBOARD_ROLE_NAME":"User Role",
+  "USER_DASHBOARD_USERS_ROLE_COUNT":"Count",
+  "USER_ROLE_DASHBOARD_LIST_WARNING":"Users Data Not Found",
+  "USER_DASHBOARD":"Dashboard",
+  "USER_DASHBOARD_ROLE":"Enter User Role",
   "USER_TOTAL": "Number of Users Found",
 
   "USER_BLOCK_CONFIRMATION": "Are you sure you want to block",
@@ -91,5 +99,7 @@
 
   "COMMON_USERS":"Users",
   "COMMON_YES":"Yes",
-  "COMMON_NO":"No"
+  "COMMON_NO":"No",
+
+  "LABEL_HOME":"Home"
 }
