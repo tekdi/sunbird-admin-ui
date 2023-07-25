@@ -64,8 +64,7 @@ export class SbOrganizationComponent implements OnDestroy {
       (error: any) => {
         console.log(error);
         this.loading = false;
-      }
-    );
+      });
   }
 
   addOrg() {
@@ -80,15 +79,13 @@ export class SbOrganizationComponent implements OnDestroy {
   }
 
   addSubOrg() {
-    this.ref=this.dialogService.open(AddSubOrgComponent, this.addSubOrgDialog);
+    this.ref = this.dialogService.open(AddSubOrgComponent, this.addSubOrgDialog);
     this.ref.onClose.subscribe((newSubOrgData: any) => {
       if (newSubOrgData) {
         this.messageService.add({ severity: 'success', summary: this.i18nextPipe.transform('ADD_SUB_ORGANIZATION_SUCCESSFULLY') })
       }
-    })
-
+    });
   }
-
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

@@ -4,9 +4,9 @@ input.ng-touched.ng-invalid{
 textarea.ng-touched.ng-invalid{
     border: 1px solid red;
 }
-small{
+.error-message{
     color: red;
 }
-.p-button-container{
+.action-buttons-position{
     float:right
 }
