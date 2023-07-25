@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { OrganizationDetail } from './OrganizationDetail';
+import { OrganizationDetail, UserType} from './OrganizationDetail';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 import { Subscription } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -10,6 +10,7 @@ import { UserService } from 'src/app/sb-admin/service/user.service';
 import { map } from 'rxjs';
 import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
 
+
 @Component({
   selector: 'app-sb-organization',
   templateUrl: './sb-organization.component.html',
@@ -17,6 +18,7 @@ import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
 })
 export class SbOrganizationComponent implements OnDestroy {
   organizationDetail: OrganizationDetail[] = [];
+  userType: UserType[]=[];
   loading: boolean = true;
   private subscription: Subscription | any;
   globalFilterFields: string[] = ['organizationName', 'channel', 'id'];
@@ -25,6 +27,7 @@ export class SbOrganizationComponent implements OnDestroy {
   TotaluserCount: number = 0;
   TotalsubOrgCount: number = 0;
   messages: Message[] = [];
+  userTypeofOrg:any;
 
 
   constructor(private orgList: OrganizationListService, private userService: UserService,
@@ -39,6 +42,7 @@ export class SbOrganizationComponent implements OnDestroy {
       if (data && data.length > 0) {
         this.getSubOrgCountOfEachOrg(data);
         this.getUserCountOfEachOrg(data);
+        this.getUserType(data);
       }
     });
   }
@@ -57,6 +61,7 @@ export class SbOrganizationComponent implements OnDestroy {
         this.organizationDetail = data.result.response.content;
         this.organizationDetail.sort((startDate: any, endDate: any) =>
           new Date(endDate.createdDate).getTime() - new Date(startDate.createdDate).getTime());
+          console.log(this.organizationDetail)
         return this.organizationDetail;
       },
         (error: any) => {
@@ -116,6 +121,42 @@ export class SbOrganizationComponent implements OnDestroy {
     );
   }
 
+  getUserType(orgDetail: any):void{
+
+    // const userTypes: UserType = {
+    //   userType1: "",
+    //   userType2: "",
+    //   userType3: "",
+    //   userType4: "",
+    //   userType5: "",
+    //   userType6: "",
+    //   userType7: "",
+    // };
+
+    
+    orgDetail.map((org: any, index: number) => {
+      const body = {
+        "request": {
+        "type": "config",
+        "action": "get",
+        "subType": "userType",
+        "rootOrgId": org.rootOrgId,
+        "component": "portal"
+        }
+      };
+      
+      this.orgList.getUserType(body).subscribe((userType: any) => {
+        org.userType =userType.result.form.data?.fields.map((field: any) => field.name);;
+       // console.log( this.userType);
+      })
+    },
+      (error: any) => {
+        console.log(error);
+       // this.loading = false;
+      }
+    );
+    }
+
   getTotalOrgCount() {
     const body = {
       "request": {
@@ -166,6 +207,8 @@ export class SbOrganizationComponent implements OnDestroy {
       }
     )
   }
+
+
 
   addOrg() {
     this.ref = this.dialogService.open(AddOrEditOrgComponent,

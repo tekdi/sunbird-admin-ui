@@ -3,6 +3,7 @@
         "ORGANIZATION_CREATE_URL": "api/org/v1/create",
         "ORGANIZATION_UPDATE_URL": "api/org/v1/update",
         "ORGNIZATION_SEARCH_URL": "api/org/v1/search",
+        "ORGNIZATION_USER_TYPE": "api/data/v1/form/read",
         "USER_BLOCK_URL": "api/user/v1/block",
         "USER_CREATE_URL": "api/user/v3/create",
         "USER_UPDATE_ROLE_URL": "api/user/v1/role/assign",

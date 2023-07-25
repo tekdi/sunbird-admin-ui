@@ -36,4 +36,11 @@ export class OrganizationListService {
     return this.http.patch(config.URLS.ORGANIZATION_UPDATE_URL, body, { headers: header })
   }
 
+  getUserType(body:any):Observable<any>{
+    let header = new HttpHeaders({
+      "Content-Type": 'application/json'
+    })
+    return this.http.post(config.URLS.ORGNIZATION_USER_TYPE, body, { headers: header })
+  }
+
 }
