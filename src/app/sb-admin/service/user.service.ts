@@ -54,4 +54,22 @@ export class UserService {
       return this.http.post(config.URLS.USER_UNBLOCK_URL, payload, { headers: header });
     }
   }
+
+  getAllUserRoles(body: any): Observable<Object> {
+    let header = new HttpHeaders({
+      "Content-Type": 'application/json',
+      "Authorization": environment.authKey,
+      "x-authenticated-user-token": environment.userToken,
+    })
+    return this.http.post(config.URLS.USER_ROLES_GET_URL, body, { headers: header })
+  }
+
+  getUsersCountByRole(body: any): Observable<Object> {
+    let header = new HttpHeaders({
+      "Content-Type": 'application/json',
+      "Authorization": environment.authKey,
+      "x-authenticated-user-token": environment.userToken,
+    })
+    return this.http.post(config.URLS.USER_SEARCH_URL, body, { headers: header })
+  }
 }
