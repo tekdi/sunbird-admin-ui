@@ -29,7 +29,6 @@ export class SbOrganizationComponent implements OnDestroy {
   TotalsubOrgCount: number = 0;
   messages: Message[] = [];
 
-
   constructor(private orgList: OrganizationListService, private userService: UserService,
     private userCountService: UserCountService, public dialogService: DialogService,
     public ref: DynamicDialogRef, private messageService: MessageService, private i18nextPipe: I18NextPipe) { }
@@ -211,6 +210,7 @@ export class SbOrganizationComponent implements OnDestroy {
       }
     })
   }
+
   addSubOrg() {
     this.ref = this.dialogService.open(AddSubOrgComponent, this.addSubOrgDialog);
     this.ref.onClose.subscribe((newSubOrgData: any) => {
@@ -223,6 +223,7 @@ export class SbOrganizationComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
 }
 
 

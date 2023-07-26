@@ -5,7 +5,6 @@ import { OrganizationListService } from 'src/app/sb-admin/service/organization-l
 import { Message } from 'primeng/api';
 import { I18NextPipe } from 'angular-i18next';
 
-
 @Component({
   selector: 'app-add-or-edit-org',
   templateUrl: './add-or-edit-org.component.html',
