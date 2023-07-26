@@ -21,7 +21,6 @@ export class AddOrEditOrgComponent {
       description: ['', Validators.required],
       channel: ['', Validators.required],
       organisationType: 'board',
-      isRootOrg: true,
       isTenant: true
     })
   }

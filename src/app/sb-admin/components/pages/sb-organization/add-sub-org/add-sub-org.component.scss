@@ -1,0 +1,12 @@
+input.ng-touched.ng-invalid{
+    border: 1px solid red;
+}
+textarea.ng-touched.ng-invalid{
+    border: 1px solid red;
+}
+.error-message{
+    color: red;
+}
+.action-buttons-position{
+    float:right
+}

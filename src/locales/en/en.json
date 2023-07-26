@@ -4,6 +4,7 @@
   "ORG_DASHBOARD_USERS_REGISTERED": "Registered Users",
   "ORG_DASHBOARD_WARNING": "Tenants Users Count Data Not Found !!",
   "ORG_DASHBOARD_LIST_WARNING":"Organization Data Not Found",
+  "ORG_MANAGEMENT":"Org Management",
   
   "ORGANIZATION":"Organizations",
   "ORGANIZATION_NAME":"Organization Name",
@@ -25,8 +26,15 @@
   "ADD_ORGANIZATION_BLANK_FIELD_MSG":"Fields should not be blank",
   "ADD_ORGANIZATION_SUCCESSFULLY":"Organization added successfully",
   "ADD_ORGANIZATION_ALREADY_EXIT":"Channel Already Exists",
-  "ORG_MANAGEMENT":"Org Management",
-  
+  "ADD_SUB_ORGANIZATION" : "Add Sub Organization",  
+  "ADD_SUB_ORGANIZATION_ROOT":"Root Organization",
+  "ADD_SUB_ORG":"Sub Organization",
+  "ADD_SUB_ORGANIZATION_DESCRIPTION": "Description",
+  "ADD_SUB_ORGANIZATION_NAME_INVALID":"Required Sub Organisation Name",
+  "ADD_SUB_ORGANIZATION_ROOT_INVALID":"Please select Organization",
+  "ADD_SUB_ORGANIZATION_ALREADY_EXIT": "Already Exist Sub Organiztion",
+  "ADD_SUB_ORGANIZATION_SUCCESSFULLY": "Sub Organization added successfully",
+
   "USER_FIRST_NAME":"First Name",
   "USER_LAST_NAME":"Last Name",    
   "USER_EMAIL":"Email",

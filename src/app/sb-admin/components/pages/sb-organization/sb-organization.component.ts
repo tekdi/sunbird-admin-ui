@@ -6,6 +6,8 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddOrEditOrgComponent } from './add-or-edit-org/add-or-edit-org.component';
 import { MessageService, Message } from 'primeng/api';
 import { I18NextPipe } from 'angular-i18next';
+import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
+
 
 @Component({
   selector: 'app-sb-organization',
@@ -17,9 +19,9 @@ export class SbOrganizationComponent implements OnDestroy {
   organizationDetail: OrganizationDetail[] = [];
   loading: boolean = true;
   private subscription: Subscription | any;
-  globalFilterFields :string []=['organizationName','channel','id'];
-  rows:number=10;
-  count :number=0;
+  globalFilterFields: string[] = ['organizationName', 'channel', 'id'];
+  rows: number = 10;
+  count: number = 0;
   messages: Message[] = [];
   addOrgDialog = {
     header: this.i18nextPipe.transform('ADD_ORGANIZATION'),
@@ -29,7 +31,16 @@ export class SbOrganizationComponent implements OnDestroy {
     }
   };
 
-  constructor(private orgList: OrganizationListService, public dialogService: DialogService, public ref: DynamicDialogRef, private messageService: MessageService,private i18nextPipe: I18NextPipe) { }
+  addSubOrgDialog = {
+    header: this.i18nextPipe.transform('ADD_SUB_ORGANIZATION'),
+    width: '40%',
+    contentStyle: {
+      overflow: 'auto'
+    }
+  };
+
+
+  constructor(private orgList: OrganizationListService, public dialogService: DialogService, public ref: DynamicDialogRef, private messageService: MessageService, private i18nextPipe: I18NextPipe) { }
   ngOnInit() {
     this.getAllOrganizationList();
   }
@@ -45,16 +56,15 @@ export class SbOrganizationComponent implements OnDestroy {
     this.subscription = this.orgList.getAllOrganizationList(body).subscribe(
       (data: any) => {
         this.organizationDetail = data.result.response.content;
-        this.count=this.organizationDetail.length;
-        this.organizationDetail.sort((startDate:any ,endDate :any)=>
+        this.count = this.organizationDetail.length;
+        this.organizationDetail.sort((startDate: any, endDate: any) =>
           new Date(endDate.createdDate).getTime() - new Date(startDate.createdDate).getTime());
         this.loading = false;
       },
       (error: any) => {
         console.log(error);
         this.loading = false;
-      }
-    );
+      });
   }
 
   addOrg() {
@@ -62,11 +72,21 @@ export class SbOrganizationComponent implements OnDestroy {
     this.ref.onClose.subscribe((newOrganizationData: any) => {
       if (newOrganizationData) {
         this.organizationDetail.unshift(newOrganizationData);
-        this.count=this.organizationDetail.length;
-        this.messageService.add({ severity: 'success', summary: this.i18nextPipe.transform('ADD_ORGANIZATION_SUCCESSFULLY')})
+        this.count = this.organizationDetail.length;
+        this.messageService.add({ severity: 'success', summary: this.i18nextPipe.transform('ADD_ORGANIZATION_SUCCESSFULLY') })
       }
     });
   }
+
+  addSubOrg() {
+    this.ref = this.dialogService.open(AddSubOrgComponent, this.addSubOrgDialog);
+    this.ref.onClose.subscribe((newSubOrgData: any) => {
+      if (newSubOrgData) {
+        this.messageService.add({ severity: 'success', summary: this.i18nextPipe.transform('ADD_SUB_ORGANIZATION_SUCCESSFULLY') })
+      }
+    });
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
