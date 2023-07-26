@@ -28,6 +28,10 @@
         <div class="card p-fluid">
             <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
             <div class="field">
+                <label for="description">{{ 'EDIT_ORGANIZATION_CHANNEL_ID' | i18next }}</label>
+                <input id="disabled-input" pInputText [disabled]="isDisabled" autofocus formControlName="organisationId" value="{{organization.id}}" readonly />
+            </div>
+            <div class="field">
                 <label for="orgName">{{ 'ORGANIZATION_NAME' | i18next}} </label>
                 <input type="text" name="orgName" pInputText id="orgName" autofocus placeholder="{{ 'ORGANIZATION_NAME' | i18next}}" formControlName="orgName" />
                 <small *ngIf="submitted && EditOrgForm.controls['orgName'].errors">{{ 'ADD_ORGANIZATION_NAME_INVALID' | i18next}}</small>
@@ -36,10 +40,6 @@
                 <label for="description">{{ 'ADD_ORGANIZATION_DESCRIPTION' | i18next}} </label>
                 <textarea pInputTextarea placeholder="{{ 'ADD_ORGANIZATION_DESCRIPTION' | i18next }}" autofocus formControlName="description"></textarea>
                 <small *ngIf="submitted && EditOrgForm.controls['description'].errors">{{ 'ADD_ORGANIZATION_DESCRIPTION_INVALID' | i18next}}</small>
-            </div>
-            <div class="field">
-                <label for="description">{{ 'EDIT_ORGANIZATION_CHANNEL_ID' | i18next }}</label>
-                <input type="text" name="organisationId" pInputText id="organisationId" autofocus formControlName="organisationId" value="{{organization.id}}" readonly />
             </div>
         </div>
         <div class="p-col-12 p-md-6 p-lg-4 p-xl-3 p-button-container">

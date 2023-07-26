@@ -20,6 +20,7 @@ export class AddOrEditOrgComponent {
   EditOrgForm!: FormGroup
   submitted: boolean = false;
   messages!: Message[];
+  isDisabled: boolean = true;
 
   constructor(public formBuilder: FormBuilder,
     public ref: DynamicDialogRef,
@@ -42,7 +43,6 @@ export class AddOrEditOrgComponent {
       description: ['', Validators.required],
       channel: ['', Validators.required],
       organisationType: 'board',
-      isRootOrg: true,
       isTenant: true
     })
   }
@@ -71,10 +71,12 @@ export class AddOrEditOrgComponent {
       "request": this.addEditOrgForm.value
     }
     this.organizationListService.addOrg(body).subscribe((response) => {
+      const id = response.result.organisationId
       const updatedFormValues = {
         ...this.addEditOrgForm.value,
         subOrgCount: 0,
-        userCount: 0
+        userCount: 0,
+        id: id
       };
       this.ref.close(updatedFormValues);
     }, (error: any) => {

@@ -1,0 +1,17 @@
+{
+    "charset": "utf-8",
+
+    "insert_final_newline": true,
+
+    "useTabs": true,
+    "tabWidth": 4,
+
+    "bracketSpacing": true,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all",
+
+    "printWidth": 80,
+
+    "overrides": []
+}

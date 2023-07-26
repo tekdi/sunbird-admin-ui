@@ -1,0 +1,24 @@
+<form [formGroup]="addSubOrg">
+    <div class="card p-fluid">
+        <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+        <div class="field">
+            <label for="rootName">{{ 'ADD_SUB_ORGANIZATION_ROOT' | i18next}}</label>
+            <p-dropdown formControlName="channel" [options]="organizations" optionLabel="orgName" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel" [filter]="true" filterBy="channel" [showClear]="true">
+            </p-dropdown>
+            <small class="error-message" *ngIf="submitted && addSubOrg.controls['channel'].errors">{{ 'ADD_ORGANIZATION_TYPE_INVALID' | i18next}}</small>
+        </div>
+        <div class="field">
+            <label for="addSubOrg">{{ 'ADD_SUB_ORG' | i18next }}</label>
+            <input type="text" pInputText id="orgName" autofocus formControlName="orgName" placeholder="{{ 'ADD_SUB_ORG' | i18next }}" />
+            <small class="error-message" *ngIf="submitted && addSubOrg.controls['orgName'].errors">{{ 'ADD_SUB_ORGANIZATION_NAME_INVALID' | i18next}}</small>
+        </div>
+        <div class="field">
+            <label for="description">{{ 'ADD_SUB_ORGANIZATION_DESCRIPTION' | i18next }}</label>
+            <textarea pInputTextarea placeholder="{{ 'ADD_SUB_ORGANIZATION_DESCRIPTION' | i18next }}" autofocus formControlName="description"></textarea>
+            <small class="error-message" *ngIf="submitted && addSubOrg.controls['description'].errors">{{ 'ADD_ORGANIZATION_DESCRIPTION_INVALID' | i18next}}</small>
+        </div>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-4 p-xl-3 action-buttons-position">
+        <button pButton pRipple label="{{ 'ADD_ORGANIZATION_SUBMIT' | i18next }}" icon="pi pi-check" class="p-button p-button-success" (click)="saveSubOrg()"></button>&nbsp; <button pButton pRipple type="button" label="{{ 'ADD_ORGANIZATION_CANCEL' | i18next }}" icon="pi pi-times" class="p-button p-button-danger" (click)="cancel()"></button>
+    </div>
+</form>

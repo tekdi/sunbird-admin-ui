@@ -52,6 +52,7 @@
                         <p-message severity="warn" text="{{ 'ORGANIZATION_LIST_WARNING' | i18next }}" *ngIf="!organizationDetail || organizationDetail.length === 0"></p-message>
                         <div class="my-2">
                             <button pButton pRipple label="{{ 'ADD_ORGANIZATION' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2" (click)="addOrg()"></button>
+                            <button pButton pRipple label="{{ 'ADD_SUB_ORGANIZATION' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2" (click)="addSubOrg()"></button>
                         </div>
                     </div>
                 </ng-template>

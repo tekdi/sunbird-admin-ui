@@ -27,13 +27,24 @@ export class OrganizationListService {
     return this.http.post(config.URLS.ORGANIZATION_CREATE_URL, body, { headers: header })
   }
 
-  editOrg(body: any): Observable<any>{
+  editOrg(body: any): Observable<any> {
+    let header = new HttpHeaders({
+      "Content-Type": 'application/json',
+      "Authorization": environment.authKey,
+      "x-authenticated-user-token": environment.userToken,
+
+    })
+    return this.http.patch(config.URLS.ORGANIZATION_UPDATE_URL, body, { headers: header })
+  }
+
+  addSubOrg(body: any): Observable<any> {
     let header = new HttpHeaders({
       "Content-Type": 'application/json',
       "Authorization": environment.authKey,
       "x-authenticated-user-token": environment.userToken,
     })
-    return this.http.patch(config.URLS.ORGANIZATION_UPDATE_URL, body, { headers: header })
+
+    return this.http.post(config.URLS.ORGANIZATION_CREATE_URL, body, { headers: header })
   }
 
 }
