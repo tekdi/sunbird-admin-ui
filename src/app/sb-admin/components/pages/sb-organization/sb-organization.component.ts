@@ -15,6 +15,7 @@ import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
   templateUrl: './sb-organization.component.html',
   styleUrls: ['./sb-organization.component.scss']
 })
+
 export class SbOrganizationComponent implements OnDestroy {
   organizationDetail: OrganizationDetail[] = [];
   loading: boolean = true;
@@ -25,7 +26,6 @@ export class SbOrganizationComponent implements OnDestroy {
   TotaluserCount: number = 0;
   TotalsubOrgCount: number = 0;
   messages: Message[] = [];
-
 
   constructor(private orgList: OrganizationListService, private userService: UserService,
     private userCountService: UserCountService, public dialogService: DialogService,
@@ -42,7 +42,6 @@ export class SbOrganizationComponent implements OnDestroy {
       }
     });
   }
-
 
   getAllOrg() {
     const body = {
@@ -89,8 +88,7 @@ export class SbOrganizationComponent implements OnDestroy {
       (error: any) => {
         console.log(error);
         this.loading = false;
-      }
-    )
+      })
   }
 
   getUserCountOfEachOrg(orgDetail: any): void {
@@ -112,8 +110,7 @@ export class SbOrganizationComponent implements OnDestroy {
       (error: any) => {
         console.log(error);
         this.loading = false;
-      }
-    );
+      });
   }
 
   getTotalOrgCount() {
@@ -130,8 +127,7 @@ export class SbOrganizationComponent implements OnDestroy {
       },
       (error: any) => {
         console.log(error);
-      }
-    );
+      });
   }
 
   getTotalSubOrgCount() {
@@ -147,8 +143,7 @@ export class SbOrganizationComponent implements OnDestroy {
     },
       (error: any) => {
         console.log(error);
-      }
-    )
+      })
   }
 
   getTotalUserCount() {
@@ -163,8 +158,7 @@ export class SbOrganizationComponent implements OnDestroy {
     },
       (error: any) => {
         console.log(error);
-      }
-    )
+      })
   }
 
   addOrg() {
@@ -206,6 +200,7 @@ export class SbOrganizationComponent implements OnDestroy {
       }
     })
   }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

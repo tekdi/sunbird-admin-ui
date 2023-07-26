@@ -13,7 +13,6 @@ import { I18NextPipe } from 'angular-i18next';
 })
 export class AddOrEditOrgComponent {
 
-
   data: any;
   mode!: 'Add' | 'Edit';
   organization: any;
@@ -22,24 +21,22 @@ export class AddOrEditOrgComponent {
   submitted: boolean = false;
   messages!: Message[];
 
-  constructor(public formBuilder: FormBuilder, public ref: DynamicDialogRef, public dialogConfig: DynamicDialogConfig, private organizationListService: OrganizationListService, private i18nextPipe: I18NextPipe) {
+  constructor(public formBuilder: FormBuilder,
+    public ref: DynamicDialogRef,
+    public dialogConfig: DynamicDialogConfig,
+    private organizationListService: OrganizationListService,
+    private i18nextPipe: I18NextPipe) {
     this.data = this.dialogConfig.data;
     this.mode = this.data.mode;
     this.organization = this.data.organization;
-  //  console.log(this.organization,'dataaaaaa')
-
-
-   
-
   }
+
   ngOnInit() {
     this.initializeAddForm();
     this.initialzeEditForm();
-
   }
 
-  initializeAddForm()
-  {
+  initializeAddForm() {
     this.addEditOrgForm = this.formBuilder.group({
       orgName: ['', Validators.required],
       description: ['', Validators.required],
@@ -49,14 +46,14 @@ export class AddOrEditOrgComponent {
       isTenant: true
     })
   }
-  initialzeEditForm(){
+
+  initialzeEditForm() {
     this.EditOrgForm = this.formBuilder.group({
       orgName: [this.organization?.orgName, Validators.required],
       description: [this.organization?.description, Validators.required],
       organisationId: [this.organization?.id]
     })
   }
-
 
   cancel() {
     this.ref.close();
@@ -77,18 +74,17 @@ export class AddOrEditOrgComponent {
       const updatedFormValues = {
         ...this.addEditOrgForm.value,
         subOrgCount: 0,
-        userCount : 0
+        userCount: 0
       };
       this.ref.close(updatedFormValues);
     }, (error: any) => {
       this.messages = [
         { severity: 'error', summary: this.i18nextPipe.transform('ADD_ORGANIZATION_ALREADY_EXIT') }
       ]
-    }
-    )
+    });
   }
 
-  ediitOrg() {
+  editOrg() {
     this.submitted = true;
     if (this.EditOrgForm.invalid) {
       this.messages = [
@@ -106,11 +102,9 @@ export class AddOrEditOrgComponent {
     },
       (error: any) => {
         this.messages = [
-          { severity: 'error', summary: this.i18nextPipe.transform('EDIT_ORGANIZATION_API_ERROR')  }
+          { severity: 'error', summary: this.i18nextPipe.transform('EDIT_ORGANIZATION_API_ERROR') }
         ]
-      }
-
-    )
+      })
   }
 }
 
