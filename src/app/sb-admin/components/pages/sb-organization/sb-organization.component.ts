@@ -9,6 +9,8 @@ import { I18NextPipe } from 'angular-i18next';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { map } from 'rxjs';
 import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
+import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
+
 
 @Component({
   selector: 'app-sb-organization',
@@ -34,9 +36,18 @@ export class SbOrganizationComponent implements OnDestroy {
     }
   };
 
-  constructor(private orgList: OrganizationListService, private userService: UserService, 
-    private userCountService: UserCountService, public dialogService: DialogService, 
+  constructor(private orgList: OrganizationListService, private userService: UserService,
+    private userCountService: UserCountService, public dialogService: DialogService,
     public ref: DynamicDialogRef, private messageService: MessageService, private i18nextPipe: I18NextPipe) { }
+
+  addSubOrgDialog = {
+    header: this.i18nextPipe.transform('ADD_SUB_ORGANIZATION'),
+    width: '40%',
+    contentStyle: {
+      overflow: 'auto'
+    }
+  };
+
 
   ngOnInit() {
     this.getTotalOrgCount();
@@ -180,6 +191,15 @@ export class SbOrganizationComponent implements OnDestroy {
         this.organizationDetail.unshift(newOrganizationData);
         this.orgCount = this.organizationDetail.length;
         this.messageService.add({ severity: 'success', summary: this.i18nextPipe.transform('ADD_ORGANIZATION_SUCCESSFULLY') })
+      }
+    });
+  }
+
+  addSubOrg() {
+    this.ref = this.dialogService.open(AddSubOrgComponent, this.addSubOrgDialog);
+    this.ref.onClose.subscribe((newSubOrgData: any) => {
+      if (newSubOrgData) {
+        this.messageService.add({ severity: 'success', summary: this.i18nextPipe.transform('ADD_SUB_ORGANIZATION_SUCCESSFULLY') })
       }
     });
   }
