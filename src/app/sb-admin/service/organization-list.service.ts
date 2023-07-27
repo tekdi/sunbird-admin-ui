@@ -18,18 +18,28 @@ export class OrganizationListService {
     return this.http.post(config.URLS.ORGNIZATION_SEARCH_URL, body, { headers: header })
   }
 
-  addOrg(body : any):Observable<any>{
-    let header=new HttpHeaders({
+  addOrg(body: any): Observable<any> {
+    let header = new HttpHeaders({
       "Content-Type": 'application/json',
       "Authorization": environment.authKey,
       "x-authenticated-user-token": environment.userToken,
     })
- return this.http.post(config.URLS.ORGANIZATION_CREATE_URL,body,{headers: header})
-}
-  getSubOrgList(body:any): Observable<object>{
+    return this.http.post(config.URLS.ORGANIZATION_CREATE_URL, body, { headers: header })
+  }
+  getSubOrgList(body: any): Observable<object> {
     let header = new HttpHeaders({
       "Content-Type": 'application/json'
     })
     return this.http.post(config.URLS.ORGNIZATION_SEARCH_URL, body, { headers: header })
+  }
+
+
+  addSubOrg(body: any): Observable<any> {
+    let header = new HttpHeaders({
+      "Content-Type": 'application/json',
+      "Authorization": environment.authKey,
+      "x-authenticated-user-token": environment.userToken,
+    })
+    return this.http.post(config.URLS.ORGANIZATION_CREATE_URL, body, { headers: header })
   }
 }

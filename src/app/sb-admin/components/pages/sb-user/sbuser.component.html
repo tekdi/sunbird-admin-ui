@@ -2,108 +2,81 @@
 <div class="grid">
     <div class="col-12">
         <div class="card px-6 py-6">
-            <h5 class="m-0">{{ 'COMMON_USERS' | i18next}}</h5><br>                 
-            <p-table #myTable [value]="organizationsUsersList" [columns]="cols" [loading]='loading'
-                [totalRecords]="count" responsiveLayout="scroll" [rows]="rows" [paginator]="true"
-                [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple"
-                [rowHover]="true" dataKey="userId" [lazy]="true" (onLazyLoad)="loadUserList($event)" [(first)]="first">
+            <h5 class="m-0">{{ 'COMMON_USERS' | i18next}}</h5><br>
+            <p-table #myTable [value]="organizationsUsersList" [columns]="cols" [loading]='loading' [totalRecords]="count" responsiveLayout="scroll" [rows]="rows" [paginator]="true" [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="userId" [lazy]="true" (onLazyLoad)="loadUserList($event)" [(first)]="first">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                        <span class="block mt-2 md:mt-0 p-input-icon-left">
-                            {{ 'USER_TOTAL' | i18next }} <p-chip label="{{count}}" icon="pi pi-user"></p-chip>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left"> {{ 'USER_TOTAL' | i18next }} <p-chip label="{{count}}" icon="pi pi-user"></p-chip>
                         </span>
-                        <p-message severity="warn" text="{{ 'ORGANIZATION_USERS_LIST_WARNING' | i18next }}"
-                               *ngIf="!organizationsUsersList || organizationsUsersList.length === 0"></p-message>
-                    
-                        <button pButton pRipple label="{{ 'USER_ADD' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2" (click)="addNewUser()"
-                            ></button>
+                        <p-message severity="warn" text="{{ 'ORGANIZATION_USERS_LIST_WARNING' | i18next }}" *ngIf="!organizationsUsersList || organizationsUsersList.length === 0"></p-message>
+                        <button pButton pRipple label="{{ 'USER_ADD' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2" (click)="addNewUser()"></button>
                     </div>
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
                         <th scope="col" pSortableColumn="firstName">{{ 'USER_FIRST_NAME' |i18next }}<p-sortIcon field="firstName"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="lastName">{{ 'USER_LAST_NAME' |i18next }}<p-sortIcon field="lastName"></p-sortIcon></th>
-                        <th scope="col" pSortableColumn="channel">{{ 'USER_CHANNEL_NAME'  | i18next}}<p-sortIcon field="channel"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="channel">{{ 'USER_CHANNEL_NAME' | i18next}}<p-sortIcon field="channel"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="email">{{ 'USER_EMAIL' | i18next }} <p-sortIcon field="email"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="phone">{{ 'USER_PHONE' |i18next }}<p-sortIcon field="phone"></p-sortIcon></th>
                         <th scope="col" pSortableColumn="status">{{ 'USER_STATUS' | i18next }}<p-sortIcon field="status"></p-sortIcon></th>
                         <th scope="col">{{ 'USER_ACTION' | i18next }}</th>
                         <th></th>
                     </tr>
-                    
-                    <tr>                      
+                    <tr>
                         <th scope="col">
                             <span class="block mt-2 md:mt-0 p-input-icon-left">
                                 <i class="pi pi-search"></i>
-                                <input pInputText type="text" (input)="onSearch($event,'firstName')"
-                                    placeholder="{{ 'USER_SEARCH_FIRST_NAME' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.firstName" >
-                            </span>   
-                        </th>
-                        <th scope="col">
-                            <span class="block mt-2 md:mt-0 p-input-icon-left">
-                                <i class="pi pi-search"></i>
-                                <input pInputText type="text" (input)="onSearch($event,'lastName')"
-                                    placeholder="{{ 'USER_SEARCH_LAST_NAME' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.lastName" />
+                                <input pInputText type="text" (input)="onSearch($event,'firstName')" placeholder="{{ 'USER_SEARCH_FIRST_NAME' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.firstName">
                             </span>
                         </th>
                         <th scope="col">
-                            <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" [(ngModel)]="filteredValue.rootOrgName"
-                                optionLabel="channel" (onChange)="onSearch($event,'organizations')" appendTo="body"
-                                placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}"  (onChange)="loadSuborgOptions($event.value)" optionValue="channel">
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="onSearch($event,'lastName')" placeholder="{{ 'USER_SEARCH_LAST_NAME' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.lastName" />
+                            </span>
+                        </th>
+                        <th scope="col">
+                            <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" [(ngModel)]="filteredValue.rootOrgName" optionLabel="channel" (onChange)="onSearch($event,'organizations')" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" (onChange)="loadSuborgOptions($event.value)" optionValue="channel">
                             </p-dropdown><br><br>
-                            <p-dropdown [options]="suborgOptions" [filter]="true" [showClear]="true" [(ngModel)]="filteredValue.orgName"
-                                optionLabel="orgName" appendTo="body" (onChange)="onSearch($event,'organizations')" placeholder="Select Suborg" optionValue="orgName"
-                                [disabled]="isSubOrgDisabled">
+                            <p-dropdown [options]="suborgOptions" [filter]="true" [showClear]="true" [(ngModel)]="filteredValue.orgName" optionLabel="orgName" appendTo="body" (onChange)="onSearch($event,'organizations')" placeholder="Select Suborg" optionValue="orgName" [disabled]="isSubOrgDisabled">
                             </p-dropdown>
-                        </th>                        
-                        <th scope="col">
-                            <span class="block mt-2 md:mt-0 p-input-icon-left">
-                                <i class="pi pi-search"></i>
-                                <input pInputText type="text" (input)="onSearch($event,'email')"
-                                    placeholder="{{ 'USER_SEARCH_EMAIL' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.email" >
-                            </span>   
                         </th>
                         <th scope="col">
                             <span class="block mt-2 md:mt-0 p-input-icon-left">
                                 <i class="pi pi-search"></i>
-                                <input pInputText type="text" (input)="onSearch($event,'phone')"
-                                    placeholder="{{ 'USER_SEARCH_PHONE' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.phone" >
-                            </span>   
+                                <input pInputText type="text" (input)="onSearch($event,'email')" placeholder="{{ 'USER_SEARCH_EMAIL' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.email">
+                            </span>
                         </th>
                         <th scope="col">
-                            <p-dropdown [options]="status" [filter]="true" [showClear]="true" [(ngModel)]="filteredValue.status"
-                                optionLabel="name" (onChange)="onSearch($event,'status')" placeholder="{{'USER_STATUS_PLACEHOLDER' | i18next}}"
-                                optionValue="value" appendTo="body"></p-dropdown>
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="onSearch($event,'phone')" placeholder="{{ 'USER_SEARCH_PHONE' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.phone">
+                            </span>
+                        </th>
+                        <th scope="col">
+                            <p-dropdown [options]="status" [filter]="true" [showClear]="true" [(ngModel)]="filteredValue.status" optionLabel="name" (onChange)="onSearch($event,'status')" placeholder="{{'USER_STATUS_PLACEHOLDER' | i18next}}" optionValue="value" appendTo="body"></p-dropdown>
                         </th>
                         <th scope="col"></th>
                     </tr>
-
                 </ng-template>
                 <ng-template pTemplate="body" let-user>
                     <tr>
                         <td>
-                            <span class="p-column-title">{{'USER_FIRST_NAME' | i18next}}</span>
-                            {{user.firstName}}
+                            <span class="p-column-title">{{'USER_FIRST_NAME' | i18next}}</span> {{user.firstName}}
                         </td>
                         <td>
-                            <span class="p-column-title">{{'USER_LAST_NAME' | i18next}}</span>
-                            {{user.lastName}}
+                            <span class="p-column-title">{{'USER_LAST_NAME' | i18next}}</span> {{user.lastName}}
                         </td>
-                        <td ><span class="p-column-title">{{'USER_ORGANIZATION_NAME' | i18next}}</span>
-                            {{user.channel}}
+                        <td><span class="p-column-title">{{'USER_ORGANIZATION_NAME' | i18next}}</span> {{user.channel}} </td>
+                        <td>
+                            <span class="p-column-title">{{'USER_EMAIL' | i18next}}</span> {{user.email}}
                         </td>
                         <td>
-                            <span class="p-column-title">{{'USER_EMAIL' | i18next}}</span>
-                            {{user.email}}
+                            <span class="p-column-title">{{'USER_PHONE' | i18next}}</span> {{user.phone}}
                         </td>
                         <td>
-                            <span class="p-column-title">{{'USER_PHONE' | i18next}}</span>
-                            {{user.phone}}
-                        </td>
-                        <td>
-                            <span class="p-column-title" >{{'USER_STATUS' | i18next}}</span>
-                            {{user.status ? "Active" : "Inactive"}}
+                            <span class="p-column-title">{{'USER_STATUS' | i18next}}</span> {{user.status ? "Active" : "Inactive"}}
                         </td>
                         <td>
                             <div class="flex">
@@ -114,38 +87,32 @@
                     </tr>
                 </ng-template>
             </p-table>
-
-            <p-dialog [(visible)]="blockUnblockUserDialog" header="Confirm" [modal]="true" >
+            <p-dialog [(visible)]="blockUnblockUserDialog" header="Confirm" [modal]="true">
                 <div class="flex align-items-center justify-content-center">
                     <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                     <span> {{ user?.status === 1 ? ('USER_BLOCK_CONFIRMATION' | i18next) : ('USER_UNBLOCK_CONFIRMATION' | i18next)}} <b>{{user?.firstName}} {{user?.lastName}}</b>?</span>
+                    <span> {{ user?.status === 1 ? ('USER_BLOCK_CONFIRMATION' | i18next) : ('USER_UNBLOCK_CONFIRMATION' | i18next)}} <b>{{user?.firstName}} {{user?.lastName}}</b>?</span>
                 </div>
                 <ng-template pTemplate="footer">
                     <button pButton pRipple icon="pi pi-times" class="p-button-text" label="{{'COMMON_NO' | i18next}}" (click)="blockUnblockUserDialog = false"></button>
                     <button pButton pRipple icon="pi pi-check" class="p-button-text" label="{{'COMMON_YES' | i18next}}" (click)="confirmBlock()"></button>
-                </ng-template>            
+                </ng-template>
             </p-dialog>
-
         </div>
     </div>
 </div>
-
-<p-dialog [(visible)]="userDialog" header="{{'USER_EDIT_ROLE' | i18next}}" [modal]="true" class="p-fluid"> 
+<p-dialog [(visible)]="userDialog" header="{{'USER_EDIT_ROLE' | i18next}}" [modal]="true" class="p-fluid">
     <ng-template pTemplate="content">
         <div class="card p-fluid">
             <div class="field">
                 <label for="multiselect">{{ 'USER_ROLE' | i18next }} *</label>
-                <p-multiSelect optionLabel="name" placeholder="{{'USER_ROLE_PLACEHOLDER' | i18next}}" optionValue="value"
-                    [options]="roles" appendTo="body" [(ngModel)]="selectedUserRole" [ngClass]="{'ng-invalid ng-dirty' : submitted && selectedUserRole.length === 0}"></p-multiSelect>
-                    <div><small class=danger *ngIf="submitted && selectedUserRole.length === 0">{{ 'USER_ROLE_REQUIRED' | i18next }}.</small>
-                    </div>
+                <p-multiSelect optionLabel="name" placeholder="{{'USER_ROLE_PLACEHOLDER' | i18next}}" optionValue="value" [options]="roles" appendTo="body" [(ngModel)]="selectedUserRole" [ngClass]="{'ng-invalid ng-dirty' : submitted && selectedUserRole.length === 0}"></p-multiSelect>
+                <div><small class=danger *ngIf="submitted && selectedUserRole.length === 0">{{ 'USER_ROLE_REQUIRED' | i18next }}.</small>
+                </div>
             </div>
         </div>
     </ng-template>
-
     <ng-template pTemplate="footer">
         <button pButton pRipple label="{{ 'USER_CANCEL' | i18next }}" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
-        <button pButton pRipple label="{{ 'USER_SAVE' | i18next }}" icon="pi pi-check" class="p-button-success" appendTo="body"
-            (click)="saveUserRole()"></button>
+        <button pButton pRipple label="{{ 'USER_SAVE' | i18next }}" icon="pi pi-check" class="p-button-success" appendTo="body" (click)="saveUserRole()"></button>
     </ng-template>
 </p-dialog>

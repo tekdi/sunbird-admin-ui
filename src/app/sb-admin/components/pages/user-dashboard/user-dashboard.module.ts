@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SbOrganizationRoutingModule } from './sb-organization-routing.module';
-import { SbOrganizationComponent } from './sb-organization.component';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessagesModule } from 'primeng/messages';
@@ -13,24 +11,20 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FormsModule ,ReactiveFormsModule } from '@angular/forms';
-import { AddOrEditOrgComponent } from './add-or-edit-org/add-or-edit-org.component';
 import { RippleModule } from 'primeng/ripple';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MessageService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
-import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
 import { ChipModule } from 'primeng/chip';
+import { UserDashboardComponent } from './user-dashboard.component';
+import { UserDashboardRoutingModule } from './user-dashboard-routing.module';
 
 @NgModule({
   declarations: [
-    SbOrganizationComponent,
-    AddOrEditOrgComponent,
-    AddSubOrgComponent
-
+    UserDashboardComponent
   ],
   imports: [
     CommonModule,
-    SbOrganizationRoutingModule,
     TableModule,
     InputTextModule,
     MessageModule,
@@ -46,6 +40,7 @@ import { ChipModule } from 'primeng/chip';
     InputTextareaModule,
     DropdownModule,
     ChipModule,
+    UserDashboardRoutingModule,
     I18NextModule.forRoot()
   ],
   providers:[
@@ -54,4 +49,4 @@ import { ChipModule } from 'primeng/chip';
    MessageService
   ]
 })
-export class SbOrganizationModule { }
+export class UserDashboardModule { }
