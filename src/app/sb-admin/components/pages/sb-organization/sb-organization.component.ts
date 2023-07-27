@@ -34,13 +34,13 @@ export class SbOrganizationComponent implements OnDestroy {
   }
   orgRoles: any;
   role = [
-    { orgName: 'Org1', usersRoleCount: 5 },
-    { orgName: 'Org2', usersRoleCount: 3 },
-    { orgName: 'Org3', usersRoleCount: 3 },
-    { orgName: 'Org4', usersRoleCount: 3 },
-    { orgName: 'Org5', usersRoleCount: 3 },
-    { orgName: 'Org6', usersRoleCount: 3 },
-    { orgName: 'Org7', usersRoleCount: 3 },
+    { orgName: 'Teacher', usersRoleCount: 5 },
+    { orgName: 'Student', usersRoleCount: 3 },
+    { orgName: 'Officer', usersRoleCount: 3 },
+    { orgName: 'Others', usersRoleCount: 3 },
+    { orgName: 'Farmers', usersRoleCount: 3 },
+    { orgName: 'public', usersRoleCount: 3 },
+    { orgName: 'Others1', usersRoleCount: 3 },
   ];
 
   constructor(private orgList: OrganizationListService, private userService: UserService,

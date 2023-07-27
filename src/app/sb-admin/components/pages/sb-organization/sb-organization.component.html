@@ -70,7 +70,7 @@
                         <td>{{organization.channel}}</td>
                         <td>{{organization.subOrgCount}}</td>
                         <td>{{organization.userCount}}</td>
-                        <td><p-button (click)="showDialog()" icon="pi pi-external-link" (click)="getRoles(organization)" label="Show"></p-button></td>
+                        <td><p-button (click)="showDialog()" icon="pi pi-external-link" (click)="getRoles(organization)"></p-button></td>
                         <td>
                             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2" (click)="editOrganization(organization)"></button>
                         </td>
@@ -88,15 +88,15 @@
                     <h5>{{ orgRoles?.channel }}</h5>
                     <!-- <p-message severity="warn" text="{{ 'USER_ROLE_DASHBOARD_LIST_WARNING' | i18next }}"></p-message> -->
                     <p-table #sbDashboardTable [value]="role" [loading]="loading" [paginator]="true" [rows]="7" responsiveLayout="scroll" [globalFilterFields]="['roleName']">
-                        <ng-template pTemplate="caption">
+                        <!-- <ng-template pTemplate="caption">
                             <span class="p-input-icon-left">
                                 <i class="pi pi-search"> </i>
                                 <input type="text" pInputText placeholder="{{ 'USER_DASHBOARD_ROLE' | i18next }}" (input)="sbDashboardTable.filterGlobal($any($event.target).value,'contains')" />
                             </span>
-                        </ng-template>
+                        </ng-template> -->
                         <ng-template pTemplate="header">
                             <tr>
-                                <th scope="col" pSortableColumn="roleName">{{ 'USER_DASHBOARD_ROLE_NAME' | i18next }}<p-sortIcon field="orgName"></p-sortIcon></th>
+                                <th scope="col" pSortableColumn="roleName">{{ 'USER_DASHBOARD_ROLE_NAME' | i18next }}</th>
                                 <th scope="col">{{ 'USER_DASHBOARD_USERS_ROLE_COUNT' | i18next }}</th>
                             </tr>
                         </ng-template>
