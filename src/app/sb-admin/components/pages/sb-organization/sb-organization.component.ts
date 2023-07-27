@@ -28,7 +28,20 @@ export class SbOrganizationComponent implements OnDestroy {
   TotaluserCount: number = 0;
   TotalsubOrgCount: number = 0;
   messages: Message[] = [];
-
+  visible: boolean = false;
+  showDialog() {
+    this.visible = true;
+  }
+  orgRoles: any;
+  role = [
+    { orgName: 'Org1', usersRoleCount: 5 },
+    { orgName: 'Org2', usersRoleCount: 3 },
+    { orgName: 'Org3', usersRoleCount: 3 },
+    { orgName: 'Org4', usersRoleCount: 3 },
+    { orgName: 'Org5', usersRoleCount: 3 },
+    { orgName: 'Org6', usersRoleCount: 3 },
+    { orgName: 'Org7', usersRoleCount: 3 },
+  ];
 
   constructor(private orgList: OrganizationListService, private userService: UserService,
     private userCountService: UserCountService, public dialogService: DialogService,
@@ -59,7 +72,8 @@ export class SbOrganizationComponent implements OnDestroy {
       "request": {
         "filters": {
           "isRootOrg": true
-        }
+        },
+        "limit": 10
       }
     }
     return this.orgList.getAllOrgSubOrg(body).pipe(
@@ -211,6 +225,7 @@ export class SbOrganizationComponent implements OnDestroy {
       }
     })
   }
+
   addSubOrg() {
     this.ref = this.dialogService.open(AddSubOrgComponent, this.addSubOrgDialog);
     this.ref.onClose.subscribe((newSubOrgData: any) => {
@@ -220,9 +235,16 @@ export class SbOrganizationComponent implements OnDestroy {
     });
   }
 
+  getRoles(organization: any) {
+    this.orgRoles = organization;
+
+    console.log(organization)
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
 }
 
 
