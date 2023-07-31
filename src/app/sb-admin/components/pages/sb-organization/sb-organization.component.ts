@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { OrganizationDetail } from './OrganizationDetail';
+import { OrganizationDetail, SearchFilterValue } from './OrganizationDetail';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 import { Subscription } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -11,25 +11,35 @@ import { map } from 'rxjs';
 import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
 import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
 
-
 @Component({
   selector: 'app-sb-organization',
   templateUrl: './sb-organization.component.html',
   styleUrls: ['./sb-organization.component.scss']
 })
-export class SbOrganizationComponent implements OnDestroy {
 
+export class SbOrganizationComponent implements OnDestroy {
   organizationDetail: OrganizationDetail[] = [];
   loading: boolean = true;
   private subscription: Subscription | any;
-  globalFilterFields: string[] = ['organizationName', 'channel', 'id'];
   rows: number = 10;
   orgCount: number = 0;
   TotaluserCount: number = 0;
   TotalsubOrgCount: number = 0;
   messages: Message[] = [];
+  first: number = 0;
+  filteredValue = SearchFilterValue;
+  pageOffsetConstant: number = 10;
+  rowsPerPageOptions: number[] = [10, 20, 30];
+  timeout: any = null;
   addOrgDialog = {
     header: this.i18nextPipe.transform('ADD_ORGANIZATION'),
+    width: '40%',
+    contentStyle: {
+      overflow: 'auto'
+    }
+  };
+  addSubOrgDialog = {
+    header: this.i18nextPipe.transform('ADD_SUB_ORGANIZATION'),
     width: '40%',
     contentStyle: {
       overflow: 'auto'
@@ -40,33 +50,40 @@ export class SbOrganizationComponent implements OnDestroy {
     private userCountService: UserCountService, public dialogService: DialogService,
     public ref: DynamicDialogRef, private messageService: MessageService, private i18nextPipe: I18NextPipe) { }
 
-  addSubOrgDialog = {
-    header: this.i18nextPipe.transform('ADD_SUB_ORGANIZATION'),
-    width: '40%',
-    contentStyle: {
-      overflow: 'auto'
-    }
-  };
-
-
   ngOnInit() {
     this.getTotalOrgCount();
     this.getTotalUserCount();
     this.getTotalSubOrgCount();
-    this.getAllOrg().subscribe((data: any) => {
+  }
+
+  loadOrganizationData(event: any) {
+    this.loading = true;
+    this.getAllOrg(event).subscribe((data: any) => {
+      this.organizationDetail = data;
       if (data && data.length > 0) {
         this.getSubOrgCountOfEachOrg(data);
         this.getUserCountOfEachOrg(data);
+      } else {
+        this.loading = false;
       }
     });
   }
 
-  getAllOrg() {
+  getAllOrg(event: any) {
+    let offset = (event.first) / 10 * this.pageOffsetConstant;
+    offset = isNaN(offset) ? 0 : offset;
+    let filters = this.filteredValue;
+    Object.keys(filters).forEach(key => {
+      if (!filters[key]) {
+        delete filters[key]
+      }
+    });
+
     const body = {
-      "request": {
-        "filters": {
-          "isRootOrg": true
-        }
+      request: {
+        filters: filters,
+        limit: event?.rows || 10,
+        offset: offset,
       }
     }
     return this.orgList.getAllOrgSubOrg(body).pipe(
@@ -83,6 +100,24 @@ export class SbOrganizationComponent implements OnDestroy {
       )
     );
   }
+
+  onSearch(event: any): void {
+    let $this = this;
+    this.first = 0
+    if (event.target.value.length > 3) {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(function () {
+        $this.loadOrganizationData(event);
+      }, 2000);
+    }
+    else if (event.target.value.length === 0) {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(function () {
+        $this.loadOrganizationData(event);
+      }, 1000);
+    }
+  }
+
 
   getSubOrgCountOfEachOrg(orgDetail: any) {
     orgDetail.map((org: any) => {
@@ -207,6 +242,7 @@ export class SbOrganizationComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
 }
 
 

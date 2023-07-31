@@ -42,12 +42,10 @@
         <div class="card">
             <h5 class="m-0">{{ 'ORGANIZATION' | i18next}}</h5><br>
             <p-messages id="messages" [value]="messages"></p-messages>
-            <p-table #myTab [value]="organizationDetail" [loading]='loading' [paginator]="true" [rows]="rows" responsiveLayout="scroll" [globalFilterFields]="globalFilterFields">
+            <p-table #myTab [value]="organizationDetail" [loading]='loading' [totalRecords]="orgCount" [paginator]="true" [(first)]="first" [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true" [lazy]="true" (onLazyLoad)="loadOrganizationData($event)" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" responsiveLayout="scroll" [rowHover]="true">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
-                            <i class="pi pi-search"></i>
-                            <input type="text" pInputText placeholder="{{ 'ORGANIZATION_SEARCH' | i18next }}" (input)="myTab.filterGlobal($any($event.target).value,'contains')" />
                         </span>
                         <p-message severity="warn" text="{{ 'ORGANIZATION_LIST_WARNING' | i18next }}" *ngIf="!organizationDetail || organizationDetail.length === 0"></p-message>
                         <div class="my-2">
@@ -58,9 +56,19 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th scope="col" pSortableColumn="channel">{{ 'ORGANIZATION_NAME' | i18next }}<p-sortIcon field="channel"></p-sortIcon></th>
-                        <th scope="col" pSortableColumn="userCount">{{ 'NUMBER_OF_SUB_ORG' | i18next }}<p-sortIcon field="userCount"></p-sortIcon></th>
-                        <th scope="col" pSortableColumn="subOrgCount">{{ 'NUMBER_OF_USER_COUNT' |i18next }}<p-sortIcon field="subOrgCount"></p-sortIcon></th>
+                        <th scope="col" pSortableColumn="channel">{{ 'ORGANIZATION_NAME' | i18next }}</th>
+                        <th scope="col" pSortableColumn="userCount">{{ 'NUMBER_OF_SUB_ORG' | i18next }}</th>
+                        <th scope="col" pSortableColumn="subOrgCount">{{ 'NUMBER_OF_USER_COUNT' |i18next }}</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="onSearch($event)" placeholder="{{ 'ORGANIZATION_SEARCH' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.channel">
+                            </span>
+                        </th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-organization>
