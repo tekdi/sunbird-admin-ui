@@ -1,13 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
 import { OrganizationDetail, SearchFilterValue } from './OrganizationDetail';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
-import { Subscription } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddOrEditOrgComponent } from './add-or-edit-org/add-or-edit-org.component';
 import { MessageService, Message } from 'primeng/api';
 import { I18NextPipe } from 'angular-i18next';
 import { UserService } from 'src/app/sb-admin/service/user.service';
-import { map } from 'rxjs';
 import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
 import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
 
@@ -20,7 +19,7 @@ import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
 export class SbOrganizationComponent implements OnDestroy {
   organizationDetail: OrganizationDetail[] = [];
   loading: boolean = true;
-  private subscription: Subscription | any;
+  private subscription!: Subscription;
   rows: number = 10;
   orgCount: number = 0;
   TotaluserCount: number = 0;
