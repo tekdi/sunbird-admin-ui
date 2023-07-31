@@ -34,7 +34,6 @@ export class SbUserComponent implements OnInit {
   first: number = 0
   filteredValue = SearchFilterValue;
   timeout: any = null;
-  pageOffsetConstant: number = 10;
   status = [
     { name: 'Active', 'value': '1' },
     { name: 'Inactive', 'value': '0' }
@@ -122,7 +121,7 @@ export class SbUserComponent implements OnInit {
         delete filters[key]
       }
     });
-    let offset = (event.first) / 10 * this.pageOffsetConstant;
+    let offset = event.first;
     offset = isNaN(offset) ? 0 : offset;
 
     const body = {

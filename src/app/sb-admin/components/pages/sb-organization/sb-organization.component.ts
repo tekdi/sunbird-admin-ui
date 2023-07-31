@@ -27,7 +27,6 @@ export class SbOrganizationComponent implements OnDestroy {
   messages: Message[] = [];
   first: number = 0;
   filteredValue = SearchFilterValue;
-  pageOffsetConstant: number = 10;
   rowsPerPageOptions: number[] = [10, 20, 30];
   timeout: any = null;
   addOrgDialog = {
@@ -69,15 +68,14 @@ export class SbOrganizationComponent implements OnDestroy {
   }
 
   getAllOrg(event: any) {
-    let offset = (event.first) / 10 * this.pageOffsetConstant;
-    offset = isNaN(offset) ? 0 : offset;
     let filters = this.filteredValue;
     Object.keys(filters).forEach(key => {
       if (!filters[key]) {
         delete filters[key]
       }
     });
-
+    let offset = event.first
+    offset = isNaN(offset) ? 0 : offset;
     const body = {
       request: {
         filters: filters,
