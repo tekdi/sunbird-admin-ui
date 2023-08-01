@@ -10,12 +10,11 @@
   "ORGANIZATION_NAME":"Organization Name",
   "NUMBER_OF_SUB_ORG":"Number of Sub-Organizations",
   "NUMBER_OF_USER_COUNT":"Number of Users",
-  "ORGANIZATION_SEARCH": "Search",
+  "ORGANIZATION_SEARCH": "Search Organisation",
   "ORGANIZATION_TOTAL":"Total Organizations",
   "SUB_ORGANIZATION_TOTAL":"Total Sub-organizations",
   "TOTAL_USER":"Total Users",
-  "ORGANIZATION_USERS_LIST_WARNING": "Organization Users Data Not Found",
-  "ORGANIZATION_LIST_WARNING":"Organisation Not Found",
+  "ORGANIZATION_LIST_WARNING": "Organisation Data Not found",
   
   "ADD_ORGANIZATION_DESCRIPTION" : "Description",
   "ORGANIZATION_CHANNEL_NAME" : "Channel Name",
@@ -57,6 +56,7 @@
   "USER_NAME": "Username",
   "USER_PASSWORD": "Password",
   "USER_ROLE": "Roles",
+  "ORGANIZATION_USERS_LIST_WARNING": "Organization Users Data Not Found",
     
   "USER_FIRST_NAME_REQUIRED": "First Name is required",
   "USER_LAST_NAME_REQUIRED": "Last Name is required",

@@ -7,3 +7,8 @@ export interface OrganizationDetail {
     subOrgCount: number;
     description: string
 }
+
+export const SearchFilterValue: any = {
+    channel: '',
+    isRootOrg: true,
+}
