@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup ,Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 import { Message } from 'primeng/api';
@@ -15,7 +15,7 @@ export class AddOrEditOrgComponent {
   submitted: boolean = false;
   messages!: Message[];
 
-  constructor(public formBuilder: FormBuilder, public ref: DynamicDialogRef, private addOrgservice: OrganizationListService,private i18nextPipe: I18NextPipe) {
+  constructor(public formBuilder: FormBuilder, public ref: DynamicDialogRef, private addOrgservice: OrganizationListService, private i18nextPipe: I18NextPipe) {
     this.addEditOrgForm = formBuilder.group({
       orgName: ['', Validators.required],
       description: ['', Validators.required],
@@ -33,7 +33,7 @@ export class AddOrEditOrgComponent {
     this.submitted = true;
     if (this.addEditOrgForm.invalid) {
       this.messages = [
-        { severity: 'error',summary:this.i18nextPipe.transform('ADD_ORGANIZATION_BLANK_FIELD_MSG')}
+        { severity: 'error', summary: this.i18nextPipe.transform('ADD_ORGANIZATION_BLANK_FIELD_MSG') }
       ];
       return;
     }
@@ -44,15 +44,17 @@ export class AddOrEditOrgComponent {
       const id = response.result.organisationId
       const updatedFormValues = {
         ...this.addEditOrgForm.value,
+        subOrgCount: 0,
+        userCount: 0,
         id: id
       };
       this.ref.close(updatedFormValues);
     }, (error: any) => {
-        this.messages = [
-          { severity: 'error',summary: this.i18nextPipe.transform('ADD_ORGANIZATION_ALREADY_EXIT')}
-        ]
-      }
-   )
+      this.messages = [
+        { severity: 'error', summary: this.i18nextPipe.transform('ADD_ORGANIZATION_ALREADY_EXIT') }
+      ]
+    }
+    )
   }
 }
 
