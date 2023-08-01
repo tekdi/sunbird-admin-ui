@@ -70,7 +70,7 @@
                         <td>{{organization.channel}}</td>
                         <td>{{organization.subOrgCount}}</td>
                         <td>{{organization.userCount}}</td>
-                        <td><p-button (click)="showDialog()" icon="pi pi-external-link" (click)="getRoles(organization)"></p-button></td>
+                        <td><p-button icon="pi pi-external-link" (click)="getAllUserTypeandCount(organization)"></p-button></td>
                         <td>
                             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2" (click)="editOrganization(organization)"></button>
                         </td>
@@ -87,7 +87,7 @@
                 <div class="card">
                     <h5>{{ orgRoles?.channel }}</h5>
                     <!-- <p-message severity="warn" text="{{ 'USER_ROLE_DASHBOARD_LIST_WARNING' | i18next }}"></p-message> -->
-                    <p-table #sbDashboardTable [value]="role" [loading]="loading" [paginator]="true" [rows]="7" responsiveLayout="scroll" [globalFilterFields]="['roleName']">
+                    <p-table #sbDashboardTable [value]="userRoles" [loading]="loading" [paginator]="true" [rows]="7" responsiveLayout="scroll" [globalFilterFields]="['roleName']">
                         <!-- <ng-template pTemplate="caption">
                             <span class="p-input-icon-left">
                                 <i class="pi pi-search"> </i>
@@ -100,10 +100,10 @@
                                 <th scope="col">{{ 'USER_DASHBOARD_USERS_ROLE_COUNT' | i18next }}</th>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-roles>
+                        <ng-template pTemplate="body" let-userRoleCount>
                             <tr>
-                                <td>{{ roles?.orgName }}</td>
-                                <td>{{ roles?.usersRoleCount }}</td>
+                                <td>{{ userRoleCount?.name }}</td>
+                                <td>{{ userRoleCount?.userTypeCount }}</td>
                             </tr>
                         </ng-template>
                     </p-table>

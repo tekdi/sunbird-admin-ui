@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { OrganizationDetail } from './OrganizationDetail';
+import { OrganizationDetail, UserRoles } from './OrganizationDetail';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 import { Subscription } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -10,7 +10,7 @@ import { UserService } from 'src/app/sb-admin/service/user.service';
 import { map } from 'rxjs';
 import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
 import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
-
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sb-organization',
@@ -29,19 +29,8 @@ export class SbOrganizationComponent implements OnDestroy {
   TotalsubOrgCount: number = 0;
   messages: Message[] = [];
   visible: boolean = false;
-  showDialog() {
-    this.visible = true;
-  }
   orgRoles: any;
-  role = [
-    { orgName: 'Teacher', usersRoleCount: 5 },
-    { orgName: 'Student', usersRoleCount: 3 },
-    { orgName: 'Officer', usersRoleCount: 3 },
-    { orgName: 'Others', usersRoleCount: 3 },
-    { orgName: 'Farmers', usersRoleCount: 3 },
-    { orgName: 'public', usersRoleCount: 3 },
-    { orgName: 'Others1', usersRoleCount: 3 },
-  ];
+  userRoles!: UserRoles[];
 
   constructor(private orgList: OrganizationListService, private userService: UserService,
     private userCountService: UserCountService, public dialogService: DialogService,
@@ -72,8 +61,7 @@ export class SbOrganizationComponent implements OnDestroy {
       "request": {
         "filters": {
           "isRootOrg": true
-        },
-        "limit": 10
+        }
       }
     }
     return this.orgList.getAllOrgSubOrg(body).pipe(
@@ -186,6 +174,56 @@ export class SbOrganizationComponent implements OnDestroy {
       })
   }
 
+  getAllUserTypeandCount(organization: any) {
+    this.getAllUserType(organization).subscribe(
+      (data: any) => {
+        if (data) {
+          this.getAllUserTypeCount(data, organization.id);
+        }
+      },
+      (error: any) => {
+        console.error('Error fetching roles:', error);
+      }
+    );
+  }
+
+  getAllUserType(organization: any): Observable<any> {
+    this.visible = true;
+    this.orgRoles = organization;
+    const id = organization.id;
+    const body = {
+      "request": {
+        "type": "config",
+        "action": "get",
+        "subType": "userType",
+        "id": id,
+        "component": "portal"
+      }
+    };
+    return this.userService.getAllUserRoles(body).pipe(
+      map((response: any) => {
+        this.userRoles = response.result.form.data?.fields;
+        return this.userRoles;
+      })
+    );
+  }
+
+  getAllUserTypeCount(UserTypes: any, id: any) {
+    UserTypes.map((org: any) => {
+      const body = {
+        "request": {
+          "filters": {
+            "rootOrgId": id,
+            "userType": org.name
+          }
+        }
+      }
+      this.orgList.getUserTypeCount(body).subscribe((data: any) => {
+        org.userTypeCount = data.result.response.count;
+      })
+    })
+  }
+
   addOrg() {
     this.ref = this.dialogService.open(AddOrEditOrgComponent,
       {
@@ -233,12 +271,6 @@ export class SbOrganizationComponent implements OnDestroy {
         this.messageService.add({ severity: 'success', summary: this.i18nextPipe.transform('ADD_SUB_ORGANIZATION_SUCCESSFULLY') })
       }
     });
-  }
-
-  getRoles(organization: any) {
-    this.orgRoles = organization;
-
-    console.log(organization)
   }
 
   ngOnDestroy(): void {

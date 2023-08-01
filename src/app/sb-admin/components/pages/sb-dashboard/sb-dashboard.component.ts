@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs';
 import { UserService } from 'src/app/sb-admin/service/user.service';
-import { userRoleCountModel} from 'src/app/sb-admin/api/user'
+import { userRoleCountModel } from 'src/app/sb-admin/api/user'
 @Component({
   selector: 'app-sb-dashboard',
   templateUrl: './sb-dashboard.component.html',
@@ -11,7 +11,7 @@ export class SbDashboardComponent implements OnInit {
 
   loading: boolean = false;
   userRole: string[] = [];
-  roles:any;
+  roles: any;
   userRoleCount: userRoleCountModel[] = [];
 
   constructor(
@@ -31,7 +31,7 @@ export class SbDashboardComponent implements OnInit {
         "component": "portal"
       }
     };
-    this.userService.getAllUserRole(body).subscribe((response: any) => {
+    this.userService.getAllUserRoles(body).subscribe((response: any) => {
       const fields = response?.result?.form?.data?.fields;
       this.roles = fields.map((f: any) => f.code);
       this.getUserCount(this.roles);
@@ -53,7 +53,7 @@ export class SbDashboardComponent implements OnInit {
       const users = response?.result?.response?.content;
       this.roles.forEach((role: string) => {
         const count = users.filter((user: any) => user.profileUserType.type === role).length
-        this.userRoleCount.push({roleName: role, count: count});
+        this.userRoleCount.push({ roleName: role, count: count });
       });
     }, (error: any) => {
       console.error(error);

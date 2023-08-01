@@ -47,4 +47,14 @@ export class OrganizationListService {
     return this.http.post(config.URLS.ORGANIZATION_CREATE_URL, body, { headers: header })
   }
 
+  getUserTypeCount(body: any): Observable<any> {
+    let header = new HttpHeaders({
+      "Content-Type": 'application/json',
+      "Authorization": environment.authKey,
+      "x-authenticated-user-token": environment.userToken,
+    })
+    return this.http.post(config.URLS.USER_TYPE_ROLE_COUNT, body, { headers: header })
+
+  }
+
 }

@@ -7,3 +7,8 @@ export interface OrganizationDetail {
     subOrgCount: number;
     description: string
 }
+
+export interface UserRoles {
+    name: string;
+    userTypeCount: number;
+}
