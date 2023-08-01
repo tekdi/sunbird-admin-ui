@@ -21,8 +21,8 @@ import { Observable } from 'rxjs';
 export class SbOrganizationComponent implements OnDestroy {
   organizationDetail: OrganizationDetail[] = [];
   loading: boolean = true;
-  private subscription: Subscription | any;
-  globalFilterFields: string[] = ['organizationName', 'channel', 'id'];
+  private subscription!: Subscription;
+  globalFilterFields: string[] = ['channel'];
   rows: number = 10;
   orgCount: number = 0;
   TotaluserCount: number = 0;
@@ -61,7 +61,8 @@ export class SbOrganizationComponent implements OnDestroy {
       "request": {
         "filters": {
           "isRootOrg": true
-        }
+        },
+        "limit": 10
       }
     }
     return this.orgList.getAllOrgSubOrg(body).pipe(
@@ -180,9 +181,11 @@ export class SbOrganizationComponent implements OnDestroy {
         if (data) {
           this.getAllUserTypeCount(data, organization.id);
         }
+        this.loading = false;
       },
       (error: any) => {
         console.error('Error fetching roles:', error);
+        this.loading = false;
       }
     );
   }
@@ -218,8 +221,9 @@ export class SbOrganizationComponent implements OnDestroy {
           }
         }
       }
-      this.orgList.getUserTypeCount(body).subscribe((data: any) => {
+      this.subscription = this.orgList.getUserTypeCount(body).subscribe((data: any) => {
         org.userTypeCount = data.result.response.count;
+        this.loading = false;
       })
     })
   }

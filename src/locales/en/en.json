@@ -16,6 +16,9 @@
   "TOTAL_USER":"Total Users",
   "ORGANIZATION_USERS_LIST_WARNING": "Organization Users Data Not Found",
   "ORGANIZATION_LIST_WARNING":"Organisation Not Found",
+  "ROLE_INFO": "Roles Info",
+  "ENTER_USER_ROLES": "Enter User Role",
+  "USER_TYPE_WARNING_MSG" : "User Type Data Not Found",
   
   "ADD_ORGANIZATION_DESCRIPTION" : "Description",
   "ORGANIZATION_CHANNEL_NAME" : "Channel Name",
@@ -30,7 +33,6 @@
   "ADD_ORGANIZATION_BLANK_FIELD_MSG":"Fields should not be blank",
   "ADD_ORGANIZATION_SUCCESSFULLY":"Organization added successfully",
   "ADD_ORGANIZATION_ALREADY_EXIT":"Channel Already Exists",
-
 
   "EDIT_ORGANIZATION_ACTION": "Action",
   "EDIT_ORGANIZATION_CHANNEL_ID": "Channel Id",

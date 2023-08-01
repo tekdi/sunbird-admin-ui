@@ -59,9 +59,9 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th scope="col" pSortableColumn="channel">{{ 'ORGANIZATION_NAME' | i18next }}<p-sortIcon field="channel"></p-sortIcon></th>
-                        <th scope="col" pSortableColumn="userCount">{{ 'NUMBER_OF_SUB_ORG' | i18next }}</th>
-                        <th scope="col" pSortableColumn="subOrgCount">{{ 'NUMBER_OF_USER_COUNT' | i18next }}</th>
-                        <th scope="col">Roles Info</th>
+                        <th scope="col">{{ 'NUMBER_OF_SUB_ORG' | i18next }}</th>
+                        <th scope="col">{{ 'NUMBER_OF_USER_COUNT' | i18next }}</th>
+                        <th scope="col">{{ 'ROLE_INFO'|i18next }}</th>
                         <th scope="col">{{ 'EDIT_ORGANIZATION_ACTION' | i18next }}</th>
                     </tr>
                 </ng-template>
@@ -81,22 +81,22 @@
     </div>
 </div>
 <div class="card flex justify-content-center">
-    <p-dialog header="Roles" [(visible)]="visible" [style]="{ width: '50vw', height: '700px' }">
+    <p-dialog header="Roles" [(visible)]="visible" [style]="{ width: '50vw', height: '650px' }">
         <div class="grid">
             <div class="col-12 xl:col-12">
                 <div class="card">
                     <h5>{{ orgRoles?.channel }}</h5>
-                    <!-- <p-message severity="warn" text="{{ 'USER_ROLE_DASHBOARD_LIST_WARNING' | i18next }}"></p-message> -->
-                    <p-table #sbDashboardTable [value]="userRoles" [loading]="loading" [paginator]="true" [rows]="7" responsiveLayout="scroll" [globalFilterFields]="['roleName']">
-                        <!-- <ng-template pTemplate="caption">
+                    <p-message severity="warn" text="{{ 'USER_TYPE_WARNING_MSG' | i18next }}" *ngIf="!userRoles"></p-message>
+                    <p-table #userRoleDashboard [value]="userRoles" [loading]="loading" [paginator]="true" [rows]="7" responsiveLayout="scroll" [globalFilterFields]="['name']">
+                        <ng-template pTemplate="caption">
                             <span class="p-input-icon-left">
                                 <i class="pi pi-search"> </i>
-                                <input type="text" pInputText placeholder="{{ 'USER_DASHBOARD_ROLE' | i18next }}" (input)="sbDashboardTable.filterGlobal($any($event.target).value,'contains')" />
+                                <input type="text" pInputText placeholder="{{ 'ENTER_USER_ROLES' | i18next }}" (input)="userRoleDashboard.filterGlobal($any($event.target).value,'contains')" />
                             </span>
-                        </ng-template> -->
+                        </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
-                                <th scope="col" pSortableColumn="roleName">{{ 'USER_DASHBOARD_ROLE_NAME' | i18next }}</th>
+                                <th scope="col" pSortableColumn="name">{{ 'USER_DASHBOARD_ROLE_NAME' | i18next }}<p-sortIcon field="name"></p-sortIcon></th>
                                 <th scope="col">{{ 'USER_DASHBOARD_USERS_ROLE_COUNT' | i18next }}</th>
                             </tr>
                         </ng-template>
