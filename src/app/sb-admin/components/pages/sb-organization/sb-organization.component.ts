@@ -20,7 +20,6 @@ export class SbOrganizationComponent implements OnDestroy {
   organizationDetail: OrganizationDetail[] = [];
   loading: boolean = true;
   private subscription!: Subscription;
-  globalFilterFields: string[] = ['channel'];
   rows: number = 10;
   orgCount: number = 0;
   TotaluserCount: number = 0;
@@ -220,23 +219,22 @@ export class SbOrganizationComponent implements OnDestroy {
   getAllUserTypeandCount(organization: any) {
     this.visible = true;
     this.orgRoles = organization;
-    this.getAllUserType(organization).subscribe(
+    this.loading = true
+    this.subscription = this.getAllUserType(organization).subscribe(
       (data: any) => {
         if (data) {
           this.getAllUserTypeCount(data, organization.id);
         }
-        this.loading = false;
+
       },
       (error: any) => {
-        console.error('Error fetching roles:', error);
-        this.loading = false;
+        console.error(error);
+        this.loading = false
       }
     );
   }
 
   getAllUserType(organization: any): Observable<any> {
-    this.visible = true;
-    this.orgRoles = organization;
     const id = organization.id;
     const body = {
       "request": {
@@ -255,8 +253,8 @@ export class SbOrganizationComponent implements OnDestroy {
     );
   }
 
-  getAllUserTypeCount(UserTypes: any, id: any) {
-    UserTypes.map((org: any) => {
+  getAllUserTypeCount(userTypes: any, id: any) {
+    userTypes.map((org: any) => {
       const body = {
         "request": {
           "filters": {
@@ -267,7 +265,7 @@ export class SbOrganizationComponent implements OnDestroy {
       }
       this.subscription = this.orgList.getUserTypeCount(body).subscribe((data: any) => {
         org.userTypeCount = data.result.response.count;
-        this.loading = false;
+        this.loading = false
       })
     })
   }
