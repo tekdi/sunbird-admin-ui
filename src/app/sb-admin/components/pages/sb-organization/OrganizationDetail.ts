@@ -5,6 +5,7 @@ export interface OrganizationDetail {
     id: string;
     userCount: number;
     subOrgCount: number;
+    description: string
 }
 
 export const SearchFilterValue: any = {

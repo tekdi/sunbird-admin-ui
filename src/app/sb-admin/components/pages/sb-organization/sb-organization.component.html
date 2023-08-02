@@ -56,9 +56,10 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th scope="col" pSortableColumn="channel">{{ 'ORGANIZATION_NAME' | i18next }}</th>
-                        <th scope="col" pSortableColumn="userCount">{{ 'NUMBER_OF_SUB_ORG' | i18next }}</th>
-                        <th scope="col" pSortableColumn="subOrgCount">{{ 'NUMBER_OF_USER_COUNT' |i18next }}</th>
+                        <th scope="col">{{ 'ORGANIZATION_NAME' | i18next }}</th>
+                        <th scope="col">{{ 'NUMBER_OF_SUB_ORG' | i18next }}</th>
+                        <th scope="col">{{ 'NUMBER_OF_USER_COUNT' |i18next }}</th>
+                        <th scope="col">{{ 'EDIT_ORGANIZATION_ACTION' | i18next }}</th>
                     </tr>
                     <tr>
                         <th scope="col">
@@ -76,6 +77,9 @@
                         <td>{{organization.channel}}</td>
                         <td>{{organization.subOrgCount}}</td>
                         <td>{{organization.userCount}}</td>
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2" (click)="editOrganization(organization)"></button>
+                        </td>
                     </tr>
                 </ng-template>
             </p-table>
