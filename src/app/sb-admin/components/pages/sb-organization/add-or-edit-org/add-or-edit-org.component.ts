@@ -15,7 +15,7 @@ export class AddOrEditOrgComponent {
   data: any;
   mode!: 'Add' | 'Edit';
   organization: any;
-  addEditOrgForm!: FormGroup;
+  addOrgForm!: FormGroup;
   EditOrgForm!: FormGroup
   submitted: boolean = false;
   messages!: Message[];
@@ -37,7 +37,7 @@ export class AddOrEditOrgComponent {
   }
 
   initializeAddForm() {
-    this.addEditOrgForm = this.formBuilder.group({
+    this.addOrgForm = this.formBuilder.group({
       orgName: ['', Validators.required],
       description: ['', Validators.required],
       channel: ['', Validators.required],
@@ -59,20 +59,21 @@ export class AddOrEditOrgComponent {
   }
 
   saveOrg() {
+    console.log(this.addOrgForm.value);
     this.submitted = true;
-    if (this.addEditOrgForm.invalid) {
+    if (this.addOrgForm.invalid) {
       this.messages = [
         { severity: 'error', summary: this.i18nextPipe.transform('ADD_ORGANIZATION_BLANK_FIELD_MSG') }
       ];
       return;
     }
     const body = {
-      "request": this.addEditOrgForm.value
+      "request": this.addOrgForm.value
     }
     this.organizationListService.addOrg(body).subscribe((response) => {
       const id = response.result.organisationId
       const updatedFormValues = {
-        ...this.addEditOrgForm.value,
+        ...this.addOrgForm.value,
         subOrgCount: 0,
         userCount: 0,
         id: id

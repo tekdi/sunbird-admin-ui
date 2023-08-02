@@ -56,7 +56,7 @@ export class SbOrganizationComponent implements OnDestroy {
 
   loadOrganizationData(event: any) {
     this.loading = true;
-    this.getAllOrg(event).subscribe((data: any) => {
+    this.subscription = this.getAllOrg(event).subscribe((data: any) => {
       this.organizationDetail = data;
       if (data && data.length > 0) {
         this.getSubOrgCountOfEachOrg(data);
@@ -83,12 +83,9 @@ export class SbOrganizationComponent implements OnDestroy {
         offset: offset,
       }
     }
-    console.log(body)
     return this.orgList.getAllOrgSubOrg(body).pipe(
       map((data: any) => {
         this.organizationDetail = data.result.response.content;
-        this.organizationDetail.sort((startDate: any, endDate: any) =>
-          new Date(endDate.createdDate).getTime() - new Date(startDate.createdDate).getTime());
         return this.organizationDetail;
       },
         (error: any) => {
@@ -132,7 +129,7 @@ export class SbOrganizationComponent implements OnDestroy {
           }
         }
       }
-      this.orgList.getAllOrgSubOrg(body).subscribe((subOrgCount: any) => {
+      this.subscription = this.orgList.getAllOrgSubOrg(body).subscribe((subOrgCount: any) => {
         org.subOrgCount = subOrgCount.result.response.count;
       })
     },
@@ -151,7 +148,7 @@ export class SbOrganizationComponent implements OnDestroy {
           }
         }
       };
-      this.userCountService.getUserCountOfaTenant(body).subscribe((counttenant: any) => {
+      this.subscription = this.userCountService.getUserCountOfaTenant(body).subscribe((counttenant: any) => {
         org.userCount = counttenant?.result?.response?.count;
         if (orgDetail[orgDetail.length - 1].id === org.id) {
           this.loading = false;
@@ -191,7 +188,7 @@ export class SbOrganizationComponent implements OnDestroy {
         }
       }
     }
-    this.orgList.getAllOrgSubOrg(body).subscribe((response: any) => {
+    this.subscription = this.orgList.getAllOrgSubOrg(body).subscribe((response: any) => {
       this.TotalsubOrgCount = response.result.response.count;
     },
       (error: any) => {
@@ -207,7 +204,7 @@ export class SbOrganizationComponent implements OnDestroy {
         }
       }
     }
-    this.userService.loadUserList(body).subscribe((response: any) => {
+    this.subscription = this.userService.loadUserList(body).subscribe((response: any) => {
       this.TotaluserCount = response.result.response.count;
     },
       (error: any) => {
@@ -238,7 +235,7 @@ export class SbOrganizationComponent implements OnDestroy {
 
   editOrganization(organization: any) {
     this.ref = this.dialogService.open(AddOrEditOrgComponent, {
-      data: { mode: 'Edit', organization, },
+      data: { mode: 'Edit', organization },
       width: '40%',
       header: 'Edit Organization'
     });
