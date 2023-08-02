@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { OrganizationDetail, UserRoles, SearchFilterValue } from './OrganizationDetail';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
-import { Subscription, map } from 'rxjs';
+import { Subscription, map, Observable } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddOrEditOrgComponent } from './add-or-edit-org/add-or-edit-org.component';
 import { MessageService, Message } from 'primeng/api';
@@ -9,7 +9,6 @@ import { I18NextPipe } from 'angular-i18next';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
 import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sb-organization',
@@ -61,7 +60,7 @@ export class SbOrganizationComponent implements OnDestroy {
 
   loadOrganizationData(event: any) {
     this.loading = true;
-    this.getAllOrg(event).subscribe((data: any) => {
+    this.subscription = this.getAllOrg(event).subscribe((data: any) => {
       this.organizationDetail = data;
       if (data && data.length > 0) {
         this.getSubOrgCountOfEachOrg(data);
@@ -91,8 +90,6 @@ export class SbOrganizationComponent implements OnDestroy {
     return this.orgList.getAllOrgSubOrg(body).pipe(
       map((data: any) => {
         this.organizationDetail = data.result.response.content;
-        this.organizationDetail.sort((startDate: any, endDate: any) =>
-          new Date(endDate.createdDate).getTime() - new Date(startDate.createdDate).getTime());
         return this.organizationDetail;
       },
         (error: any) => {
@@ -136,15 +133,14 @@ export class SbOrganizationComponent implements OnDestroy {
           }
         }
       }
-      this.orgList.getAllOrgSubOrg(body).subscribe((subOrgCount: any) => {
+      this.subscription = this.orgList.getAllOrgSubOrg(body).subscribe((subOrgCount: any) => {
         org.subOrgCount = subOrgCount.result.response.count;
       })
     },
       (error: any) => {
         console.log(error);
         this.loading = false;
-      }
-    )
+      })
   }
 
   getUserCountOfEachOrg(orgDetail: any): void {
@@ -156,7 +152,7 @@ export class SbOrganizationComponent implements OnDestroy {
           }
         }
       };
-      this.userCountService.getUserCountOfaTenant(body).subscribe((counttenant: any) => {
+      this.subscription = this.userCountService.getUserCountOfaTenant(body).subscribe((counttenant: any) => {
         org.userCount = counttenant?.result?.response?.count;
         if (orgDetail[orgDetail.length - 1].id === org.id) {
           this.loading = false;
@@ -196,7 +192,7 @@ export class SbOrganizationComponent implements OnDestroy {
         }
       }
     }
-    this.orgList.getAllOrgSubOrg(body).subscribe((response: any) => {
+    this.subscription = this.orgList.getAllOrgSubOrg(body).subscribe((response: any) => {
       this.TotalsubOrgCount = response.result.response.count;
     },
       (error: any) => {
@@ -212,7 +208,7 @@ export class SbOrganizationComponent implements OnDestroy {
         }
       }
     }
-    this.userService.loadUserList(body).subscribe((response: any) => {
+    this.subscription = this.userService.loadUserList(body).subscribe((response: any) => {
       this.TotaluserCount = response.result.response.count;
     },
       (error: any) => {
@@ -239,8 +235,8 @@ export class SbOrganizationComponent implements OnDestroy {
   }
 
   getAllUserType(organization: any): Observable<any> {
-    //this.visible = true;
-    //this.orgRoles = organization;
+    this.visible = true;
+    this.orgRoles = organization;
     const id = organization.id;
     const body = {
       "request": {
@@ -298,7 +294,7 @@ export class SbOrganizationComponent implements OnDestroy {
 
   editOrganization(organization: any) {
     this.ref = this.dialogService.open(AddOrEditOrgComponent, {
-      data: { mode: 'Edit', organization, },
+      data: { mode: 'Edit', organization },
       width: '40%',
       header: 'Edit Organization'
     });
