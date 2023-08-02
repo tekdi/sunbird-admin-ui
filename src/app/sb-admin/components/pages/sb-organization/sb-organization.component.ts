@@ -1,13 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
-import { OrganizationDetail, UserRoles } from './OrganizationDetail';
+import { OrganizationDetail, UserRoles, SearchFilterValue } from './OrganizationDetail';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
-import { Subscription } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddOrEditOrgComponent } from './add-or-edit-org/add-or-edit-org.component';
 import { MessageService, Message } from 'primeng/api';
 import { I18NextPipe } from 'angular-i18next';
 import { UserService } from 'src/app/sb-admin/service/user.service';
-import { map } from 'rxjs';
 import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
 import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
 import { Observable } from 'rxjs';
@@ -28,14 +27,20 @@ export class SbOrganizationComponent implements OnDestroy {
   TotaluserCount: number = 0;
   TotalsubOrgCount: number = 0;
   messages: Message[] = [];
-  visible: boolean = false;
-  orgRoles: any;
+  first: number = 0;
+  filteredValue = SearchFilterValue;
+  rowsPerPageOptions: number[] = [10, 20, 30];
+  timeout: any = null;
   userRoles!: UserRoles[];
-
-  constructor(private orgList: OrganizationListService, private userService: UserService,
-    private userCountService: UserCountService, public dialogService: DialogService,
-    public ref: DynamicDialogRef, private messageService: MessageService, private i18nextPipe: I18NextPipe) { }
-
+  visible: boolean = false;
+  orgRoles: any
+  addOrgDialog = {
+    header: this.i18nextPipe.transform('ADD_ORGANIZATION'),
+    width: '40%',
+    contentStyle: {
+      overflow: 'auto'
+    }
+  };
   addSubOrgDialog = {
     header: this.i18nextPipe.transform('ADD_SUB_ORGANIZATION'),
     width: '40%',
@@ -44,25 +49,43 @@ export class SbOrganizationComponent implements OnDestroy {
     }
   };
 
+  constructor(private orgList: OrganizationListService, private userService: UserService,
+    private userCountService: UserCountService, public dialogService: DialogService,
+    public ref: DynamicDialogRef, private messageService: MessageService, private i18nextPipe: I18NextPipe) { }
+
   ngOnInit() {
     this.getTotalOrgCount();
     this.getTotalUserCount();
     this.getTotalSubOrgCount();
-    this.getAllOrg().subscribe((data: any) => {
+  }
+
+  loadOrganizationData(event: any) {
+    this.loading = true;
+    this.getAllOrg(event).subscribe((data: any) => {
+      this.organizationDetail = data;
       if (data && data.length > 0) {
         this.getSubOrgCountOfEachOrg(data);
         this.getUserCountOfEachOrg(data);
+      } else {
+        this.loading = false;
       }
     });
   }
 
-  getAllOrg() {
+  getAllOrg(event: any) {
+    let filters = this.filteredValue;
+    Object.keys(filters).forEach(key => {
+      if (!filters[key]) {
+        delete filters[key]
+      }
+    });
+    let offset = event.first
+    offset = isNaN(offset) ? 0 : offset;
     const body = {
-      "request": {
-        "filters": {
-          "isRootOrg": true
-        },
-        "limit": 10
+      request: {
+        filters: filters,
+        limit: event?.rows || 10,
+        offset: offset,
       }
     }
     return this.orgList.getAllOrgSubOrg(body).pipe(
@@ -79,6 +102,24 @@ export class SbOrganizationComponent implements OnDestroy {
       )
     );
   }
+
+  onSearch(event: any): void {
+    let $this = this;
+    this.first = 0
+    if (event.target.value.length > 3) {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(function () {
+        $this.loadOrganizationData(event);
+      }, 2000);
+    }
+    else if (event.target.value.length === 0) {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(function () {
+        $this.loadOrganizationData(event);
+      }, 1000);
+    }
+  }
+
 
   getSubOrgCountOfEachOrg(orgDetail: any) {
     orgDetail.map((org: any) => {
@@ -102,7 +143,8 @@ export class SbOrganizationComponent implements OnDestroy {
       (error: any) => {
         console.log(error);
         this.loading = false;
-      })
+      }
+    )
   }
 
   getUserCountOfEachOrg(orgDetail: any): void {
@@ -124,7 +166,8 @@ export class SbOrganizationComponent implements OnDestroy {
       (error: any) => {
         console.log(error);
         this.loading = false;
-      });
+      }
+    );
   }
 
   getTotalOrgCount() {
@@ -141,7 +184,8 @@ export class SbOrganizationComponent implements OnDestroy {
       },
       (error: any) => {
         console.log(error);
-      });
+      }
+    );
   }
 
   getTotalSubOrgCount() {
@@ -157,7 +201,8 @@ export class SbOrganizationComponent implements OnDestroy {
     },
       (error: any) => {
         console.log(error);
-      })
+      }
+    )
   }
 
   getTotalUserCount() {
@@ -172,10 +217,13 @@ export class SbOrganizationComponent implements OnDestroy {
     },
       (error: any) => {
         console.log(error);
-      })
+      }
+    )
   }
 
   getAllUserTypeandCount(organization: any) {
+    this.visible = true;
+    this.orgRoles = organization;
     this.getAllUserType(organization).subscribe(
       (data: any) => {
         if (data) {
@@ -191,8 +239,8 @@ export class SbOrganizationComponent implements OnDestroy {
   }
 
   getAllUserType(organization: any): Observable<any> {
-    this.visible = true;
-    this.orgRoles = organization;
+    //this.visible = true;
+    //this.orgRoles = organization;
     const id = organization.id;
     const body = {
       "request": {

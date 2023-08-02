@@ -14,7 +14,6 @@
   "ORGANIZATION_TOTAL":"Total Organizations",
   "SUB_ORGANIZATION_TOTAL":"Total Sub-organizations",
   "TOTAL_USER":"Total Users",
-  "ORGANIZATION_USERS_LIST_WARNING": "Organization Users Data Not Found",
   "ORGANIZATION_LIST_WARNING":"Organisation Not Found",
   "ROLE_INFO": "Roles Info",
   "ENTER_USER_ROLES": "Enter User Role",
@@ -59,6 +58,7 @@
   "USER_NAME": "Username",
   "USER_PASSWORD": "Password",
   "USER_ROLE": "Roles",
+  "ORGANIZATION_USERS_LIST_WARNING": "Organization Users Data Not Found",
     
   "USER_FIRST_NAME_REQUIRED": "First Name is required",
   "USER_LAST_NAME_REQUIRED": "Last Name is required",
