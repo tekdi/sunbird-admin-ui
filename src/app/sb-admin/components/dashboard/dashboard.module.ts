@@ -12,7 +12,9 @@ import { DashboardsRoutingModule } from './dashboard-routing.module';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from "primeng/message";
-import { I18NextModule} from 'angular-i18next';
+import { I18NextModule } from 'angular-i18next';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -29,8 +31,10 @@ import { I18NextModule} from 'angular-i18next';
         InputTextModule,
         MessagesModule,
         MessageModule,
+        ToastModule,
         I18NextModule.forRoot(),
     ],
-    declarations: [DashboardComponent]
+    declarations: [DashboardComponent],
+    providers: [MessageService]
 })
 export class DashboardModule { }

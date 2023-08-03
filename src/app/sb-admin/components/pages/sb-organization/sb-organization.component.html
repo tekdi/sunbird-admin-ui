@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="grid">
     <div class="col-12 lg:col-6 xl:col-4">
         <div class="card mb-0">
@@ -41,7 +42,6 @@
     <div class="col-12 xl:col-12">
         <div class="card">
             <h5 class="m-0">{{ 'ORGANIZATION' | i18next}}</h5><br>
-            <p-messages id="messages" [value]="messages"></p-messages>
             <p-table #myTab [value]="organizationDetail" [loading]='loading' [totalRecords]="orgCount" [paginator]="true" [(first)]="first" [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true" [lazy]="true" (onLazyLoad)="loadOrganizationData($event)" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" responsiveLayout="scroll" [rowHover]="true">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">

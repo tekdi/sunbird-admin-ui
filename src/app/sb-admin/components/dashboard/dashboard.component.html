@@ -1,30 +1,33 @@
+<p-toast></p-toast>
 <div class="grid">
     <div class="col-12 xl:col-12">
         <div class="card">
             <h5>{{ 'ORG_DASHBOARD' | i18next }}</h5>
-            <p-message severity="warn" text="{{ 'ORG_DASHBOARD_LIST_WARNING' | i18next }}"
-                *ngIf="!tenantUserCountResponse || tenantUserCountResponse.length === 0"></p-message>
-            <p-table #myTab [value]="tenantDetail" [loading]="loading" [paginator]="true" [rows]="10"
-                responsiveLayout="scroll" [globalFilterFields]="['orgName']">
-                <ng-template pTemplate="caption">
+            <p-message severity="warn" text="{{ 'ORG_DASHBOARD_LIST_WARNING' | i18next }}" *ngIf="!tenantUserCountResponse || tenantUserCountResponse.length === 0"></p-message>
+            <p-table #myTab [value]="tenantDetail" [loading]='loading' [totalRecords]="orgCount" [paginator]="true" [(first)]="first" [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true" [lazy]="true" (onLazyLoad)="loadOrg($event)" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" responsiveLayout="scroll" [rowHover]="true">
+                <!-- <ng-template pTemplate="caption">
                     <span class="p-input-icon-left">
                         <i class="pi pi-search"> </i>
-                        <input type="text" pInputText placeholder="{{ 'ORG_DASHBOARD_NAME' | i18next }}"
-                            (input)="myTab.filterGlobal($any($event.target).value,'contains')" />
+                        <input type="text" pInputText placeholder="{{ 'ORG_DASHBOARD_NAME' | i18next }}" (input)="myTab.filterGlobal($any($event.target).value,'contains')" />
                     </span>
-                </ng-template>
+                </ng-template> -->
                 <ng-template pTemplate="header">
                     <tr>
-                        <th scope="col" pSortableColumn="orgName">{{ 'ORG_DASHBOARD_NAME' | i18next }}<p-sortIcon
-                                field="orgName"></p-sortIcon></th>
-                        <th scope="col" pSortableColumn="userCount">{{ 'ORG_DASHBOARD_USERS_REGISTERED' | i18next }}<p-sortIcon
-                                field="userCount"> </p-sortIcon></th>
+                        <th scope="col">{{ 'ORG_DASHBOARD_NAME' | i18next }}</th>
+                        <th scope="col">{{ 'ORG_DASHBOARD_USERS_REGISTERED' | i18next }}</th>
+                    </tr>
+                    <tr>
+                        <th scope="col"> <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="onSearch($event)" placeholder="{{ 'ORGANIZATION_SEARCH' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.channel">
+                            </span></th>
+                        <th scope="col"></th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-user>
+                <ng-template pTemplate="body" let-tenant>
                     <tr>
-                        <td>{{user.orgName}}</td>
-                        <td>{{user.userCount}}</td>
+                        <td>{{tenant.channel}}</td>
+                        <td>{{tenant.userCount}}</td>
                     </tr>
                 </ng-template>
             </p-table>

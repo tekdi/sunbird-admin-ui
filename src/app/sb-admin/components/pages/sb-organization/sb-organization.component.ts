@@ -4,7 +4,7 @@ import { OrganizationListService } from 'src/app/sb-admin/service/organization-l
 import { Subscription, map, Observable } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddOrEditOrgComponent } from './add-or-edit-org/add-or-edit-org.component';
-import { MessageService, Message } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { I18NextPipe } from 'angular-i18next';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
@@ -24,7 +24,6 @@ export class SbOrganizationComponent implements OnDestroy {
   orgCount: number = 0;
   TotaluserCount: number = 0;
   TotalsubOrgCount: number = 0;
-  messages: Message[] = [];
   first: number = 0;
   filteredValue = SearchFilterValue;
   rowsPerPageOptions: number[] = [10, 20, 30];
@@ -67,7 +66,13 @@ export class SbOrganizationComponent implements OnDestroy {
       } else {
         this.loading = false;
       }
-    });
+    },
+      (error: any) => {
+        this.loading = false;
+        this.messageService.add({ severity: 'error', summary: "Oops! Something went wrong. Please try again later" })
+        console.log(error);
+      }
+    );
   }
 
   getAllOrg(event: any) {
@@ -137,7 +142,7 @@ export class SbOrganizationComponent implements OnDestroy {
       })
     },
       (error: any) => {
-        console.log(error);
+        console.log(error)
         this.loading = false;
       })
   }
@@ -151,17 +156,19 @@ export class SbOrganizationComponent implements OnDestroy {
           }
         }
       };
-      this.subscription = this.userCountService.getUserCountOfaTenant(body).subscribe((counttenant: any) => {
-        org.userCount = counttenant?.result?.response?.count;
-        if (orgDetail[orgDetail.length - 1].id === org.id) {
-          this.loading = false;
+      this.subscription = this.userCountService.getUserCountOfaTenant(body).subscribe(
+        (counttenant: any) => {
+          org.userCount = counttenant?.result?.response?.count;
+          if (orgDetail[orgDetail.length - 1].id === org.id) {
+            this.loading = false;
+          }
+        },
+        (error: any) => {
+          this.loading = false
+          console.log('error', error);
         }
-      });
-    },
-      (error: any) => {
-        console.log(error);
-        this.loading = false;
-      }
+      );
+    }
     );
   }
 
@@ -211,6 +218,7 @@ export class SbOrganizationComponent implements OnDestroy {
       this.TotaluserCount = response.result.response.count;
     },
       (error: any) => {
+        this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })
         console.log(error);
       }
     )
@@ -224,8 +232,8 @@ export class SbOrganizationComponent implements OnDestroy {
       (data: any) => {
         if (data) {
           this.getAllUserTypeCount(data, organization.id);
+          this.loading = false;
         }
-
       },
       (error: any) => {
         console.error(error);
@@ -254,6 +262,7 @@ export class SbOrganizationComponent implements OnDestroy {
   }
 
   getAllUserTypeCount(userTypes: any, id: any) {
+    let errorOccured = false;
     userTypes.map((org: any) => {
       const body = {
         "request": {
@@ -266,7 +275,14 @@ export class SbOrganizationComponent implements OnDestroy {
       this.subscription = this.orgList.getUserTypeCount(body).subscribe((data: any) => {
         org.userTypeCount = data.result.response.count;
         this.loading = false
-      })
+      },
+        (error: any) => {
+          if (!errorOccured) {
+            errorOccured = true;
+            this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })
+          }
+        }
+      )
     })
   }
 
