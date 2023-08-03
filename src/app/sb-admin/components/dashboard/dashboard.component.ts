@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { UserCountService } from '../../service/user-count.service';
 import { TenantDetails } from './tenantDetails';
 import $ from 'jquery';
 import { SearchFilterValue } from '../pages/sb-organization/OrganizationDetail';
-import { Subscription } from 'rxjs';
 import { MessageService, Message } from 'primeng/api';
 
 @Component({
