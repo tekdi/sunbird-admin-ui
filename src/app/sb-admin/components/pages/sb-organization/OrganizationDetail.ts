@@ -17,3 +17,9 @@ export const SearchFilterValue: any = {
     channel: '',
     isRootOrg: true,
 }
+
+export interface SubOrganizationDetail {
+    orgName: string;
+    channel: string;
+    id: string;
+}

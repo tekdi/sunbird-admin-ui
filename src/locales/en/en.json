@@ -49,6 +49,11 @@
   "ADD_SUB_ORGANIZATION_ALREADY_EXIT": "Already Exist Sub Organiztion",
   "ADD_SUB_ORGANIZATION_SUCCESSFULLY": "Sub Organization added successfully",
 
+  "SUB_ORGANIZATION":"Sub-Organization",
+  "SUB_ORGANIZATION_SEARCH": "Search Sub-Organization",
+  "SUB-ORGANIZATION_NAME":"Sub-Organization Name",
+  "SUB_ORGANIZATION_ID":"Sub-Organization Id",
+
   "USER_FIRST_NAME":"First Name",
   "USER_LAST_NAME":"Last Name",    
   "USER_EMAIL":"Email",

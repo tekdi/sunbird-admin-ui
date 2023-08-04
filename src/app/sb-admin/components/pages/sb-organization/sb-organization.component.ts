@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { OrganizationDetail, UserRoles, SearchFilterValue } from './OrganizationDetail';
+import { OrganizationDetail, UserRoles, SearchFilterValue, SubOrganizationDetail } from './OrganizationDetail';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 import { Subscription, map, Observable } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -29,8 +29,12 @@ export class SbOrganizationComponent implements OnDestroy {
   rowsPerPageOptions: number[] = [10, 20, 30];
   timeout: any = null;
   userRoles!: UserRoles[];
-  visible: boolean = false;
   orgRoles: any
+  userTypeVisible: boolean = false;
+  subOrgDetailsVisible: boolean = false;
+  subOrgDetails: SubOrganizationDetail[] = [];
+  rootOrgDetail: any;
+
   addOrgDialog = {
     header: this.i18nextPipe.transform('ADD_ORGANIZATION'),
     width: '40%',
@@ -225,7 +229,8 @@ export class SbOrganizationComponent implements OnDestroy {
   }
 
   getAllUserTypeandCount(organization: any) {
-    this.visible = true;
+    this.userTypeVisible = true;
+    this.subOrgDetailsVisible = false;
     this.orgRoles = organization;
     this.loading = true
     this.subscription = this.getAllUserType(organization).subscribe(
@@ -284,6 +289,27 @@ export class SbOrganizationComponent implements OnDestroy {
         }
       )
     })
+  }
+
+  getSubOrgDetail(rootOrg: any) {
+    this.rootOrgDetail = rootOrg;
+    this.subOrgDetailsVisible = true;
+    this.userTypeVisible = false;
+    const body = {
+      "request": {
+        "filters": {
+          "isRootOrg": false,
+          "isTenant": false,
+          "channel": rootOrg.channel
+        }
+      }
+    }
+    this.orgList.getAllOrgSubOrg(body).subscribe((suborg: any) => {
+      this.subOrgDetails = suborg.result.response.content;
+      console.log(this.subOrgDetails);
+
+    })
+    console.log("suborgdetail", rootOrg);
   }
 
   addOrg() {
