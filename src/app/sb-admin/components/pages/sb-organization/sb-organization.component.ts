@@ -32,9 +32,6 @@ export class SbOrganizationComponent implements OnDestroy {
   userRoles!: UserRoles[];
   orgRoles: any
   userTypeVisible: boolean = false;
-  subOrgDetailsVisible: boolean = false;
-  subOrgDetails: SubOrganizationDetail[] = [];
-  rootOrgDetail: any;
 
   addOrgDialog = {
     header: this.i18nextPipe.transform('ADD_ORGANIZATION'),
@@ -231,7 +228,6 @@ export class SbOrganizationComponent implements OnDestroy {
 
   getAllUserTypeandCount(organization: any) {
     this.userTypeVisible = true;
-    this.subOrgDetailsVisible = false;
     this.orgRoles = organization;
     this.loading = true
     this.subscription = this.getAllUserType(organization).subscribe(
@@ -292,8 +288,6 @@ export class SbOrganizationComponent implements OnDestroy {
     })
   }
 
-
-
   addOrg() {
     this.ref = this.dialogService.open(AddOrEditOrgComponent,
       {
@@ -316,9 +310,9 @@ export class SbOrganizationComponent implements OnDestroy {
 
   editOrganization(organization: any) {
     this.ref = this.dialogService.open(AddOrEditOrgComponent, {
+      header: this.i18nextPipe.transform('EDIT_ORGANIZATION_HEADER'),
       data: { mode: 'Edit', organization },
-      width: '40%',
-      header: 'Edit Organization'
+      width: '40%'
     });
     this.ref.onClose.subscribe((updatedData: any) => {
       if (updatedData) {
@@ -335,11 +329,10 @@ export class SbOrganizationComponent implements OnDestroy {
   }
 
   getSubOrgDetail(rootOrg: any) {
-    this.rootOrgDetail = rootOrg;
     this.dialogService.open(SubOrgDetailsComponent, {
       data: { rootOrg },
       width: '60%',
-      header: 'Sub-Organization'
+      header: this.i18nextPipe.transform('SUB_ORGANIZATION')
     })
   }
 

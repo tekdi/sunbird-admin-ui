@@ -27,4 +27,5 @@ export interface SubOrganizationDetail {
     orgName: string;
     channel: string;
     id: string;
+    userCount: number;
 }

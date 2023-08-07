@@ -34,6 +34,7 @@
   "ADD_ORGANIZATION_ALREADY_EXIT":"Channel Already Exists",
 
   "EDIT_ORGANIZATION_ACTION": "Action",
+  "EDIT_ORGANIZATION_HEADER": "Edit Organization",
   "EDIT_ORGANIZATION_CHANNEL_ID": "Channel Id",
   "EDIT_ORGANIZATION_SAVE": "SAVE",
   "EDIT_ORGANIZATION_BLANK_FIELD_MSG": "Fields should not be blank",
@@ -51,8 +52,10 @@
 
   "SUB_ORGANIZATION":"Sub-Organization",
   "SUB_ORGANIZATION_SEARCH": "Search Sub-Organization",
-  "SUB-ORGANIZATION_NAME":"Sub-Organization Name",
+  "SUB_ORGANIZATION_NAME":"Sub-Organization Name",
   "SUB_ORGANIZATION_ID":"Sub-Organization Id",
+  "SUB_ORGANIZATION_USER_COUNT": "User Count",
+  "SUB_ORGANIZATION_DATA_NOT_FOUND" : "Sub-Organization Not Found",
 
   "USER_FIRST_NAME":"First Name",
   "USER_LAST_NAME":"Last Name",    
