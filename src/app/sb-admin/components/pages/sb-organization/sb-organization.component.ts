@@ -9,6 +9,7 @@ import { I18NextPipe } from 'angular-i18next';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
 import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
+import { SubOrgDetailsComponent } from './sub-org-details/sub-org-details.component';
 
 @Component({
   selector: 'app-sb-organization',
@@ -291,26 +292,7 @@ export class SbOrganizationComponent implements OnDestroy {
     })
   }
 
-  getSubOrgDetail(rootOrg: any) {
-    this.rootOrgDetail = rootOrg;
-    this.subOrgDetailsVisible = true;
-    this.userTypeVisible = false;
-    const body = {
-      "request": {
-        "filters": {
-          "isRootOrg": false,
-          "isTenant": false,
-          "channel": rootOrg.channel
-        }
-      }
-    }
-    this.orgList.getAllOrgSubOrg(body).subscribe((suborg: any) => {
-      this.subOrgDetails = suborg.result.response.content;
-      console.log(this.subOrgDetails);
 
-    })
-    console.log("suborgdetail", rootOrg);
-  }
 
   addOrg() {
     this.ref = this.dialogService.open(AddOrEditOrgComponent,
@@ -349,6 +331,15 @@ export class SbOrganizationComponent implements OnDestroy {
           this.organizationDetail[index].description = updatedData.description
         }
       }
+    })
+  }
+
+  getSubOrgDetail(rootOrg: any) {
+    this.rootOrgDetail = rootOrg;
+    this.dialogService.open(SubOrgDetailsComponent, {
+      data: { rootOrg },
+      width: '60%',
+      header: 'Sub-Organization'
     })
   }
 

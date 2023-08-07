@@ -18,6 +18,11 @@ export const SearchFilterValue: any = {
     isRootOrg: true,
 }
 
+export const SearchSubOrgFilterValue: any = {
+    channel: '',
+    orgName: '',
+}
+
 export interface SubOrganizationDetail {
     orgName: string;
     channel: string;
