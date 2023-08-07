@@ -35,8 +35,6 @@ export class SubOrgDetailsComponent implements OnDestroy {
     this.rootOrg = this.data.rootOrg;
   }
 
-  ngOnInit() { }
-
   loadSubOrgandUserCount(event: any) {
     this.subscription = this.getSubOrgDetail(event).subscribe((subOrgData: any) => {
       if (subOrgData && subOrgData.length > 0) {
