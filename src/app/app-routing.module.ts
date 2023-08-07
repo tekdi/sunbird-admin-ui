@@ -1,7 +1,8 @@
-import { RouterModule } from '@angular/router';
+import { RouterModule} from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './sb-admin/components/notfound/notfound.component';
 import { AppLayoutComponent } from "./layout/app.layout.component";
+import  {WebComponentWrapper,WebComponentWrapperOptions} from "@angular-architects/module-federation-tools"
 
 @NgModule({
     imports: [
@@ -11,8 +12,23 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
                 children: [
                     { path: '', loadChildren: () => import('./sb-admin/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'pages', loadChildren: () => import('./sb-admin/components/pages/pages.module').then(m => m.PagesModule) }
+                    ,
+
+                    { path: 'bulkUplaod', 
+            component: WebComponentWrapper, 
+            data: { 
+              type: 'script', 
+              remoteEntry: 'http://localhost:4205/remoteEntry.js', 
+              remoteName: 'bulkContentUpload',
+             exposedModule: './web-components', 
+             elementName: 'bulk-upload', 
+            } as WebComponentWrapperOptions, }, 
+              
                 ]
             },
+           
+           
+             
             { path: 'notfound', component: NotfoundComponent },
             { path: '**', redirectTo: '/notfound' },
         ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload' })

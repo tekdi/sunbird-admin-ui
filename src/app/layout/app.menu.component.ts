@@ -41,7 +41,19 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['/pages/sb-user']
                     }
                 ]
-            }
+            },
+ 
+            {
+                label: 'Upload Content',
+                icon: 'pi pi-fw pi-briefcase',
+                items: [
+                    {
+                        label: 'Upload',
+                        icon: 'pi pi-fw pi-upload',
+                        routerLink: ['/bulkUplaod']
+                    }
+                ]
+            },
         ];
     }
 }
