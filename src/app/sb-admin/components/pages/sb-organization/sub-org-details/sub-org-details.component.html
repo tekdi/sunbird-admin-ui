@@ -9,7 +9,6 @@
         <ng-template pTemplate="header">
             <tr>
                 <th scope="col">{{'SUB_ORGANIZATION_NAME' |i18next}}</th>
-                <th scope="col">{{'SUB_ORGANIZATION_ID' |i18next}}</th>
                 <th scope="col">{{'SUB_ORGANIZATION_USER_COUNT' |i18next}}</th>
             </tr>
             <tr>
@@ -26,7 +25,6 @@
         <ng-template pTemplate="body" let-subOrg>
             <tr>
                 <td>{{ subOrg.orgName }}</td>
-                <td>{{ subOrg.id }}</td>
                 <td>{{ subOrg.userCount }}</td>
             </tr>
         </ng-template>
