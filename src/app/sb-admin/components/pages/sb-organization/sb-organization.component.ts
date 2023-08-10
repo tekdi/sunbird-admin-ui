@@ -10,7 +10,6 @@ import { UserService } from 'src/app/sb-admin/service/user.service';
 import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
 import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
 import { SystemRoles } from 'src/app/constant.config';
-import { error } from 'console';
 
 @Component({
   selector: 'app-sb-organization',
