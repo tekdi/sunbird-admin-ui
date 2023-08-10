@@ -71,11 +71,10 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
                 if (value.routeEvent) {
                     this.active = (value.key === this.key || value.key.startsWith(this.key + '-')) ? true : false;
                 }
-                else {
-                    if (value.key !== this.key && !value.key.startsWith(this.key + '-')) {
-                        this.active = false;
-                    }
+                else if (value.key !== this.key && !value.key.startsWith(this.key + '-')) {
+                    this.active = false;
                 }
+
             });
         });
 
@@ -131,7 +130,7 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
         return this.root ? 'expanded' : (this.active ? 'expanded' : 'collapsed');
     }
 
-    @HostBinding('class.active-menuitem') 
+    @HostBinding('class.active-menuitem')
     get activeClass() {
         return this.active && !this.root;
     }

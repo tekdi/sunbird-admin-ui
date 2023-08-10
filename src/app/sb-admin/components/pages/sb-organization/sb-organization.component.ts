@@ -10,6 +10,7 @@ import { UserService } from 'src/app/sb-admin/service/user.service';
 import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
 import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
 import { SystemRoles } from 'src/app/constant.config';
+import { error } from 'console';
 
 @Component({
   selector: 'app-sb-organization',
@@ -289,7 +290,7 @@ export class SbOrganizationComponent implements OnDestroy {
   }
 
   getSystemRolesWithCounts(org: any) {
-    this.systemRoles.map(role => {
+    this.systemRoles.forEach(role => {
       const body = {
         "request": {
           "filters": {
@@ -300,7 +301,12 @@ export class SbOrganizationComponent implements OnDestroy {
       };
       this.subscription = this.orgList.getUserandSystemTypeCount(body).subscribe((data: any) => {
         role.count = data.result.response.count;
-      });
+      },
+        (error: any) => {
+          console.log(error);
+          this.loading = false;
+        }
+      );
     });
   }
 
