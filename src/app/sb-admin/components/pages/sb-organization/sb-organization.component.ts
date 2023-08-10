@@ -9,6 +9,7 @@ import { I18NextPipe } from 'angular-i18next';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
 import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
+import { SystemRoles } from 'src/app/constant.config';
 
 @Component({
   selector: 'app-sb-organization',
@@ -29,6 +30,7 @@ export class SbOrganizationComponent implements OnDestroy {
   rowsPerPageOptions: number[] = [10, 20, 30];
   timeout: any = null;
   userRoles!: UserRoles[];
+  systemRoles = SystemRoles;
   visible: boolean = false;
   orgRoles: any
   addOrgDialog = {
@@ -272,7 +274,7 @@ export class SbOrganizationComponent implements OnDestroy {
           }
         }
       }
-      this.subscription = this.orgList.getUserTypeCount(body).subscribe((data: any) => {
+      this.subscription = this.orgList.getUserandSystemTypeCount(body).subscribe((data: any) => {
         org.userTypeCount = data.result.response.count;
         this.loading = false
       },
@@ -284,6 +286,22 @@ export class SbOrganizationComponent implements OnDestroy {
         }
       )
     })
+  }
+
+  getSystemRolesWithCounts(org: any) {
+    this.systemRoles.map(role => {
+      const body = {
+        "request": {
+          "filters": {
+            "channel": org.channel,
+            "organisations.roles": [role.name]
+          }
+        }
+      };
+      this.subscription = this.orgList.getUserandSystemTypeCount(body).subscribe((data: any) => {
+        role.count = data.result.response.count;
+      });
+    });
   }
 
   addOrg() {

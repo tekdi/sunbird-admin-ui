@@ -112,6 +112,11 @@
   "USER_SEARCH_EMAIL":"Search Email",
   "USER_SEARCH_PHONE":"Search Phone",
 
+  "PROFILE_ROLE":"User Role",
+  "PROFILE_ROLE_COUNT": "User Count",
+  "SYSTEM_ROLE": "System Role",
+  "SYSTEM_ROLE_COUNT" : "System Count",
+
   "COMMON_USERS":"Users",
   "COMMON_YES":"Yes",
   "COMMON_NO":"No",
