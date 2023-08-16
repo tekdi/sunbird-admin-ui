@@ -3,7 +3,8 @@ const PROXY_CONFIG = [
         context: [
             "/api",
             "/assets",
-            "/search"
+            "/search",
+            "/action"
         ],
         "target": "http://localhost:3000",
         "secure": false,
