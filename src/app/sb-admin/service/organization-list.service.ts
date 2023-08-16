@@ -56,6 +56,11 @@ export class OrganizationListService {
     return this.http.post(config.URLS.USER_SEARCH_URL, body, { headers: header })
   }
 
-
+  getContentTypeCount(body: any): Observable<object> {
+    let header = new HttpHeaders({
+      "Content-Type": 'application/json'
+    })
+    return this.http.post(config.URLS.USER_CONTENT_TYPE_COUNT, body, { headers: header })
+  }
 
 }

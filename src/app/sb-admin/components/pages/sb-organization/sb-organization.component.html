@@ -80,7 +80,7 @@
                         <td>{{organization.channel}}</td>
                         <td>{{organization.subOrgCount}}</td>
                         <td>{{organization.userCount}}</td>
-                        <td><p-button icon="pi pi-external-link" (click)="getAllUserTypeandCount(organization)" (click)="getSystemRolesWithCounts(organization)"></p-button></td>
+                        <td><p-button icon="pi pi-external-link" (click)="getAllUserTypeandCount(organization)" (click)="getSystemRolesWithCounts(organization)" (click)="getContentTypeCount(organization)"></p-button></td>
                         <td>
                             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2" (click)="editOrganization(organization)"></button>
                         </td>
@@ -91,18 +91,18 @@
     </div>
 </div>
 <div class="card flex justify-content-center">
-    <p-dialog header="Roles" [(visible)]="visible" [style]="{ width: '50vw', height: '600px' }">
+    <p-dialog header="Roles" [(visible)]="visible" [style]="{width: '40vw'}">
         <h5>{{ orgRoles?.channel }}</h5>
-        <div class="grid">
-            <div class="col-6 xl:col-6">
+        <!-- <div class="card"> -->
+        <p-tabView>
+            <p-tabPanel header="{{'PROFILE_ROLE' |i18next }}" class="line-height-3 m-0">
                 <div class="card">
-                    <h5>{{'PROFILE_ROLE' |i18next }}</h5>
                     <p-message severity="warn" text="{{ 'USER_TYPE_WARNING_MSG' | i18next }}" *ngIf="!userRoles"></p-message>
                     <p-table #userRoleDashboard [value]="userRoles" [loading]="loading" responsiveLayout="scroll">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th scope="col">{{ 'PROFILE_ROLE' | i18next }}</th>
-                                <th scope="col">{{ 'PROFILE_ROLE_COUNT' | i18next }}</th>
+                                <th scope="col">{{ 'COUNT' | i18next }}</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-userType>
@@ -113,16 +113,15 @@
                         </ng-template>
                     </p-table>
                 </div>
-            </div>
-            <div class="col-6 xl:col-6">
+            </p-tabPanel>
+            <p-tabPanel header="{{'SYSTEM_ROLE' |i18next}}" class="line-height-3 m-0">
                 <div class="card">
-                    <h5>{{'SYSTEM_ROLE' |i18next}}</h5>
-                    <p-message severity="warn" text="{{ 'USER_TYPE_WARNING_MSG' | i18next }}" *ngIf="!userRoles"></p-message>
+                    <p-message severity="warn" text="{{ 'USER_TYPE_WARNING_MSG' | i18next }}" *ngIf="!systemRoles"></p-message>
                     <p-table [value]="systemRoles" #systemRoleDashboard [loading]="loading" responsiveLayout="scroll">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th scope="col">{{'SYSTEM_ROLE' |i18next}}</th>
-                                <th scope="col">{{'SYSTEM_ROLE_COUNT' |i18next}}</th>
+                                <th scope="col">{{'COUNT' |i18next}}</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-systemRole>
@@ -133,7 +132,27 @@
                         </ng-template>
                     </p-table>
                 </div>
-            </div>
-        </div>
+            </p-tabPanel>
+            <p-tabPanel header="Content" class="line-height-3 m-0">
+                <div class="card">
+                    <!-- <p-message severity="warn" text="{{ 'USER_TYPE_WARNING_MSG' | i18next }}" *ngIf="!userRoles"></p-message> -->
+                    <p-table [value]="contentTypeCOunt" #contentDashboard [loading]="loading" [paginator]="true" [rows]="6" responsiveLayout="scroll">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th scope="col">{{'CONTENT' |i18next}}</th>
+                                <th scope="col">{{'COUNT' |i18next}}</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-content>
+                            <tr>
+                                <td>{{ content?.name }}</td>
+                                <td>{{ content?.count }}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+        <!-- </div> -->
     </p-dialog>
 </div>
