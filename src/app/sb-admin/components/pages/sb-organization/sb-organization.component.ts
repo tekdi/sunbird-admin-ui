@@ -33,7 +33,7 @@ export class SbOrganizationComponent implements OnDestroy {
   systemRoles = SystemRoles;
   visible: boolean = false;
   orgRoles: any
-  contentTypeCOunt: any;
+  contentTypeCount: any;
   addOrgDialog = {
     header: this.i18nextPipe.transform('ADD_ORGANIZATION'),
     width: '40%',
@@ -311,7 +311,6 @@ export class SbOrganizationComponent implements OnDestroy {
   }
 
   getContentTypeCount(org: any) {
-    console.log('contentTypeId', org.id);
     const body = {
       "request": {
         "filters": {
@@ -326,9 +325,12 @@ export class SbOrganizationComponent implements OnDestroy {
       }
     }
     this.orgList.getContentTypeCount(body).subscribe((data: any) => {
-      this.contentTypeCOunt = data.result.facets[0].values;
-      console.log(this.contentTypeCOunt.length);
-    })
+      this.contentTypeCount = data.result.facets[0].values;
+    },
+      (error: any) => {
+        console.log(error);
+      }
+    )
   }
 
   addOrg() {

@@ -17,7 +17,6 @@
   "ORGANIZATION_LIST_WARNING":"Organisation Not Found",
   "ROLE_INFO": "Roles Info",
   "ENTER_USER_ROLES": "Enter User Role",
-  "USER_TYPE_WARNING_MSG" : "User Type Data Not Found",
   
   "ADD_ORGANIZATION_DESCRIPTION" : "Description",
   "ORGANIZATION_CHANNEL_NAME" : "Channel Name",
@@ -116,7 +115,9 @@
   "SYSTEM_ROLE": "System Role",
   "CONTENT": "Content",
   "COUNT": "Count",
-
+  "USER_TYPE_WARNING_MSG" : "User Type Data Not Found",
+  "SYSTEM_ROLE_TYPE_WARNING_MSG" : "System Role not Found",
+  "CONTENT_WARNING_MSG":"Content Not Found",
 
   "COMMON_USERS":"Users",
   "COMMON_YES":"Yes",

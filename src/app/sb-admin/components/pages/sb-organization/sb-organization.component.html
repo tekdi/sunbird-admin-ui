@@ -93,7 +93,6 @@
 <div class="card flex justify-content-center">
     <p-dialog header="Roles" [(visible)]="visible" [style]="{width: '40vw'}">
         <h5>{{ orgRoles?.channel }}</h5>
-        <!-- <div class="card"> -->
         <p-tabView>
             <p-tabPanel header="{{'PROFILE_ROLE' |i18next }}" class="line-height-3 m-0">
                 <div class="card">
@@ -116,7 +115,7 @@
             </p-tabPanel>
             <p-tabPanel header="{{'SYSTEM_ROLE' |i18next}}" class="line-height-3 m-0">
                 <div class="card">
-                    <p-message severity="warn" text="{{ 'USER_TYPE_WARNING_MSG' | i18next }}" *ngIf="!systemRoles"></p-message>
+                    <p-message severity="warn" text="{{ 'SYSTEM_ROLE_TYPE_WARNING_MSG' | i18next }}" *ngIf="!systemRoles"></p-message>
                     <p-table [value]="systemRoles" #systemRoleDashboard [loading]="loading" responsiveLayout="scroll">
                         <ng-template pTemplate="header">
                             <tr>
@@ -135,8 +134,8 @@
             </p-tabPanel>
             <p-tabPanel header="Content" class="line-height-3 m-0">
                 <div class="card">
-                    <!-- <p-message severity="warn" text="{{ 'USER_TYPE_WARNING_MSG' | i18next }}" *ngIf="!userRoles"></p-message> -->
-                    <p-table [value]="contentTypeCOunt" #contentDashboard [loading]="loading" [paginator]="true" [rows]="6" responsiveLayout="scroll">
+                    <p-message severity="warn" text="{{ 'CONTENT_WARNING_MSG' | i18next }}" *ngIf="!contentTypeCount || contentTypeCount.length===0"></p-message>
+                    <p-table [value]="contentTypeCount" #contentDashboard [loading]="loading" responsiveLayout="scroll">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th scope="col">{{'CONTENT' |i18next}}</th>
@@ -153,6 +152,5 @@
                 </div>
             </p-tabPanel>
         </p-tabView>
-        <!-- </div> -->
     </p-dialog>
 </div>
