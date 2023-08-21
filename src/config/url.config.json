@@ -9,7 +9,6 @@
         "USER_UNBLOCK_URL": "api/user/v1/unblock",
         "USER_ROLES_GET_URL":"api/data/v1/form/read",
         "USER_SEARCH_URL": "api/user/v1/search",
-        "USER_CONTENT_TYPE_COUNT" :"action/composite/v3/search"
-
+        "COMPOSITE_SEARCH_URL" :"action/composite/v3/search"
     }
 }

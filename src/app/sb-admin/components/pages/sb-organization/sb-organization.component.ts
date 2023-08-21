@@ -23,8 +23,8 @@ export class SbOrganizationComponent implements OnDestroy {
   private subscription!: Subscription;
   rows: number = 10;
   orgCount: number = 0;
-  TotaluserCount: number = 0;
-  TotalsubOrgCount: number = 0;
+  totalUserCount: number = 0;
+  totalSubOrgCount: number = 0;
   first: number = 0;
   filteredValue = SearchFilterValue;
   rowsPerPageOptions: number[] = [10, 20, 30];
@@ -42,7 +42,7 @@ export class SbOrganizationComponent implements OnDestroy {
     }
   };
   addSubOrgDialog = {
-    header: this.i18nextPipe.transform('ADD_SUB_ORGANIZATION'),
+    header: this.i18nextPipe.transform('ADD_SUB_ORGANIZATION_HEADER'),
     width: '40%',
     contentStyle: {
       overflow: 'auto'
@@ -72,8 +72,7 @@ export class SbOrganizationComponent implements OnDestroy {
     },
       (error: any) => {
         this.loading = false;
-        this.messageService.add({ severity: 'error', summary: "Oops! Something went wrong. Please try again later" })
-        console.log(error);
+        this.messageService.add({ severity: 'error', summary: this.i18nextPipe.transform('API_ERROR') })
       }
     );
   }
@@ -100,7 +99,6 @@ export class SbOrganizationComponent implements OnDestroy {
         return this.organizationDetail;
       },
         (error: any) => {
-          console.log(error);
           this.loading = false;
         }
       )
@@ -145,7 +143,6 @@ export class SbOrganizationComponent implements OnDestroy {
       })
     },
       (error: any) => {
-        console.log(error)
         this.loading = false;
       })
   }
@@ -168,11 +165,9 @@ export class SbOrganizationComponent implements OnDestroy {
         },
         (error: any) => {
           this.loading = false
-          console.log('error', error);
         }
       );
-    }
-    );
+    });
   }
 
   getTotalOrgCount() {
@@ -188,7 +183,7 @@ export class SbOrganizationComponent implements OnDestroy {
         this.orgCount = data.result.response.count;
       },
       (error: any) => {
-        console.log(error);
+        this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })
       }
     );
   }
@@ -202,10 +197,10 @@ export class SbOrganizationComponent implements OnDestroy {
       }
     }
     this.subscription = this.orgList.getAllOrgSubOrg(body).subscribe((response: any) => {
-      this.TotalsubOrgCount = response.result.response.count;
+      this.totalSubOrgCount = response.result.response.count;
     },
       (error: any) => {
-        console.log(error);
+        this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })
       }
     )
   }
@@ -218,11 +213,10 @@ export class SbOrganizationComponent implements OnDestroy {
       }
     }
     this.subscription = this.userService.loadUserList(body).subscribe((response: any) => {
-      this.TotaluserCount = response.result.response.count;
+      this.totalUserCount = response.result.response.count;
     },
       (error: any) => {
         this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })
-        console.log(error);
       }
     )
   }
@@ -239,7 +233,6 @@ export class SbOrganizationComponent implements OnDestroy {
         }
       },
       (error: any) => {
-        console.error(error);
         this.loading = false
       }
     );
@@ -303,7 +296,6 @@ export class SbOrganizationComponent implements OnDestroy {
         role.count = data.result.response.count;
       },
         (error: any) => {
-          console.log(error);
           this.loading = false;
         }
       );
@@ -328,7 +320,7 @@ export class SbOrganizationComponent implements OnDestroy {
       this.contentTypeCount = data.result.facets[0].values;
     },
       (error: any) => {
-        console.log(error);
+        this.loading = false;
       }
     )
   }

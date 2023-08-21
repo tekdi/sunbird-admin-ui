@@ -60,7 +60,7 @@ export class OrganizationListService {
     let header = new HttpHeaders({
       "Content-Type": 'application/json'
     })
-    return this.http.post(config.URLS.USER_CONTENT_TYPE_COUNT, body, { headers: header })
+    return this.http.post(config.URLS.COMPOSITE_SEARCH_URL, body, { headers: header })
   }
 
 }
