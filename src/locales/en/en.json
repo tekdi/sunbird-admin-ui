@@ -2,6 +2,7 @@
   "ORG_DASHBOARD":"Dashboard",
   "ORG_DASHBOARD_NAME": "Organization Name",
   "ORG_DASHBOARD_USERS_REGISTERED": "Registered Users",
+  "ORG_DASHBOARD_SEARCH":"Search Organisation",
   "ORG_DASHBOARD_WARNING": "Tenants Users Count Data Not Found !!",
   "ORG_DASHBOARD_LIST_WARNING":"Organization Data Not Found",
   "ORG_MANAGEMENT":"Org Management",
