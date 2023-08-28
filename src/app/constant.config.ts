@@ -17,3 +17,9 @@ export const SystemRoles = [
     { name: 'ORG_ADMIN', role: 'Org Admin', count: 0 },
     { name: 'PUBLIC', role: 'Public', count: 0 }
 ]
+
+export const Content = [
+    { name: "resource", count: 0 },
+    { name: "course", count: 0 },
+    { name: "textbook", count: 0 }
+]
