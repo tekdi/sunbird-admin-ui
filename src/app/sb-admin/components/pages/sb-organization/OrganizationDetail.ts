@@ -8,6 +8,11 @@ export interface OrganizationDetail {
     description: string
 }
 
+export interface UserRoles {
+    name: string;
+    userTypeCount: number;
+}
+
 export const SearchFilterValue: any = {
     channel: '',
     isRootOrg: true,

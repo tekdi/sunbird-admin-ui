@@ -2,21 +2,11 @@
     <div class="col-12 xl:col-12">
         <div class="card">
             <h5>{{ 'USER_DASHBOARD' | i18next }}</h5>
-            <p-message severity="warn" text="{{ 'USER_ROLE_DASHBOARD_LIST_WARNING' | i18next }}" 
-            *ngIf="!userRoleCount || userRoleCount.length === 0"></p-message>
-            <p-table #userDashboardTable [value]="userRoleCount" [loading]="loading" [paginator]="true" [rows]="10"
-                responsiveLayout="scroll" [globalFilterFields]="['roleName']">
-                <ng-template pTemplate="caption">
-                    <span class="p-input-icon-left">
-                        <i class="pi pi-search"> </i>
-                        <input type="text" pInputText placeholder="{{ 'USER_DASHBOARD_ROLE' | i18next }}"
-                        (input)="userDashboardTable.filterGlobal($any($event.target).value,'contains')" />
-                    </span>
-                </ng-template>
+            <p-message severity="warn" text="{{ 'USER_ROLE_DASHBOARD_LIST_WARNING' | i18next }}" *ngIf="!userRoleCount || userRoleCount.length === 0"></p-message>
+            <p-table #userDashboardTable [value]="userRoleCount" [loading]="loading" responsiveLayout="scroll">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th scope="col" pSortableColumn="roleName">{{ 'USER_DASHBOARD_ROLE_NAME' | i18next }}<p-sortIcon
-                                field="orgName"></p-sortIcon></th>
+                        <th scope="col">{{ 'USER_DASHBOARD_ROLE_NAME' | i18next }}</th>
                         <th scope="col">{{ 'USER_DASHBOARD_USERS_ROLE_COUNT' | i18next }}</th>
                     </tr>
                 </ng-template>

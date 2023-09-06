@@ -1,14 +1,15 @@
 import { Component, OnDestroy } from '@angular/core';
-import { OrganizationDetail, SearchFilterValue } from './OrganizationDetail';
+import { OrganizationDetail, UserRoles, SearchFilterValue } from './OrganizationDetail';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
-import { Subscription, map } from 'rxjs';
+import { Subscription, map, Observable } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddOrEditOrgComponent } from './add-or-edit-org/add-or-edit-org.component';
-import { MessageService, Message } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { I18NextPipe } from 'angular-i18next';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
 import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
+import { SystemRoles, Content } from 'src/app/constant.config';
 
 @Component({
   selector: 'app-sb-organization',
@@ -22,13 +23,18 @@ export class SbOrganizationComponent implements OnDestroy {
   private subscription!: Subscription;
   rows: number = 10;
   orgCount: number = 0;
-  TotaluserCount: number = 0;
-  TotalsubOrgCount: number = 0;
-  messages: Message[] = [];
+  totalUserCount: number = 0;
+  totalSubOrgCount: number = 0;
   first: number = 0;
   filteredValue = SearchFilterValue;
   rowsPerPageOptions: number[] = [10, 20, 30];
   timeout: any = null;
+  userRoles!: UserRoles[];
+  systemRoles = SystemRoles;
+  visible: boolean = false;
+  orgRoles: any
+  contentTypeandCount: any;
+  content = Content;
   addOrgDialog = {
     header: this.i18nextPipe.transform('ADD_ORGANIZATION'),
     width: '40%',
@@ -37,7 +43,7 @@ export class SbOrganizationComponent implements OnDestroy {
     }
   };
   addSubOrgDialog = {
-    header: this.i18nextPipe.transform('ADD_SUB_ORGANIZATION'),
+    header: this.i18nextPipe.transform('ADD_SUB_ORGANIZATION_HEADER'),
     width: '40%',
     contentStyle: {
       overflow: 'auto'
@@ -64,7 +70,12 @@ export class SbOrganizationComponent implements OnDestroy {
       } else {
         this.loading = false;
       }
-    });
+    },
+      (error: any) => {
+        this.loading = false;
+        this.messageService.add({ severity: 'error', summary: this.i18nextPipe.transform('API_ERROR') })
+      }
+    );
   }
 
   getAllOrg(event: any) {
@@ -89,7 +100,6 @@ export class SbOrganizationComponent implements OnDestroy {
         return this.organizationDetail;
       },
         (error: any) => {
-          console.log(error);
           this.loading = false;
         }
       )
@@ -134,7 +144,6 @@ export class SbOrganizationComponent implements OnDestroy {
       })
     },
       (error: any) => {
-        console.log(error);
         this.loading = false;
       })
   }
@@ -148,18 +157,18 @@ export class SbOrganizationComponent implements OnDestroy {
           }
         }
       };
-      this.subscription = this.userCountService.getUserCountOfaTenant(body).subscribe((counttenant: any) => {
-        org.userCount = counttenant?.result?.response?.count;
-        if (orgDetail[orgDetail.length - 1].id === org.id) {
-          this.loading = false;
+      this.subscription = this.userCountService.getUserCountOfaTenant(body).subscribe(
+        (counttenant: any) => {
+          org.userCount = counttenant?.result?.response?.count;
+          if (orgDetail[orgDetail.length - 1].id === org.id) {
+            this.loading = false;
+          }
+        },
+        (error: any) => {
+          this.loading = false
         }
-      });
-    },
-      (error: any) => {
-        console.log(error);
-        this.loading = false;
-      }
-    );
+      );
+    });
   }
 
   getTotalOrgCount() {
@@ -175,7 +184,7 @@ export class SbOrganizationComponent implements OnDestroy {
         this.orgCount = data.result.response.count;
       },
       (error: any) => {
-        console.log(error);
+        this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })
       }
     );
   }
@@ -189,10 +198,10 @@ export class SbOrganizationComponent implements OnDestroy {
       }
     }
     this.subscription = this.orgList.getAllOrgSubOrg(body).subscribe((response: any) => {
-      this.TotalsubOrgCount = response.result.response.count;
+      this.totalSubOrgCount = response.result.response.count;
     },
       (error: any) => {
-        console.log(error);
+        this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })
       }
     )
   }
@@ -205,13 +214,129 @@ export class SbOrganizationComponent implements OnDestroy {
       }
     }
     this.subscription = this.userService.loadUserList(body).subscribe((response: any) => {
-      this.TotaluserCount = response.result.response.count;
+      this.totalUserCount = response.result.response.count;
     },
       (error: any) => {
-        console.log(error);
+        this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })
       }
     )
   }
+
+  getAllUserTypeandCount(organization: any) {
+    this.visible = true;
+    this.orgRoles = organization;
+    this.loading = true
+    this.subscription = this.getAllUserType(organization).subscribe(
+      (data: any) => {
+        if (data) {
+          this.getAllUserTypeCount(data, organization.id);
+          this.loading = false;
+        }
+      },
+      (error: any) => {
+        this.loading = false
+      }
+    );
+  }
+
+  getAllUserType(organization: any): Observable<any> {
+    const id = organization.id;
+    const body = {
+      "request": {
+        "type": "config",
+        "action": "get",
+        "subType": "userType",
+        "id": id,
+        "component": "portal"
+      }
+    };
+    return this.userService.getAllUserRoles(body).pipe(
+      map((response: any) => {
+        this.userRoles = response.result.form.data?.fields;
+        return this.userRoles;
+      })
+    );
+  }
+
+  getAllUserTypeCount(userTypes: any, id: any) {
+    let errorOccured = false;
+    userTypes.map((org: any) => {
+      const body = {
+        "request": {
+          "filters": {
+            "rootOrgId": id,
+            "userType": org.name
+          }
+        }
+      }
+      this.subscription = this.orgList.getUserandSystemTypeCount(body).subscribe((data: any) => {
+        org.userTypeCount = data.result.response.count;
+        this.loading = false
+      },
+        (error: any) => {
+          if (!errorOccured) {
+            errorOccured = true;
+            this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })
+          }
+        }
+      )
+    })
+  }
+
+  getSystemRolesWithCounts(org: any) {
+    this.systemRoles.forEach(role => {
+      const body = {
+        "request": {
+          "filters": {
+            "channel": org.channel,
+            "organisations.roles": [role.name]
+          }
+        }
+      };
+      this.subscription = this.orgList.getUserandSystemTypeCount(body).subscribe((data: any) => {
+        role.count = data.result.response.count;
+      },
+        (error: any) => {
+          this.loading = false;
+        }
+      );
+    });
+  }
+
+  getContentTypeCount(org: any) {
+    const body = {
+      "request": {
+        "filters": {
+          "status": [
+            "Live"
+          ],
+          "channel": org.id
+        },
+        "facets": [
+          "contentType"
+        ]
+      }
+    }
+    console.log(org.id);
+    this.orgList.getContentTypeCount(body).subscribe((data: any) => {
+      this.contentTypeandCount = data.result.facets[0].values;
+      this.content.forEach(contentItem => {
+        const matchContent = this.contentTypeandCount.find((values: any) => values.name === contentItem.name)
+        if (matchContent) {
+          contentItem.count = matchContent.count;
+        }
+        else {
+          contentItem.count = 0;
+        }
+      })
+
+    },
+      (error: any) => {
+        this.loading = false;
+      }
+    )
+  }
+
 
   addOrg() {
     this.ref = this.dialogService.open(AddOrEditOrgComponent,
