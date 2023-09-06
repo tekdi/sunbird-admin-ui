@@ -10,6 +10,7 @@ import { UserService } from 'src/app/sb-admin/service/user.service';
 import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
 import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
 import { SubOrgDetailsComponent } from './sub-org-details/sub-org-details.component';
+import { SystemRoles, Content } from 'src/app/constant.config';
 
 @Component({
   selector: 'app-sb-organization',
@@ -23,16 +24,18 @@ export class SbOrganizationComponent implements OnDestroy {
   private subscription!: Subscription;
   rows: number = 10;
   orgCount: number = 0;
-  TotaluserCount: number = 0;
-  TotalsubOrgCount: number = 0;
+  totalUserCount: number = 0;
+  totalSubOrgCount: number = 0;
   first: number = 0;
   filteredValue = SearchFilterValue;
   rowsPerPageOptions: number[] = [10, 20, 30];
   timeout: any = null;
   userRoles!: UserRoles[];
+  systemRoles = SystemRoles;
+  visible: boolean = false;
   orgRoles: any
-  userTypeVisible: boolean = false;
-
+  contentTypeandCount: any;
+  content = Content;
   addOrgDialog = {
     header: this.i18nextPipe.transform('ADD_ORGANIZATION'),
     width: '40%',
@@ -41,7 +44,7 @@ export class SbOrganizationComponent implements OnDestroy {
     }
   };
   addSubOrgDialog = {
-    header: this.i18nextPipe.transform('ADD_SUB_ORGANIZATION'),
+    header: this.i18nextPipe.transform('ADD_SUB_ORGANIZATION_HEADER'),
     width: '40%',
     contentStyle: {
       overflow: 'auto'
@@ -71,8 +74,7 @@ export class SbOrganizationComponent implements OnDestroy {
     },
       (error: any) => {
         this.loading = false;
-        this.messageService.add({ severity: 'error', summary: "Oops! Something went wrong. Please try again later" })
-        console.log(error);
+        this.messageService.add({ severity: 'error', summary: this.i18nextPipe.transform('API_ERROR') })
       }
     );
   }
@@ -99,7 +101,6 @@ export class SbOrganizationComponent implements OnDestroy {
         return this.organizationDetail;
       },
         (error: any) => {
-          console.log(error);
           this.loading = false;
         }
       )
@@ -144,7 +145,6 @@ export class SbOrganizationComponent implements OnDestroy {
       })
     },
       (error: any) => {
-        console.log(error)
         this.loading = false;
       })
   }
@@ -167,11 +167,9 @@ export class SbOrganizationComponent implements OnDestroy {
         },
         (error: any) => {
           this.loading = false
-          console.log('error', error);
         }
       );
-    }
-    );
+    });
   }
 
   getTotalOrgCount() {
@@ -187,7 +185,7 @@ export class SbOrganizationComponent implements OnDestroy {
         this.orgCount = data.result.response.count;
       },
       (error: any) => {
-        console.log(error);
+        this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })
       }
     );
   }
@@ -201,10 +199,10 @@ export class SbOrganizationComponent implements OnDestroy {
       }
     }
     this.subscription = this.orgList.getAllOrgSubOrg(body).subscribe((response: any) => {
-      this.TotalsubOrgCount = response.result.response.count;
+      this.totalSubOrgCount = response.result.response.count;
     },
       (error: any) => {
-        console.log(error);
+        this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })
       }
     )
   }
@@ -217,17 +215,16 @@ export class SbOrganizationComponent implements OnDestroy {
       }
     }
     this.subscription = this.userService.loadUserList(body).subscribe((response: any) => {
-      this.TotaluserCount = response.result.response.count;
+      this.totalUserCount = response.result.response.count;
     },
       (error: any) => {
         this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })
-        console.log(error);
       }
     )
   }
 
   getAllUserTypeandCount(organization: any) {
-    this.userTypeVisible = true;
+    this.visible = true;
     this.orgRoles = organization;
     this.loading = true
     this.subscription = this.getAllUserType(organization).subscribe(
@@ -238,7 +235,6 @@ export class SbOrganizationComponent implements OnDestroy {
         }
       },
       (error: any) => {
-        console.error(error);
         this.loading = false
       }
     );
@@ -274,7 +270,7 @@ export class SbOrganizationComponent implements OnDestroy {
           }
         }
       }
-      this.subscription = this.orgList.getUserTypeCount(body).subscribe((data: any) => {
+      this.subscription = this.orgList.getUserandSystemTypeCount(body).subscribe((data: any) => {
         org.userTypeCount = data.result.response.count;
         this.loading = false
       },
@@ -287,6 +283,61 @@ export class SbOrganizationComponent implements OnDestroy {
       )
     })
   }
+
+  getSystemRolesWithCounts(org: any) {
+    this.systemRoles.forEach(role => {
+      const body = {
+        "request": {
+          "filters": {
+            "channel": org.channel,
+            "organisations.roles": [role.name]
+          }
+        }
+      };
+      this.subscription = this.orgList.getUserandSystemTypeCount(body).subscribe((data: any) => {
+        role.count = data.result.response.count;
+      },
+        (error: any) => {
+          this.loading = false;
+        }
+      );
+    });
+  }
+
+  getContentTypeCount(org: any) {
+    const body = {
+      "request": {
+        "filters": {
+          "status": [
+            "Live"
+          ],
+          "channel": org.id
+        },
+        "facets": [
+          "contentType"
+        ]
+      }
+    }
+    console.log(org.id);
+    this.orgList.getContentTypeCount(body).subscribe((data: any) => {
+      this.contentTypeandCount = data.result.facets[0].values;
+      this.content.forEach(contentItem => {
+        const matchContent = this.contentTypeandCount.find((values: any) => values.name === contentItem.name)
+        if (matchContent) {
+          contentItem.count = matchContent.count;
+        }
+        else {
+          contentItem.count = 0;
+        }
+      })
+
+    },
+      (error: any) => {
+        this.loading = false;
+      }
+    )
+  }
+
 
   addOrg() {
     this.ref = this.dialogService.open(AddOrEditOrgComponent,
