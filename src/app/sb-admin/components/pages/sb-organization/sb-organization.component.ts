@@ -391,6 +391,7 @@ export class SbOrganizationComponent implements OnDestroy {
     this.ref = this.dialogService.open(AddSubOrgComponent, this.addSubOrgDialog);
     this.ref.onClose.subscribe((newSubOrgData: any) => {
       if (newSubOrgData) {
+        this.totalSubOrgCount = this.totalSubOrgCount + 1;
         this.messageService.add({ severity: 'success', summary: this.i18nextPipe.transform('ADD_SUB_ORGANIZATION_SUCCESSFULLY') })
       }
     });
