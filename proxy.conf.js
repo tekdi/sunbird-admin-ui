@@ -9,6 +9,13 @@ const PROXY_CONFIG = [
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
+    },
+    {
+        context: "/bulkupload/ops-tool-upload",
+        target: "http://localhost:3101",
+        secure: false,
+        logLevel: "debug",
+        changeOrigin: true
     }
 ]
 
