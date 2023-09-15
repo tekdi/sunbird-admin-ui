@@ -2,6 +2,7 @@ interface Status {
     label: string;
     value: string;
 }
+
 export interface User {
     id?: string;
     firstName?: string;
@@ -19,10 +20,6 @@ export interface User {
     organisations: any;
 }
 
-export interface userRoleCountModel {
-    roleName: string;
-    count: number;
-}
 export const SearchFilterValue: any = {
     firstName: '',
     lastName: '',

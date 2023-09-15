@@ -15,7 +15,11 @@ import { MessageModule } from "primeng/message";
 import { I18NextModule } from 'angular-i18next';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-
+import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { SubOrgDetailsComponent } from './sub-org-details/sub-org-details.component';
+import { TabViewModule } from 'primeng/tabview';
+import { DialogModule } from 'primeng/dialog';
+import { KnobModule } from 'primeng/knob';
 
 @NgModule({
     imports: [
@@ -32,9 +36,15 @@ import { ToastModule } from 'primeng/toast';
         MessagesModule,
         MessageModule,
         ToastModule,
+        DynamicDialogModule,
+        TabViewModule,
+        DialogModule,
+        KnobModule,
         I18NextModule.forRoot(),
     ],
-    declarations: [DashboardComponent],
-    providers: [MessageService]
+    declarations: [DashboardComponent, SubOrgDetailsComponent],
+    providers: [DialogService,
+        DynamicDialogRef,
+        MessageService]
 })
 export class DashboardModule { }

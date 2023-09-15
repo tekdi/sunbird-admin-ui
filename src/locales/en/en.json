@@ -1,11 +1,12 @@
 {
+  "ORG":"Oragnization",
   "ORG_DASHBOARD":"Dashboard",
+  "ORG_MANAGEMENT":"Management",
   "ORG_DASHBOARD_NAME": "Organization Name",
   "ORG_DASHBOARD_USERS_REGISTERED": "Registered Users",
   "ORG_DASHBOARD_SEARCH":"Search Organisation",
   "ORG_DASHBOARD_WARNING": "Tenants Users Count Data Not Found !!",
   "ORG_DASHBOARD_LIST_WARNING":"Organization Data Not Found",
-  "ORG_MANAGEMENT":"Org Management",
   
   "ORG_TOTAL":"Total Organizations",
   "ORG_SUBORG_TOTAL":"Total Sub-organizations",
@@ -15,7 +16,7 @@
   "ORG_NAME":"Organization Name",
   "ORG_NUMBER_OF_SUB_ORG":"Number of Sub-Organizations",
   "ORG_NUMBER_OF_USER_COUNT":"Number of Users",
-  "ORG_ROLE_INFO": "Roles Info",
+  "ORG_ROLE_INFO": "Roles/Content Info",
   "ORG_LIST_WARNING":"Organisation Not Found",
   "API_ERROR":"Oops! Something went wrong. Please try again later",
   
@@ -107,7 +108,7 @@
   "USER_EDIT_ROLE":"Edit User Role",
   "USER_ROLES":"Roles",
   "USER_ROLE_ADDED":"User Role Updated Successfully",
-  "USER_MANAGEMENT":"User Management",
+  "USER_MANAGEMENT":"Management",
 
   "USER_DASHBOARD_ROLE_NAME":"User Role",
   "USER_DASHBOARD_USERS_ROLE_COUNT":"Count",
@@ -134,7 +135,7 @@
   "ROLES_INFO_SYSTEM_TYPE_WARNING_MSG" : "System Role not Found",
   "ROLES_INFO_CONTENT_WARNING_MSG":"Content Not Found",
 
-  "COMMON_USERS":"Users",
+  "COMMON_USERS":"User",
   "COMMON_YES":"Yes",
   "COMMON_NO":"No",
 

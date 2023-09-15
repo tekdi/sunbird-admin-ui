@@ -15,26 +15,23 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: this.i18nextPipe.transform('LABEL_HOME')
-            },
-            {
-                label: this.i18nextPipe.transform('ORG_MANAGEMENT'),
+                label: this.i18nextPipe.transform('ORG'),
                 icon: 'pi pi-fw pi-briefcase',
                 items: [
                     {
-                        label: this.i18nextPipe.transform('USER_DASHBOARD'),
+                        label: this.i18nextPipe.transform('ORG_DASHBOARD'),
                         icon: 'pi pi-fw pi-home',
                         routerLink: ['/']
                     },
                     {
-                        label: this.i18nextPipe.transform('USER_CHANNEL_NAME'),
+                        label: this.i18nextPipe.transform('ORG_MANAGEMENT'),
                         icon: 'pi pi-fw pi-user',
                         routerLink: ['/pages/sb-organization']
                     },
                 ]
             },
             {
-                label: this.i18nextPipe.transform('USER_MANAGEMENT'),
+                label: this.i18nextPipe.transform('COMMON_USERS'),
                 icon: 'pi pi-fw pi-briefcase',
                 items: [
                     {
@@ -43,7 +40,7 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['/pages/user-dashboard']
                     },
                     {
-                        label: this.i18nextPipe.transform('COMMON_USERS'),
+                        label: this.i18nextPipe.transform('USER_MANAGEMENT'),
                         icon: 'pi pi-fw pi-user',
                         routerLink: ['/pages/sb-user']
                     }

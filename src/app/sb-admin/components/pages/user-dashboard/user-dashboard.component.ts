@@ -1,63 +1,93 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs';
 import { UserService } from 'src/app/sb-admin/service/user.service';
-import { userRoleCountModel} from 'src/app/sb-admin/api/user'
+import { I18NextPipe } from 'angular-i18next';
+import { Subscription } from 'rxjs';
+import { OrganizationsUsersList } from './organizationsUsersList';
+import { SearchFilterValue, User } from 'src/app/sb-admin/api/user';
+import { Message, MessageService } from 'primeng/api';
+
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.scss']
 })
 export class UserDashboardComponent implements OnInit {
+  private subscription!: Subscription;
+  cols: any[] = [];
+  loading: boolean = true;
+  organizations: any[] = [];
+  organizationsUsersList: OrganizationsUsersList[] = [];
+  rowsPerPageOptions: number[] = [10, 20, 30];
+  rows: number = 10;
+  user!: User;
+  messages!: Message[];
+  count: number = 0;
+  users: User[] = [];
+  first: number = 0
+  filteredValue = SearchFilterValue;
+  timeout: any = null;
+  status = [
+    { name: 'Active', 'value': '1' },
+    { name: 'Inactive', 'value': '0' }
+  ]
 
-  loading: boolean = false;
-  userRole: string[] = [];
-  roles:any;
-  userRoleCount: userRoleCountModel[] = [];
+  constructor(private userService: UserService,
+    private i18nextPipe: I18NextPipe,
+    private messageService: MessageService,
 
-  constructor(
-    private userService: UserService) {
+  ) { }
+
+  ngOnInit() {
   }
-  ngOnInit(): void {
-    this.getAllUserRoles();
-  }
 
-  getAllUserRoles(): void {
-    const body = {
-      "request": {
-        "type": "config",
-        "action": "get",
-        "subType": "userType",
-        "rootOrgId": "*",
-        "component": "portal"
+  loadUserList(event: any) {
+    let filters = this.filteredValue;
+    Object.keys(filters).forEach(key => {
+      if (!filters[key]) {
+        delete filters[key]
       }
-    };
-    this.userService.getAllUserRoles(body).subscribe((response: any) => {
-      const fields = response?.result?.form?.data?.fields;
-      this.roles = fields.map((f: any) => f.code);
-      this.getUserCount(this.roles);
-    }, (error: any) => {
-      console.error(error);
-      this.loading = false;
-    })
-  }
+    });
+    let offset = event.first;
+    offset = isNaN(offset) ? 0 : offset;
 
-  getUserCount(roles: string[]): void {
     const body = {
       request: {
-        filters: {
-          "profileUserType.type": this.roles
-        }
+        filters: filters,
+        limit: event?.rows,
+        offset: offset
       }
     }
-    this.userService.getUsersCountByRole(body).subscribe((response: any) => {
-      const users = response?.result?.response?.content;
-      this.roles.forEach((role: string) => {
-        const count = users.filter((user: any) => user.profileUserType.type === role).length
-        this.userRoleCount.push({roleName: role, count: count});
-      });
-    }, (error: any) => {
-      console.error(error);
+    this.subscription = this.userService.loadUserList(body).subscribe(users => {
+      this.organizationsUsersList = users?.result?.response?.content;
+      this.count = users?.result?.response?.count;
       this.loading = false;
+    }, (error: any) => {
+      this.loading = false;
+      this.messages = [];
+      this.messageService.add({ severity: 'error', detail: error?.error?.params?.errmsg });
     })
   }
+
+  onSearch(event: any, column: string): void {
+    let $this = this;
+    this.first = 0
+    if (column === 'organizations' || column === 'status') {
+      this.loadUserList(event);
+    } else if (event.target.value.length > 3) {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(function () {
+        $this.loadUserList(event);
+      }, 2000);
+    } else if (event.target.value.length === 0) {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(function () {
+        $this.loadUserList(event);
+      }, 1000);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }
