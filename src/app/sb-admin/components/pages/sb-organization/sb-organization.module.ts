@@ -20,15 +20,13 @@ import { MessageService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
 import { AddSubOrgComponent } from './add-sub-org/add-sub-org.component';
 import { ChipModule } from 'primeng/chip';
-import { SubOrgDetailsComponent } from './sub-org-details/sub-org-details.component';
 import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   declarations: [
     SbOrganizationComponent,
     AddOrEditOrgComponent,
-    AddSubOrgComponent,
-    SubOrgDetailsComponent
+    AddSubOrgComponent
   ],
   imports: [
     CommonModule,

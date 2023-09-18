@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { I18NextPipe } from 'angular-i18next';
 import { Subscription } from 'rxjs';
-import { OrganizationsUsersList } from './organizationsUsersList';
-import { SearchFilterValue, User } from 'src/app/sb-admin/api/user';
+import { OrganizationsUsersList } from '../../../api/organizationsUsersList';
+import { SearchFilterValue } from 'src/app/sb-admin/api/user';
 import { Message, MessageService } from 'primeng/api';
 
 @Component({
@@ -19,10 +19,8 @@ export class UserDashboardComponent implements OnInit {
   organizationsUsersList: OrganizationsUsersList[] = [];
   rowsPerPageOptions: number[] = [10, 20, 30];
   rows: number = 10;
-  user!: User;
   messages!: Message[];
   count: number = 0;
-  users: User[] = [];
   first: number = 0
   filteredValue = SearchFilterValue;
   timeout: any = null;
@@ -33,11 +31,26 @@ export class UserDashboardComponent implements OnInit {
 
   constructor(private userService: UserService,
     private i18nextPipe: I18NextPipe,
-    private messageService: MessageService,
-
-  ) { }
+    private messageService: MessageService) { }
 
   ngOnInit() {
+    this.getOrganizations();
+  }
+
+  getOrganizations() {
+    const body = {
+      "request": {
+        "filters": {
+          "isRootOrg": true
+        }
+      }
+    }
+    this.subscription = this.userService.getOrganizations(body).subscribe((response: any) => {
+      this.organizations = response?.result?.response?.content;
+    }, (error) => {
+      this.messages = [];
+      this.messageService.add({ severity: 'error', detail: error?.error?.params?.errmsg })
+    });
   }
 
   loadUserList(event: any) {

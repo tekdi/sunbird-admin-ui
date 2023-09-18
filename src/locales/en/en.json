@@ -18,6 +18,7 @@
   "ORG_NUMBER_OF_USER_COUNT":"Number of Users",
   "ORG_ROLE_INFO": "Roles/Content Info",
   "ORG_LIST_WARNING":"Organisation Not Found",
+  "ORG_COUNT": "Number of Organization Found",
   "API_ERROR":"Oops! Something went wrong. Please try again later",
   
   "ADD_ORGANIZATION_NAME":"Organization Name",

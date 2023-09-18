@@ -1,14 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { map, Subscription, Observable } from 'rxjs';
 import { UserCountService } from '../../service/user-count.service';
-import { TenantDetails } from './tenantDetails';
 import $ from 'jquery';
-import { SearchFilterValue, OrganizationDetail, UserRoles } from '../pages/sb-organization/OrganizationDetail';
+import { SearchFilterValue, OrganizationDetail, UserRoles } from '../../api/OrganizationDetail';
 import { MessageService, Message } from 'primeng/api';
 import { OrganizationListService } from '../../service/organization-list.service';
 import { UserService } from '../../service/user.service';
 import { I18NextPipe } from 'angular-i18next';
-import { SystemRoles, Content } from 'src/app/constant.config'
+import { SystemRoles, Content } from 'src/config/constant.config'
 import { DialogService } from 'primeng/dynamicdialog';
 import { SubOrgDetailsComponent } from './sub-org-details/sub-org-details.component';
 
@@ -17,9 +16,7 @@ import { SubOrgDetailsComponent } from './sub-org-details/sub-org-details.compon
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   organizationDetail: OrganizationDetail[] = [];
-  tenantDetail: TenantDetails[] = [];
   loading: boolean = true;
-  tenantUserCountResponse: any[] = [];
   rows: number = 10;
   first: number = 0;
   rowsPerPageOptions: number[] = [10, 20, 30];
@@ -332,6 +329,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     )
   }
+
   getSubOrgDetail(rootOrg: any) {
     this.dialogService.open(SubOrgDetailsComponent, {
       data: { rootOrg },

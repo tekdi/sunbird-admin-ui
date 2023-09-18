@@ -7,7 +7,8 @@ import { I18NextPipe } from 'angular-i18next';
 import { Subscription } from 'rxjs';
 import { OrganizationsUsersList } from './organizationsUsersList';
 import { SearchFilterValue, User } from 'src/app/sb-admin/api/user';
-import { Roles } from 'src/app/constant.config';
+import { Roles } from 'src/config/constant.config';
+
 @Component({
   templateUrl: './sbuser.component.html',
   providers: [MessageService]

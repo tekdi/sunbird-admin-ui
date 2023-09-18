@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { Message, MessageService } from 'primeng/api';
-import { Roles } from 'src/app/constant.config';
+import { Roles } from 'src/config/constant.config';
 
 @Component({
   selector: 'app-add-edit-user',
@@ -49,7 +49,7 @@ export class AddEditUserComponent {
       password: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
       channel: ['', Validators.required],
       roles: ['', Validators.required],
-      status:["ACTIVE"]
+      status: ["ACTIVE"]
     })
     if (this.config.data) {
       let user = this.config.data;
