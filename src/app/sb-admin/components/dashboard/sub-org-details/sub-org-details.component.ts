@@ -8,8 +8,7 @@ import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-sub-org-details',
-  templateUrl: './sub-org-details.component.html',
-  styleUrls: ['./sub-org-details.component.scss']
+  templateUrl: './sub-org-details.component.html'
 })
 export class SubOrgDetailsComponent implements OnDestroy {
   data: any;
