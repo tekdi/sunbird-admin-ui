@@ -4,7 +4,7 @@
         <div class="card mb-0">
             <div class="flex justify-content-between mb-3">
                 <div>
-                    <span class="block text-900 font-medium mb-3">{{ 'ORG_TOTAL' | i18next }} </span>
+                    <span class="block text-900 font-medium mb-3">{{ 'DASHBOARD_ORG_TOTAL' | i18next }} </span>
                     <div class="text-900 font-medium text-xl">{{orgCount}}</div>
                 </div>
                 <div class="flex align-items-center justify-content-center">
@@ -17,7 +17,7 @@
         <div class="card mb-0">
             <div class="flex justify-content-between mb-3">
                 <div>
-                    <span class="block text-900 font-medium mb-3">{{ 'ORG_SUBORG_TOTAL' | i18next }}</span>
+                    <span class="block text-900 font-medium mb-3">{{ 'DASHBOARD_SUBORG_TOTAL' | i18next }}</span>
                     <div class="text-900 font-medium text-xl">{{totalSubOrgCount}}</div>
                 </div>
                 <div class="flex align-items-center justify-content-center">
@@ -30,7 +30,7 @@
         <div class="card mb-0">
             <div class="flex justify-content-between mb-3">
                 <div>
-                    <span class="block text-900 font-medium mb-3">{{ 'ORG_TOTAL_USER' |i18next }}</span>
+                    <span class="block text-900 font-medium mb-3">{{ 'DASHBOARD_TOTAL_USER' |i18next }}</span>
                     <div class="text-900 font-medium text-xl">{{totalUserCount}}</div>
                 </div>
                 <div class="flex align-items-center justify-content-center">
@@ -41,21 +41,21 @@
     </div>
     <div class="col-12 xl:col-12">
         <div class="card">
-            <h5 class="m-0">{{ 'ORG_HEADER' | i18next}}</h5><br>
+            <h5 class="m-0">{{ 'DASHBOARD_ORG_HEADER' | i18next}}</h5><br>
             <p-message severity="warn" text="{{ 'ORG_LIST_WARNING' | i18next }}" *ngIf="!organizationDetail || organizationDetail.length === 0"></p-message>
             <p-table #myTab [value]="organizationDetail" [loading]='loading' [totalRecords]="orgCount" [paginator]="true" [(first)]="first" [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true" [lazy]="true" (onLazyLoad)="loadOrganizationData($event)" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" responsiveLayout="scroll" [rowHover]="true">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th scope="col">{{ 'ORG_NAME' | i18next }}</th>
-                        <th scope="col">{{ 'ORG_NUMBER_OF_SUB_ORG' | i18next }}</th>
-                        <th scope="col">{{ 'ORG_NUMBER_OF_USER_COUNT' |i18next }}</th>
-                        <th scope="col">{{ 'ORG_ROLE_INFO' |i18next}}</th>
+                        <th scope="col">{{ 'DASHBOARD_ORG_NAME' | i18next }}</th>
+                        <th scope="col">{{ 'DASHBOARD_NUMBER_OF_SUB_ORG' | i18next }}</th>
+                        <th scope="col">{{ 'DASHBOARD_NUMBER_OF_USER_COUNT' |i18next }}</th>
+                        <th scope="col">{{ 'DASHBOARD_ROLE_INFO' |i18next}}</th>
                     </tr>
                     <tr>
                         <th scope="col">
                             <span class="block mt-2 md:mt-0 p-input-icon-left">
                                 <i class="pi pi-search"></i>
-                                <input pInputText type="text" (input)="onSearch($event)" placeholder="{{ 'ORG_SEARCH' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.channel">
+                                <input pInputText type="text" (input)="onSearch($event)" placeholder="{{ 'DASHBOARD_ORG_SEARCH' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.channel">
                             </span>
                         </th>
                         <th scope="col"></th>
@@ -68,7 +68,7 @@
                         <td>{{organization.channel}}</td>
                         <td>
                             <ng-container *ngIf="organization.subOrgCount > 0">
-                                <button pButton pRipple class="p-button-link" label="{{ organization.subOrgCount }}" (click)="getSubOrgDetail(organization)"></button>
+                                <button pButton pRipple style="padding: 0;" label="{{ organization.subOrgCount }}" (click)="getSubOrgDetail(organization)"></button>
                             </ng-container>
                             <ng-container *ngIf="organization.subOrgCount === 0;"> {{ organization.subOrgCount }} </ng-container>
                         </td>
