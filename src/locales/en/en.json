@@ -63,6 +63,7 @@
   "SUB_ORGANIZATION_DATA_NOT_FOUND" : "Sub-Organization Not Found",
 
   "USER_DASHBOARD":"Dashboard",
+  "USER_TOTAL":"Number of User Found",
   "USER_FIRST_NAME":"First Name",
   "USER_LAST_NAME":"Last Name",    
   "USER_EMAIL":"Email",
