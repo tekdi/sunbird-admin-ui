@@ -4,6 +4,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { Message, MessageService } from 'primeng/api';
 import { Roles } from 'src/config/constant.config';
+import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 
 @Component({
   selector: 'app-add-edit-user',
@@ -18,15 +19,25 @@ export class AddEditUserComponent {
   emailPhoneRequired: boolean = false;
   organizations: any[] = [];
   selectedRole: any[] = [];
-  selectedOrganization!: any;
   messages!: Message[];
-  roles = Roles
+  roles = Roles;
+  orgTypeSelection: any[] = [
+    { name: 'Yes', value: 'yes' },
+    { name: 'No', value: 'no' }
+  ];
+  selectedOrgTypeOption: string = 'yes';
+  orgTypeRoot: boolean = false;
+  orgTypeSubOrg: boolean = false;
+  isSubOrgDisabled: boolean = true;
+  suborgOptions: any[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     public ref: DynamicDialogRef,
     private userService: UserService,
     private messageService: MessageService,
-    public config: DynamicDialogConfig
+    public config: DynamicDialogConfig,
+    private orgList: OrganizationListService
   ) { }
 
   ngOnInit(): void {
@@ -47,9 +58,11 @@ export class AddEditUserComponent {
       email: ['', Validators.email],
       emailVerified: true,
       password: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
-      channel: ['', Validators.required],
+      organisationId: ['', Validators.required],
       roles: ['', Validators.required],
-      status: ["ACTIVE"]
+      status: ["ACTIVE"],
+      selectedOrgTypeOption: ['', Validators.required],
+      channelId: ['']
     })
     if (this.config.data) {
       let user = this.config.data;
@@ -81,7 +94,39 @@ export class AddEditUserComponent {
       });
   }
 
+  loadSuborgOptions(selectedChannel: string) {
+    const body = {
+      "request": {
+        "filters": {
+          "isRootOrg": false,
+          "isTenant": false,
+          "channel": selectedChannel
+
+        }
+      }
+    }
+
+    this.orgList.getAllOrgSubOrg(body).subscribe((data: any) => {
+      this.suborgOptions = data?.result?.response?.content;
+      this.isSubOrgDisabled = false;
+    }, error => {
+      console.error('Error:', error);
+    });
+  }
+
+  getOrgType(value: string): void {
+    this.selectedOrgTypeOption = value;
+    if (this.selectedOrgTypeOption === 'yes') {
+      this.orgTypeRoot = true;
+      this.orgTypeSubOrg = false;
+    } else {
+      this.orgTypeRoot = false;
+      this.orgTypeSubOrg = true;
+    }
+  }
+
   saveUser() {
+    console.log(this.addEditUserForm.value)
     this.submitted = true;
     if (!this.addEditUserForm.controls['phone'].value && !this.addEditUserForm.controls['email'].value) {
       this.emailPhoneRequired = true;

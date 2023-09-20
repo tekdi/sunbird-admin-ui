@@ -68,7 +68,7 @@
                         <td>{{organization.channel}}</td>
                         <td>
                             <ng-container *ngIf="organization.subOrgCount > 0">
-                                <button pButton pRipple style="padding: 0;" label="{{ organization.subOrgCount }}" (click)="getSubOrgDetail(organization)"></button>
+                                <button pButton pRipple class="suborgbut" label="{{ organization.subOrgCount }}" (click)="getSubOrgDetail(organization)"></button>
                             </ng-container>
                             <ng-container *ngIf="organization.subOrgCount === 0;"> {{ organization.subOrgCount }} </ng-container>
                         </td>

@@ -16,7 +16,7 @@ import { Roles } from 'src/config/constant.config';
 export class SbUserComponent implements OnInit {
 
   private subscription!: Subscription;
-  createUser: any = { header: this.i18nextPipe.transform('USER_CREATE'), width: '30%', height: 'auto' };
+  createUser: any = { header: this.i18nextPipe.transform('USER_CREATE'), width: '40%', height: 'auto' };
   userDialog: boolean = false;
   blockUnblockUserDialog: boolean = false;
   submitted: boolean = false;

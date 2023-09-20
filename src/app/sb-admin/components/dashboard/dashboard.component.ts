@@ -13,6 +13,7 @@ import { SubOrgDetailsComponent } from './sub-org-details/sub-org-details.compon
 
 @Component({
   templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   organizationDetail: OrganizationDetail[] = [];

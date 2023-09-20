@@ -73,6 +73,9 @@
   "USER_NAME": "Username",
   "USER_PASSWORD": "Password",
   "USER_ROLE": "Roles",
+  "USER_ORGANIZATION_TYPE":"Organization Type",
+  "USER_CHANNEL_NAME":"Organizatons",
+  "USER_SUB_ORG_TYPE":"Sub-Organization",
   "ORGANIZATION_USERS_LIST_WARNING": "Organization Users Data Not Found",
     
   "USER_FIRST_NAME_REQUIRED": "First Name is required",
@@ -81,7 +84,9 @@
   "USER_PASSWORD_REQUIRED": "Your password must contain a minimum of 8 characters. It must include numerals, lower and upper case alphabets and special characters, without any spaces",
   "USER_PHONE_OR_USER_EMAIL_REQUIRED": "Please enter Phone or Email to proceed",
   "USER_ROLE_REQUIRED": "Role is required",
+  "USER_ORGANIZATION_TYPE_REQUIRED":"Select Organization Type",
   "USER_ORGANIZATION_NAME_REQUIRED": "Organization name is required",
+  "USER_SUB_ORGANIZATION_NAME_REQUIRED": "Sub-Organization name is required",
   
   "USER_CANCEL": "Cancel",
   "USER_SUBMIT": "Submit",
@@ -102,7 +107,6 @@
   "USER_EMAIL_PLACEHOLDER":"Enter Email",
   "USER_STATUS_PLACEHOLDER":"Select Status",
     
-  "USER_CHANNEL_NAME":"Organizatons",
   "USER_ADDED_SUCCESSFULLY":"User Added Successfully",
   "USER_ORGANIZATION_NAME":"Organization Name",
   "USER_EDIT_ROLE":"Edit User Role",
