@@ -14,7 +14,7 @@ export interface User {
     channel?: string;
     userName?: string;
     email?: string;
-    status?: Number;
+    status?: number;
     userId: string;
     rootOrgId?: string;
     organisations: any;
