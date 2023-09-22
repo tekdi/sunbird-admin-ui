@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { I18NextPipe } from 'angular-i18next';
 import { Subscription } from 'rxjs';
-import { OrganizationsUsersList } from '../../../api/organizationsUsersList';
-import { SearchFilterValue } from 'src/app/sb-admin/api/user';
+import { OrganizationsUsersList } from '../../../interfaces/organizationsUsersList';
+import { SearchFilterValue } from 'src/app/sb-admin/interfaces/user';
 import { Message, MessageService } from 'primeng/api';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { OrganizationDetail, SearchFilterValue } from 'src/app/sb-admin/api/OrganizationDetail';
+import { OrganizationDetail, SearchFilterValue } from 'src/app/sb-admin/interfaces/OrganizationDetail';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 import { Subscription, } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';

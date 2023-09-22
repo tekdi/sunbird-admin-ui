@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { map, Subscription, Observable } from 'rxjs';
 import { UserCountService } from '../../service/user-count.service';
 import $ from 'jquery';
-import { SearchFilterValue, OrganizationDetail, UserRoles } from '../../api/OrganizationDetail';
+import { SearchFilterValue, OrganizationDetail, UserRoles } from '../../interfaces/OrganizationDetail';
 import { MessageService, Message } from 'primeng/api';
 import { OrganizationListService } from '../../service/organization-list.service';
 import { UserService } from '../../service/user.service';
