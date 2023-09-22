@@ -43,7 +43,7 @@
             </div>
             <div class="field col">
                 <label for="multiselect">{{ 'USER_ROLE' | i18next }} *</label>
-                <p-multiSelect [options]="roles" formControlName="roles" optionLabel="name" placeholder="{{'USER_ROLE_PLACEHOLDER' | i18next}}" optionValue="value"></p-multiSelect>
+                <p-multiSelect [options]="roles" formControlName="roles" optionLabel="name" appendTo="body" placeholder="{{'USER_ROLE_PLACEHOLDER' | i18next}}" optionValue="value"></p-multiSelect>
                 <div class="text-red-500">
                     <small *ngIf="submitted && addEditUserForm.controls['roles'].errors">{{ 'USER_ROLE_REQUIRED' | i18next }}.</small>
                 </div>
@@ -69,7 +69,7 @@
         <div class="p-formgrid grid" *ngIf="orgTypeRoot">
             <div class="field col">
                 <label for="multiselect">{{ 'USER_CHANNEL_NAME' | i18next }} *</label>
-                <p-dropdown formControlName="organisationId" [options]="organizations" optionLabel="orgName" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="id" [filter]="true" filterBy="channel" [showClear]="true" [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['organisationId'].errors}"></p-dropdown>
+                <p-dropdown formControlName="organisationId" [showClear]="true" [options]="organizations" optionLabel="orgName" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="id" [filter]="true" filterBy="channel" [showClear]="true" [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['organisationId'].errors}"></p-dropdown>
                 <div class="text-red-500">
                     <small *ngIf="submitted && addEditUserForm.controls['organisationId'].errors">{{ 'USER_ORGANIZATION_NAME_REQUIRED' | i18next }}</small>
                 </div>
@@ -79,7 +79,7 @@
         <div class="p-formgrid grid" *ngIf="orgTypeSubOrg">
             <div class="field col">
                 <label for="multiselect">{{ 'USER_CHANNEL_NAME' | i18next }} *</label>
-                <p-dropdown formControlName="channelId" [options]="organizations" (onChange)="loadSuborgOptions($event.value)" optionLabel="channel" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel" [filter]="true" filterBy="channel" [showClear]="true" [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['channelId'].errors}"></p-dropdown>
+                <p-dropdown formControlName="channelId" [showClear]="true" [options]="organizations" [filter]="true" (onChange)="loadSuborgOptions($event.value)" optionLabel="channel" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel" filterBy="channel" [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['channelId'].errors}"></p-dropdown>
                 <div class="text-red-500">
                     <small *ngIf="submitted && addEditUserForm.controls['channelId'].errors">{{ 'USER_ORGANIZATION_NAME_REQUIRED' | i18next }}</small>
                 </div>
