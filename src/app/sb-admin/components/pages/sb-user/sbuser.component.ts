@@ -5,7 +5,7 @@ import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { I18NextPipe } from 'angular-i18next';
 import { Subscription } from 'rxjs';
-import { OrganizationsUsersList } from './organizationsUsersList';
+import { OrganizationsUsersList } from 'src/app/sb-admin/interfaces/organizationsUsersList';
 import { SearchFilterValue, User } from 'src/app/sb-admin/interfaces/user';
 import { Roles } from 'src/config/constant.config';
 
