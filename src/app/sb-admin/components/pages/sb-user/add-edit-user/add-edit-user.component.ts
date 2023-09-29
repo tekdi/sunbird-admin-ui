@@ -21,15 +21,13 @@ export class AddEditUserComponent {
   selectedRole: any[] = [];
   messages!: Message[];
   roles = Roles;
-  orgTypeSelection: any[] = [
-    { name: 'Yes', value: 'yes' },
-    { name: 'No', value: 'no' }
-  ];
-  selectedOrgTypeOption: string = 'yes';
   orgTypeRoot: boolean = false;
   orgTypeSubOrg: boolean = false;
   isSubOrgDisabled: boolean = true;
   suborgOptions: any[] = [];
+  showEmail: boolean = false;
+  showPhone: boolean = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -47,6 +45,13 @@ export class AddEditUserComponent {
   cancel() {
     this.ref.close();
   }
+  getSelectValue(option: string) {
+    if (option === 'email') {
+      this.showEmail = !this.showEmail;
+    } else if (option === 'phone') {
+      this.showPhone = !this.showPhone;
+    }
+  }
 
   initializeForm() {
     this.addEditUserForm = this.formBuilder.group({
@@ -61,8 +66,9 @@ export class AddEditUserComponent {
       organisationId: ['', Validators.required],
       roles: ['', Validators.required],
       status: ["ACTIVE"],
-      selectedOrgTypeOption: ['', Validators.required],
-      channelId: ['']
+      channelId: [''],
+      emailandphone: ['', Validators.required],
+      orgType: ['', Validators.required]
     })
     if (this.config.data) {
       let user = this.config.data;
@@ -115,8 +121,7 @@ export class AddEditUserComponent {
   }
 
   getOrgType(value: string): void {
-    this.selectedOrgTypeOption = value;
-    if (this.selectedOrgTypeOption === 'yes') {
+    if (value === 'org') {
       this.orgTypeRoot = true;
       this.orgTypeSubOrg = false;
     } else {
