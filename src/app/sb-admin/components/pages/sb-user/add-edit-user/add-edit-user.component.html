@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="field col">
-                <label for="multiselect">{{ 'CONTACTTYPE' |i18next }}</label>
+                <label for="multiselect">{{ 'USER_CONTACTTYPE' |i18next }} *</label>
                 <div class="field-checkbox">
                     <p-checkbox label="Email ID" formControlName="emailandphone" value="email" (onChange)="getSelectValue('email')"></p-checkbox>&nbsp; <p-checkbox label="Phone Number" value="phone" formControlName="emailandphone" (onChange)="getSelectValue('phone')"></p-checkbox>
                 </div>
@@ -74,11 +74,11 @@
                 <div class="horizontal-radio-group">
                     <div class="radio-option">
                         <input id="org" type="radio" (change)="getOrgType('org')" value="org" formControlName="orgType">
-                        <label for="org">Root Org</label>
+                        <label for="org">{{ 'USER_ROOT_ORG' |i18next }}</label>
                     </div>
                     <div class="radio-option">
                         <input id="suborg" type="radio" (change)="getOrgType('subOrg')" value="suborg" formControlName="orgType">
-                        <label for="suborg">Sub-ORG</label>
+                        <label for="suborg">{{ 'USER_SUB-ORG' |i18next }}</label>
                     </div>
                 </div>
                 <div class="text-red-500">
