@@ -123,8 +123,8 @@
         </p-tabPanel>
         <p-tabPanel header="{{ 'ROLES_INFO_CONTENT' | i18next}}" class="line-height-3 m-0">
             <div class="card">
-                <p-message severity="warn" text="{{ 'ROLES_INFO_CONTENT_WARNING_MSG' | i18next }}" *ngIf="!content || content.length===0"></p-message>
-                <p-table [value]="content" #contentDashboard [loading]="loading" responsiveLayout="scroll">
+                <p-message severity="warn" text="{{ 'ROLES_INFO_CONTENT_WARNING_MSG' | i18next }}" *ngIf="!contentTypeandCount"></p-message>
+                <p-table [value]="contentTypeandCount" #contentDashboard [loading]="loading" responsiveLayout="scroll">
                     <ng-template pTemplate="header">
                         <tr>
                             <th scope="col">{{'ROLES_INFO_CONTENT' |i18next}}</th>

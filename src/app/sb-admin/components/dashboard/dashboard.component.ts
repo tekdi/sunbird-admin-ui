@@ -7,7 +7,7 @@ import { MessageService, Message } from 'primeng/api';
 import { OrganizationListService } from '../../service/organization-list.service';
 import { UserService } from '../../service/user.service';
 import { I18NextPipe } from 'angular-i18next';
-import { SystemRoles, Content } from 'src/config/constant.config'
+import { SystemRoles } from 'src/config/constant.config'
 import { DialogService } from 'primeng/dynamicdialog';
 import { SubOrgDetailsComponent } from './sub-org-details/sub-org-details.component';
 
@@ -31,7 +31,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   visible: boolean = false;
   orgRoles: any;
   contentTypeandCount: any;
-  content = Content;
   systemRoles = SystemRoles;
   userRoles!: UserRoles[];
 
@@ -308,22 +307,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
           "channel": org.id
         },
         "facets": [
-          "contentType"
+          "primaryCategory"
         ]
       }
     }
+    console.log(body);
     this.orgList.getContentTypeCount(body).subscribe((data: any) => {
+      console.log('data', data);
       this.contentTypeandCount = data.result.facets[0].values;
-      this.content.forEach(contentItem => {
-        const matchContent = this.contentTypeandCount.find((values: any) => values.name === contentItem.name)
-        if (matchContent) {
-          contentItem.count = matchContent.count;
-        }
-        else {
-          contentItem.count = 0;
-        }
-      })
-
     },
       (error: any) => {
         this.loading = false;
