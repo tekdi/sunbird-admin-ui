@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/sb-admin/service/user.service';
-import { I18NextPipe } from 'angular-i18next';
 import { Subscription } from 'rxjs';
 import { OrganizationsUsersList } from '../../../interfaces/organizationsUsersList';
 import { SearchFilterValue } from 'src/app/sb-admin/interfaces/user';
@@ -30,7 +29,6 @@ export class UserDashboardComponent implements OnInit {
   ]
 
   constructor(private userService: UserService,
-    private i18nextPipe: I18NextPipe,
     private messageService: MessageService) { }
 
   ngOnInit() {

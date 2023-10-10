@@ -90,7 +90,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
     return this.orgList.getAllOrgSubOrg(body).pipe(
       map((data: any) => {
-        this.organizationDetail = data.result.response.content;
+        this.organizationDetail = data?.result?.response?.content;
         return this.organizationDetail;
       },
         (error: any) => {
@@ -134,7 +134,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       }
       this.subscription = this.orgList.getAllOrgSubOrg(body).subscribe((subOrgCount: any) => {
-        org.subOrgCount = subOrgCount.result.response.count;
+        org.subOrgCount = subOrgCount?.result?.response?.count;
       })
     },
       (error: any) => {
@@ -175,7 +175,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
     this.subscription = this.orgList.getAllOrgSubOrg(body).subscribe(
       (data: any) => {
-        this.orgCount = data.result.response.count;
+        this.orgCount = data?.result?.response?.count;
       },
       (error: any) => {
         this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })
@@ -192,7 +192,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     }
     this.subscription = this.orgList.getAllOrgSubOrg(body).subscribe((response: any) => {
-      this.totalSubOrgCount = response.result.response.count;
+      this.totalSubOrgCount = response?.result?.response?.count;
     },
       (error: any) => {
         this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })
@@ -208,7 +208,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     }
     this.subscription = this.userService.loadUserList(body).subscribe((response: any) => {
-      this.totalUserCount = response.result.response.count;
+      this.totalUserCount = response?.result?.response?.count;
     },
       (error: any) => {
         this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })
@@ -246,7 +246,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     };
     return this.userService.getAllUserRoles(body).pipe(
       map((response: any) => {
-        this.userRoles = response.result.form.data?.fields;
+        this.userRoles = response?.result?.form?.data?.fields;
         return this.userRoles;
       })
     );
@@ -264,7 +264,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       }
       this.subscription = this.orgList.getUserandSystemTypeCount(body).subscribe((data: any) => {
-        org.userTypeCount = data.result.response.count;
+        org.userTypeCount = data?.result?.response?.count;
         this.loading = false
       },
         (error: any) => {
@@ -288,7 +288,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       };
       this.subscription = this.orgList.getUserandSystemTypeCount(body).subscribe((data: any) => {
-        role.count = data.result.response.count;
+        role.count = data?.result?.response?.count;
       },
         (error: any) => {
           this.loading = false;
@@ -314,7 +314,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     console.log(body);
     this.orgList.getContentTypeCount(body).subscribe((data: any) => {
       console.log('data', data);
-      this.contentTypeandCount = data.result.facets[0].values;
+      this.contentTypeandCount = data?.result?.facets[0]?.values;
     },
       (error: any) => {
         this.loading = false;

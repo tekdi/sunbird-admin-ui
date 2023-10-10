@@ -1,4 +1,5 @@
 {
+  "DASHBOARD_NAME":"Admin Dashboard",
   "ORG":"Oragnization",
   "ORG_DASHBOARD":"Dashboard",
   "ORG_MANAGEMENT":"Management",
@@ -62,6 +63,7 @@
   "SUB_ORGANIZATION_NAME":"Sub-Organization Name",
   "SUB_ORGANIZATION_USER_COUNT": "User Count",
   "SUB_ORGANIZATION_DATA_NOT_FOUND" : "Sub-Organization Not Found",
+  "SUB_ORGANIZATION_ERROR":"Oops! Something went wrong. Please try again later",
 
   "USER_DASHBOARD":"Dashboard",
   "USER_TOTAL":"Number of User Found",

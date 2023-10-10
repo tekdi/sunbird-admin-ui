@@ -67,7 +67,7 @@ export class SbOrganizationComponent implements OnDestroy {
       }
     }
     return this.orgList.getAllOrgSubOrg(body).subscribe((data: any) => {
-      this.organizationDetail = data.result.response.content;
+      this.organizationDetail = data?.result?.response?.content;
       this.loading = false;
       return this.organizationDetail;
     },
@@ -104,7 +104,7 @@ export class SbOrganizationComponent implements OnDestroy {
     }
     this.subscription = this.orgList.getAllOrgSubOrg(body).subscribe(
       (data: any) => {
-        this.orgCount = data.result.response.count;
+        this.orgCount = data?.result?.response?.count;
       },
       (error: any) => {
         this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })

@@ -5,6 +5,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { MessageService } from 'primeng/api';
+import { I18NextPipe } from 'angular-i18next';
 
 @Component({
   selector: 'app-sub-org-details',
@@ -17,6 +18,7 @@ export class SubOrgDetailsComponent implements OnDestroy {
   loading: boolean = true;
   first: number = 0;
   rows: number = 10;
+  limit_size: number = 10;
   filteredValue = SearchSubOrgFilterValue;
   rowsPerPageOptions: number[] = [10, 20, 30];
   timeout: any = null;
@@ -27,7 +29,8 @@ export class SubOrgDetailsComponent implements OnDestroy {
     public dialogConfig: DynamicDialogConfig,
     private organizationListService: OrganizationListService,
     private userService: UserService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private i18nextPipe: I18NextPipe
   ) {
     this.data = this.dialogConfig.data;
     this.rootOrg = this.data.rootOrg;
@@ -42,7 +45,7 @@ export class SubOrgDetailsComponent implements OnDestroy {
     },
       (error: any) => {
         this.loading = false;
-        this.messageService.add({ severity: 'error', summary: "Oops! Something went wrong. Please try again later" })
+        this.messageService.add({ severity: 'error', summary: this.i18nextPipe.transform('SUB_ORGANIZATION_ERROR') })
         console.log(error);
       }
     )
@@ -65,14 +68,14 @@ export class SubOrgDetailsComponent implements OnDestroy {
           isRootOrg: false,
           isTenant: false,
         },
-        limit: event?.rows || 10,
+        limit: event?.rows || this.limit_size,
         offset: offset,
       }
     }
     return this.organizationListService.getAllOrgSubOrg(body).pipe(
       map((suborg: any) => {
-        this.SuborgCount = suborg.result.response.count;
-        this.subOrgDetails = suborg.result.response.content;
+        this.SuborgCount = suborg?.result?.response?.count;
+        this.subOrgDetails = suborg?.result?.response?.content;
         return this.subOrgDetails;
       })
     )
@@ -106,7 +109,7 @@ export class SubOrgDetailsComponent implements OnDestroy {
         }
       }
       this.subscription = this.userService.loadUserList(body).subscribe((userCount: any) => {
-        subOrg.userCount = userCount.result.response.count;
+        subOrg.userCount = userCount?.result?.response?.count;
       },
         (error: any) => {
           if (!serverError) {
