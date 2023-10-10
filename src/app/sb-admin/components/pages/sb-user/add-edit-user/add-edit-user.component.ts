@@ -28,23 +28,24 @@ export class AddEditUserComponent {
   showEmail: boolean = false;
   showPhone: boolean = false;
 
-
   constructor(
     private formBuilder: FormBuilder,
     public ref: DynamicDialogRef,
     private userService: UserService,
     private messageService: MessageService,
     public config: DynamicDialogConfig,
-    private orgList: OrganizationListService
+    private orgListService: OrganizationListService
   ) { }
 
   ngOnInit(): void {
     this.getOrganizations();
     this.initializeForm();
   }
+
   cancel() {
     this.ref.close();
   }
+
   getSelectValue(option: string) {
     if (option === 'email') {
       this.showEmail = !this.showEmail;
@@ -112,7 +113,7 @@ export class AddEditUserComponent {
       }
     }
 
-    this.orgList.getAllOrgSubOrg(body).subscribe((data: any) => {
+    this.orgListService.getAllOrgSubOrg(body).subscribe((data: any) => {
       this.suborgOptions = data?.result?.response?.content;
       this.isSubOrgDisabled = false;
     }, error => {
@@ -131,7 +132,6 @@ export class AddEditUserComponent {
   }
 
   saveUser() {
-    console.log(this.addEditUserForm.value)
     this.submitted = true;
     if (!this.addEditUserForm.controls['phone'].value && !this.addEditUserForm.controls['email'].value) {
       this.emailPhoneRequired = true;

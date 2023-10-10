@@ -152,8 +152,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       };
       this.subscription = this.userCountService.getUserCountOfaTenant(body).subscribe(
-        (counttenant: any) => {
-          org.userCount = counttenant?.result?.response?.count;
+        (userCount: any) => {
+          org.userCount = userCount?.result?.response?.count;
           if (orgDetail[orgDetail.length - 1].id === org.id) {
             this.loading = false;
           }
