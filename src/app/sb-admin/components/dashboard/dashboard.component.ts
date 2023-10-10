@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   loading: boolean = true;
   rows: number = 10;
   first: number = 0;
+  limit_size: number = 10;
   rowsPerPageOptions: number[] = [10, 20, 30];
   orgCount: number = 0;
   filteredValue = SearchFilterValue;
@@ -84,7 +85,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const body = {
       request: {
         filters: filters,
-        limit: event?.rows || 10,
+        limit: event?.rows || this.limit_size,
         offset: offset,
       }
     }
@@ -311,9 +312,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         ]
       }
     }
-    console.log(body);
     this.orgList.getContentTypeCount(body).subscribe((data: any) => {
-      console.log('data', data);
       this.contentTypeandCount = data?.result?.facets[0]?.values;
     },
       (error: any) => {

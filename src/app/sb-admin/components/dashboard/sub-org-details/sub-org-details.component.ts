@@ -46,7 +46,6 @@ export class SubOrgDetailsComponent implements OnDestroy {
       (error: any) => {
         this.loading = false;
         this.messageService.add({ severity: 'error', summary: this.i18nextPipe.transform('SUB_ORGANIZATION_ERROR') })
-        console.log(error);
       }
     )
   }
@@ -114,7 +113,6 @@ export class SubOrgDetailsComponent implements OnDestroy {
         (error: any) => {
           if (!serverError) {
             serverError = true;
-            console.log(error);
             this.loading = false;
             this.messageService.add({ severity: 'error', summary: error?.error?.params?.errmsg })
           }

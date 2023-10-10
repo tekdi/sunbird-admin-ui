@@ -82,7 +82,6 @@ export class AddOrEditOrgComponent {
   }
 
   saveOrg() {
-    console.log(this.addOrgForm.value);
     this.submitted = true;
     if (this.addOrgForm.invalid) {
       this.messages = [
