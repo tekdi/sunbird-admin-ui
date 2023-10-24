@@ -14,15 +14,10 @@ import  {WebComponentWrapper,WebComponentWrapperOptions} from "@angular-architec
                     { path: 'pages', loadChildren: () => import('./sb-admin/components/pages/pages.module').then(m => m.PagesModule) }
                     ,
 
-                    { path: 'bulkUplaod', 
-            component: WebComponentWrapper, 
-            data: { 
-              type: 'script', 
-              remoteEntry: 'http://localhost:4205/remoteEntry.js', 
-              remoteName: 'bulkContentUpload',
-             exposedModule: './web-components', 
-             elementName: 'bulk-upload', 
-            } as WebComponentWrapperOptions, }, 
+                     
+                    { path: 'bulkUpload',
+                        component: BulkUploadComponent
+                    },
               
                 ]
             },
