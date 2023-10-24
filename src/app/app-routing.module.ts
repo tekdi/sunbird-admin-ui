@@ -2,7 +2,8 @@ import { RouterModule} from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './sb-admin/components/notfound/notfound.component';
 import { AppLayoutComponent } from "./layout/app.layout.component";
-import  {WebComponentWrapper,WebComponentWrapperOptions} from "@angular-architects/module-federation-tools"
+import { BulkUploadComponent } from './sb-admin/components/bulk-upload/bulk-upload.component';
+
 
 @NgModule({
     imports: [
@@ -13,11 +14,10 @@ import  {WebComponentWrapper,WebComponentWrapperOptions} from "@angular-architec
                     { path: '', loadChildren: () => import('./sb-admin/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'pages', loadChildren: () => import('./sb-admin/components/pages/pages.module').then(m => m.PagesModule) }
                     ,
-
-                     
                     { path: 'bulkUpload',
-                        component: BulkUploadComponent
-                    },
+                    component: BulkUploadComponent
+                    }
+                    
               
                 ]
             },

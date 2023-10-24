@@ -44,16 +44,16 @@ export class AppMenuComponent implements OnInit {
             },
  
             {
-                label: 'Upload Content',
+                label: 'Upload',
                 icon: 'pi pi-fw pi-briefcase',
                 items: [
-                    {
-                        label: 'Upload',
-                        icon: 'pi pi-fw pi-upload',
-                        routerLink: ['/bulkUplaod']
-                    }
+                {
+                label: 'Upload',
+                icon: 'pi pi-fw pi-upload',
+                routerLink: ['/bulkUpload']
+                }
                 ]
-            },
+            }   
         ];
     }
 }

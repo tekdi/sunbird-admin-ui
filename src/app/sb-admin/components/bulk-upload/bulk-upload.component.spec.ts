@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BulkUploadComponent } from './bulk-upload.component';
 
 describe('BulkUploadComponent', () => {
