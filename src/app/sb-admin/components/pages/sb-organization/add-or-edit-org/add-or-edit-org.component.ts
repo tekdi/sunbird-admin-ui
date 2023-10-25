@@ -21,6 +21,8 @@ export class AddOrEditOrgComponent {
   submitted: boolean = false;
   messages!: Message[];
   isDisabled: boolean = true;
+  currentOrgValue!: string;
+  CurrentChannelName!: string;
 
   constructor(public formBuilder: FormBuilder,
     public ref: DynamicDialogRef,
@@ -35,6 +37,26 @@ export class AddOrEditOrgComponent {
   ngOnInit() {
     this.initializeAddForm();
     this.initialzeEditForm();
+  }
+
+  onInputChange(event: any, field: string) {
+    if (field === 'org') {
+      this.currentOrgValue = event.target.value;
+    } else if (field === 'channel') {
+      this.CurrentChannelName = event.target.value;
+    }
+    this.CompareOrgandChannel();
+  }
+
+  CompareOrgandChannel() {
+    if (this.currentOrgValue === this.CurrentChannelName) {
+      this.messages = [
+        { severity: 'error', summary: this.i18nextPipe.transform('ADD_ORGANIZATION_CHANNEL_NAME_UNIQUE') }
+      ];
+    }
+    else {
+      this.messages = [];
+    }
   }
 
   initializeAddForm() {
@@ -60,7 +82,6 @@ export class AddOrEditOrgComponent {
   }
 
   saveOrg() {
-    console.log(this.addOrgForm.value);
     this.submitted = true;
     if (this.addOrgForm.invalid) {
       this.messages = [
@@ -86,7 +107,6 @@ export class AddOrEditOrgComponent {
       ]
     });
   }
-
   editOrg() {
     this.submitted = true;
     if (this.EditOrgForm.invalid) {

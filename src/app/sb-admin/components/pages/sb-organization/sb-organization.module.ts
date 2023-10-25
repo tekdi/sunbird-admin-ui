@@ -27,7 +27,6 @@ import { TabViewModule } from 'primeng/tabview';
     SbOrganizationComponent,
     AddOrEditOrgComponent,
     AddSubOrgComponent
-
   ],
   imports: [
     CommonModule,
@@ -48,7 +47,6 @@ import { TabViewModule } from 'primeng/tabview';
     DropdownModule,
     TabViewModule,
     ChipModule,
-
     I18NextModule.forRoot()
   ],
   providers: [

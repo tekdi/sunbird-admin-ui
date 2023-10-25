@@ -4,7 +4,7 @@
             <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
             <div class="field">
                 <label for="orgName">{{ 'ADD_ORGANIZATION_NAME' | i18next}} *</label>
-                <input type="text" name="orgName" pInputText id="orgName" autofocus placeholder="{{ 'ADD_ORGANIZATION_NAME' | i18next}}" formControlName="orgName" />
+                <input type="text" name="orgName" pInputText id="orgName" autofocus placeholder="{{ 'ADD_ORGANIZATION_NAME' | i18next}}" formControlName="orgName" (input)="onInputChange($event,'org')" />
                 <small *ngIf="submitted && addOrgForm.controls['orgName'].errors">{{ 'ADD_ORGANIZATION_NAME_INVALID' | i18next}}</small>
             </div>
             <div class="field">
@@ -14,7 +14,7 @@
             </div>
             <div class="field">
                 <label for="channel">{{ 'ADD_ORGANIZATION_CHANNEL_NAME' | i18next}} *</label>
-                <input type="text" pInputText id="channel" autofocus formControlName="channel" placeholder="{{ 'ADD_ORGANIZATION_CHANNEL_NAME' | i18next}}" />
+                <input type="text" pInputText id="channel" autofocus formControlName="channel" (input)="onInputChange($event,'channel')" placeholder="{{ 'ADD_ORGANIZATION_CHANNEL_NAME' | i18next}}" />
                 <small *ngIf="submitted && addOrgForm.controls['channel'].errors">{{ 'ADD_ORGANIZATION_CHANNEL_INVALID' | i18next}}</small>
             </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="card p-fluid">
             <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
             <div class="field">
-                <label for="description">{{ 'EDIT_ORGANIZATION_CHANNEL_ID' | i18next }}</label>
+                <label for="description">{{ 'EDIT_ORGANIZATION_CHANNEL_ID' |i18next }}</label>
                 <input id="disabled-input" pInputText [disabled]="isDisabled" autofocus formControlName="organisationId" value="{{organization.id}}" readonly />
             </div>
             <div class="field">

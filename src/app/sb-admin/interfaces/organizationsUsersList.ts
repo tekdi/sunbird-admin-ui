@@ -6,7 +6,6 @@ export interface OrganizationsUsersList {
     userId: string;
     email: string;
     phone: string;
-    organisations:any;
-    rootOrgId:string;
-    
+    organisations: any;
+    rootOrgId: string;
 }

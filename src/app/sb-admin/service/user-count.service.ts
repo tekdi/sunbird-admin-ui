@@ -11,13 +11,6 @@ export class UserCountService {
 
   constructor(private http: HttpClient) { }
 
-  getTenant(body: any): Observable<Object> {
-    let header = new HttpHeaders({
-      "Content-Type": 'application/json'
-    })
-    return this.http.post(config.URLS.ORGNIZATION_SEARCH_URL, body, { headers: header })
-  }
-
   getUserCountOfaTenant(body: any): Observable<Object> {
     let header = new HttpHeaders({
       "Content-Type": 'application/json',

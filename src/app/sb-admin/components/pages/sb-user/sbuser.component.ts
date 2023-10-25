@@ -5,9 +5,10 @@ import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { I18NextPipe } from 'angular-i18next';
 import { Subscription } from 'rxjs';
-import { OrganizationsUsersList } from './organizationsUsersList';
-import { SearchFilterValue, User } from 'src/app/sb-admin/api/user';
-import { Roles } from 'src/app/constant.config';
+import { OrganizationsUsersList } from 'src/app/sb-admin/interfaces/organizationsUsersList';
+import { SearchFilterValue, User } from 'src/app/sb-admin/interfaces/user';
+import { Roles } from 'src/config/constant.config';
+
 @Component({
   templateUrl: './sbuser.component.html',
   providers: [MessageService]
@@ -15,7 +16,7 @@ import { Roles } from 'src/app/constant.config';
 export class SbUserComponent implements OnInit {
 
   private subscription!: Subscription;
-  createUser: any = { header: this.i18nextPipe.transform('USER_CREATE'), width: '30%', height: 'auto' };
+  createUser: any = { header: this.i18nextPipe.transform('USER_CREATE'), width: '40%', height: 'auto' };
   userDialog: boolean = false;
   blockUnblockUserDialog: boolean = false;
   submitted: boolean = false;

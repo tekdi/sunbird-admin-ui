@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { Message, MessageService } from 'primeng/api';
-import { Roles } from 'src/app/constant.config';
+import { Roles } from 'src/config/constant.config';
+import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 
 @Component({
   selector: 'app-add-edit-user',
@@ -18,23 +19,39 @@ export class AddEditUserComponent {
   emailPhoneRequired: boolean = false;
   organizations: any[] = [];
   selectedRole: any[] = [];
-  selectedOrganization!: any;
   messages!: Message[];
-  roles = Roles
+  roles = Roles;
+  orgTypeRoot: boolean = false;
+  orgTypeSubOrg: boolean = false;
+  isSubOrgDisabled: boolean = true;
+  suborgOptions: any[] = [];
+  showEmail: boolean = false;
+  showPhone: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     public ref: DynamicDialogRef,
     private userService: UserService,
     private messageService: MessageService,
-    public config: DynamicDialogConfig
+    public config: DynamicDialogConfig,
+    private orgListService: OrganizationListService
   ) { }
 
   ngOnInit(): void {
     this.getOrganizations();
     this.initializeForm();
   }
+
   cancel() {
     this.ref.close();
+  }
+
+  getSelectValue(option: string) {
+    if (option === 'email') {
+      this.showEmail = !this.showEmail;
+    } else if (option === 'phone') {
+      this.showPhone = !this.showPhone;
+    }
   }
 
   initializeForm() {
@@ -47,9 +64,12 @@ export class AddEditUserComponent {
       email: ['', Validators.email],
       emailVerified: true,
       password: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
-      channel: ['', Validators.required],
+      organisationId: ['', Validators.required],
       roles: ['', Validators.required],
-      status:["ACTIVE"]
+      status: ["ACTIVE"],
+      channelId: [''],
+      emailandphone: ['', Validators.required],
+      orgType: ['', Validators.required]
     })
     if (this.config.data) {
       let user = this.config.data;
@@ -79,6 +99,36 @@ export class AddEditUserComponent {
       (data: any) => {
         this.organizations = data?.result?.response?.content;
       });
+  }
+
+  loadSuborgOptions(selectedChannel: string) {
+    const body = {
+      "request": {
+        "filters": {
+          "isRootOrg": false,
+          "isTenant": false,
+          "channel": selectedChannel
+
+        }
+      }
+    }
+
+    this.orgListService.getAllOrgSubOrg(body).subscribe((data: any) => {
+      this.suborgOptions = data?.result?.response?.content;
+      this.isSubOrgDisabled = false;
+    }, error => {
+      console.error('Error:', error);
+    });
+  }
+
+  getOrgType(value: string): void {
+    if (value === 'org') {
+      this.orgTypeRoot = true;
+      this.orgTypeSubOrg = false;
+    } else {
+      this.orgTypeRoot = false;
+      this.orgTypeSubOrg = true;
+    }
   }
 
   saveUser() {

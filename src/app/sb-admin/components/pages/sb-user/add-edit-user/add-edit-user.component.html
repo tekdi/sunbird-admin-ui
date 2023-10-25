@@ -1,83 +1,121 @@
 <p-toast></p-toast>
 <form [formGroup]="addEditUserForm">
     <div class="card p-fluid">
-        <div class="field">
-            <label for="firstName">{{ 'USER_FIRST_NAME' | i18next }} * </label>
-            <input type="text" pInputText id="firstName" autofocus placeholder="{{'USER_FIRST_NAME_PLACEHOLDER' | i18next}}"
-                [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['firstName'].errors}" formControlName="firstName" />
-            <div class="text-red-500">
-                <small *ngIf="submitted && addEditUserForm.controls['firstName'].errors">{{ 'USER_FIRST_NAME_REQUIRED' | i18next }}.</small>
+        <div class="p-formgrid grid">
+            <div class="field col">
+                <label for="firstName">{{ 'USER_FIRST_NAME' | i18next }} * </label>
+                <input type="text" pInputText id="firstName" autofocus placeholder="{{'USER_FIRST_NAME_PLACEHOLDER' | i18next}}" [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['firstName'].errors}" formControlName="firstName" />
+                <div class="text-red-500">
+                    <small *ngIf="submitted && addEditUserForm.controls['firstName'].errors">{{ 'USER_FIRST_NAME_REQUIRED' | i18next }}.</small>
+                </div>
+            </div>
+            <div class="field col">
+                <label for="lastName">{{ 'USER_LAST_NAME' | i18next }} *</label>
+                <input type="text" pInputText id="lastName" autofocus placeholder="{{'USER_LAST_NAME_PLACEHOLDER' | i18next}}" [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['lastName'].errors}" formControlName="lastName" />
+                <div class="text-red-500">
+                    <small *ngIf="submitted && addEditUserForm.controls['lastName'].errors">{{ 'USER_LAST_NAME_REQUIRED' | i18next }}.</small>
+                </div>
             </div>
         </div>
-        <div class="field">
-            <label for="lastName">{{ 'USER_LAST_NAME' | i18next }} *</label>
-            <input type="text" pInputText id="lastName" autofocus placeholder="{{'USER_LAST_NAME_PLACEHOLDER' | i18next}}"
-                [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['lastName'].errors}" formControlName="lastName" />
-            <div class="text-red-500">
-                <small *ngIf="submitted && addEditUserForm.controls['lastName'].errors">{{ 'USER_LAST_NAME_REQUIRED' | i18next }}.</small>
+        <div class="p-formgrid grid">
+            <div class="field col">
+                <label for="userName">{{ 'USER_NAME' | i18next }} *</label>
+                <input type="text" pInputText id="userName" autofocus placeholder="{{'USER_NAME_PLACEHOLDER' | i18next}}" [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['userName'].errors}" formControlName="userName" />
+                <div class="text-red-500">
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && addEditUserForm.controls['userName'].errors">{{ 'USER_NAME_REQUIRED' | i18next }}.</small>
+                </div>
+            </div>
+            <div class="field col">
+                <label for="password">{{ 'USER_PASSWORD' | i18next }} *</label>
+                <p-password type="password" id="password" autofocus placeholder="{{'USER_PASSWORD_PLACEHOLDER' | i18next}}" [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['password'].errors}" formControlName="password" />
+                <div class="text-red-500">
+                    <small class="text-red-500" *ngIf="submitted && addEditUserForm.controls['password'].errors">{{ 'USER_PASSWORD_REQUIRED' | i18next }}.</small>
+                </div>
             </div>
         </div>
-        <div class="field">
-            <label for="userName">{{ 'USER_NAME' | i18next }} *</label>
-            <input type="text" pInputText id="userName" autofocus placeholder="{{'USER_NAME_PLACEHOLDER' | i18next}}"
-                [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['userName'].errors}" formControlName="userName" />
-            <div class="text-red-500">
-                 <small class="ng-dirty ng-invalid" *ngIf="submitted && addEditUserForm.controls['userName'].errors">{{ 'USER_NAME_REQUIRED' | i18next }}.</small>
+        <div class="p-formgrid grid">
+            <div class="field col">
+                <label for="multiselect">{{ 'USER_ROLE' | i18next }} *</label>
+                <p-multiSelect [options]="roles" formControlName="roles" optionLabel="name" appendTo="body" placeholder="{{'USER_ROLE_PLACEHOLDER' | i18next}}" optionValue="value"></p-multiSelect>
+                <div class="text-red-500">
+                    <small *ngIf="submitted && addEditUserForm.controls['roles'].errors">{{ 'USER_ROLE_REQUIRED' | i18next }}.</small>
+                </div>
+            </div>
+            <div class="field col">
+                <label for="multiselect">{{ 'USER_CONTACTTYPE' |i18next }} *</label>
+                <div class="field-checkbox">
+                    <p-checkbox label="Email ID" formControlName="emailandphone" value="email" (onChange)="getSelectValue('email')"></p-checkbox>&nbsp; <p-checkbox label="Phone Number" value="phone" formControlName="emailandphone" (onChange)="getSelectValue('phone')"></p-checkbox>
+                </div>
+                <div class="text-red-500">
+                    <small *ngIf="submitted && addEditUserForm.controls['emailandphone'].errors">{{ 'EMAILANDPHONE' | i18next }}.</small>
+                </div>
             </div>
         </div>
-        <div class="field">
-            <label for="password">{{ 'USER_PASSWORD' | i18next }} *</label>
-            <input type="password" pInputText id="password" autofocus placeholder="{{'USER_PASSWORD_PLACEHOLDER' | i18next}}"
-                [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['password'].errors}" formControlName="password" />
-            <div class="text-red-500">
-                <small class="text-red-500" *ngIf="submitted && addEditUserForm.controls['password'].errors">{{ 'USER_PASSWORD_REQUIRED' | i18next }}.</small>
+        <div class="p-formgrid grid">
+            <div class="field col" *ngIf="showEmail">
+                <label for="email">{{ 'USER_EMAIL' |i18next }} *</label>
+                <input type="email" pInputText id="email" autofocus formControlName="email" placeholder="{{'USER_EMAIL_PLACEHOLDER' | i18next}}" [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['email'].errors}" />
+                <div class="text-red-500">
+                    <small *ngIf="submitted && !(addEditUserForm.controls['phone'].value || addEditUserForm.controls['email'].value)">{{ 'USER_PHONE_OR_USER_EMAIL_REQUIRED' | i18next }}.</small>
+                </div>
+            </div>
+            <div class="field col" *ngIf="showPhone">
+                <label for="phone">{{ 'USER_PHONE' |i18next }} *</label>
+                <input type="text" pInputText id="phone" autofocus formControlName="phone" placeholder="{{'USER_PHONE_PLACEHOLDER' | i18next}}" formControlName="phone" />
+                <div class="text-red-500">
+                    <small *ngIf="submitted && !(addEditUserForm.controls['phone'].value || addEditUserForm.controls['email'].value)">{{ 'USER_PHONE_OR_USER_EMAIL_REQUIRED' | i18next }}.</small>
+                    <small *ngIf="addEditUserForm.controls['phone'].hasError('pattern')">Please Enter 10 digit</small>
+                </div>
             </div>
         </div>
-        <div class="field">
-            <label for="email">{{ 'USER_EMAIL' |i18next }} *</label>
-            <input type="email" pInputText id="email" autofocus formControlName="email" placeholder="{{'USER_EMAIL_PLACEHOLDER' | i18next}}"
-                [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['email'].errors}" />
-            <div class="text-red-500">
-                <small *ngIf="submitted && !(addEditUserForm.controls['phone'].value || addEditUserForm.controls['email'].value)">{{ 'USER_PHONE_OR_USER_EMAIL_REQUIRED' | i18next }}.</small>
+        <div class="p-formgrid grid">
+            <div class="field col">
+                <label>{{ 'USER_ORGANIZATION_TYPE' | i18next }} *</label>
+                <div class="horizontal-radio-group">
+                    <div class="radio-option">
+                        <input id="org" type="radio" (change)="getOrgType('org')" value="org" formControlName="orgType">
+                        <label for="org">{{ 'USER_ROOT_ORG' |i18next }}</label>
+                    </div>
+                    <div class="radio-option">
+                        <input id="suborg" type="radio" (change)="getOrgType('subOrg')" value="suborg" formControlName="orgType">
+                        <label for="suborg">{{ 'USER_SUB-ORG' |i18next }}</label>
+                    </div>
+                </div>
+                <div class="text-red-500">
+                    <small *ngIf="submitted && addEditUserForm.controls['orgType'].errors">{{'USER_ORGANIZATION_TYPE_REQUIRED'|i18next}}</small>
+                </div>
             </div>
         </div>
-        <div class="field">
-            <label for="phone">{{ 'USER_PHONE' |i18next }} *</label>
-            <input type="text" pInputText id="phone" autofocus formControlName="phone" placeholder="{{'USER_PHONE_PLACEHOLDER' | i18next}}"
-                [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['phone'].errors}" formControlName="phone" />
-            <div class="text-red-500">
-                <small *ngIf="submitted && !(addEditUserForm.controls['phone'].value || addEditUserForm.controls['email'].value)">{{ 'USER_PHONE_OR_USER_EMAIL_REQUIRED' | i18next }}.</small>
+        <div class="p-formgrid grid" *ngIf="orgTypeRoot">
+            <div class="field col">
+                <label for="multiselect">{{ 'USER_CHANNEL_NAME' | i18next }} *</label>
+                <p-dropdown formControlName="organisationId" [showClear]="true" [options]="organizations" optionLabel="orgName" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="id" [filter]="true" filterBy="channel" [showClear]="true" [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['organisationId'].errors}"></p-dropdown>
+                <div class="text-red-500">
+                    <small *ngIf="submitted && addEditUserForm.controls['organisationId'].errors">{{ 'USER_ORGANIZATION_NAME_REQUIRED' | i18next }}</small>
+                </div>
             </div>
+            <div class="field col"></div>
         </div>
-        <div class="field">
-            <label for="multiselect">{{ 'USER_ROLE' | i18next }} *</label>
-            <p-multiSelect [options]="roles" formControlName="roles" optionLabel="name" placeholder="{{'USER_ROLE_PLACEHOLDER' | i18next}}"
-                optionValue="value"
-                [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['roles'].errors}"></p-multiSelect>          
-            <div class="text-red-500">
-                <small *ngIf="submitted && addEditUserForm.controls['roles'].errors">{{ 'USER_ROLE_REQUIRED' | i18next }}.</small>
+        <div class="p-formgrid grid" *ngIf="orgTypeSubOrg">
+            <div class="field col">
+                <label for="multiselect">{{ 'USER_CHANNEL_NAME' | i18next }} *</label>
+                <p-dropdown formControlName="channelId" [showClear]="true" [options]="organizations" [filter]="true" (onChange)="loadSuborgOptions($event.value)" optionLabel="channel" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel" filterBy="channel" [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['channelId'].errors}"></p-dropdown>
+                <div class="text-red-500">
+                    <small *ngIf="submitted && addEditUserForm.controls['channelId'].errors">{{ 'USER_ORGANIZATION_NAME_REQUIRED' | i18next }}</small>
+                </div>
             </div>
-        </div>
-        <div class="field">
-            <label for="multiselect">{{ 'USER_CHANNEL_NAME' | i18next }} *</label>
-            <p-dropdown formControlName="channel" [options]="organizations" optionLabel="orgName" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel" [filter]="true" filterBy="channel" [showClear]="true"
-                [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['channel'].errors}"></p-dropdown>
-            <div class="text-red-500">
-                <small *ngIf="submitted && addEditUserForm.controls['channel'].errors">{{ 'USER_ORGANIZATION_NAME_REQUIRED' | i18next }}.</small>
+            <div class="field col">
+                <label for="multiselect">{{ 'USER_SUB_ORG_TYPE' | i18next}} *</label>
+                <p-dropdown [options]="suborgOptions" [filter]="true" [showClear]="true" formControlName="organisationId" optionLabel="orgName" appendTo="body" placeholder="Select Suborg" optionValue="id" [disabled]="isSubOrgDisabled">
+                </p-dropdown>
+                <div class="text-red-500">
+                    <small *ngIf="submitted && addEditUserForm.controls['organisationId'].errors">{{ 'USER_SUB_ORGANIZATION_NAME_REQUIRED' | i18next }}</small>
+                </div>
             </div>
         </div>
         <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
-        <div class="p-formgrid grid mt-5">
-            <div class="field col">
-                <button pButton pRipple type="button" label="{{ 'USER_CANCEL' | i18next }}" icon="pi pi-times" class="p-button-secondary"
-                (click)="cancel()" ></button>
-            </div>
-            <div class="field col">
-                <button pButton pRipple label="{{ 'USER_SUBMIT' | i18next }}" type="button" icon="pi pi-check" class="p-button-success"
-                (click)="saveUser()"></button>
-            </div>
-            
-            
-        </div>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-4 p-xl-3 p-button-container">
+        <button pButton pRipple label="{{ 'USER_SUBMIT' | i18next }}" type="button" icon="pi pi-check" class="p-button-success" (click)="saveUser()"></button>&nbsp;&nbsp; <button pButton pRipple type="button" label="{{ 'USER_CANCEL' | i18next }}" icon="pi pi-times" class="p-button p-button-danger" (click)="cancel()"></button>
     </div>
 </form>
