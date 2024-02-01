@@ -54,9 +54,6 @@ export class LoginComponent implements OnInit {
     const sanitizedTargetUrl = targetURL.endsWith('/')
       ? targetURL.slice(0, -1)
       : targetURL;
-
-    console.log('sanitizedTargetUrl', sanitizedTargetUrl);
-
     this.sessionStorageService.setAuthToken(authToken);
     this.sessionStorageService.setTargetUrl(sanitizedTargetUrl);
 
@@ -64,12 +61,11 @@ export class LoginComponent implements OnInit {
 
     this.http
       .post(
-        `${sanitizedTargetUrl}/${config.URLS.GENRATE_TOKEN}`,
+        `${sanitizedTargetUrl}/${config.URLS.GENERATE_TOKEN}`,
         body.toString(),
         { headers: header },
       )
       .subscribe((response) => {
-        console.log('response', typeof response);
         if ('access_token' in response && 'expires_in' in response) {
           const accessToken = (response as any).access_token;
           this.sessionStorageService.setAccessToken(accessToken);

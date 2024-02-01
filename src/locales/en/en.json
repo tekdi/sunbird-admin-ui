@@ -144,15 +144,15 @@
   "COMMON_NO":"No",
   "LABEL_HOME":"Home",
   
-	"ADD_AUTH": "Add Auth Token",
-	"ADD_USERNAME": "Enter Username",
-	"ADD_PASSWORD": "Enter Password",
-	"ADD_AUTH_INVALID": "Required Auth Token",
-	"ADD_USERNAME_INVALID": "Required Username",
-	"ADD_PASSWORD_INVALID": "Required Password",
-	"TARGET_URL": "Enter target URL",
-	"ADD_URL_INVALID": "Required Url",
-  "CLIENT_SECRET":"Enter Client Secret"
+	"LOGIN_ADD_AUTH": "Add Auth Token",
+	"LOGIN_ADD_USERNAME": "Enter Username",
+	"LOGIN_ADD_PASSWORD": "Enter Password",
+	"LOGIN_ADD_AUTH_INVALID": "Required Auth Token",
+	"LOGIN_ADD_USERNAME_INVALID": "Required Username",
+	"LOGIN_ADD_PASSWORD_INVALID": "Required Password",
+	"LOGIN_TARGET_URL": "Enter target URL",
+	"LOGIN_ADD_URL_INVALID": "Required Url",
+  "LOGIN_CLIENT_SECRET":"Enter Client Secret"
 
 
 }

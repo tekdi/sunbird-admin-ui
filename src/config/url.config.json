@@ -10,7 +10,7 @@
 		"USER_ROLES_GET_URL": "api/data/v1/form/read",
 		"USER_SEARCH_URL": "api/user/v1/search",
 		"COMPOSITE_SEARCH_URL": "action/composite/v3/search",
-		"GENRATE_TOKEN": "auth/realms/sunbird/protocol/openid-connect/token"
+		"GENERATE_TOKEN": "auth/realms/sunbird/protocol/openid-connect/token"
 	
 	}
 }

@@ -8,7 +8,6 @@ export const Roles = [
     { name: 'Public', value: 'PUBLIC' }
 ]
 
-
 export const SystemRoles = [
     { name: 'CONTENT_CREATOR', role: 'Content Creator', count: 0 },
     { name: 'CONTENT_REVIEWER', role: 'Content Reviewer', count: 0 },
@@ -24,7 +23,7 @@ export const SessionStorageKeys = {
     TARGET_URL: 'target_url',
   };
 
-  export const CategoryName = [
+export const CategoryName = [
     { name: 'Board', value: 'BOARD' },
     { name: 'Medium', value: 'MEDIUM' },
     { name: 'Grade', value: 'GRADE' },
