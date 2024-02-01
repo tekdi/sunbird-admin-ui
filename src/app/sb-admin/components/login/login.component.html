@@ -1,0 +1,101 @@
+<div class="login-container">
+	<div class="login-header">
+		<h2>Login</h2>
+	</div>
+	<form [formGroup]="login" class="login-form">
+		<div class="card p-fluid">
+			<div class="field">
+				<label for="targetURL">{{ 'TARGET_URL' | i18next }} *</label>
+				<input
+					type="text"
+					name="targetURL"
+					pInputText
+					id="targetURL"
+					autofocus
+					placeholder="{{ 'TARGET_URL' | i18next }}"
+					formControlName="targetURL"
+					
+				/>
+				<small
+					*ngIf="submitted && login.controls['targetURL'].errors"
+					>{{ 'ADD_URL_INVALID' | i18next }}</small
+				>
+			</div>
+			<div class="field">
+				<label for="authToken">{{ 'ADD_AUTH' | i18next }} *</label>
+				<input
+					type="password"
+					name="authToken"
+					pInputText
+					id="authToken"
+					autofocus
+					placeholder="{{ 'ADD_AUTH' | i18next }}"
+					formControlName="authToken"
+					
+				/>
+				<small
+					*ngIf="submitted && login.controls['authToken'].errors"
+					>{{ 'ADD_AUTH_INVALID' | i18next }}</small
+				>
+			</div>
+			<div class="field">
+				<label for="clientSecret">{{ 'CLIENT_SECRET' | i18next }} *</label>
+				<input
+					type="password"
+					name="clientSecret"
+					pInputText
+					id="clientSecret"
+					autofocus
+					placeholder="{{ 'CLIENT_SECRET' | i18next }}"
+					formControlName="clientSecret"
+					
+				/>
+				<small *ngIf="submitted && login.controls['userName'].errors">{{
+					'ADD_USERNAME_INVALID' | i18next
+				}}</small>
+			</div>
+			<div class="field">
+				<label for="userName">{{ 'ADD_USERNAME' | i18next }} *</label>
+				<input
+					type="text"
+					name="userName"
+					pInputText
+					id="userName"
+					autofocus
+					placeholder="{{ 'ADD_USERNAME' | i18next }}"
+					formControlName="userName"
+					
+				/>
+				<small *ngIf="submitted && login.controls['userName'].errors">{{
+					'ADD_USERNAME_INVALID' | i18next
+				}}</small>
+			</div>
+			<div class="field">
+				<label for="Password">{{ 'ADD_PASSWORD' | i18next }} *</label>
+				<input
+					type="password"
+					name="Password"
+					pInputText
+					id="Password"
+					autofocus
+					placeholder="{{ 'ADD_PASSWORD' | i18next }}"
+					formControlName="Password"
+					
+				/>
+				<small *ngIf="submitted && login.controls['Password'].errors">{{
+					'ADD_PASSWORD_INVALID' | i18next
+				}}</small>
+			</div>
+		</div>
+		<div class="button-container">
+			<button
+				(click)="saveLogin()"
+				pButton
+				pRipple
+				label="{{ 'ADD_ORGANIZATION_SUBMIT' | i18next }}"
+				icon="pi pi-check"
+				class="p-button p-button-success"
+			></button>
+		</div>
+	</form>
+</div>

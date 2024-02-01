@@ -21,7 +21,7 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: this.i18nextPipe.transform('ORG_DASHBOARD'),
                         icon: 'pi pi-fw pi-home',
-                        routerLink: ['/']
+                        routerLink: ['/dashboard']
                     },
                     {
                         label: this.i18nextPipe.transform('ORG_MANAGEMENT'),

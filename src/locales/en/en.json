@@ -142,6 +142,17 @@
   "COMMON_USERS":"User",
   "COMMON_YES":"Yes",
   "COMMON_NO":"No",
+  "LABEL_HOME":"Home",
+  
+	"ADD_AUTH": "Add Auth Token",
+	"ADD_USERNAME": "Enter Username",
+	"ADD_PASSWORD": "Enter Password",
+	"ADD_AUTH_INVALID": "Required Auth Token",
+	"ADD_USERNAME_INVALID": "Required Username",
+	"ADD_PASSWORD_INVALID": "Required Password",
+	"TARGET_URL": "Enter target URL",
+	"ADD_URL_INVALID": "Required Url",
+  "CLIENT_SECRET":"Enter Client Secret"
 
-  "LABEL_HOME":"Home"
+
 }

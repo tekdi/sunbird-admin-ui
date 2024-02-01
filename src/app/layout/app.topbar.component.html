@@ -10,9 +10,9 @@
         <i class="pi pi-ellipsis-v"></i>
     </button>
     <div #topbarmenu class="layout-topbar-menu" routerLink="/auth/login" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-        <button class="p-link layout-topbar-button">
-            <i class="pi pi-user"></i>
-            <span>Profile</span>
+        <button (click)="logout()" class="p-link layout-topbar-button">
+            <i class="pi pi-power-off"></i>
+            <span>Logout</span>
         </button>
         <button class="p-link layout-topbar-button">
             <i class="pi pi-cog"></i>
