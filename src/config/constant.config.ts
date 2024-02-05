@@ -35,5 +35,4 @@ export const CategoryCode = [
     { value: 'medium', name: 'Medium' },
     { value: 'gradeLevel', name: 'Grade' },
     { value: 'subject', name: 'Subject' },
-   
 ]
