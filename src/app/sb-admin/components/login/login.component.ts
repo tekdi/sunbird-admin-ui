@@ -4,7 +4,7 @@ import { I18NextPipe } from 'angular-i18next';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '../../service/login.service';
-import config from 'src/config/url.config.json';
+import { Subscription } from 'rxjs';
 
 @Component({
   templateUrl: './login.component.html',
@@ -13,13 +13,15 @@ import config from 'src/config/url.config.json';
 export class LoginComponent implements OnInit {
   login!: FormGroup;
   submitted = false;
-
+  private subscription!: Subscription;
   constructor(
     private i18nextPipe: I18NextPipe,
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
     private sessionStorageService: SessionStorageService,
+   
+
   ) {}
 
   ngOnInit() {
@@ -45,33 +47,20 @@ export class LoginComponent implements OnInit {
   saveLogin() {
     this.submitted = true;
     const updatedFormValues = { ...this.login.value };
-
-    const header = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-    });
-
     const { authToken, targetURL } = updatedFormValues;
     const sanitizedTargetUrl = targetURL.endsWith('/')
       ? targetURL.slice(0, -1)
       : targetURL;
     this.sessionStorageService.setAuthToken(authToken);
     this.sessionStorageService.setTargetUrl(sanitizedTargetUrl);
-
     const body = this.createRequestBody(updatedFormValues, sanitizedTargetUrl);
-
-    this.http
-      .post(
-        `${sanitizedTargetUrl}/${config.URLS.GENERATE_TOKEN}`,
-        body.toString(),
-        { headers: header },
-      )
-      .subscribe((response) => {
-        if ('access_token' in response && 'expires_in' in response) {
+    this.subscription = this.sessionStorageService.userLogin(body).subscribe((response: any) => {
+      if ('access_token' in response && 'expires_in' in response) {
           const accessToken = (response as any).access_token;
           this.sessionStorageService.setAccessToken(accessToken);
           this.router.navigate(['/dashboard']);
         }
-      });
+    });
   }
 
   private createRequestBody(values: any, targetUrl: string): URLSearchParams {

@@ -1,10 +1,20 @@
 import { Injectable } from '@angular/core';
 import { SessionStorageKeys } from 'src/config/constant.config';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import config from 'src/config/url.config.json';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SessionStorageService {
+  private targeturl: any;
+  constructor(
+    private http: HttpClient,
+  ) {
+    this.targeturl = this.getTargetUrl();
+  }
+
   setItem(key: string, value: string): void {
     sessionStorage.setItem(key, value);
   }
@@ -44,5 +54,22 @@ export class SessionStorageService {
 
   getTargetUrl(): string | null {
     return this.getItem(SessionStorageKeys.TARGET_URL);
+  }
+  private getCommonHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+  }
+
+
+  private handlePostUrl(url: string, data: any): Observable<any> {
+    const headers = this.getCommonHeaders();
+    return this.http.post(url, data, { headers: headers });
+  }
+  userLogin(body: any): Observable<Object> {
+    return this.handlePostUrl(
+      `${this.targeturl}/${config.URLS.GENERATE_TOKEN}`,
+      body
+    );
   }
 }
