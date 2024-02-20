@@ -9,7 +9,7 @@ import { symlink } from 'fs';
   providedIn: 'root',
 })
 export class SessionStorageService {
-  private targeturl: string | null;
+  private targeturl: any;
   constructor(
     private http: HttpClient,
   ) {
@@ -80,6 +80,7 @@ export class SessionStorageService {
   }
   
   userLogin(body: any): Observable<Object> {
+    console.log("body in service",body)
     return this.handlePostUrl(
       `${this.targeturl}/${config.URLS.GENERATE_TOKEN}`,
       body

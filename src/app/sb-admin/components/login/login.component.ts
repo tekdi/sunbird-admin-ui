@@ -40,8 +40,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
-
   setItem(key: string, value: string): void {
     sessionStorage.setItem(key, value);
   }
@@ -55,7 +53,13 @@ export class LoginComponent implements OnInit {
       : targetURL;
     this.sessionStorageService.setAuthToken(authToken);
     this.sessionStorageService.setTargetUrl(sanitizedTargetUrl);
-    const body = this.createRequestBody(updatedFormValues, sanitizedTargetUrl);
+    const body = {
+      "client_id": 'implementation',
+      "client_secret": updatedFormValues.clientSecret,
+      "grant_type": 'password',
+      "username": updatedFormValues.userName,
+      "password": updatedFormValues.password,
+    };
     this.subscription = this.sessionStorageService.userLogin(body).subscribe((response: any) => {
       if ('access_token' in response && 'expires_in' in response) {
           const accessToken = (response as any).access_token;
@@ -67,16 +71,5 @@ export class LoginComponent implements OnInit {
       this.messageService.add({ severity: 'error', detail: error?.error?.params?.errmsg })
     }
     );
-  }
-
-  private createRequestBody(values: any, targetUrl: string): URLSearchParams {
-    const body = new URLSearchParams();
-    body.set('client_id', 'implementation');
-    body.set('client_secret', values.clientSecret);
-    body.set('grant_type', 'password');
-    body.set('username', values.userName);
-    body.set('password', values.Password);
-
-    return body;
   }
 }
