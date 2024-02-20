@@ -3,7 +3,10 @@
   "ORG":"Oragnization",
   "ORG_DASHBOARD":"Dashboard",
   "ORG_MANAGEMENT":"Management",
-
+  "LOGOUT":"Logout",
+  "SETTINGS":"Settings",
+  "FOOTER":"Sunbird Admin pannel",
+  
   "DASHBOARD_ORG_HEADER":"Organizations",
   "DASHBOARD_ORG_TOTAL":"Total Organizations",
   "DASHBOARD_SUBORG_TOTAL":"Total Sub-organizations",
@@ -153,6 +156,7 @@
   "LOGIN_TARGET_URL": "Enter target URL",
   "LOGIN_ADD_URL_INVALID": "Required Url",
   "LOGIN_CLIENT_SECRET":"Enter Client Secret",
+  "LOGIN_ADD_CLIENT_INVALID":"Required Client Secret",
   "LOGIN":"Login"
 
 

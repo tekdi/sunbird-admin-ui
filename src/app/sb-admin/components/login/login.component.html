@@ -28,7 +28,6 @@
 					name="authToken"
 					pInputText
 					id="authToken"
-					autofocus
 					placeholder="{{ 'LOGIN_ADD_AUTH' | i18next }}"
 					formControlName="authToken"
 					
@@ -45,13 +44,12 @@
 					name="clientSecret"
 					pInputText
 					id="clientSecret"
-					autofocus
 					placeholder="{{ 'LOGIN_CLIENT_SECRET' | i18next }}"
 					formControlName="clientSecret"
 					
 				/>
-				<small *ngIf="submitted && login.controls['userName'].errors">{{
-					'LOGIN_ADD_USERNAME_INVALID' | i18next
+				<small *ngIf="submitted && login.controls['clientSecret'].errors">{{
+					'LOGIN_ADD_CLIENT_INVALID' | i18next
 				}}</small>
 			</div>
 			<div class="field">
@@ -61,7 +59,6 @@
 					name="userName"
 					pInputText
 					id="userName"
-					autofocus
 					placeholder="{{ 'LOGIN_ADD_USERNAME' | i18next }}"
 					formControlName="userName"
 					
@@ -71,18 +68,17 @@
 				}}</small>
 			</div>
 			<div class="field">
-				<label for="Password">{{ 'LOGIN_ADD_PASSWORD' | i18next }} *</label>
+				<label for="password">{{ 'LOGIN_ADD_PASSWORD' | i18next }} *</label>
 				<input
 					type="password"
-					name="Password"
+					name="password"
 					pInputText
-					id="Password"
-					autofocus
+					id="password"
 					placeholder="{{ 'LOGIN_ADD_PASSWORD' | i18next }}"
-					formControlName="Password"
+					formControlName="password"
 					
 				/>
-				<small *ngIf="submitted && login.controls['Password'].errors">{{
+				<small *ngIf="submitted && login.controls['password'].errors">{{
 					'LOGIN_ADD_PASSWORD_INVALID' | i18next
 				}}</small>
 			</div>

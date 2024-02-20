@@ -5,14 +5,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '../../service/login.service';
 import { Subscription } from 'rxjs';
-
+import { Message, MessageService } from 'primeng/api';
 @Component({
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  providers: [MessageService]
 })
 export class LoginComponent implements OnInit {
   login!: FormGroup;
   submitted = false;
+  messages!: Message[];
   private subscription!: Subscription;
   constructor(
     private i18nextPipe: I18NextPipe,
@@ -20,7 +22,7 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private sessionStorageService: SessionStorageService,
-   
+    private messageService: MessageService,
 
   ) {}
 
@@ -32,7 +34,7 @@ export class LoginComponent implements OnInit {
     this.login = this.formBuilder.group({
       authToken: ['', Validators.required],
       userName: ['', Validators.required],
-      Password: ['', Validators.required],
+      password: ['', Validators.required],
       targetURL: ['', Validators.required],
       clientSecret:['',Validators.required]
     });
@@ -60,7 +62,11 @@ export class LoginComponent implements OnInit {
           this.sessionStorageService.setAccessToken(accessToken);
           this.router.navigate(['/dashboard']);
         }
-    });
+    }, (error) => {
+      this.messages = [];
+      this.messageService.add({ severity: 'error', detail: error?.error?.params?.errmsg })
+    }
+    );
   }
 
   private createRequestBody(values: any, targetUrl: string): URLSearchParams {

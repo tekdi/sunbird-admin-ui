@@ -3,12 +3,13 @@ import { SessionStorageKeys } from 'src/config/constant.config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import config from 'src/config/url.config.json';
 import { Observable } from 'rxjs';
+import { symlink } from 'fs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SessionStorageService {
-  private targeturl: any;
+  private targeturl: string | null;
   constructor(
     private http: HttpClient,
   ) {
@@ -55,17 +56,29 @@ export class SessionStorageService {
   getTargetUrl(): string | null {
     return this.getItem(SessionStorageKeys.TARGET_URL);
   }
+
   private getCommonHeaders(): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
   }
 
-
   private handlePostUrl(url: string, data: any): Observable<any> {
     const headers = this.getCommonHeaders();
-    return this.http.post(url, data, { headers: headers });
+    const encodedData = this.encodeFormData(data);
+    return this.http.post(url, encodedData, { headers: headers });
   }
+
+  private encodeFormData(data: any): string {
+    const params = new URLSearchParams();
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        params.set(key, data[key]);
+      }
+    }
+    return params.toString();
+  }
+  
   userLogin(body: any): Observable<Object> {
     return this.handlePostUrl(
       `${this.targeturl}/${config.URLS.GENERATE_TOKEN}`,
