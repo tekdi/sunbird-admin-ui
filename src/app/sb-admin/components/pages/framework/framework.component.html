@@ -1,0 +1,48 @@
+<p-toast></p-toast>
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <form [formGroup]="createFramework">
+                <div class="card p-fluid">
+                    <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+                    <div class="field">
+                        <label for="rootName">{{ 'ADD_SUB_ORGANIZATION_ROOT' | i18next}}*</label>
+                        <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" formControlName="filteredValue" optionLabel="channel" (onChange)="onSearch($event)" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="orgName"></p-dropdown>
+                    </div>
+                    <div class="field">
+                        <label for="rootName">{{ 'FRAMEWORK' | i18next}}</label>
+                        <ul>
+                            <li *ngFor="let framework of frameworks">
+                                {{ framework.identifier }}
+                            </li>
+                        </ul>
+                    </div>
+                   
+                </div>
+                <div class="card p-fluid">
+                    <div class="field">
+                        <label for="frameworkName">{{ 'FRAMEWORK_NAME' | i18next }}*</label>
+                  
+                        <input type="text" pInputText id="frameworkName" autofocus formControlName="frameworkName" placeholder="{{ 'FRAMEWORK_NAME' | i18next }}" />
+                        <small class="error-message" *ngIf="submitted && createFramework.controls['frameworkName'].errors">{{ 'FRAMEWORK_NAME_INVALID'| i18next}}</small>
+                    </div>
+                    <div class="field">
+                        <label for="frameworkCode">{{ 'FRAMEWORK_CODE' | i18next }}*</label>
+                  
+                        <input type="text" pInputText id="frameworkCode" autofocus formControlName="frameworkCode" placeholder="{{ 'FRAMEWORK_CODE' | i18next }}" />
+                        <small class="error-message" *ngIf="submitted && createFramework.controls['frameworkCode'].errors">{{ 'FRAMEWORK_CODE_INVALID'| i18next}}</small>
+                    </div>
+                    <div class="field">
+                        <label for="frameworkDesc">{{ 'ADD_FRAMEWORK_DESCRIPTION' | i18next }}*</label>
+                        <textarea pInputTextarea placeholder="{{ 'ADD_FRAMEWORK_DESCRIPTION' | i18next }}" autofocus formControlName="frameworkDesc"></textarea>
+                        <small class="error-message" *ngIf="submitted && createFramework.controls['frameworkDesc'].errors">{{ 'ADD_FRAMEWORK_DESCRIPTION_INVALID'| i18next}}</small>
+                    </div>
+                </div>
+                 
+                <div class="p-col-12 p-md-6 p-lg-4 p-xl-3 action-buttons-position">
+                    <button pButton pRipple label="{{ 'ADD_SUB_ORG_SUBMIT' | i18next }}" icon="pi pi-check" class="p-button p-button-success" (click)="saveFramework()"></button>&nbsp; 
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

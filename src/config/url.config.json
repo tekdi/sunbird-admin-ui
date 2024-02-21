@@ -10,7 +10,11 @@
 		"USER_ROLES_GET_URL": "api/data/v1/form/read",
 		"USER_SEARCH_URL": "api/user/v1/search",
 		"COMPOSITE_SEARCH_URL": "action/composite/v3/search",
-		"GENERATE_TOKEN": "auth/realms/sunbird/protocol/openid-connect/token"
+		"GENERATE_TOKEN": "auth/realms/sunbird/protocol/openid-connect/token",
+		"CREATE_FRAMEWORK":"api/framework/v1/create",
+		"GET_CHANNEL":"api/channel/v1/read",
+		"UPDATE_FRAMEWORK":"api/framework/v1/update",
+		"GET_FRAMEWORK":"api/framework/v1/read"
 	
 	}
 }
