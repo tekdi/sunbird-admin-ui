@@ -3,7 +3,10 @@
   "ORG":"Oragnization",
   "ORG_DASHBOARD":"Dashboard",
   "ORG_MANAGEMENT":"Management",
-
+  "LOGOUT":"Logout",
+  "SETTINGS":"Settings",
+  "FOOTER":"Sunbird Admin pannel",
+  
   "DASHBOARD_ORG_HEADER":"Organizations",
   "DASHBOARD_ORG_TOTAL":"Total Organizations",
   "DASHBOARD_SUBORG_TOTAL":"Total Sub-organizations",
@@ -142,6 +145,19 @@
   "COMMON_USERS":"User",
   "COMMON_YES":"Yes",
   "COMMON_NO":"No",
+  "LABEL_HOME":"Home",
+  
+  "LOGIN_ADD_AUTH": "Add Auth Token",
+  "LOGIN_ADD_USERNAME": "Enter Username",
+  "LOGIN_ADD_PASSWORD": "Enter Password",
+  "LOGIN_ADD_AUTH_INVALID": "Required Auth Token",
+  "LOGIN_ADD_USERNAME_INVALID": "Required Username",
+  "LOGIN_ADD_PASSWORD_INVALID": "Required Password",
+  "LOGIN_TARGET_URL": "Enter target URL",
+  "LOGIN_ADD_URL_INVALID": "Required Url",
+  "LOGIN_CLIENT_SECRET":"Enter Client Secret",
+  "LOGIN_ADD_CLIENT_INVALID":"Required Client Secret",
+  "LOGIN":"Login"
 
-  "LABEL_HOME":"Home"
+
 }

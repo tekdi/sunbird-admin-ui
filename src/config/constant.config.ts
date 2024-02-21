@@ -8,7 +8,6 @@ export const Roles = [
     { name: 'Public', value: 'PUBLIC' }
 ]
 
-
 export const SystemRoles = [
     { name: 'CONTENT_CREATOR', role: 'Content Creator', count: 0 },
     { name: 'CONTENT_REVIEWER', role: 'Content Reviewer', count: 0 },
@@ -16,4 +15,24 @@ export const SystemRoles = [
     { name: 'Book Reviewer', role: 'Book Reviewer', count: 0 },
     { name: 'ORG_ADMIN', role: 'Org Admin', count: 0 },
     { name: 'PUBLIC', role: 'Public', count: 0 }
+]
+
+export const SessionStorageKeys = {
+    ACCESS_TOKEN: 'access_token',
+    AUTH_TOKEN: 'auth_token',
+    TARGET_URL: 'target_url',
+  };
+
+export const CategoryName = [
+    { name: 'Board', value: 'BOARD' },
+    { name: 'Medium', value: 'MEDIUM' },
+    { name: 'Grade', value: 'GRADE' },
+    { name: 'Subject', value: 'SUBJECT' },
+];
+
+export const CategoryCode = [
+    { value: 'board', name: 'Board' },
+    { value: 'medium', name: 'Medium' },
+    { value: 'gradeLevel', name: 'Grade' },
+    { value: 'subject', name: 'Subject' },
 ]

@@ -1,14 +1,16 @@
 {
-    "URLS": {
-        "ORGANIZATION_CREATE_URL": "api/org/v1/create",
-        "ORGANIZATION_UPDATE_URL": "api/org/v1/update",
-        "ORGNIZATION_SEARCH_URL": "api/org/v1/search",
-        "USER_CREATE_URL": "api/user/v3/create",
-        "USER_UPDATE_ROLE_URL": "api/user/v1/role/assign",
-        "USER_BLOCK_URL": "api/user/v1/block",
-        "USER_UNBLOCK_URL": "api/user/v1/unblock",
-        "USER_ROLES_GET_URL":"api/data/v1/form/read",
-        "USER_SEARCH_URL": "api/user/v1/search",
-        "COMPOSITE_SEARCH_URL" :"action/composite/v3/search"
-    }
+	"URLS": {
+		"ORGANIZATION_CREATE_URL": "api/org/v1/create",
+		"ORGANIZATION_UPDATE_URL": "api/org/v1/update",
+		"ORGNIZATION_SEARCH_URL": "api/org/v1/search",
+		"USER_CREATE_URL": "api/user/v3/create",
+		"USER_UPDATE_ROLE_URL": "api/user/v1/role/assign",
+		"USER_BLOCK_URL": "api/user/v1/block",
+		"USER_UNBLOCK_URL": "api/user/v1/unblock",
+		"USER_ROLES_GET_URL": "api/data/v1/form/read",
+		"USER_SEARCH_URL": "api/user/v1/search",
+		"COMPOSITE_SEARCH_URL": "action/composite/v3/search",
+		"GENERATE_TOKEN": "auth/realms/sunbird/protocol/openid-connect/token"
+	
+	}
 }
