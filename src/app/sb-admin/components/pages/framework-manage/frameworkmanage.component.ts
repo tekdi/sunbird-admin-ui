@@ -19,7 +19,6 @@ import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
 export class FrameworkManageComponent implements OnInit, OnDestroy {
   organizationDetail: OrganizationDetail[] = [];
   loading = true;
-  private subscription: Subscription | undefined;
   rows = 10;
   orgCount = 0;
   first = 0;
@@ -37,7 +36,9 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
   selectedFramework = { name: '', description: '' };
   optionLabel: any;
   optionValue: any;
-
+  frameworksName: any;
+  private subscription: Subscription | undefined;
+  searchTerm: string = '';
   constructor(
     private orgList: OrganizationListService,
     private userService: UserService,
@@ -65,15 +66,17 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
     }
   }
 
-
   getAllOrg(event: any) {
-    const filters = this.filteredValue;
+    const filters = { ...this.filteredValue };
     Object.keys(filters).forEach((key) => {
       if (!filters[key]) {
         delete filters[key];
       }
     });
 
+    if (this.searchTerm) {
+      filters['channel'] = this.searchTerm;
+    }
     const offset = isNaN(event.first) ? 0 : event.first;
     const body = {
       request: {
@@ -82,7 +85,7 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
         offset: offset,
       },
     };
-
+  
     this.orgList.getAllOrgSubOrg(body).subscribe(
       (data: any) => {
         this.organizationDetail = data?.result?.response?.content;
@@ -93,16 +96,15 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
       }
     );
   }
+  
 
   onSearch(event: any): void {
     this.first = 0;
-
-    if (event.target.value.length > 3 || event.target.value.length === 0) {
-      clearTimeout(this.timeout);
-      this.timeout = setTimeout(() => {
-        this.getAllOrg(event);
-      }, event.target.value.length > 3 ? 2000 : 1000);
-    }
+    this.searchTerm = event.target.value.trim();
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => {
+      this.getAllOrg(event);
+    }, this.searchTerm.length > 3 ? 2000 : 1000);
   }
 
   getTotalOrgCount() {
@@ -129,14 +131,34 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
 
   editFramework(event: any) {
     this.orgId = event.id;
-    this.getFramework(this.orgId);
+    this.getFrameworkbyChannel(this.orgId);
   }
 
-  getFramework(org: any): void {
-    this.subscription = this.userService.getChannel(org).subscribe(
+  getFrameworkbyChannel(org: any): void {
+    this.subscription = this.userService.getChannel(this.orgId).subscribe(
       (response: any) => {
-     this.frameworks=response?.result?.channel?.frameworks
+        this.frameworks = response?.result?.channel?.frameworks;
+        if (this.frameworks === undefined) {
+          this.NodataDialog = true;
+          this.userDialog = false;
+        } else {
+          this.userDialog = true;
+        }
+      },
+      (error) => {
+        this.messages = [];
+        this.messageService.add({
+          severity: 'error',
+          detail: error?.error?.params?.errmsg,
+        });
+      }
+    );
+  }
 
+  getFramework(org: any): void {    
+    this.subscription = this.userService.getFramework(org).subscribe(
+      (response: any) => {
+        this.frameworks = Array.isArray(response?.result?.framework?.frameworks) ? response?.result?.framework?.frameworks : [response?.result?.framework];
         if (this.frameworks === undefined) {
           this.NodataDialog = true;
           this.userDialog = false;
@@ -178,8 +200,7 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
         }
       }
     };
-
-    this.userService.updateFramework(body, updatedFormValues.frameworkNameDD).subscribe(
+    this.subscription = this.userService.updateFramework(body, updatedFormValues.frameworkNameDD).subscribe(
       (response) => this.handleFrameworkUpdateSuccess(response),
       (error) => this.handleFrameworkUpdateError(error)
     );
@@ -188,9 +209,11 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
   handleFrameworkUpdateSuccess(response: any): void {
     this.messages = [];
     this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('FRAMEWORK_UPDATED') });
-    this.editFrameworkForm.reset();
+    this.editFrameworkForm.reset(); 
+    this.selectedFramework = { name: '', description: '' }; 
     this.filteredValue = null;
-    this.submitted = false;
+    this.hideDialog(); 
+    location.reload();
   }
 
   handleFrameworkUpdateError(error: any): void {
@@ -199,8 +222,9 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
     this.messageService.add({ severity: 'error', detail: error?.error?.params?.errmsg });
   }
 
-
-  onSearch1(event: any) {
+ onSearch1(event: any) {
+    this.frameworksName=event;
+    this.getFrameworkbyChannel(this.orgId);
     this.selectedFramework = this.frameworks.find(
       (org) => org.identifier === event
     );

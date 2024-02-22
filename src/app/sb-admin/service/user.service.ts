@@ -129,7 +129,6 @@ export class UserService {
       Authorization: this.authToken,
       'X-Channel-Id': payload.request.framework.channels[0].identifier,
     });
-
     const url = `${this.targeturl}/${config.URLS.UPDATE_FRAMEWORK}/${framework}`;
     return this.http.patch(url, payload, { headers: headers });
   }
