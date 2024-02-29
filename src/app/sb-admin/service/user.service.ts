@@ -33,6 +33,10 @@ export class UserService {
     const headers = this.getCommonHeaders();
     return this.http.post(url, data, { headers: headers });
   }
+  private handlePostUrl1(url: string, data: any): Observable<any> {
+    const headers = this.getCommonHeaders();
+    return this.http.post(url, data);
+  }
 
   private handlePatchUrl(url: string, data: any): Observable<any> {
     const headers = this.getCommonHeaders();
@@ -113,15 +117,6 @@ export class UserService {
     );
   }
 
-  getChannel(payload: any): Observable<any> {
-    const urlWithParams = `${this.targeturl}/${config.URLS.GET_CHANNEL}/${payload}`;
-    return this.handleGetUrl(urlWithParams);
-  }
-
-  getFramework(payload: any): Observable<any> {
-    const urlWithParams = `${this.targeturl}/${config.URLS.GET_FRAMEWORK}/${payload}?cache=false&mode=edit`;
-    return this.handleGetUrl(urlWithParams);
-  }
 
   updateFramework(payload: any, framework: any): Observable<any> {
     const headers = new HttpHeaders({
@@ -129,8 +124,54 @@ export class UserService {
       Authorization: this.authToken,
       'X-Channel-Id': payload.request.framework.channels[0].identifier,
     });
-    const url = `${this.targeturl}/${config.URLS.UPDATE_FRAMEWORK}/${framework}`;
+
+    const url = `${this.targeturl}/${config.URLS.UPDATE_FRAMEWORK}${framework}`;
     return this.http.patch(url, payload, { headers: headers });
   }
+
+
+  getChannel(payload: any): Observable<any> {
+    const urlWithParams = `${this.targeturl}/${config.URLS.GET_CHANNEL}/${payload}`;
+    return this.handleGetUrl(urlWithParams);
+  }
+
+
+  createCategory(payload: any, framework: any): Observable<any> {
+    const urlWithParams = `${this.targeturl}/${config.URLS.CREATE_CATEGORY}?framework=${framework}`;
+    return this.handlePostUrl(urlWithParams, payload);
+  }
+
+  getFramework(payload: any): Observable<any> {
+    const urlWithParams = `${this.targeturl}/${config.URLS.GET_FRAMEWORK}/${payload}?cache=false&mode=edit`;
+    return this.handleGetUrl(urlWithParams);
+  }
+
+
+  createTerm(payload: any, data: any): Observable<any> {
+    const urlWithParams = `${this.targeturl}/${config.URLS.CREATE_TERM}?framework=${data.frameworkName}&category=${data.categoryName}`;
+    return this.handlePostUrl(urlWithParams, payload);
+  }
+
+  publishFramework(payload: any, framework: any) {
+
+    const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.authToken,
+        'X-Channel-Id': payload,
+    });
+    const url = `${this.targeturl}/${config.URLS.PUBLISH_FRAMEWORK}/${framework}`;
+    return this.http.post(url, null, { headers: headers });
+}
+getUserdata(payload: any): Observable<any> {
+  const urlWithParams = `${this.targeturl}/${config.URLS.GET_USER_DETAILS}/${payload}`;
+  return this.handleGetUrl(urlWithParams);
+}
+
+getContentdetails(body: any): Observable<Object> {
+  return this.handlePostUrl1(
+    `${this.targeturl}/${config.URLS.GET_ORG_CONTENT}`,
+    body
+  );
+}
 
 }

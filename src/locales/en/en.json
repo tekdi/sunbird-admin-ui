@@ -172,9 +172,31 @@
   "ADD_FRAMEWORK_DESCRIPTION": "Description",
   "ADD_FRAMEWORK_DESCRIPTION_INVALID":"Required Description",
   "FRAMEWORK_UPDATED":"Framework updated successfully",
-  "FRAMEWORK_PLACEHOLDER":"Select framework"
 
+  "CATEGORY":"Category",
+  "FRAMEWORK_PLACEHOLDER": "Select an Framework",
+  "CATEGORY_NAME":"Enter Category name",
+  "CATEGORY_NAME_INVALID":"Required Category name",
+  "CATEGORY_CODE":"Enter Category code",
+  "CATEGORY_CODE_INVALID":"Required Category code",
+ 
+  "BOARD":"Board",
+  "MEDIUM":"Medium",
+  "GRADE":"Grade",
+  "SUBJECT":"Subject",
+  "NODE":"Node",
 
+  "TERM":"Term",
+  "SELECT_CATEGORY":"Select an Category",
+  "TERM_NAME":"Enter term name",
+  "TERM_NAME_INVALID":"Required term name",
+  "TERM_LABEL":"Enter term label",
+  "TERM_LABEL_INVALID":"Required term label",
+  "TERM_CODE":"Enter term code",
+  "TERM_CODE_INVALID":"Required term code",
+
+  "PUBLISH":"Publish Framework",
+  "FRAMEWORK_PUBLISHED":"Framework published successfully"
 
 
 }

@@ -1,0 +1,52 @@
+<p-toast></p-toast>
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <form [formGroup]="createCategory">
+                <div class="card p-fluid">
+                    <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+                    <div class="field">
+                        <label for="rootName">{{ 'ADD_SUB_ORGANIZATION_ROOT' | i18next}}*</label>
+                        <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" formControlName="filteredValue" optionLabel="channel" (onChange)="onSearch($event)" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="orgName"></p-dropdown>
+                    </div>
+                    <div class="field">
+                        <label for="rootName">{{ 'FRAMEWORK' | i18next}}*</label>
+                        <p-dropdown [options]="frameworks" [filter]="true" [showClear]="true" formControlName="frameworkName" optionLabel="identifier" appendTo="body" placeholder="{{'FRAMEWORK_PLACEHOLDER' | i18next}}" optionValue="identifier"></p-dropdown>
+                    </div>
+                   
+                </div>
+                <div class="card p-fluid">
+                    <div class="field">
+                        <label for="categoryName">{{ 'CATEGORY_NAME' | i18next }}*</label>
+                        <p-dropdown [options]="CategoryName" [filter]="true" [showClear]="true" formControlName="categoryName" optionLabel="name" appendTo="body" placeholder="{{'CATEGORY_NAME' | i18next}}" optionValue="name"></p-dropdown>
+
+                        <small class="error-message" *ngIf="submitted && createCategory.controls['categoryName'].errors">{{ 'CATEGORY_NAME_INVALID'| i18next}}</small>
+                    </div>
+                    <div class="field">
+                        <label for="description">{{ 'ADD_ORGANIZATION_DESCRIPTION' | i18next}} *</label>
+                        <textarea pInputTextarea placeholder="{{ 'ADD_ORGANIZATION_DESCRIPTION' | i18next }}" autofocus formControlName="description"></textarea>
+                        <small *ngIf="submitted && createCategory.controls['description'].errors">{{ 'ADD_ORGANIZATION_DESCRIPTION_INVALID' | i18next}}</small>
+                    </div>
+                    <div class="field">
+                        <label for="categoryCode">{{ 'CATEGORY_CODE' | i18next }}*</label>
+                        <p-dropdown [options]="CategoryCode" [filter]="true" [showClear]="true" formControlName="categoryCode" optionLabel="name" appendTo="body" placeholder="{{'CATEGORY_CODE' | i18next}}" optionValue="name"></p-dropdown>
+
+                        <small class="error-message" *ngIf="submitted && createCategory.controls['categoryCode'].errors">{{ 'CATEGORY_CODE_INVALID'| i18next}}</small>
+                    </div>
+                 <div class="field"  *ngIf="this.node"> 
+                        <label>{{ 'NODE' | i18next }}:</label>
+                  
+                        <small *ngIf="this.node">{{ this.node}}</small>
+                    </div>
+               
+                   
+                </div>
+                 
+                <div class="p-col-12 p-md-6 p-lg-4 p-xl-3 action-buttons-position">
+                    <button pButton pRipple label="{{ 'ADD_SUB_ORG_SUBMIT' | i18next }}" icon="pi pi-check" class="p-button p-button-success" (click)="saveCategory()"></button>&nbsp; 
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
