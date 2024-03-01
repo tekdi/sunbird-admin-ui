@@ -81,7 +81,7 @@ export class SessionStorageService {
   
   userLogin(body: any): Observable<Object> {
     return this.handlePostUrl(
-      `${this.targeturl}/${config.URLS.GENERATE_TOKEN}`,
+      `${this.getTargetUrl()}/${config.URLS.GENERATE_TOKEN}`,
       body
     );
   }

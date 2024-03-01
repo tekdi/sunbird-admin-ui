@@ -33,7 +33,7 @@ export class UserService {
     const headers = this.getCommonHeaders();
     return this.http.post(url, data, { headers: headers });
   }
-  private handlePostUrl1(url: string, data: any): Observable<any> {
+  private handlePostUrlwithoutheader(url: string, data: any): Observable<any> {
     const headers = this.getCommonHeaders();
     return this.http.post(url, data);
   }
@@ -168,7 +168,7 @@ getUserdata(payload: any): Observable<any> {
 }
 
 getContentdetails(body: any): Observable<Object> {
-  return this.handlePostUrl1(
+  return this.handlePostUrlwithoutheader(
     `${this.targeturl}/${config.URLS.GET_ORG_CONTENT}`,
     body
   );

@@ -11,11 +11,11 @@
                     </div>
                     <div class="field">
                         <label for="rootName">{{ 'FRAMEWORK' | i18next}}*</label>
-                        <p-dropdown [options]="frameworks" [filter]="true" [showClear]="true" formControlName="frameworkName" optionLabel="identifier" (onChange)="onSearch1($event)" appendTo="body" placeholder="{{'FRAMEWORK_PLACEHOLDER' | i18next}}" optionValue="identifier"></p-dropdown>
+                        <p-dropdown [options]="frameworks" [filter]="true" [showClear]="true" formControlName="frameworkName" optionLabel="identifier"  appendTo="body" placeholder="{{'FRAMEWORK_PLACEHOLDER' | i18next}}" optionValue="identifier"></p-dropdown>
                     </div>
                     <div class="field">
                         <label for="categoryName">{{ 'CATEGORY' | i18next }}*</label>
-                        <p-dropdown [options]="CategoryName" [filter]="true" [showClear]="true" formControlName="categoryName" optionLabel="name" (onChange)="onSearch1($event)" appendTo="body" placeholder="{{'SELECT_CATEGORY' | i18next}}" optionValue="name"></p-dropdown>
+                        <p-dropdown [options]="CategoryName" [filter]="true" [showClear]="true" formControlName="categoryName" optionLabel="name" appendTo="body" placeholder="{{'SELECT_CATEGORY' | i18next}}" optionValue="name"></p-dropdown>
 
                     </div>
                    

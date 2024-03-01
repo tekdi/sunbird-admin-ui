@@ -60,16 +60,16 @@ export class LoginComponent implements OnInit {
       "username": updatedFormValues.userName,
       "password": updatedFormValues.password,
     };
-    this.subscription = this.sessionStorageService.userLogin(body).subscribe((response: any) => {
-      if ('access_token' in response && 'expires_in' in response) {
-          const accessToken = (response as any).access_token;
-          this.sessionStorageService.setAccessToken(accessToken);
-          this.router.navigate(['/dashboard']);
-        }
-    }, (error) => {
-      this.messages = [];
-      this.messageService.add({ severity: 'error', detail: error?.error?.params?.errmsg })
-    }
-    );
+      this.subscription = this.sessionStorageService.userLogin(body).subscribe((response: any) => {
+        if ('access_token' in response && 'expires_in' in response) {
+            const accessToken = (response as any).access_token;
+            this.sessionStorageService.setAccessToken(accessToken);
+            this.router.navigate(['/dashboard']);
+          }
+      }, (error) => {
+        this.messages = [];
+        this.messageService.add({ severity: 'error', detail: error?.error?.params?.errmsg })
+      }
+      );
   }
 }

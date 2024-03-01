@@ -72,7 +72,7 @@ export class CategoryComponent implements OnInit {
       }
     );
   }
-
+// Maps human-readable category codes to their corresponding system identifiers.
   mapCategoryCode(updatedFormValues: any): void {
     const categoryCodeMap: { [key: string]: string } = {
       "Grade": "gradeLevel",

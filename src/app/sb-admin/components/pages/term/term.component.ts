@@ -9,7 +9,7 @@ import { SearchFilterValue } from 'src/app/sb-admin/interfaces/user';
 import { CategoryName, CategoryCode } from 'src/config/constant.config';
 
 @Component({
-  selector: 'app-tern',
+  selector: 'app-term',
   templateUrl: './term.component.html',
   styleUrls: ['./term.component.scss']
 })
@@ -90,7 +90,7 @@ export class TermComponent implements OnInit {
       }
     );
   }
-
+// Maps human-readable category names to their corresponding system identifiers.
   mapCategoryNames(updatedFormValues: any): void {
     if (updatedFormValues.categoryName === "Grade") {
       updatedFormValues.categoryName = "gradeLevel";
@@ -150,9 +150,5 @@ export class TermComponent implements OnInit {
       this.orgId = selectedOrganization.id;
       this.getFramework(this.orgId);
     }
-  }
-
-  onSearch1(event: any): void {
-    this.first = 0;
   }
 }
