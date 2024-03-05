@@ -3,7 +3,6 @@ import { SessionStorageKeys } from 'src/config/constant.config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import config from 'src/config/url.config.json';
 import { Observable } from 'rxjs';
-import { symlink } from 'fs';
 
 @Injectable({
   providedIn: 'root',
