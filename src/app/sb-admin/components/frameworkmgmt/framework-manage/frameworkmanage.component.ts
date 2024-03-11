@@ -17,6 +17,7 @@ import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
   styleUrls: ['./frameworkmanage.component.scss']
 })
 export class FrameworkManageComponent implements OnInit, OnDestroy {
+  private subscription!: Subscription;
   organizationDetail: OrganizationDetail[] = [];
   loading = true;
   rows = 10;
@@ -37,7 +38,6 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
   optionLabel: any;
   optionValue: any;
   frameworksName: any;
-  private subscription: Subscription | undefined;
   searchTerm: string = '';
   constructor(
     private orgList: OrganizationListService,
@@ -60,11 +60,6 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
 
   getAllOrg(event: any) {
     const filters = { ...this.filteredValue };
@@ -86,7 +81,7 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
       },
     };
   
-    this.orgList.getAllOrgSubOrg(body).subscribe(
+    this.subscription =  this.orgList.getAllOrgSubOrg(body).subscribe(
       (data: any) => {
         this.organizationDetail = data?.result?.response?.content;
         this.loading = false;
@@ -121,10 +116,7 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
         this.orgCount = data?.result?.response?.count;
       },
       (error: any) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: error?.error?.params?.errmsg,
-        });
+        this.handleFrameworkUpdateError(error)
       }
     );
   }
@@ -146,11 +138,7 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
         }
       },
       (error) => {
-        this.messages = [];
-        this.messageService.add({
-          severity: 'error',
-          detail: error?.error?.params?.errmsg,
-        });
+        this.handleFrameworkUpdateError(error)
       }
     );
   }
@@ -167,11 +155,7 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
         }
       },
       (error) => {
-        this.messages = [];
-        this.messageService.add({
-          severity: 'error',
-          detail: error?.error?.params?.errmsg,
-        });
+        this.handleFrameworkUpdateError(error)
       }
     );
   }
@@ -228,5 +212,9 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
     this.selectedFramework = this.frameworks.find(
       (org) => org.identifier === event
     );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

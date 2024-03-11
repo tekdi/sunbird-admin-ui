@@ -68,7 +68,7 @@ export class TermComponent implements OnInit {
         }
       }
     };
-    this.userService.createTerm(body, updatedFormValues).subscribe(
+   this.subscription= this.userService.createTerm(body, updatedFormValues).subscribe(
       (response) => {
         this.node = response.result.node_id;
         this.messages = [];
@@ -81,12 +81,7 @@ export class TermComponent implements OnInit {
         this.submitted = false;
       },
       (error) => {
-        this.submitted = false;
-        this.messages = [];
-        this.messageService.add({
-          severity: 'error',
-          detail: error?.error?.params?.errmsg
-        });
+        this.handleCategoryCreationError(error);
       }
     );
   }
@@ -117,11 +112,7 @@ export class TermComponent implements OnInit {
         this.organizations = response?.result?.response?.content;
       },
       (error) => {
-        this.messages = [];
-        this.messageService.add({
-          severity: 'error',
-          detail: error?.error?.params?.errmsg
-        });
+        this.handleCategoryCreationError(error);
       }
     );
   }
@@ -132,11 +123,7 @@ export class TermComponent implements OnInit {
         this.frameworks = response?.result?.channel?.frameworks;
       },
       (error: any) => {
-        this.messages = [];
-        this.messageService.add({
-          severity: 'error',
-          detail: error?.error?.params?.errmsg
-        });
+        this.handleCategoryCreationError(error);
       }
     );
   }
@@ -150,5 +137,15 @@ export class TermComponent implements OnInit {
       this.orgId = selectedOrganization.id;
       this.getFramework(this.orgId);
     }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  handleCategoryCreationError(error: any): void {
+    this.submitted = false;
+    this.messages = [];
+    this.messageService.add({ severity: 'error', detail: error?.error?.params?.errmsg });
   }
 }
