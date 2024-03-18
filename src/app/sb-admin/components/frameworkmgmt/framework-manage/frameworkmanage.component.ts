@@ -10,6 +10,7 @@ import { OrganizationDetail, SearchFilterValue } from 'src/app/sb-admin/interfac
 import { OrganizationListService } from 'src/app/sb-admin/service/organization-list.service';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { UserCountService } from 'src/app/sb-admin/service/user-count.service';
+import { FrameworkService } from 'src/app/sb-admin/service/framework.service';
 
 @Component({
   selector: 'app-frameworkmanage',
@@ -48,7 +49,8 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
     private messageService: MessageService,
     private i18nextPipe: I18NextPipe,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private frameworkService: FrameworkService,
   ) {}
 
   ngOnInit() {
@@ -99,7 +101,7 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
       this.getAllOrg(event);
-    }, this.searchTerm.length > 3 ? 2000 : 1000);
+    },);
   }
 
   getTotalOrgCount() {
@@ -127,7 +129,7 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
   }
 
   getFrameworkbyChannel(org: any): void {
-    this.subscription = this.userService.getChannel(this.orgId).subscribe(
+    this.subscription = this.frameworkService.getChannel(this.orgId).subscribe(
       (response: any) => {
         this.frameworks = response?.result?.channel?.frameworks;
         if (this.frameworks === undefined) {
@@ -144,7 +146,7 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
   }
 
   getFramework(org: any): void {    
-    this.subscription = this.userService.getFramework(org).subscribe(
+    this.subscription = this.frameworkService.getFramework(org).subscribe(
       (response: any) => {
         this.frameworks = Array.isArray(response?.result?.framework?.frameworks) ? response?.result?.framework?.frameworks : [response?.result?.framework];
         if (this.frameworks === undefined) {
@@ -184,7 +186,7 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
         }
       }
     };
-    this.subscription = this.userService.updateFramework(body, updatedFormValues.frameworkNameDD).subscribe(
+    this.subscription = this.frameworkService.updateFramework(body, updatedFormValues.frameworkNameDD).subscribe(
       (response) => this.handleFrameworkUpdateSuccess(response),
       (error) => this.handleFrameworkUpdateError(error)
     );
@@ -197,7 +199,6 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
     this.selectedFramework = { name: '', description: '' }; 
     this.filteredValue = null;
     this.hideDialog(); 
-    location.reload();
   }
 
   handleFrameworkUpdateError(error: any): void {

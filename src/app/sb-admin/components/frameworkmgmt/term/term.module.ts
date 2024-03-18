@@ -18,6 +18,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ChipModule } from 'primeng/chip';
 import { TermComponent } from './term.component';
 import { TermRoutingModule } from './term-routing.module';
+import { FrameworkService } from 'src/app/sb-admin/service/framework.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { TermRoutingModule } from './term-routing.module';
   providers:[
    DialogService,
    DynamicDialogRef,
-   MessageService
+   MessageService,
+   FrameworkService
   ]
 })
 export class TermModule { }

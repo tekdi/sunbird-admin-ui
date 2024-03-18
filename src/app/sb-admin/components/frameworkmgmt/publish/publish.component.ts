@@ -6,6 +6,7 @@ import { Message, MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { I18NextPipe } from 'angular-i18next';
 import { CategoryName, CategoryCode } from 'src/config/constant.config';
+import { FrameworkService } from 'src/app/sb-admin/service/framework.service';
 
 @Component({
   selector: 'app-publish',
@@ -33,6 +34,7 @@ export class PublishComponent implements OnInit {
     private messageService: MessageService,
     public formBuilder: FormBuilder,
     private i18nextPipe: I18NextPipe,
+    private frameworkService: FrameworkService,
   ) {}
 
   ngOnInit() {
@@ -50,7 +52,7 @@ export class PublishComponent implements OnInit {
   Publish() {
     this.submitted = true;
     const updatedFormValues = { ...this.createCategory.value };
-    this.userService.publishFramework( this.orgId,updatedFormValues.frameworkName).subscribe(
+    this.frameworkService.publishFramework( this.orgId,updatedFormValues.frameworkName).subscribe(
       (response) => {
         this.handleCategoryCreationSuccess(response);
       },
@@ -61,11 +63,13 @@ export class PublishComponent implements OnInit {
   }
 
   handleCategoryCreationSuccess(response: any): void {
-    this.node = response.result.node_id;
-    this.messages = [];
-    this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('FRAMEWORK_PUBLISHED') });
-    this.createCategory.reset();
-    this.submitted = false;
+    if(response.responseCode == "OK"){
+      this.node = response.result.node_id;
+      this.messages = [];
+      this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('FRAMEWORK_PUBLISHED') });
+      this.createCategory.reset();
+      this.submitted = false;
+    }
   }
 
 
@@ -95,7 +99,7 @@ export class PublishComponent implements OnInit {
   }
 
   getFramework(org: any): void {
-    this.subscription = this.userService.getChannel(org).subscribe(
+    this.subscription = this.frameworkService.getChannel(org).subscribe(
       (response: any) => {
         this.frameworks = response?.result?.channel?.frameworks;
       },

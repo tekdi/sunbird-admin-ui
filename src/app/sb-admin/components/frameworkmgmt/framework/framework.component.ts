@@ -5,6 +5,7 @@ import { SearchFilterValue } from 'src/app/sb-admin/interfaces/user';
 import { Message, MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { I18NextPipe } from 'angular-i18next';
+import { FrameworkService } from 'src/app/sb-admin/service/framework.service';
 
 @Component({
   selector: 'app-framework',
@@ -23,6 +24,7 @@ export class FrameworkComponent implements OnInit {
   frameworks: any[] = [];
 
   constructor(
+    private frameworkService: FrameworkService,
     private userService: UserService,
     private messageService: MessageService,
     public formBuilder: FormBuilder,
@@ -49,7 +51,7 @@ export class FrameworkComponent implements OnInit {
     const updatedFormValues = { ...this.createFramework.value };
     const body = this.createRequestBody(updatedFormValues);
 
-    this.userService.saveFramework(body).subscribe(
+    this.frameworkService.saveFramework(body).subscribe(
       (response) => this.handleFrameworkSaveSuccess(response),
       (error) => this.handleFrameworkSaveError(error)
     );
@@ -62,7 +64,6 @@ export class FrameworkComponent implements OnInit {
           "name": updatedFormValues.frameworkName,
           "code": updatedFormValues.frameworkCode,
           "description": updatedFormValues.frameworkDesc,
-          "type": "K-12",
           "channels": [
             {
               "identifier": this.orgId,
@@ -107,7 +108,7 @@ export class FrameworkComponent implements OnInit {
   }
 
   getFramework(org: any): void {
-    this.subscription = this.userService.getChannel(org).subscribe(
+    this.subscription = this.frameworkService.getChannel(org).subscribe(
       (response: any) => {
         this.frameworks = response?.result?.channel?.frameworks;
       },

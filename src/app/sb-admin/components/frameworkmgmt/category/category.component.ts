@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FrameworkService } from 'src/app/sb-admin/service/framework.service';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { Subscription } from 'rxjs';
 import { SearchFilterValue } from 'src/app/sb-admin/interfaces/user';
@@ -29,10 +30,11 @@ export class CategoryComponent implements OnInit {
   node: any;
 
   constructor(
-    private userService: UserService,
+    private frameworkService: FrameworkService,
     private messageService: MessageService,
     public formBuilder: FormBuilder,
     private i18nextPipe: I18NextPipe,
+    private userService: UserService,
   ) {}
 
   ngOnInit() {
@@ -63,7 +65,7 @@ export class CategoryComponent implements OnInit {
         }
       }
     };
-    this.userService.createCategory(body, updatedFormValues.frameworkName).subscribe(
+    this.frameworkService.createCategory(body, updatedFormValues.frameworkName).subscribe(
       (response) => {
         this.handleCategoryCreationSuccess(response);
       },
@@ -120,7 +122,7 @@ export class CategoryComponent implements OnInit {
   }
 
   getFramework(org: any): void {
-    this.subscription = this.userService.getChannel(org).subscribe(
+    this.subscription = this.frameworkService.getChannel(org).subscribe(
       (response: any) => {
         this.frameworks = response?.result?.channel?.frameworks;
       },

@@ -7,6 +7,7 @@ import { I18NextPipe } from 'angular-i18next';
 import { UserService } from 'src/app/sb-admin/service/user.service';
 import { SearchFilterValue } from 'src/app/sb-admin/interfaces/user';
 import { CategoryName, CategoryCode } from 'src/config/constant.config';
+import { FrameworkService } from 'src/app/sb-admin/service/framework.service';
 
 @Component({
   selector: 'app-term',
@@ -28,12 +29,18 @@ export class TermComponent implements OnInit {
   CategoryName = CategoryName;
   CategoryCode = CategoryCode;
   node: any;
-
+  CATEGORY_NAME_MAPPING: { [key: string]: string } = {
+    "Grade": "gradeLevel",
+    "Board": "board",
+    "Medium": "medium",
+    "Subject": "subject"
+  };
   constructor(
     private userService: UserService,
     private messageService: MessageService,
     public formBuilder: FormBuilder,
-    private i18nextPipe: I18NextPipe
+    private i18nextPipe: I18NextPipe,
+    private frameworkService: FrameworkService,
   ) {}
 
   ngOnInit() {
@@ -68,7 +75,7 @@ export class TermComponent implements OnInit {
         }
       }
     };
-   this.subscription= this.userService.createTerm(body, updatedFormValues).subscribe(
+   this.subscription= this.frameworkService.createTerm(body, updatedFormValues).subscribe(
       (response) => {
         this.node = response.result.node_id;
         this.messages = [];
@@ -86,17 +93,14 @@ export class TermComponent implements OnInit {
     );
   }
 // Maps human-readable category names to their corresponding system identifiers.
-  mapCategoryNames(updatedFormValues: any): void {
-    if (updatedFormValues.categoryName === "Grade") {
-      updatedFormValues.categoryName = "gradeLevel";
-    } else if (updatedFormValues.categoryName === "Board") {
-      updatedFormValues.categoryName = "board";
-    } else if (updatedFormValues.categoryName === "Medium") {
-      updatedFormValues.categoryName = "medium";
-    } else if (updatedFormValues.categoryName === "Subject") {
-      updatedFormValues.categoryName = "subject";
-    }
+
+mapCategoryNames(updatedFormValues: any): void {
+  const categoryName = updatedFormValues.categoryName;
+  if (this.CATEGORY_NAME_MAPPING.hasOwnProperty(categoryName)) {
+    updatedFormValues.categoryName = this.CATEGORY_NAME_MAPPING[categoryName];
   }
+}
+ 
 
   getOrganizations() {
     const body = {
@@ -118,7 +122,7 @@ export class TermComponent implements OnInit {
   }
 
   getFramework(org: any): void {
-    this.subscription = this.userService.getChannel(org).subscribe(
+    this.subscription = this.frameworkService.getChannel(org).subscribe(
       (response: any) => {
         this.frameworks = response?.result?.channel?.frameworks;
       },

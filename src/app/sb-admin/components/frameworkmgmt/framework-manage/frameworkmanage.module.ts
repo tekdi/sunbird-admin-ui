@@ -22,6 +22,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ChipModule } from 'primeng/chip';
 import { FrameworkManageComponent } from './frameworkmanage.component';
 import { FrameworkManageRoutingModule } from './frameworkmanage-routing.module';
+import { FrameworkService } from 'src/app/sb-admin/service/framework.service';
 
 @NgModule({
 	declarations: [FrameworkManageComponent],
@@ -45,6 +46,6 @@ import { FrameworkManageRoutingModule } from './frameworkmanage-routing.module';
 		FrameworkManageRoutingModule,
 		I18NextModule.forRoot(),
 	],
-	providers: [DialogService, DynamicDialogRef, MessageService],
+	providers: [DialogService, DynamicDialogRef, MessageService,FrameworkService],
 })
 export class FrameworkManageModule {}
