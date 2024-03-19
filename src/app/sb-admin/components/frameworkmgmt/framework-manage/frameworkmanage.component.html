@@ -1,0 +1,88 @@
+<p-toast></p-toast>
+<div class="grid">
+    <div class="col-12 xl:col-12">
+        <div class="card">
+            <h5 class="m-0">{{ 'DASHBOARD_ORG_HEADER' | i18next}}</h5><br>
+            <p-table #myTab [value]="organizationDetail" [loading]='loading' [totalRecords]="orgCount" [paginator]="true" [(first)]="first" [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true" [lazy]="true" (onLazyLoad)="getAllOrg($event)" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" responsiveLayout="scroll" [rowHover]="true">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <span class="block mt-2 md:mt-0 p-input-icon-left"> {{ 'ORG_COUNT' | i18next }} <p-chip label="{{orgCount}}" icon="pi pi-user"></p-chip>
+                        </span>
+                        <p-message severity="warn" text="{{ 'ORG_LIST_WARNING' | i18next }}" *ngIf="!organizationDetail || organizationDetail.length === 0"></p-message>
+                       
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th scope="col">{{ 'ORG_NAME' | i18next }}</th>
+                        <th scope="col">{{ 'EDIT_ORGANIZATION_ACTION' |i18next }}</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="onSearch($event)" placeholder="{{ 'DASHBOARD_ORG_SEARCH' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.channel">
+                            </span>
+                        </th>
+                        <th scope="col"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-organization>
+                    <tr>
+                        <td>{{organization.channel}}</td>
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info mr-2" (click)="editFramework(organization)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+    <p-dialog [(visible)]="userDialog" (visibleChange)="hideDialog()" header="{{ 'EDIT_FRAMEWORK' | i18next }}" [modal]="true" class="p-fluid">
+        <ng-template pTemplate="content">
+          <div class="card p-fluid">
+            <form [formGroup]="editFrameworkForm"> <!-- Add formGroup here -->
+              <div class="field">
+                <label for="rootName">{{ 'FRAMEWORK' | i18next}}</label>
+                <p-dropdown [options]="frameworks" [filter]="true" [showClear]="true" formControlName="frameworkNameDD" optionLabel="identifier" (onChange)="onSearch1($event.value)" appendTo="body" placeholder="{{ 'FRAMEWORK_PLACEHOLDER' | i18next }}" optionValue="identifier"></p-dropdown>
+              </div>
+              <div class="card p-fluid">
+                <div class="field">
+                    <label for="frameworkName">{{ 'FRAMEWORK_NAME' | i18next }}</label>
+              
+                    <input type="text" pInputText id="frameworkName" autofocus formControlName="frameworkName" placeholder="{{ 'FRAMEWORK_NAME' | i18next }}" [(ngModel)]="selectedFramework.name"/>
+                    <small class="error-message" *ngIf="submitted && editFrameworkForm.controls['frameworkName'].errors">{{ 'FRAMEWORK_NAME_INVALID'| i18next}}</small>
+                </div>
+  
+                <div class="field">
+                    <label for="frameworkDesc">{{ 'ADD_FRAMEWORK_DESCRIPTION' | i18next }}</label>
+                    <textarea pInputTextarea placeholder="{{ 'ADD_FRAMEWORK_DESCRIPTION' | i18next }}" autofocus formControlName="frameworkDesc" [(ngModel)]="selectedFramework.description"></textarea>
+                    <small class="error-message" *ngIf="submitted && editFrameworkForm.controls['frameworkDesc'].errors">{{ 'ADD_FRAMEWORK_DESCRIPTION_INVALID'| i18next}}</small>
+                </div>
+            </div>
+            </form>
+          </div>
+       
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <button pButton pRipple label="{{ 'USER_CANCEL' | i18next }}" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
+          <button pButton pRipple label="{{ 'USER_SAVE' | i18next }}" icon="pi pi-check" class="p-button-success" appendTo="body" (click)="saveEditFramework()"></button>
+        </ng-template>
+      </p-dialog>
+
+      <p-dialog [(visible)]="NodataDialog" header="{{ 'EDIT_FRAMEWORK' | i18next }}" [modal]="true" class="p-fluid">
+        <ng-template pTemplate="content">
+          <div class="card p-fluid">
+            <label>
+                {{ 'NO_FRAMEWORK' | i18next }}
+            </label>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <button pButton pRipple label="{{ 'USER_CANCEL' | i18next }}" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
+          <button pButton pRipple label="{{ 'ADD_FRAMEWORK' | i18next }}" icon="pi pi-check" class="p-button-success" appendTo="body" (click)="addframework()"></button>
+        </ng-template>
+      </p-dialog>
+      
+      

@@ -5,7 +5,7 @@
   "ORG_MANAGEMENT":"Management",
   "LOGOUT":"Logout",
   "SETTINGS":"Settings",
-  "FOOTER":"Sunbird Admin pannel",
+  "FOOTER":"Sunbird Admin panel",
   
   "DASHBOARD_ORG_HEADER":"Organizations",
   "DASHBOARD_ORG_TOTAL":"Total Organizations",
@@ -157,7 +157,46 @@
   "LOGIN_ADD_URL_INVALID": "Required Url",
   "LOGIN_CLIENT_SECRET":"Enter Client Secret",
   "LOGIN_ADD_CLIENT_INVALID":"Required Client Secret",
-  "LOGIN":"Login"
+  "LOGIN":"Login",
+
+  "FRAMEWORK":"Framework",
+  "FRAMEWORK_NAME":"Enter Framework name",
+  "FRAMEWORK_NAME_INVALID": "Required Framework name",
+  "FRAMEWORK_CODE":"Enter Framework code",
+  "FRAMEWORK_CODE_INVALID": "Required Framework code",
+  "FRAMEWORK_ADDED":"Framework created successfully",
+  "FRAMEWORK_MANAGEMENT":"Management",
+  "EDIT_FRAMEWORK":"Edit Framework",
+  "NO_FRAMEWORK":"There is no framework created",
+  "ADD_FRAMEWORK":"ADD", 
+  "ADD_FRAMEWORK_DESCRIPTION": "Description",
+  "ADD_FRAMEWORK_DESCRIPTION_INVALID":"Required Description",
+  "FRAMEWORK_UPDATED":"Framework updated successfully",
+
+  "CATEGORY":"Category",
+  "FRAMEWORK_PLACEHOLDER": "Select an Framework",
+  "CATEGORY_NAME":"Enter Category name",
+  "CATEGORY_NAME_INVALID":"Required Category name",
+  "CATEGORY_CODE":"Enter Category code",
+  "CATEGORY_CODE_INVALID":"Required Category code",
+ 
+  "BOARD":"Board",
+  "MEDIUM":"Medium",
+  "GRADE":"Grade",
+  "SUBJECT":"Subject",
+  "NODE":"Node",
+
+  "TERM":"Term",
+  "SELECT_CATEGORY":"Select an Category",
+  "TERM_NAME":"Enter term name",
+  "TERM_NAME_INVALID":"Required term name",
+  "TERM_LABEL":"Enter term label",
+  "TERM_LABEL_INVALID":"Required term label",
+  "TERM_CODE":"Enter term code",
+  "TERM_CODE_INVALID":"Required term code",
+
+  "PUBLISH":"Publish Framework",
+  "FRAMEWORK_PUBLISHED":"Framework published successfully"
 
 
 }

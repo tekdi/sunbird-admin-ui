@@ -40,9 +40,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  setItem(key: string, value: string): void {
-    sessionStorage.setItem(key, value);
-  }
 
   saveLogin() {
     this.submitted = true;

@@ -33,6 +33,10 @@ export class UserService {
     const headers = this.getCommonHeaders();
     return this.http.post(url, data, { headers: headers });
   }
+  private handlePostUrlwithoutheader(url: string, data: any): Observable<any> {
+    const headers = this.getCommonHeaders();
+    return this.http.post(url, data);
+  }
 
   private handlePatchUrl(url: string, data: any): Observable<any> {
     const headers = this.getCommonHeaders();
@@ -98,6 +102,5 @@ export class UserService {
       body
     );
   }
-
 
 }

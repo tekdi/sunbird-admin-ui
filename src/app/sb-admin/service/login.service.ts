@@ -3,7 +3,6 @@ import { SessionStorageKeys } from 'src/config/constant.config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import config from 'src/config/url.config.json';
 import { Observable } from 'rxjs';
-import { symlink } from 'fs';
 
 @Injectable({
   providedIn: 'root',
@@ -80,9 +79,8 @@ export class SessionStorageService {
   }
   
   userLogin(body: any): Observable<Object> {
-    console.log("body in service",body)
     return this.handlePostUrl(
-      `${this.targeturl}/${config.URLS.GENERATE_TOKEN}`,
+      `${this.getTargetUrl()}/${config.URLS.GENERATE_TOKEN}`,
       body
     );
   }

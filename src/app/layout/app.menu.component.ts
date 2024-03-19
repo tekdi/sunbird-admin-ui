@@ -45,7 +45,39 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['/pages/sb-user']
                     }
                 ]
-            }
+            },
+            {
+                label: this.i18nextPipe.transform('FRAMEWORK'),
+                icon: 'pi pi-fw pi-briefcase',
+                items: [
+                    {
+                        label: this.i18nextPipe.transform('FRAMEWORK'),
+                        icon: 'pi pi-fw pi-home',
+                        routerLink: ['/framework-management/framework']
+                    },
+                    {
+                        label: this.i18nextPipe.transform('FRAMEWORK_MANAGEMENT'),
+                        icon: 'pi pi-fw pi-user',
+                        routerLink: ['/framework-management/framework-manage']
+                    },
+                    {
+                        label: this.i18nextPipe.transform('CATEGORY'),
+                        icon: 'pi pi-fw pi-home',
+                        routerLink: ['/framework-management/category']
+                    },
+                    {
+                        label: this.i18nextPipe.transform('TERM'),
+                        icon: 'pi pi-fw pi-home',
+                        routerLink: ['/framework-management/term']
+                    },
+                    {
+                        label: this.i18nextPipe.transform('PUBLISH'),
+                        icon: 'pi pi-fw pi-home',
+                        routerLink: ['/framework-management/publish']
+                    }
+                    
+                ]
+            },
         ];
     }
 }

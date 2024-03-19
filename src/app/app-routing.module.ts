@@ -2,6 +2,7 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { LoginComponent } from './sb-admin/components/login/login.component';
+import { FrameworkManageRoutingModule } from './sb-admin/components/frameworkmgmt/frameworkmgmt-routing.module';
 @NgModule({
   imports: [
     RouterModule.forRoot(
@@ -53,7 +54,18 @@ import { LoginComponent } from './sb-admin/components/login/login.component';
               (m) => m.PagesModule
             ),
         },
-      
+        {
+          path: 'framework-management',
+          component: AppLayoutComponent,
+          children: [
+            { path: 'category', loadChildren: () => import('./sb-admin/components/frameworkmgmt/category/category.module').then(m => m.CategoryModule) },
+            { path: 'framework-manage', loadChildren: () => import('./sb-admin/components/frameworkmgmt/framework-manage/frameworkmanage.module').then(m => m.FrameworkManageModule) },
+            { path: 'framework', loadChildren: () => import('./sb-admin/components/frameworkmgmt/framework/framework.module').then(m => m.FrameworkModule) },
+            { path: 'publish', loadChildren: () => import('./sb-admin/components/frameworkmgmt/publish/publish.module').then(m => m.PublishModule)},
+            { path: 'term', loadChildren: () => import('./sb-admin/components/frameworkmgmt/term/term.module').then(m => m.TermModule)  },
+            { path: '', redirectTo: 'category', pathMatch: 'full' }, // Default to category if no child route provided
+          ],
+        },
         { path: '**', redirectTo: '/notfound' },
       ],
       {
