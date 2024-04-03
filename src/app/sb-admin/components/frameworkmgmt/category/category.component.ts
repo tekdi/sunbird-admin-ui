@@ -65,7 +65,7 @@ export class CategoryComponent implements OnInit {
         }
       }
     };
-    this.frameworkService.createCategory(body, updatedFormValues.frameworkName).subscribe(
+    this.subscription=this.frameworkService.createCategory(body, updatedFormValues.frameworkName).subscribe(
       (response) => {
         this.handleCategoryCreationSuccess(response);
       },
@@ -140,8 +140,10 @@ export class CategoryComponent implements OnInit {
       this.getFramework(this.orgId);
     }
   }
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+   ngOnDestroy() {
+       if (this.subscription) {
+         this.subscription.unsubscribe();
+       }
+     }
 
 }

@@ -7,7 +7,7 @@ import { I18NextPipe } from 'angular-i18next';
 import { CategoryName, CategoryCode } from 'src/config/constant.config';
 import { FrameworkService } from 'src/app/sb-admin/service/framework.service';
 @Component({
-  selector: 'app-term-asociation',
+  selector: 'app-term-association',
   templateUrl: './term-association.component.html',
   styleUrls: ['./term-association.component.scss']
 })
@@ -68,18 +68,18 @@ export class TermAssociationComponent implements OnInit {
   
 
   initializeAddForm() {
-
     this.form = this.formBuilder.group({
-      board : ['',[Validators.required]],
-      medium:['',[Validators.required]],
-      grade:['',[Validators.required]],
-      subject:['',[Validators.required]]
-    })
+      board: ['', [Validators.required]],
+      medium: ['', [Validators.required]],
+      grade: ['', [Validators.required]],
+      subject: ['', [Validators.required]]
+    });
+
     this.createCategory = this.formBuilder.group({
       categoryName: ['', Validators.required], // Initialize as an empty array for multiple selection
       frameworkName: [null, Validators.required],
       filteredValue: [null, Validators.required],
-      termName:[null,Validators.required]
+      termName: [null,Validators.required]
     });
     this.filteredCategories = this.CategoryName.filter(category => category.name !== 'Board');
 
@@ -250,51 +250,57 @@ export class TermAssociationComponent implements OnInit {
     });
   }
 
-
   handleButtonClick(){
     const updatedFormValues = { ...this.createCategory.value };
-   
     const form = { ...this.form.value };
     let associationswith: any[] = [];
     let associations: any[] = [];
-    switch (updatedFormValues.categoryName) {
-      case "Medium":
-        associationswith = form.board.map((item: { item_id: any }) => ({ identifier: item.item_id }));
-        associations = form.grade.map((item: { item_id: any }) => ({ identifier: item.item_id }))
-          .concat(form.subject.map((item: { item_id: any }) => ({ identifier: item.item_id })));
-        break;
-      case "Grade":
-        associationswith = form.board.map((item: { item_id: any }) => ({ identifier: item.item_id }))
-          .concat( form.medium.map((item: { item_id: any }) => ({ identifier: item.item_id })));
-        associations = form.subject.map((item: { item_id: any }) => ({ identifier: item.item_id }));
-        break;
-    case "Subject":
-    associationswith = form.board.map((item: { item_id: any }) => ({ identifier: item.item_id }))
-                      .concat(form.medium.map((item: { item_id: any }) => ({ identifier: item.item_id })))
-                      .concat(form.grade.map((item: { item_id: any }) => ({ identifier: item.item_id })));
-    break;
-    }
-    const requestBody = {
-      request: {
-        term: {
-          associationswith: associationswith,
-          associations: associations
+    if (this.createCategory.valid && this.form.valid) {
+      switch (updatedFormValues.categoryName) {
+        case "Medium":
+          associationswith = form.board.map((item: { item_id: any }) => ({ identifier: item.item_id }));
+          associations = form.grade.map((item: { item_id: any }) => ({ identifier: item.item_id }))
+            .concat(form.subject.map((item: { item_id: any }) => ({ identifier: item.item_id })));
+          break;
+        case "Grade":
+          associationswith = form.board.map((item: { item_id: any }) => ({ identifier: item.item_id }))
+            .concat( form.medium.map((item: { item_id: any }) => ({ identifier: item.item_id })));
+          associations = form.subject.map((item: { item_id: any }) => ({ identifier: item.item_id }));
+          break;
+      case "Subject":
+      associationswith = form.board.map((item: { item_id: any }) => ({ identifier: item.item_id }))
+                        .concat(form.medium.map((item: { item_id: any }) => ({ identifier: item.item_id })))
+                        .concat(form.grade.map((item: { item_id: any }) => ({ identifier: item.item_id })));
+      break;
+      }
+      const requestBody = {
+        request: {
+          term: {
+            associationswith: associationswith,
+            associations: associations
+          }
         }
-      }
-    };
+      };
+  
+      this.requestBody = requestBody;
+      this.mapCategoryNames(updatedFormValues);
+      this.subscription = this.frameworkService.createAssociation(this.requestBody, updatedFormValues).subscribe(
+        (response: any) => {
+          this.organizations = response?.result?.response?.content;
+        },
+        (error) => {
+          this.handleCategoryCreationError(error);
+        }
+      );
+    } else {
+      this.messageService.add({ severity: 'error', detail: 'Please fill in all required fields.' });
+    }
 
-    this.requestBody = requestBody;
-    this.mapCategoryNames(updatedFormValues);
-    this.subscription = this.frameworkService.createAssociation(this.requestBody, updatedFormValues).subscribe(
-      (response: any) => {
-        this.organizations = response?.result?.response?.content;
-      },
-      (error) => {
-        this.handleCategoryCreationError(error);
-      }
-    );
+
+   
 
 }
+
 mapCategoryNames(updatedFormValues: any): void {
   const categoryName = updatedFormValues.categoryName;
   if (this.CATEGORY_NAME_MAPPING.hasOwnProperty(categoryName)) {

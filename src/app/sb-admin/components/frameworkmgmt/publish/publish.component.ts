@@ -52,7 +52,7 @@ export class PublishComponent implements OnInit {
   Publish() {
     this.submitted = true;
     const updatedFormValues = { ...this.createCategory.value };
-    this.frameworkService.publishFramework( this.orgId,updatedFormValues.frameworkName).subscribe(
+    this.subscription =  this.frameworkService.publishFramework( this.orgId,updatedFormValues.frameworkName).subscribe(
       (response) => {
         this.handleCategoryCreationSuccess(response);
       },
@@ -115,6 +115,13 @@ export class PublishComponent implements OnInit {
     if (selectedOrganization) {
       this.orgId = selectedOrganization.id;
       this.getFramework(this.orgId);
+    }
+  }
+
+  ngOnDestroy(){
+    if (this.subscription) 
+    {
+      this.subscription.unsubscribe();
     }
   }
 

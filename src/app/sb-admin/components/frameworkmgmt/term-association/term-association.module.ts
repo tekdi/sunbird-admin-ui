@@ -45,12 +45,8 @@ import { FrameworkService } from 'src/app/sb-admin/service/framework.service';
 		DropdownModule,
 		ChipModule,
 		TermAssociationRoutingModule,
-		I18NextModule.forRoot(),
-		NgMultiSelectDropDownModule.forRoot(),
-		
-		
-		FormsModule,
-		
+		I18NextModule,
+		NgMultiSelectDropDownModule,
 	],
 	providers: [DialogService, DynamicDialogRef, MessageService,FrameworkService],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],

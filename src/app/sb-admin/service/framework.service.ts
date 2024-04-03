@@ -7,9 +7,9 @@ import { SessionStorageService } from './login.service';
 
 @Injectable()
 export class FrameworkService {
-  private accessToken: any;
-  private authToken: any;
-  private targeturl: any;
+  public accessToken: any;
+  public authToken: any;
+  public targeturl: any;
 
   constructor(
     private http: HttpClient,
