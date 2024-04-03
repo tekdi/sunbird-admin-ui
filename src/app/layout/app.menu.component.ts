@@ -71,6 +71,11 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['/framework-management/term']
                     },
                     {
+                        label: this.i18nextPipe.transform('TERM_ASSOCIATION'),
+                        icon: 'pi pi-fw pi-home',
+                        routerLink: ['/framework-management/term-association']
+                    },
+                    {
                         label: this.i18nextPipe.transform('PUBLISH'),
                         icon: 'pi pi-fw pi-home',
                         routerLink: ['/framework-management/publish']

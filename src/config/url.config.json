@@ -19,7 +19,9 @@
 		"CREATE_TERM":"api/framework/v1/term/create",
 		"PUBLISH_FRAMEWORK":"api/framework/v1/publish",
 		"GET_USER_DETAILS":"api/user/v1/read",
-		"GET_ORG_CONTENT":"/api/content/v1/search"
+		"GET_ORG_CONTENT":"/api/content/v1/search",
+		"GET_CATEGORY":"/api/framework/v1/category/read",
+		"CREATE_ASSOCIATION":"/api/framework/v1/term/update/"
 		
 
 	}	

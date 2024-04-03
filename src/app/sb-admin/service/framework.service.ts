@@ -119,5 +119,20 @@ getContentdetails(body: any): Observable<Object> {
     body
   );
 }
+getCategorydetails(data: any): Observable<Object> {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.authToken,
+    'X-Channel-Id': 'sunbird',
+});
+const urlWithParams = `${this.targeturl}/${config.URLS.GET_CATEGORY}/${data.termName}?framework=${data.frameworkName}`;
+return this.http.get(urlWithParams, { headers: headers });
+  }
+
+  createAssociation(payload: any, data: any) : Observable<Object> {
+    const urlWithParams = `${this.targeturl}/${config.URLS.CREATE_ASSOCIATION}/${data.termName}?framework=${data.frameworkName}&category=${data.categoryName}`;
+    return this.handlePatchUrl(urlWithParams, payload);
+
+  }
 
 }
