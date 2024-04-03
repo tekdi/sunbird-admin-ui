@@ -9,11 +9,7 @@ import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import {
-	DialogService,
-	DynamicDialogModule,
-	DynamicDialogRef,
-} from 'primeng/dynamicdialog';
+import {DialogService, DynamicDialogModule, DynamicDialogRef} from 'primeng/dynamicdialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RippleModule } from 'primeng/ripple';
 import { InputTextareaModule } from 'primeng/inputtextarea';

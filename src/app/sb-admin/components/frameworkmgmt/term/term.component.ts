@@ -144,7 +144,9 @@ mapCategoryNames(updatedFormValues: any): void {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+          this.subscription.unsubscribe();
+        }
   }
 
   handleCategoryCreationError(error: any): void {

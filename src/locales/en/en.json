@@ -5,7 +5,7 @@
   "ORG_MANAGEMENT":"Management",
   "LOGOUT":"Logout",
   "SETTINGS":"Settings",
-  "FOOTER":"Sunbird Admin panel",
+  "FOOTER":"Sunbird Admin Panel",
   
   "DASHBOARD_ORG_HEADER":"Organizations",
   "DASHBOARD_ORG_TOTAL":"Total Organizations",
@@ -196,7 +196,14 @@
   "TERM_CODE_INVALID":"Required term code",
 
   "PUBLISH":"Publish Framework",
-  "FRAMEWORK_PUBLISHED":"Framework published successfully"
+  "FRAMEWORK_PUBLISHED":"Framework published successfully",
 
+  "TERM_ASSOCIATION":"Term Association",
+  "TERM_ASSOCATION_TERM":"Select term for association",
+  "TERM_ASSOCATION_TERM_INVALID":"Required term",
+  "TERM_ASSOCATION_BOARD":"Select Board",
+  "TERM_ASSOCATION_MEDIUM":"Select Medium",
+  "TERM_ASSOCATION_GRADE":"Select Grade",
+  "TERM_ASSOCATION_SUBJECT":"Select Subject"
 
 }

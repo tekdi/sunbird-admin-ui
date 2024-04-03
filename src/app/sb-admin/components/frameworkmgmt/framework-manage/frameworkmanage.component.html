@@ -3,7 +3,7 @@
     <div class="col-12 xl:col-12">
         <div class="card">
             <h5 class="m-0">{{ 'DASHBOARD_ORG_HEADER' | i18next}}</h5><br>
-            <p-table #myTab [value]="organizationDetail" [loading]='loading' [totalRecords]="orgCount" [paginator]="true" [(first)]="first" [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true" [lazy]="true" (onLazyLoad)="getAllOrg($event)" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" responsiveLayout="scroll" [rowHover]="true">
+              <p-table #myTab [value]="organizationDetail" [loading]='loading' [totalRecords]="orgCount" [paginator]="true" [(first)]="first" [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true" [lazy]="true" (onLazyLoad)="getAllOrg($event)" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" responsiveLayout="scroll" [rowHover]="true">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
                         <span class="block mt-2 md:mt-0 p-input-icon-left"> {{ 'ORG_COUNT' | i18next }} <p-chip label="{{orgCount}}" icon="pi pi-user"></p-chip>
@@ -35,7 +35,7 @@
                         </td>
                     </tr>
                 </ng-template>
-            </p-table>
+              </p-table>
         </div>
     </div>
 

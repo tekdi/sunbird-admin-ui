@@ -51,7 +51,7 @@ export class FrameworkComponent implements OnInit {
     const updatedFormValues = { ...this.createFramework.value };
     const body = this.createRequestBody(updatedFormValues);
 
-    this.frameworkService.saveFramework(body).subscribe(
+    this.subscription= this.frameworkService.saveFramework(body).subscribe(
       (response) => this.handleFrameworkSaveSuccess(response),
       (error) => this.handleFrameworkSaveError(error)
     );
@@ -130,4 +130,10 @@ export class FrameworkComponent implements OnInit {
   onSearch1(event: any): void {
     this.first = 0;
   }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+     this.subscription.unsubscribe();
+     }
+   }
 }

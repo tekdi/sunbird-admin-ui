@@ -56,7 +56,7 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getTotalOrgCount();
     this.editFrameworkForm = this.fb.group({
-      frameworkNameDD: [''],
+      frameworkNameDD: ['',null],
       frameworkName: ['', Validators.required],
       frameworkDesc: ['', Validators.required],
     });
@@ -118,7 +118,7 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
         this.orgCount = data?.result?.response?.count;
       },
       (error: any) => {
-        this.handleFrameworkUpdateError(error)
+        this.messageService.add({ severity: 'error', detail: 'Failed to load organization count. Please try again.' });
       }
     );
   }
@@ -186,10 +186,16 @@ export class FrameworkManageComponent implements OnInit, OnDestroy {
         }
       }
     };
-    this.subscription = this.frameworkService.updateFramework(body, updatedFormValues.frameworkNameDD).subscribe(
-      (response) => this.handleFrameworkUpdateSuccess(response),
-      (error) => this.handleFrameworkUpdateError(error)
-    );
+    if (this.editFrameworkForm.valid) {
+      this.subscription = this.frameworkService.updateFramework(body, updatedFormValues.frameworkNameDD).subscribe(
+        (response) => this.handleFrameworkUpdateSuccess(response),
+        (error) => this.handleFrameworkUpdateError(error)
+      );
+    } else {
+      this.messageService.add({ severity: 'error', detail: 'Please fill in all required fields.' });
+    }
+
+    
   }
 
   handleFrameworkUpdateSuccess(response: any): void {
