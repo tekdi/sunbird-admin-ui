@@ -64,6 +64,7 @@ import { FrameworkManageRoutingModule } from './sb-admin/components/frameworkmgm
             { path: 'publish', loadChildren: () => import('./sb-admin/components/frameworkmgmt/publish/publish.module').then(m => m.PublishModule)},
             { path: 'term', loadChildren: () => import('./sb-admin/components/frameworkmgmt/term/term.module').then(m => m.TermModule)  },
             { path: 'term-association', loadChildren: () => import('./sb-admin/components/frameworkmgmt/term-association/term-association.module').then(m => m.TermAssociationModule) },
+            { path: '', redirectTo: 'category', pathMatch: 'full' }, // Default to category if no child route provided
           ],
         },
         { path: '**', redirectTo: '/notfound' },
