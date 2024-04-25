@@ -6,11 +6,6 @@ import { RouterModule } from '@angular/router';
         { path: 'sb-user', loadChildren: () => import('./sb-user/sbuser.module').then(m => m.SbUserModule) },
         { path: 'sb-organization', loadChildren: () => import('./sb-organization/sb-organization.module').then(m => m.SbOrganizationModule) },
         { path: 'user-dashboard', loadChildren: () => import('./user-dashboard/user-dashboard.module').then(m => m.UserDashboardModule) },
-        { path: '**', redirectTo: '/notfound' },
-
-
-
-
     ])],
     exports: [RouterModule]
 })

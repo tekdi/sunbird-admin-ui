@@ -1,0 +1,112 @@
+<p-toast></p-toast>
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <form [formGroup]="batchUpdate">
+                <div class="card p-fluid">
+                    <div class="field">
+                        <label for="courseId">{{ 'INVITE_ONLY_COURSEID' | i18next }}*</label>
+                        <input type="text" pInputText id="courseId" autofocus formControlName="courseId" placeholder="{{ 'INVITE_ONLY_COURSEID' | i18next }}" />
+                        <small class="error-message" *ngIf="submitted && batchUpdate.controls['courseId'].errors">{{ 'INVITE_ONLY_COURSEID_INVALID'| i18next}}</small>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="p-col-12 p-md-6 p-lg-4 p-xl-3 action-buttons-position">
+                        <button pButton pRipple label="{{ 'ADD_SUB_ORG_SUBMIT' | i18next }}" icon="pi pi-check" class="p-button p-button-success" (click)="getBatch()"></button>&nbsp; 
+                    </div>   
+                    </div>
+            </form>
+            <p-table *ngIf="batchDetails" #myTable [value]="batchDetails" [columns]="cols" [totalRecords]="count" responsiveLayout="scroll" [rows]="rows" [paginator]="true" [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="userId" [lazy]="true" [(first)]="first">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th scope="col">{{ 'INVITE_ONLY_BATCHNAME' |i18next }}</th>
+                        <th scope="col">{{ 'USER_LAST_NAME' |i18next }}</th>
+                        <th scope="col">{{ 'USER_ACTION' | i18next }}</th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-user>
+                    <tr>
+                        <td>
+                            <span class="p-column-title">{{'INVITE_ONLY_BATCHNAME' | i18next}}</span> {{user.name}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{'USER_LAST_NAME' | i18next}}</span> {{user.enrollmentType}}
+                        </td>
+                        <td>
+                            <div class="flex" >
+                                <button *ngIf="user.enrollmentType != 'open'" pButton pRipple icon="pi pi-plus" class="p-button-rounded p-button-info mr-2" (click)="enrolUser(user)"></button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+
+<p-dialog [(visible)]="enrolUserdialog" header="{{'INVITE_ONLY_ENROL_USER' | i18next}}" [modal]="true" class="p-fluid">
+    <ng-template pTemplate="content">
+        <p-table #myTable1 [value]="publicUsersList" [columns]="cols" [loading]='loading' [totalRecords]="count" responsiveLayout="scroll" [rows]="rows" [paginator]="true" [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="userId" [lazy]="true" (onLazyLoad)="loadUserList($event)" [(first)]="first"  (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
+       
+            <ng-template pTemplate="header">
+                <tr>
+                    <th></th>
+                    <th scope="col">{{ 'USER_FIRST_NAME' |i18next }}</th>
+                    <th scope="col">{{ 'USER_LAST_NAME' |i18next }}</th>
+                    <th scope="col">{{ 'USER_ROLE' | i18next }}</th>
+                   
+                    <th></th>
+                </tr>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onSearch($event,'firstName')" placeholder="{{ 'USER_SEARCH_FIRST_NAME' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.firstName">
+                        </span>
+                    </th>
+                    <th scope="col">
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onSearch($event,'lastName')" placeholder="{{ 'USER_SEARCH_LAST_NAME' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.lastName" />
+                        </span>
+                    </th>
+                    <th scope="col">
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onSearch($event,'role')" placeholder="{{ 'USER_SEARCH_ROLE' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.role">
+                        </span>
+                    </th>
+                    <th scope="col"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user>
+                <tr>
+                  <td>
+                        <p-tableCheckbox [value]="user"></p-tableCheckbox>
+                      </td>
+                    <td>
+                        <span class="p-column-title">{{'USER_FIRST_NAME' | i18next}}</span> {{user.firstName}}
+                    </td>
+                    <td>
+                        <span class="p-column-title">{{'USER_LAST_NAME' | i18next}}</span> {{user.lastName}}
+                    </td>
+                  
+                    <td>
+                        <span class="p-column-title">{{'USER_ROLE' | i18next}}</span> 
+                        <span *ngFor="let org of user.organisations">
+                            {{ org.roles.join(', ') }}
+                        </span>
+                    </td>
+                  
+                 
+                </tr>
+            </ng-template>
+        </p-table>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="{{ 'USER_CANCEL' | i18next }}" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
+        <button pButton pRipple label="{{ 'USER_SAVE' | i18next }}" icon="pi pi-check" class="p-button-success" appendTo="body" (click)="saveEnroluser()"></button>
+    </ng-template>
+</p-dialog>

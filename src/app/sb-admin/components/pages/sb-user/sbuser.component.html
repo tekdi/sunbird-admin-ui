@@ -3,27 +3,39 @@
     <div class="col-12">
         <div class="card px-6 py-6">
             <h5 class="m-0">{{ 'COMMON_USERS' | i18next}}</h5><br>
-            <p-table #myTable [value]="organizationsUsersList" [columns]="cols" [loading]='loading' [totalRecords]="count" responsiveLayout="scroll" [rows]="rows" [paginator]="true" [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="userId" [lazy]="true" (onLazyLoad)="loadUserList($event)" [(first)]="first">
+            <p-table #myTable [value]="organizationsUsersList" [columns]="cols" [loading]='loading' [totalRecords]="count" responsiveLayout="scroll" [rows]="rows" [paginator]="true" [rowsPerPageOptions]="rowsPerPageOptions" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" selectionMode="multiple" [rowHover]="true" dataKey="userId" [lazy]="true" (onLazyLoad)="loadUserList($event)" [(first)]="first"  (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
                         <span class="block mt-2 md:mt-0 p-input-icon-left"> {{ 'USER_TOTAL' | i18next }} <p-chip label="{{count}}" icon="pi pi-user"></p-chip>
                         </span>
                         <p-message severity="warn" text="{{ 'ORGANIZATION_USERS_LIST_WARNING' | i18next }}" *ngIf="!organizationsUsersList || organizationsUsersList.length === 0"></p-message>
+                        <!-- <input type="file" name="file" class="custom-file-input" id="inputGroupFile" required (change)="handleImport($event)"
+                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                    <label class="custom-file-label" for="inputGroupFile">Choose file</label> -->
                         <button pButton pRipple label="{{ 'USER_ADD' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2" (click)="addNewUser()"></button>
+                        <div *ngIf="selectedRows.length > 0">
+                            <button  pButton pRipple label="{{ 'USER_BLOCK' | i18next }}" icon="pi pi-lock" class="p-button-warning mr-2" (click)="blockUnblockUser1()"></button>
+                        </div>
+
                     </div>
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
+                        <th scope="col"> </th>
                         <th scope="col">{{ 'USER_FIRST_NAME' |i18next }}</th>
                         <th scope="col">{{ 'USER_LAST_NAME' |i18next }}</th>
-                        <th scope="col">{{ 'USER_CHANNEL_NAME' | i18next}}</th>
+                        <!-- <th scope="col">{{ 'USER_CHANNEL_NAME' | i18next}}</th> -->
                         <th scope="col">{{ 'USER_EMAIL' | i18next }} </th>
                         <th scope="col">{{ 'USER_PHONE' |i18next }}</th>
+                        <th scope="col">{{ 'USER_ROLE' | i18next }}</th>
                         <th scope="col">{{ 'USER_STATUS' | i18next }}</th>
                         <th scope="col">{{ 'USER_ACTION' | i18next }}</th>
                         <th></th>
                     </tr>
                     <tr>
+                        <th scope="col">
+                            
+                        </th>                       
                         <th scope="col">
                             <span class="block mt-2 md:mt-0 p-input-icon-left">
                                 <i class="pi pi-search"></i>
@@ -36,9 +48,9 @@
                                 <input pInputText type="text" (input)="onSearch($event,'lastName')" placeholder="{{ 'USER_SEARCH_LAST_NAME' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.lastName" />
                             </span>
                         </th>
-                        <th scope="col">
+                        <!-- <th scope="col">
                             <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" [(ngModel)]="filteredValue.rootOrgName" optionLabel="channel" (onChange)="onSearch($event,'organizations')" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="orgName"></p-dropdown>
-                        </th>
+                        </th> -->
                         <th scope="col">
                             <span class="block mt-2 md:mt-0 p-input-icon-left">
                                 <i class="pi pi-search"></i>
@@ -52,6 +64,12 @@
                             </span>
                         </th>
                         <th scope="col">
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="onSearch($event,'role')" placeholder="{{ 'USER_SEARCH_ROLE' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.role">
+                            </span>
+                        </th>
+                        <th scope="col">
                             <p-dropdown [options]="status" [filter]="true" [showClear]="true" [(ngModel)]="filteredValue.status" optionLabel="name" (onChange)="onSearch($event,'status')" placeholder="{{'USER_STATUS_PLACEHOLDER' | i18next}}" optionValue="value" appendTo="body"></p-dropdown>
                         </th>
                         <th scope="col"></th>
@@ -60,17 +78,26 @@
                 <ng-template pTemplate="body" let-user>
                     <tr>
                         <td>
+                            <p-tableCheckbox [value]="user"></p-tableCheckbox>
+                        </td>
+                        <td>
                             <span class="p-column-title">{{'USER_FIRST_NAME' | i18next}}</span> {{user.firstName}}
                         </td>
                         <td>
                             <span class="p-column-title">{{'USER_LAST_NAME' | i18next}}</span> {{user.lastName}}
                         </td>
-                        <td><span class="p-column-title">{{'USER_ORGANIZATION_NAME' | i18next}}</span> {{user.channel}} </td>
+                        <!-- <td><span class="p-column-title">{{'USER_ORGANIZATION_NAME' | i18next}}</span> {{user.channel}} </td> -->
                         <td>
                             <span class="p-column-title">{{'USER_EMAIL' | i18next}}</span> {{user.email}}
                         </td>
                         <td>
                             <span class="p-column-title">{{'USER_PHONE' | i18next}}</span> {{user.phone}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{'USER_ROLE' | i18next}}</span> 
+                            <span *ngFor="let org of user.organisations">
+                                {{ org.roles.join(', ') }}
+                            </span>
                         </td>
                         <td>
                             <span class="p-column-title">{{'USER_STATUS' | i18next}}</span> {{user.status ? "Active" : "Inactive"}}

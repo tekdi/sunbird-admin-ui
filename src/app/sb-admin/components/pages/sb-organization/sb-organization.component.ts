@@ -41,13 +41,16 @@ export class SbOrganizationComponent implements OnDestroy {
       overflow: 'auto'
     }
   };
+  isAdmin!: any;
 
   constructor(private orgList: OrganizationListService, private userService: UserService,
     private userCountService: UserCountService, public dialogService: DialogService,
     public ref: DynamicDialogRef, private messageService: MessageService, private i18nextPipe: I18NextPipe) { }
 
   ngOnInit() {
+    this.isAdmin = sessionStorage.getItem("isAdmin")
     this.getTotalOrgCount();
+   
   }
 
   getAllOrg(event: any) {

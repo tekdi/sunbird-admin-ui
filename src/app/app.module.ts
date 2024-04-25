@@ -11,6 +11,10 @@ import en from "../locales/en/en.json";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { MatomoModule } from 'ngx-matomo';
+import { environment } from '../environments/environment';
 
 export function appInit(i18next: ITranslationService) {
     let lang = localStorage.getItem('lang');
@@ -61,8 +65,10 @@ export const I18N_PROVIDERS = [
         DialogModule,
         I18NextModule.forRoot(),
         FormsModule,
-        ReactiveFormsModule,
-        ToastModule    
+        BrowserModule,
+        ToastModule,
+        CommonModule,
+         MatomoModule.forRoot(environment.matomoConfig),
     ],
     providers: [
         UserService,

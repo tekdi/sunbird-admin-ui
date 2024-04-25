@@ -3,12 +3,14 @@ import { SessionStorageKeys } from 'src/config/constant.config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import config from 'src/config/url.config.json';
 import { Observable } from 'rxjs';
-
+// import * as jwt_decode from 'jwt-decode';
+import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
   providedIn: 'root',
 })
 export class SessionStorageService {
   private targeturl: any;
+  decodedToken: any;
   constructor(
     private http: HttpClient,
   ) {
@@ -34,7 +36,15 @@ export class SessionStorageService {
   // Example methods using the configuration object
   setAccessToken(token: string): void {
     this.setItem(SessionStorageKeys.ACCESS_TOKEN, token);
+    
   }
+
+  decodeToken(token: string): any {
+    const helper = new JwtHelperService();
+    const decoded= helper.decodeToken(token);
+    return decoded
+  }
+  
 
   getAccessToken(): string | null {
     return this.getItem(SessionStorageKeys.ACCESS_TOKEN);

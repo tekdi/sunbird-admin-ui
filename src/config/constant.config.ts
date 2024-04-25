@@ -35,4 +35,9 @@ export const CategoryCode = [
     { value: 'medium', name: 'Medium' },
     { value: 'gradeLevel', name: 'Grade' },
     { value: 'subject', name: 'Subject' },
+];
+
+export const BatchType =[
+    { value: 'open', name: 'Open' },
+    { value: 'invite-only', name: 'Invite-only' },
 ]

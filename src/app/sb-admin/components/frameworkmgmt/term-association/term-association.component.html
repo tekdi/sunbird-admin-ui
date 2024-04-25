@@ -1,0 +1,100 @@
+<p-toast></p-toast>
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <form [formGroup]="createCategory">
+                <div class="card p-fluid">
+                    <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+                    <div class="field">
+                        <label for="filteredValue">{{ 'ADD_SUB_ORGANIZATION_ROOT' | i18next}}*</label>
+                        <!-- <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" formControlName="filteredValue" optionLabel="channel" (onChange)="onSearch($event)" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="orgName"></p-dropdown> -->
+                        <input type="text" readonly pInputText id="filteredValue" autofocus placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" formControlName="filteredValue" [(ngModel)]="rootOrgId" />
+
+                    </div>
+                    <div class="field">
+                        <label for="frameworkName">{{ 'FRAMEWORK' | i18next}}*</label>
+                        <p-dropdown [options]="frameworks" [filter]="true" [showClear]="true" formControlName="frameworkName" optionLabel="identifier" appendTo="body" placeholder="{{'FRAMEWORK_PLACEHOLDER' | i18next}}" optionValue="identifier" (onChange)="onSearch1($event)" ></p-dropdown>
+                        <small class="error-message" *ngIf="submitted && createCategory.controls['frameworkName'].errors">{{ 'FRAMEWORK_NAME_INVALID'| i18next}}</small>
+
+                    </div>
+                   
+                    <div class="field">
+                        <label for="categoryName">{{ 'CATEGORY_NAME' | i18next }}*</label>
+                        <p-dropdown [options]="filteredCategories" [filter]="true" [showClear]="true" formControlName="categoryName" optionLabel="name" appendTo="body" placeholder="{{'CATEGORY_NAME' | i18next}}" optionValue="name" (onChange)="onSearch2($event)"></p-dropdown>
+                        <small class="error-message" *ngIf="submitted && createCategory.controls['categoryName'].errors">{{ 'CATEGORY_NAME_INVALID'| i18next}}</small>
+                    </div>
+
+                    <div class="field">
+                        <label for="termName">{{ 'TERM_ASSOCATION_TERM' | i18next }}*</label>
+                        <p-dropdown [options]="termName" [filter]="true" [showClear]="true" formControlName="termName" optionLabel="item" appendTo="body" placeholder="{{'TERM_ASSOCATION_TERM' | i18next}}" optionValue="item"></p-dropdown>
+                        <small class="error-message" *ngIf="submitted && createCategory.controls['termName'].errors">{{ 'TERM_ASSOCATION_TERM_INVALID'| i18next}}</small>
+                    </div>
+
+                        <input type="file" name="file" id="inputFile" (change)="csvImport($event)" accept=".csv">
+                        
+
+                        <form [formGroup]="form">
+                            <div class="field" *ngIf="boardSelect">
+                                <label for="categoryCode">{{ 'TERM_ASSOCATION_BOARD' | i18next }}*</label>
+                            <ng-multiselect-dropdown formControlName="board"
+                          [placeholder]="'Select Board'"
+                          [settings]="dropdownSettings"
+                          [data]="dropdownList"
+                        
+                          >
+                          </ng-multiselect-dropdown>
+                        
+                            </div>
+                            <div class="field" *ngIf="mediumSelect" >
+                                <label for="categoryCode">{{ 'TERM_ASSOCATION_MEDIUM' | i18next }}*</label>
+
+                            <ng-multiselect-dropdown formControlName="medium"
+                          [placeholder]="'Select Medium'"
+                          [settings]="dropdownSettings"
+                          [data]="dropdownmediumResults"
+                          
+                          >
+                          </ng-multiselect-dropdown>
+                        
+                            </div>
+                            <div class="field"  *ngIf="grade">
+                                <label for="categoryCode">{{ 'TERM_ASSOCATION_GRADE' | i18next }}*</label>
+
+                            <ng-multiselect-dropdown formControlName="grade"
+                          [placeholder]="'Select Grade'"
+                          [settings]="dropdownSettings"
+                          [data]="dropdowngradeResults"
+                         
+                          >
+                          </ng-multiselect-dropdown>
+                        
+                            </div>
+                            <div class="field" *ngIf="subject" >
+                                <label for="categoryCode">{{ 'TERM_ASSOCATION_SUBJECT' | i18next }}*</label>
+
+                            <ng-multiselect-dropdown formControlName="subject"
+                          [placeholder]="'Select Subject'"
+                          [settings]="dropdownSettings"
+                          [data]="dropdownsubjectResults"
+                         
+                          >
+                          </ng-multiselect-dropdown>
+                        
+                            </div>
+                </form>
+                  
+               
+                   
+                </div>
+                 
+                <div class="p-col-12 p-md-6 p-lg-4 p-xl-3 action-buttons-position">
+                    <button pButton pRipple label="{{ 'ADD_SUB_ORG_SUBMIT' | i18next }}" icon="pi pi-check" class="p-button p-button-success"  (click)="handleButtonClick()"></button>&nbsp; 
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+
+  

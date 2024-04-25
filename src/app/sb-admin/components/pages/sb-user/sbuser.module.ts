@@ -27,8 +27,7 @@ import { I18NextModule } from 'angular-i18next';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from "primeng/message";
 import { ChipModule } from 'primeng/chip';
-
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
     imports: [
         CommonModule,
@@ -57,7 +56,8 @@ import { ChipModule } from 'primeng/chip';
         MessagesModule,
         MessageModule,
         ChipModule,
-        I18NextModule.forRoot()
+        I18NextModule.forRoot(),
+        HttpClientModule
     ],
     declarations: [SbUserComponent, AddEditUserComponent],
     providers: [DialogService,

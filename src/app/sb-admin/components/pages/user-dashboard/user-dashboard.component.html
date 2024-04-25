@@ -14,9 +14,10 @@
                     <tr>
                         <th scope="col">{{ 'USER_FIRST_NAME' |i18next }}</th>
                         <th scope="col">{{ 'USER_LAST_NAME' |i18next }}</th>
-                        <th scope="col">{{ 'USER_CHANNEL_NAME' | i18next}}</th>
+                        <!-- <th scope="col">{{ 'USER_CHANNEL_NAME' | i18next}}</th> -->
                         <th scope="col">{{ 'USER_EMAIL' | i18next }}</th>
                         <th scope="col">{{ 'USER_PHONE' |i18next }}</th>
+                        <th scope="col">{{ 'USER_ROLE' | i18next }}</th>
                         <th scope="col">{{ 'USER_STATUS' | i18next }}</th>
                     </tr>
                     <tr>
@@ -32,9 +33,9 @@
                                 <input pInputText type="text" (input)="onSearch($event,'lastName')" placeholder="{{ 'USER_SEARCH_LAST_NAME' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.lastName" />
                             </span>
                         </th>
-                        <th scope="col">
+                        <!-- <th scope="col">
                             <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" [(ngModel)]="filteredValue.rootOrgName" optionLabel="channel" (onChange)="onSearch($event,'organizations')" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="orgName"></p-dropdown>
-                        </th>
+                        </th> -->
                         <th scope="col">
                             <span class="block mt-2 md:mt-0 p-input-icon-left">
                                 <i class="pi pi-search"></i>
@@ -45,6 +46,12 @@
                             <span class="block mt-2 md:mt-0 p-input-icon-left">
                                 <i class="pi pi-search"></i>
                                 <input pInputText type="text" (input)="onSearch($event,'phone')" placeholder="{{ 'USER_SEARCH_PHONE' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.phone">
+                            </span>
+                        </th>
+                        <th scope="col">
+                            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="onSearch($event,'role')" placeholder="{{ 'USER_SEARCH_ROLE' | i18next }}" class="w-full sm:w-auto" [(ngModel)]="filteredValue.role">
                             </span>
                         </th>
                         <th scope="col">
@@ -60,12 +67,18 @@
                         <td>
                             <span class="p-column-title">{{'USER_LAST_NAME' | i18next}}</span> {{user.lastName}}
                         </td>
-                        <td><span class="p-column-title">{{'USER_ORGANIZATION_NAME' | i18next}}</span> {{user.channel}} </td>
+                        <!-- <td><span class="p-column-title">{{'USER_ORGANIZATION_NAME' | i18next}}</span> {{user.channel}} </td> -->
                         <td>
                             <span class="p-column-title">{{'USER_EMAIL' | i18next}}</span> {{user.email}}
                         </td>
                         <td>
                             <span class="p-column-title">{{'USER_PHONE' | i18next}}</span> {{user.phone}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{'USER_ROLE' | i18next}}</span> 
+                            <span *ngFor="let org of user.organisations">
+                                {{ org.roles.join(', ') }}
+                            </span>
                         </td>
                         <td>
                             <span class="p-column-title">{{'USER_STATUS' | i18next}}</span> {{user.status ? "Active" : "Inactive"}}

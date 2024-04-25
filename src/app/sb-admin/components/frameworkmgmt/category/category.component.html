@@ -6,12 +6,16 @@
                 <div class="card p-fluid">
                     <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
                     <div class="field">
-                        <label for="rootName">{{ 'ADD_SUB_ORGANIZATION_ROOT' | i18next}}*</label>
-                        <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" formControlName="filteredValue" optionLabel="channel" (onChange)="onSearch($event)" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="orgName"></p-dropdown>
+                        <label for="filteredValue">{{ 'ADD_SUB_ORGANIZATION_ROOT' | i18next}}*</label>
+                        <!-- <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" formControlName="filteredValue" optionLabel="channel" (onChange)="onSearch($event)" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="orgName"></p-dropdown> -->
+                        <input type="text" readonly pInputText id="filteredValue" autofocus placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" formControlName="filteredValue" [(ngModel)]="rootOrgId" />
+
                     </div>
                     <div class="field">
-                        <label for="rootName">{{ 'FRAMEWORK' | i18next}}*</label>
+                        <label for="frameworkName">{{ 'FRAMEWORK' | i18next}}*</label>
                         <p-dropdown [options]="frameworks" [filter]="true" [showClear]="true" formControlName="frameworkName" optionLabel="identifier" appendTo="body" placeholder="{{'FRAMEWORK_PLACEHOLDER' | i18next}}" optionValue="identifier"></p-dropdown>
+                        <small class="error-message" *ngIf="submitted && createCategory.controls['frameworkName'].errors">{{ 'FRAMEWORK_NAME_INVALID'| i18next}}</small>
+
                     </div>
                    
                 </div>
@@ -19,11 +23,10 @@
                     <div class="field">
                         <label for="categoryName">{{ 'CATEGORY_NAME' | i18next }}*</label>
                         <p-dropdown [options]="CategoryName" [filter]="true" [showClear]="true" formControlName="categoryName" optionLabel="name" appendTo="body" placeholder="{{'CATEGORY_NAME' | i18next}}" optionValue="name"></p-dropdown>
-
                         <small class="error-message" *ngIf="submitted && createCategory.controls['categoryName'].errors">{{ 'CATEGORY_NAME_INVALID'| i18next}}</small>
                     </div>
                     <div class="field">
-                        <label for="description">{{ 'ADD_ORGANIZATION_DESCRIPTION' | i18next}} *</label>
+                        <label for="description">{{ 'ADD_ORGANIZATION_DESCRIPTION' | i18next}}*</label>
                         <textarea pInputTextarea placeholder="{{ 'ADD_ORGANIZATION_DESCRIPTION' | i18next }}" autofocus formControlName="description"></textarea>
                         <small *ngIf="submitted && createCategory.controls['description'].errors">{{ 'ADD_ORGANIZATION_DESCRIPTION_INVALID' | i18next}}</small>
                     </div>

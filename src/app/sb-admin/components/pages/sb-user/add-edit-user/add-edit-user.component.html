@@ -76,10 +76,10 @@
                         <input id="org" type="radio" (change)="getOrgType('org')" value="org" formControlName="orgType">
                         <label for="org">{{ 'USER_ROOT_ORG' |i18next }}</label>
                     </div>
-                    <div class="radio-option">
+                    <!-- <div class="radio-option">
                         <input id="suborg" type="radio" (change)="getOrgType('subOrg')" value="suborg" formControlName="orgType">
                         <label for="suborg">{{ 'USER_SUB-ORG' |i18next }}</label>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="text-red-500">
                     <small *ngIf="submitted && addEditUserForm.controls['orgType'].errors">{{'USER_ORGANIZATION_TYPE_REQUIRED'|i18next}}</small>
@@ -89,20 +89,24 @@
         <div class="p-formgrid grid" *ngIf="orgTypeRoot">
             <div class="field col">
                 <label for="multiselect">{{ 'USER_CHANNEL_NAME' | i18next }} *</label>
-                <p-dropdown formControlName="organisationId" [showClear]="true" [options]="organizations" optionLabel="orgName" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="id" [filter]="true" filterBy="channel" [showClear]="true" [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['organisationId'].errors}"></p-dropdown>
-                <div class="text-red-500">
+                <input type="text" readonly pInputText id="organisationId" autofocus formControlName="organisationId" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" formControlName="organisationId" [(ngModel)]="rootOrgId" />
+
+                <!-- <p-dropdown formControlName="organisationId" [showClear]="true" [options]="organizations" optionLabel="orgName" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="id" [filter]="true" filterBy="channel" [showClear]="true" [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['organisationId'].errors}"></p-dropdown> -->
+                <!-- <div class="text-red-500">
                     <small *ngIf="submitted && addEditUserForm.controls['organisationId'].errors">{{ 'USER_ORGANIZATION_NAME_REQUIRED' | i18next }}</small>
-                </div>
+                </div> -->
             </div>
             <div class="field col"></div>
         </div>
         <div class="p-formgrid grid" *ngIf="orgTypeSubOrg">
             <div class="field col">
                 <label for="multiselect">{{ 'USER_CHANNEL_NAME' | i18next }} *</label>
-                <p-dropdown formControlName="channelId" [showClear]="true" [options]="organizations" [filter]="true" (onChange)="loadSuborgOptions($event.value)" optionLabel="channel" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel" filterBy="channel" [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['channelId'].errors}"></p-dropdown>
+                <!-- <p-dropdown formControlName="channelId" [showClear]="true" [options]="organizations" [filter]="true" (onChange)="loadSuborgOptions($event.value)" optionLabel="channel" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="channel" filterBy="channel" [ngClass]="{'ng-invalid ng-dirty' : submitted && addEditUserForm.controls['channelId'].errors}"></p-dropdown>
                 <div class="text-red-500">
                     <small *ngIf="submitted && addEditUserForm.controls['channelId'].errors">{{ 'USER_ORGANIZATION_NAME_REQUIRED' | i18next }}</small>
-                </div>
+                </div> -->
+                <input type="text" readonly pInputText id="organisationId" autofocus formControlName="organisationId" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" formControlName="organisationId" [(ngModel)]="rootOrgId" />
+
             </div>
             <div class="field col">
                 <label for="multiselect">{{ 'USER_SUB_ORG_TYPE' | i18next}} *</label>

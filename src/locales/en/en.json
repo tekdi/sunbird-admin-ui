@@ -5,7 +5,7 @@
   "ORG_MANAGEMENT":"Management",
   "LOGOUT":"Logout",
   "SETTINGS":"Settings",
-  "FOOTER":"Sunbird Admin panel",
+  "FOOTER":"Sunbird Admin Panel",
   
   "DASHBOARD_ORG_HEADER":"Organizations",
   "DASHBOARD_ORG_TOTAL":"Total Organizations",
@@ -106,6 +106,7 @@
   "USER_DELETE":"Delete User",
   "USER_SEARCH":"Search...",
   "USER_SAVE":"Save",
+  "USER_BLOCK":"Block User",
     
   "USER_FIRST_NAME_PLACEHOLDER": "Enter Firstname",
   "USER_LAST_NAME_PLACEHOLDER": "Enter Lastname",
@@ -133,6 +134,7 @@
   "USER_SEARCH_LAST_NAME":"Search Lastname",
   "USER_SEARCH_EMAIL":"Search Email",
   "USER_SEARCH_PHONE":"Search Phone",
+  "USER_SEARCH_ROLE":"Search Role",
 
   "ROLES_INFO_USER":"User Type",
   "ROLES_INFO_SYSTEM": "System Role",
@@ -147,10 +149,10 @@
   "COMMON_NO":"No",
   "LABEL_HOME":"Home",
   
-  "LOGIN_ADD_AUTH": "Add Auth Token",
+  "LOGIN_ADD_AUTH": "Add API Access Token",
   "LOGIN_ADD_USERNAME": "Enter Username",
   "LOGIN_ADD_PASSWORD": "Enter Password",
-  "LOGIN_ADD_AUTH_INVALID": "Required Auth Token",
+  "LOGIN_ADD_AUTH_INVALID": "Required API Access Token",
   "LOGIN_ADD_USERNAME_INVALID": "Required Username",
   "LOGIN_ADD_PASSWORD_INVALID": "Required Password",
   "LOGIN_TARGET_URL": "Enter target URL",
@@ -196,7 +198,37 @@
   "TERM_CODE_INVALID":"Required term code",
 
   "PUBLISH":"Publish Framework",
-  "FRAMEWORK_PUBLISHED":"Framework published successfully"
+  "FRAMEWORK_PUBLISHED":"Framework published successfully",
+
+  "TERM_ASSOCIATION":"Term Association",
+  "TERM_ASSOCATION_TERM":"Select term for association",
+  "TERM_ASSOCATION_TERM_INVALID":"Required term",
+  "TERM_ASSOCATION_BOARD":"Select Board",
+  "TERM_ASSOCATION_MEDIUM":"Select Medium",
+  "TERM_ASSOCATION_GRADE":"Select Grade",
+  "TERM_ASSOCATION_SUBJECT":"Select Subject",
+
+  "INVITE_ONLY_DASHBOARD":"Create Batch",
+  "INVITE_ONLY":"Invite only Batch",
+  "INVITE_ONLY_COURSEID":"Enter course id",
+  "INVITE_ONLY_COURSEID_INVALID":"Required Course Id",
+  "INVITE_ONLY_BATCHNAME":"Batch Name",
+  "INVITE_ONLY_BATCHNAME_INVALID":"Required batch name",
+  "INVITE_ONLY_DESCRIPTION":"Enter description",
+  "INVITE_ONLY_OPEN":"Open",
+  "INVITE_ONLY_LABEL":"Invite-only",
+  "INVITE_ONLY_BATCH_TYPE":"Enter Batch type",
+  "INVITE_ONLY_START_DATE":"Enter start date",
+  "INVITE_ONLY_START_DATE_INVALID":"Required start date",
+  "INVITE_ONLY_END_DATE":"Enter end date",
+  "INVITE_ONLY_END_DATE_INVALID":"Required end date",
+  "INVITE_ONLY_USERID":"Enter User Id",
+  "INVITE_ONLY_ENROLLTYPE":"Enrollment Type",
+  "INVITE_ONLY_ACTION":"Action",
+  "INVITE_ONLY_ENROL_USER":"Enrol User",
+  "INVITE_ONLY_ENROLLMENT_DATE":"Enter enrollment end date",
+  "INVITE_ONLY_ENROLL":"Enrol User",
+  "INVITE_ONLY_USERID_INVALID":"Required user id"
 
 
 }

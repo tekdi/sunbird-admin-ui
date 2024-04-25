@@ -7,7 +7,9 @@
                     <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
                     <div class="field">
                         <label for="rootName">{{ 'ADD_SUB_ORGANIZATION_ROOT' | i18next}}*</label>
-                        <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" formControlName="filteredValue" optionLabel="channel" (onChange)="onSearch($event)" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="orgName"></p-dropdown>
+                        <!-- <p-dropdown [options]="organizations" [filter]="true" [showClear]="true" formControlName="filteredValue" optionLabel="channel" (onChange)="onSearch($event)" appendTo="body" placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" optionValue="orgName"></p-dropdown> -->
+                        <input type="text" readonly pInputText id="filteredValue" autofocus placeholder="{{'USER_ORGANIZATION_PLACEHOLDER' | i18next}}" formControlName="filteredValue" [(ngModel)]="rootOrgId" />
+
                     </div>
                     <div class="field">
                         <label for="rootName">{{ 'FRAMEWORK' | i18next}}</label>

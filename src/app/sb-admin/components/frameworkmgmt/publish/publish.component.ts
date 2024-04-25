@@ -28,6 +28,7 @@ export class PublishComponent implements OnInit {
   first = 0;
   orgId: any;
   node: any;
+  rootOrgId: any;
 
   constructor(
     private userService: UserService,
@@ -39,7 +40,8 @@ export class PublishComponent implements OnInit {
 
   ngOnInit() {
     this.initializeAddForm();
-    this.getOrganizations();
+    this.rootOrgId= sessionStorage.getItem("rootOrgId")
+    this.getFramework()
   }
 
   initializeAddForm() {
@@ -52,7 +54,7 @@ export class PublishComponent implements OnInit {
   Publish() {
     this.submitted = true;
     const updatedFormValues = { ...this.createCategory.value };
-    this.frameworkService.publishFramework( this.orgId,updatedFormValues.frameworkName).subscribe(
+    this.subscription =  this.frameworkService.publishFramework( this.orgId,updatedFormValues.frameworkName).subscribe(
       (response) => {
         this.handleCategoryCreationSuccess(response);
       },
@@ -72,34 +74,15 @@ export class PublishComponent implements OnInit {
     }
   }
 
-
   handleCategoryCreationError(error: any): void {
     this.submitted = false;
     this.messages = [];
     this.messageService.add({ severity: 'error', detail: error?.error?.params?.errmsg });
   }
 
-  getOrganizations() {
-    const body = {
-      "request": {
-        "filters": {
-          "isRootOrg": true
-        }
-      }
-    };
-
-    this.subscription = this.userService.getOrganizations(body).subscribe(
-      (response: any) => {
-        this.organizations = response?.result?.response?.content;
-      },
-      (error) => {
-        this.handleCategoryCreationError(error);
-      }
-    );
-  }
-
-  getFramework(org: any): void {
-    this.subscription = this.frameworkService.getChannel(org).subscribe(
+ 
+  getFramework(): void {
+    this.subscription = this.frameworkService.getChannel(this.rootOrgId).subscribe(
       (response: any) => {
         this.frameworks = response?.result?.channel?.frameworks;
       },
@@ -109,12 +92,10 @@ export class PublishComponent implements OnInit {
     );
   }
 
-  onSearch(event: any): void {
-    this.first = 0;
-    const selectedOrganization = this.organizations.find(org => org.orgName === event.value);
-    if (selectedOrganization) {
-      this.orgId = selectedOrganization.id;
-      this.getFramework(this.orgId);
+  ngOnDestroy(){
+    if (this.subscription) 
+    {
+      this.subscription.unsubscribe();
     }
   }
 

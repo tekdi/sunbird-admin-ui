@@ -32,24 +32,8 @@ export class UserDashboardComponent implements OnInit {
     private messageService: MessageService) { }
 
   ngOnInit() {
-    this.getOrganizations();
   }
 
-  getOrganizations() {
-    const body = {
-      "request": {
-        "filters": {
-          "isRootOrg": true
-        }
-      }
-    }
-    this.subscription = this.userService.getOrganizations(body).subscribe((response: any) => {
-      this.organizations = response?.result?.response?.content;
-    }, (error) => {
-      this.messages = [];
-      this.messageService.add({ severity: 'error', detail: error?.error?.params?.errmsg })
-    });
-  }
 
   loadUserList(event: any) {
     let filters = this.filteredValue;
@@ -63,11 +47,14 @@ export class UserDashboardComponent implements OnInit {
 
     const body = {
       request: {
-        filters: filters,
+        filters: {
+          "rootOrgId": sessionStorage.getItem("rootOrgId")
+      },
         limit: event?.rows,
         offset: offset
       }
     }
+    console.log("bosy user",body)
     this.subscription = this.userService.loadUserList(body).subscribe(users => {
       this.organizationsUsersList = users?.result?.response?.content;
       this.count = users?.result?.response?.count;

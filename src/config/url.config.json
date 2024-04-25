@@ -14,12 +14,19 @@
 		"CREATE_FRAMEWORK":"api/framework/v1/create",
 		"GET_CHANNEL":"api/channel/v1/read",
 		"CREATE_CATEGORY":"api/framework/v1/category/create",
-		"UPDATE_FRAMEWORK":"api/framework/v1/update/",
+		"UPDATE_FRAMEWORK":"api/framework/v1/update",
 		"GET_FRAMEWORK":"api/framework/v1/read",
 		"CREATE_TERM":"api/framework/v1/term/create",
 		"PUBLISH_FRAMEWORK":"api/framework/v1/publish",
 		"GET_USER_DETAILS":"api/user/v1/read",
-		"GET_ORG_CONTENT":"/api/content/v1/search"
+		"GET_ORG_CONTENT":"api/content/v1/search",
+		"GET_CATEGORY":"api/framework/v1/category/read",
+		"CREATE_ASSOCIATION":"api/framework/v1/term/update",
+		"GET_CONTENT_DETAILS":"api/content/v1/search",
+		"CREATE_BATCH":"api/course/v1/batch/create",
+		"GET_BATCH_LIST":"api/course/v1/batch/list",
+		"ENROL_USER":"api/course/v1/admin/enroll",
+		"BLUK_UPLOAD":"api/user/v1/upload"
 		
 
 	}	

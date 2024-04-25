@@ -63,9 +63,21 @@ import { FrameworkManageRoutingModule } from './sb-admin/components/frameworkmgm
             { path: 'framework', loadChildren: () => import('./sb-admin/components/frameworkmgmt/framework/framework.module').then(m => m.FrameworkModule) },
             { path: 'publish', loadChildren: () => import('./sb-admin/components/frameworkmgmt/publish/publish.module').then(m => m.PublishModule)},
             { path: 'term', loadChildren: () => import('./sb-admin/components/frameworkmgmt/term/term.module').then(m => m.TermModule)  },
+            { path: 'term-association', loadChildren: () => import('./sb-admin/components/frameworkmgmt/term-association/term-association.module').then(m => m.TermAssociationModule) },
             { path: '', redirectTo: 'category', pathMatch: 'full' }, // Default to category if no child route provided
           ],
         },
+        {
+          path: 'inviteonly',
+          component: AppLayoutComponent,
+          children: [
+            { path: 'batchupdate', loadChildren: () => import('./sb-admin/components/inviteonly/batchupdate/batchupdate.module').then(m => m.BatchupdateModule) },
+            { path: 'enroluser', loadChildren: () => import('./sb-admin/components/inviteonly/enroluser/enroluser.module').then(m => m.EnroluserModule) },
+
+            { path: '', redirectTo: 'category', pathMatch: 'full' }, // Default to category if no child route provided
+          ],
+        },
+
         { path: '**', redirectTo: '/notfound' },
       ],
       {

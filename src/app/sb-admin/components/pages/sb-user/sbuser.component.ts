@@ -4,10 +4,12 @@ import { UserService } from 'src/app/sb-admin/service/user.service';
 import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { I18NextPipe } from 'angular-i18next';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { OrganizationsUsersList } from 'src/app/sb-admin/interfaces/organizationsUsersList';
 import { SearchFilterValue, User } from 'src/app/sb-admin/interfaces/user';
 import { Roles } from 'src/config/constant.config';
+import { HttpClient } from '@angular/common/http';
+// import { read, utils, writeFile } from 'xlsx';
 
 @Component({
   templateUrl: './sbuser.component.html',
@@ -26,11 +28,12 @@ export class SbUserComponent implements OnInit {
   organizationsUsersList: OrganizationsUsersList[] = [];
   rowsPerPageOptions: number[] = [10, 20, 30];
   rows: number = 10;
+  count: number = 0;
   user!: User;
   selectedUserRole: string[] = [];
   roles = Roles;
   messages!: Message[];
-  count: number = 0;
+ 
   users: User[] = [];
   first: number = 0
   filteredValue = SearchFilterValue;
@@ -39,32 +42,21 @@ export class SbUserComponent implements OnInit {
     { name: 'Active', 'value': '1' },
     { name: 'Inactive', 'value': '0' }
   ]
+  selectedFile!: File ;
+  movies: any;
+  selectedRows: any[] = [];
+  extractedIds!: any[];
 
   constructor(private userService: UserService,
     public dialogService: DialogService,
     private i18nextPipe: I18NextPipe,
     private messageService: MessageService,
+    private http: HttpClient
 
   ) { }
 
   ngOnInit() {
-    this.getOrganizations();
-  }
-
-  getOrganizations() {
-    const body = {
-      "request": {
-        "filters": {
-          "isRootOrg": true
-        }
-      }
-    }
-    this.subscription = this.userService.getOrganizations(body).subscribe((response: any) => {
-      this.organizations = response?.result?.response?.content;
-    }, (error) => {
-      this.messages = [];
-      this.messageService.add({ severity: 'error', detail: error?.error?.params?.errmsg })
-    });
+   
   }
 
   editRole(user: any) {
@@ -127,7 +119,9 @@ export class SbUserComponent implements OnInit {
 
     const body = {
       request: {
-        filters: filters,
+        filters: {
+          "rootOrgId": sessionStorage.getItem("rootOrgId")
+      },
         limit: event?.rows,
         offset: offset
       }
@@ -146,28 +140,67 @@ export class SbUserComponent implements OnInit {
   blockUnblockUser(user: User) {
     this.blockUnblockUserDialog = true;
     this.user = user;
+    console.log("this.user",this.user)
+  }
+
+  blockUnblockUser1(){
+    this.blockUnblockUserDialog = true;
+    this.extractedIds = this.selectedRows.map(user => ({
+      id: user.id,
+      status: user.status
+    }));
+    console.log("this.extractedIds",this.extractedIds)
+
   }
 
   confirmBlock() {
-    const payload = {
-      "request": {
-        "userId": this.user.userId
+    console.log("")
+    if(this.extractedIds.length == 0){
+      const payload = {
+        "request": {
+          "userId": this.user.userId
+        }
       }
+      this.userService.blockUnblockUser(payload, this.user?.status).subscribe(response => {
+        this.messages = [];
+        if (this.user.status) {
+          this.user.status = 0;
+          this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_BLOCK_SUUCCESSFULLY') });
+        } else {
+          this.user.status = 1;
+          this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_UNBLOCK_SUUCCESSFULLY') });
+        }
+        this.blockUnblockUserDialog = false;
+      }, (error: any) => {
+        this.messages = [];
+        this.messageService.add({ severity: 'error', detail: error.error.params.errmsg });
+      })
     }
-    this.userService.blockUnblockUser(payload, this.user?.status).subscribe(response => {
-      this.messages = [];
-      if (this.user.status) {
-        this.user.status = 0;
-        this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_BLOCK_SUUCCESSFULLY') });
-      } else {
-        this.user.status = 1;
-        this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_UNBLOCK_SUUCCESSFULLY') });
-      }
-      this.blockUnblockUserDialog = false;
-    }, (error: any) => {
-      this.messages = [];
-      this.messageService.add({ severity: 'error', detail: error.error.params.errmsg });
-    })
+    else{
+      this.extractedIds.forEach(userId => {
+        const body = {
+              "request": {
+                "userId": userId.id
+              }
+        };
+        console.log("body",body,userId)
+        this.userService.blockUnblockUser(body, userId?.status).subscribe(response => {
+          this.messages = [];
+          if (userId.status) {
+            userId.status = 0;
+            this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_BLOCK_SUUCCESSFULLY') });
+          } else {
+            userId.status = 1;
+            this.messageService.add({ severity: 'success', detail: this.i18nextPipe.transform('USER_UNBLOCK_SUUCCESSFULLY') });
+          }
+          this.blockUnblockUserDialog = false;
+        }, (error: any) => {
+          this.messages = [];
+          this.messageService.add({ severity: 'error', detail: error.error.params.errmsg });
+        })
+    });
+    }
+   
   }
 
   onSearch(event: any, column: string): void {
@@ -188,8 +221,55 @@ export class SbUserComponent implements OnInit {
     }
   }
 
+  onRowSelect(event: any) {
+    this.selectedRows.push(event.data);
+    console.log("this.selected row",this.selectedRows)
+  }
+  
+  onRowUnselect(event: any) {
+    this.selectedRows = this.selectedRows.filter((row:any) => row !== event.data);
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+  onFileSelected(event:any): void  {
+    this.selectedFile = <File>event.target.files[0];
+  }
+
+  // onUpload() {
+  //   const formData = new FormData();
+  //   formData.append('file', this.selectedFile, this.selectedFile.name);
+  //   console.log("formdata",formData)
+  //   this.userService.uploadblukUser(formData).subscribe(
+  //     (res:any) => {
+  //       console.log(res);
+  //       // Do something with the response
+  //     },
+  //     (err:any) => {
+  //       console.error(err);
+  //       // Handle error
+  //     }
+  //   );
+  // }
+
+//   handleImport($event: any) {
+//     const files = $event.target.files;
+//     if (files.length) {
+//         const file = files[0];
+//         const reader = new FileReader();
+//         reader.onload = (event: any) => {
+//             const wb = read(event.target.result);
+//             const sheets = wb.SheetNames;
+
+//             if (sheets.length) {
+//                 const rows = utils.sheet_to_json(wb.Sheets[sheets[0]]);
+//                 this.movies = rows;
+//             }
+//         }
+//         reader.readAsArrayBuffer(file);
+//     }
+//     console.log("thhissss",this.movies)
+// }
 
 }

@@ -35,6 +35,7 @@ export class TermComponent implements OnInit {
     "Medium": "medium",
     "Subject": "subject"
   };
+  rootOrgId:any;
   constructor(
     private userService: UserService,
     private messageService: MessageService,
@@ -45,7 +46,8 @@ export class TermComponent implements OnInit {
 
   ngOnInit() {
     this.initializeAddForm();
-    this.getOrganizations();
+    this.rootOrgId= sessionStorage.getItem("rootOrgId")
+    this.getFramework()
   }
 
   initializeAddForm() {
@@ -101,28 +103,8 @@ mapCategoryNames(updatedFormValues: any): void {
   }
 }
  
-
-  getOrganizations() {
-    const body = {
-      request: {
-        filters: {
-          isRootOrg: true
-        }
-      }
-    };
-
-    this.subscription = this.userService.getOrganizations(body).subscribe(
-      (response: any) => {
-        this.organizations = response?.result?.response?.content;
-      },
-      (error) => {
-        this.handleCategoryCreationError(error);
-      }
-    );
-  }
-
-  getFramework(org: any): void {
-    this.subscription = this.frameworkService.getChannel(org).subscribe(
+  getFramework(): void {
+    this.subscription = this.frameworkService.getChannel(this.rootOrgId).subscribe(
       (response: any) => {
         this.frameworks = response?.result?.channel?.frameworks;
       },
@@ -132,19 +114,11 @@ mapCategoryNames(updatedFormValues: any): void {
     );
   }
 
-  onSearch(event: any): void {
-    this.first = 0;
-    const selectedOrganization = this.organizations.find(
-      (org) => org.orgName === event.value
-    );
-    if (selectedOrganization) {
-      this.orgId = selectedOrganization.id;
-      this.getFramework(this.orgId);
-    }
-  }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+          this.subscription.unsubscribe();
+        }
   }
 
   handleCategoryCreationError(error: any): void {

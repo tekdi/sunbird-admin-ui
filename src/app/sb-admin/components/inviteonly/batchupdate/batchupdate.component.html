@@ -1,0 +1,77 @@
+<p-toast></p-toast>
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <form [formGroup]="batchUpdate">
+                <div class="card p-fluid">
+                    <div class="field">
+                        <label for="courseId">{{ 'INVITE_ONLY_COURSEID' | i18next }}*</label>
+                        <input type="text" pInputText id="courseId" autofocus formControlName="courseId" placeholder="{{ 'INVITE_ONLY_COURSEID' | i18next }}" />
+                        <small class="error-message" *ngIf="submitted && batchUpdate.controls['courseId'].errors">{{ 'INVITE_ONLY_COURSEID_INVALID'| i18next}}</small>
+                    </div>
+
+                    <div class="field">
+                        <label for="batchName">{{ 'INVITE_ONLY_BATCHNAME' | i18next }}*</label>
+                        <input type="text" pInputText id="batchName" autofocus formControlName="batchName" placeholder="{{ 'INVITE_ONLY_BATCHNAME' | i18next }}" />
+                        <small class="error-message" *ngIf="submitted && batchUpdate.controls['batchName'].errors">{{ 'INVITE_ONLY_BATCHNAME_INVALID'| i18next}}</small>
+                    </div>
+                    <div class="field">
+                        <label for="description">{{ 'INVITE_ONLY_DESCRIPTION' | i18next}}</label>
+                        <textarea pInputTextarea placeholder="{{ 'INVITE_ONLY_DESCRIPTION' | i18next }}" autofocus formControlName="description"></textarea>
+                    </div>
+                    <div class="horizontal-radio-group field">
+                        <!-- <label for="description">{{ 'INVITE_ONLY_BATCH_TYPE' | i18next}}</label> -->
+                        <div class="radio-options">
+                            <div class="radio-option">
+                                <input id="open" type="radio" (change)="getBatchtype('open')" value="open" formControlName="open">
+                                <label for="open">{{ 'INVITE_ONLY_OPEN' |i18next }}</label>
+                            </div>
+                            <div class="radio-option">
+                                <input id="inviteonly" type="radio" (change)="getBatchtype('invite-only')" value="invite-only" formControlName="open">
+                                <label for="inviteonly">{{ 'INVITE_ONLY_LABEL' |i18next }}</label>
+                            </div>
+                        </div>
+                    </div>               
+                    <div class="field">
+                        <label for="startDate">{{ 'INVITE_ONLY_START_DATE' | i18next }}*</label>
+                        <input type="date" pInputText id="startDate" autofocus formControlName="startDate" placeholder="{{ 'INVITE_ONLY_START_DATE' | i18next }}" />
+                        <small class="error-message" *ngIf="submitted && batchUpdate.controls['startDate'].errors">{{ 'INVITE_ONLY_START_DATE_INVALID'| i18next}}</small>
+                    </div>
+                    <div class="field">
+                        <label for="endDate">{{ 'INVITE_ONLY_END_DATE' | i18next }}</label>
+                        <input type="date" pInputText id="endDate" autofocus formControlName="endDate" placeholder="{{ 'INVITE_ONLY_END_DATE' | i18next }}" />
+                    </div>
+                    <div class="field">
+                        <label for="enrollmentEndDate">{{ 'INVITE_ONLY_ENROLLMENT_DATE' | i18next }}</label>
+                        <input type="date" pInputText id="enrollmentEndDate" autofocus formControlName="enrollmentEndDate" placeholder="{{ 'INVITE_ONLY_ENROLLMENT_DATE' | i18next }}" />
+                    </div>
+                
+                   
+                </div>
+                <!-- <div class="card p-fluid">
+                    <div class="field">
+                        <label for="frameworkName">{{ 'FRAMEWORK_NAME' | i18next }}*</label>
+                  
+                        <input type="text" pInputText id="frameworkName" autofocus formControlName="frameworkName" placeholder="{{ 'FRAMEWORK_NAME' | i18next }}" />
+                        <small class="error-message" *ngIf="submitted && createFramework.controls['frameworkName'].errors">{{ 'FRAMEWORK_NAME_INVALID'| i18next}}</small>
+                    </div>
+                    <div class="field">
+                        <label for="frameworkCode">{{ 'FRAMEWORK_CODE' | i18next }}*</label>
+                  
+                        <input type="text" pInputText id="frameworkCode" autofocus formControlName="frameworkCode" placeholder="{{ 'FRAMEWORK_CODE' | i18next }}" />
+                        <small class="error-message" *ngIf="submitted && createFramework.controls['frameworkCode'].errors">{{ 'FRAMEWORK_CODE_INVALID'| i18next}}</small>
+                    </div>
+                    <div class="field">
+                        <label for="frameworkDesc">{{ 'ADD_FRAMEWORK_DESCRIPTION' | i18next }}*</label>
+                        <textarea pInputTextarea placeholder="{{ 'ADD_FRAMEWORK_DESCRIPTION' | i18next }}" autofocus formControlName="frameworkDesc"></textarea>
+                        <small class="error-message" *ngIf="submitted && createFramework.controls['frameworkDesc'].errors">{{ 'ADD_FRAMEWORK_DESCRIPTION_INVALID'| i18next}}</small>
+                    </div>
+                </div> -->
+                 
+                <div class="p-col-12 p-md-6 p-lg-4 p-xl-3 action-buttons-position">
+                    <button pButton pRipple label="{{ 'ADD_SUB_ORG_SUBMIT' | i18next }}" icon="pi pi-check" class="p-button p-button-success" (click)="createBatch()"></button>&nbsp; 
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

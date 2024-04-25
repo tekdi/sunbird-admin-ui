@@ -27,6 +27,7 @@ export class AddEditUserComponent {
   suborgOptions: any[] = [];
   showEmail: boolean = false;
   showPhone: boolean = false;
+  rootOrgId: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,6 +41,7 @@ export class AddEditUserComponent {
   ngOnInit(): void {
     this.getOrganizations();
     this.initializeForm();
+    this.rootOrgId= sessionStorage.getItem("rootOrgId")
   }
 
   cancel() {
@@ -145,6 +147,7 @@ export class AddEditUserComponent {
       "params": {},
       "request": this.addEditUserForm.value
     }
+    console.log("payloaddd",payload)
     this.messages = [];
     this.userService.addNewUser(payload).subscribe(response => {
       this.messages = [

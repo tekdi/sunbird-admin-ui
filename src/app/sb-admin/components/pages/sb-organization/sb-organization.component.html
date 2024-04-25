@@ -9,7 +9,7 @@
                         <span class="block mt-2 md:mt-0 p-input-icon-left"> {{ 'ORG_COUNT' | i18next }} <p-chip label="{{orgCount}}" icon="pi pi-user"></p-chip>
                         </span>
                         <p-message severity="warn" text="{{ 'ORG_LIST_WARNING' | i18next }}" *ngIf="!organizationDetail || organizationDetail.length === 0"></p-message>
-                        <div class="my-2">
+                        <div class="my-2" *ngIf="isAdmin">
                             <button pButton pRipple label="{{ 'ADD_ORGANIZATION' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2" (click)="addOrg()"></button>
                             <button pButton pRipple label="{{ 'ADD_SUB_ORGANIZATION' | i18next }}" icon="pi pi-plus" class="p-button-success mr-2" (click)="addSubOrg()"></button>
                         </div>

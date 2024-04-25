@@ -22,6 +22,7 @@ export class FrameworkComponent implements OnInit {
   first = 0;
   orgId: any;
   frameworks: any[] = [];
+  rootOrgId: any;
 
   constructor(
     private frameworkService: FrameworkService,
@@ -33,12 +34,13 @@ export class FrameworkComponent implements OnInit {
 
   ngOnInit() {
     this.initializeAddForm();
-    this.getOrganizations();
+    this.rootOrgId= sessionStorage.getItem("rootOrgId")
+    this.getFramework()
   }
 
   initializeAddForm() {
     this.createFramework = this.formBuilder.group({
-      filteredValue: [null, Validators.required],
+      filteredValue: ['', Validators.required],
       frameworkName: ['', Validators.required],
       frameworkCode: ['', Validators.required],
       frameworkDesc: ['', Validators.required],
@@ -51,7 +53,7 @@ export class FrameworkComponent implements OnInit {
     const updatedFormValues = { ...this.createFramework.value };
     const body = this.createRequestBody(updatedFormValues);
 
-    this.frameworkService.saveFramework(body).subscribe(
+    this.subscription= this.frameworkService.saveFramework(body).subscribe(
       (response) => this.handleFrameworkSaveSuccess(response),
       (error) => this.handleFrameworkSaveError(error)
     );
@@ -88,27 +90,9 @@ export class FrameworkComponent implements OnInit {
     this.messageService.add({ severity: 'error', detail: error?.error?.params?.errmsg });
   }
 
-  getOrganizations() {
-    const body = {
-      "request": {
-        "filters": {
-          "isRootOrg": true,
-        },
-      },
-    };
-
-    this.subscription = this.userService.getOrganizations(body).subscribe(
-      (response: any) => {
-        this.organizations = response?.result?.response?.content;
-      },
-      (error) => {
-        this.handleFrameworkSaveError(error);
-      }
-    );
-  }
-
-  getFramework(org: any): void {
-    this.subscription = this.frameworkService.getChannel(org).subscribe(
+ 
+  getFramework(): void {
+    this.subscription = this.frameworkService.getChannel(this.rootOrgId).subscribe(
       (response: any) => {
         this.frameworks = response?.result?.channel?.frameworks;
       },
@@ -118,16 +102,15 @@ export class FrameworkComponent implements OnInit {
     );
   }
 
-  onSearch(event: any): void {
-    this.first = 0;
-    const selectedOrganization = this.organizations.find((org) => org.orgName === event.value);
-    if (selectedOrganization) {
-      this.orgId = selectedOrganization.id;
-      this.getFramework(this.orgId);
-    }
-  }
+
 
   onSearch1(event: any): void {
     this.first = 0;
   }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+     this.subscription.unsubscribe();
+     }
+   }
 }
